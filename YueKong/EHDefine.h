@@ -55,15 +55,6 @@
 #define kHttpBase                          @"http://58.240.21.117:8080/HSPS/svcRequest"        // 正式环境服务器
 #endif
 
-//银联环境
-//#define k_UP_Mode @"01"      // 测试环境服务器
-#if k_Server_Test
-#define k_UP_Mode @"01"      // 测试环境服务器
-#else
-#define k_UP_Mode @"00"        // 正式环境服务器
-#endif
-
-
 //身份信息验证
 #define k_URL_IsUserRegister              @"isUserRegister"
 

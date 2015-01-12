@@ -101,6 +101,12 @@
 		FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB141A62BE8F0032D651 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1C1A62BE8F0032D651 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB161A62BE8F0032D651 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB181A62BE8F0032D651 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FCAF7B0A1A63ADE3001CC512 /* DeviceIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */; };
+		FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B061A63ADE3001CC512 /* mPacket.m */; };
+		FCAF7B0C1A63ADE3001CC512 /* NetControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B081A63ADE3001CC512 /* NetControl.mm */; };
+		FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7B111A63B3E1001CC512 /* Documentation.html */; };
+		FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */; };
+		FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,9 +262,6 @@
 		FC147DAD1A5D1D9600BA06F3 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
 		FC147DAF1A5D1D9600BA06F3 /* SMPageControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPageControl.h; sourceTree = "<group>"; };
 		FC147DB01A5D1D9600BA06F3 /* SMPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SMPageControl.m; sourceTree = "<group>"; };
-		FC147DB21A5D1D9600BA06F3 /* libUPPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPPayPlugin.a; sourceTree = "<group>"; };
-		FC147DB31A5D1D9600BA06F3 /* UPPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPlugin.h; sourceTree = "<group>"; };
-		FC147DB41A5D1D9600BA06F3 /* UPPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPPayPluginDelegate.h; sourceTree = "<group>"; };
 		FC147E191A5D209A00BA06F3 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		FC147E1A1A5D209A00BA06F3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		FC147E1B1A5D209A00BA06F3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -311,6 +314,18 @@
 		FC5AFB161A62BE8F0032D651 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		FC5AFB171A62BE8F0032D651 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FC5AFB181A62BE8F0032D651 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		FCAF7B031A63ADE3001CC512 /* DeviceIPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceIPAddress.h; sourceTree = "<group>"; };
+		FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceIPAddress.m; sourceTree = "<group>"; };
+		FCAF7B051A63ADE3001CC512 /* mPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mPacket.h; sourceTree = "<group>"; };
+		FCAF7B061A63ADE3001CC512 /* mPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = mPacket.m; sourceTree = "<group>"; };
+		FCAF7B071A63ADE3001CC512 /* NetControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetControl.h; sourceTree = "<group>"; };
+		FCAF7B081A63ADE3001CC512 /* NetControl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NetControl.mm; sourceTree = "<group>"; };
+		FCAF7B091A63ADE3001CC512 /* netMsgDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = netMsgDefine.h; sourceTree = "<group>"; };
+		FCAF7B111A63B3E1001CC512 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = Documentation.html; sourceTree = "<group>"; };
+		FCAF7B121A63B3E1001CC512 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
+		FCAF7B141A63B3E1001CC512 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +354,7 @@
 		FC0BA9601A5E234E00748B4E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FCAF7B021A63ADE3001CC512 /* AsyncSocket */,
 				FC1AE57F1A5FCF1700CD5611 /* httpcontrol */,
 				FC0BA9621A5E26BF00748B4E /* absManager.h */,
 				FC0BA9631A5E26BF00748B4E /* absManager.m */,
@@ -416,6 +432,7 @@
 		FC147CCD1A5CDB3A00BA06F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FC6AF53F1A63CB56000C1226 /* include */,
 				FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */,
 				FC147E2B1A5D2CA700BA06F3 /* Security.framework */,
 				FC147E291A5D2C9500BA06F3 /* libiconv.dylib */,
@@ -478,6 +495,7 @@
 		FC147D151A5D1D9600BA06F3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				FCAF7B101A63B3E1001CC512 /* socket */,
 				FC5AFB0C1A62BE8F0032D651 /* BPush.h */,
 				FC5AFB0D1A62BE8F0032D651 /* opensource */,
 				FC1AE5871A5FCF6A00CD5611 /* ASIHttpRequest */,
@@ -495,7 +513,6 @@
 				FC147D9F1A5D1D9600BA06F3 /* RESideMenu */,
 				FC147DA61A5D1D9600BA06F3 /* SlimeRefresh */,
 				FC147DAE1A5D1D9600BA06F3 /* SMPageControl */,
-				FC147DB11A5D1D9600BA06F3 /* UPPayPlugin */,
 			);
 			path = ThirdParty;
 			sourceTree = "<group>";
@@ -732,16 +749,6 @@
 			path = SMPageControl;
 			sourceTree = "<group>";
 		};
-		FC147DB11A5D1D9600BA06F3 /* UPPayPlugin */ = {
-			isa = PBXGroup;
-			children = (
-				FC147DB21A5D1D9600BA06F3 /* libUPPayPlugin.a */,
-				FC147DB31A5D1D9600BA06F3 /* UPPayPlugin.h */,
-				FC147DB41A5D1D9600BA06F3 /* UPPayPluginDelegate.h */,
-			);
-			path = UPPayPlugin;
-			sourceTree = "<group>";
-		};
 		FC147E181A5D209A00BA06F3 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,6 +836,39 @@
 			path = LibBPush/opensource;
 			sourceTree = "<group>";
 		};
+		FC6AF53F1A63CB56000C1226 /* include */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		FCAF7B021A63ADE3001CC512 /* AsyncSocket */ = {
+			isa = PBXGroup;
+			children = (
+				FCAF7B031A63ADE3001CC512 /* DeviceIPAddress.h */,
+				FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */,
+				FCAF7B051A63ADE3001CC512 /* mPacket.h */,
+				FCAF7B061A63ADE3001CC512 /* mPacket.m */,
+				FCAF7B071A63ADE3001CC512 /* NetControl.h */,
+				FCAF7B081A63ADE3001CC512 /* NetControl.mm */,
+				FCAF7B091A63ADE3001CC512 /* netMsgDefine.h */,
+			);
+			path = AsyncSocket;
+			sourceTree = "<group>";
+		};
+		FCAF7B101A63B3E1001CC512 /* socket */ = {
+			isa = PBXGroup;
+			children = (
+				FCAF7B111A63B3E1001CC512 /* Documentation.html */,
+				FCAF7B121A63B3E1001CC512 /* GCDAsyncSocket.h */,
+				FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */,
+				FCAF7B141A63B3E1001CC512 /* GCDAsyncUdpSocket.h */,
+				FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */,
+			);
+			path = socket;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -912,6 +952,7 @@
 				FC147E0D1A5D1D9600BA06F3 /* sr_refresh.png in Resources */,
 				FC147E0E1A5D1D9600BA06F3 /* sr_refresh@2X.png in Resources */,
 				FC147CD91A5CDB3A00BA06F3 /* Main.storyboard in Resources */,
+				FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
 				FC147E081A5D1D9600BA06F3 /* RegexKitLite.html in Resources */,
@@ -935,9 +976,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */,
 				FC147DEE1A5D1D9600BA06F3 /* IQUIWindow+Hierarchy.m in Sources */,
 				FC147DF61A5D1D9600BA06F3 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */,
+				FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */,
 				FC0BA9731A5E303E00748B4E /* EHRootViewController.m in Sources */,
 				FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */,
 				FC147DF01A5D1D9600BA06F3 /* IQKeyboardReturnKeyHandler.m in Sources */,
@@ -946,6 +989,7 @@
 				FC147DEC1A5D1D9600BA06F3 /* IQNSArray+Sort.m in Sources */,
 				FC147DED1A5D1D9600BA06F3 /* IQUIView+Hierarchy.m in Sources */,
 				FC147E1D1A5D209A00BA06F3 /* MBProgressHUD.m in Sources */,
+				FCAF7B0A1A63ADE3001CC512 /* DeviceIPAddress.m in Sources */,
 				FC147CD61A5CDB3A00BA06F3 /* ViewController.m in Sources */,
 				FC147DF11A5D1D9600BA06F3 /* IQSegmentedNextPrevious.m in Sources */,
 				FC147DE31A5D1D9600BA06F3 /* CXBlurView.m in Sources */,
@@ -957,7 +1001,9 @@
 				FC147DE01A5D1D9600BA06F3 /* CXAlertButtonItem.m in Sources */,
 				FC147DEB1A5D1D9600BA06F3 /* HMSegmentedControl.m in Sources */,
 				FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */,
+				FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */,
 				FC147E351A5D341A00BA06F3 /* BaseViewController.m in Sources */,
+				FCAF7B0C1A63ADE3001CC512 /* NetControl.mm in Sources */,
 				FC147DE61A5D1D9600BA06F3 /* FMDatabase.m in Sources */,
 				FC147D111A5D1D1900BA06F3 /* SFHFKeychainUtils.m in Sources */,
 				FC1AE5861A5FCF1700CD5611 /* HttpMsgDefine.m in Sources */,
@@ -1147,6 +1193,7 @@
 					"$(PROJECT_DIR)/YueKong/ThirdParty/LibBPush",
 					"$(PROJECT_DIR)/YueKong/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/YueKong/ThirdParty/zBar",
+					"$(PROJECT_DIR)/YueKong",
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1160,6 +1207,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer: cl Wu (4SK6835K85)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueKong/PrefixHeader.pch";
 				INFOPLIST_FILE = YueKong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1170,9 +1218,11 @@
 					"$(PROJECT_DIR)/YueKong/ThirdParty/LibBPush",
 					"$(PROJECT_DIR)/YueKong/ThirdParty/UPPayPlugin",
 					"$(PROJECT_DIR)/YueKong/ThirdParty/zBar",
+					"$(PROJECT_DIR)/YueKong",
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "304d71ba-ca94-448b-bcb4-7094068afaad";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

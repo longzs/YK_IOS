@@ -21,7 +21,6 @@
     if (k_IS_Report_Exception) {
         
     }
-    
     //初始化
     //数据库
     //[self createDB];

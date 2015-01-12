@@ -19,8 +19,7 @@
 
 @end
 
-@interface BaseViewController : UIViewController<EHLoadByStoryboard,
-HTTP_MSG_RESPOND>
+@interface BaseViewController : UIViewController<EHLoadByStoryboard>
 
 //当前的请求，在dealloc中会cancel
 @property (nonatomic) int currentRequestId;
