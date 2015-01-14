@@ -101,6 +101,7 @@
 		FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB141A62BE8F0032D651 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1C1A62BE8F0032D651 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB161A62BE8F0032D651 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB181A62BE8F0032D651 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */; };
 		FCAF7B0A1A63ADE3001CC512 /* DeviceIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */; };
 		FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B061A63ADE3001CC512 /* mPacket.m */; };
 		FCAF7B0C1A63ADE3001CC512 /* NetControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B081A63ADE3001CC512 /* NetControl.mm */; };
@@ -314,6 +315,8 @@
 		FC5AFB161A62BE8F0032D651 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		FC5AFB171A62BE8F0032D651 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FC5AFB181A62BE8F0032D651 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		FC8DB63C1A66B27500E0ED8E /* NetWorkDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkDetails.h; sourceTree = "<group>"; };
+		FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkDetails.m; sourceTree = "<group>"; };
 		FCAF7B031A63ADE3001CC512 /* DeviceIPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceIPAddress.h; sourceTree = "<group>"; };
 		FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceIPAddress.m; sourceTree = "<group>"; };
 		FCAF7B051A63ADE3001CC512 /* mPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mPacket.h; sourceTree = "<group>"; };
@@ -369,6 +372,8 @@
 		FC0BA9611A5E234E00748B4E /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FC8DB63C1A66B27500E0ED8E /* NetWorkDetails.h */,
+				FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1024,6 +1029,7 @@
 				FC147DE91A5D1D9600BA06F3 /* FMDatabaseQueue.m in Sources */,
 				FC147DE21A5D1D9600BA06F3 /* CXAlertViewController.m in Sources */,
 				FC147E021A5D1D9600BA06F3 /* NSString+PinYin4Cocoa.m in Sources */,
+				FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */,
 				FC147DF31A5D1D9600BA06F3 /* IQBarButtonItem.m in Sources */,
 				FC147DE11A5D1D9600BA06F3 /* CXAlertView.m in Sources */,
 				FC1AE59D1A5FCF6A00CD5611 /* ASIDataCompressor.m in Sources */,

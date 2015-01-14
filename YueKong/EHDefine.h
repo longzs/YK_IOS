@@ -52,7 +52,7 @@
 #if k_Server_Test
 #define kHttpBase                          @"http://221.226.215.4:8080/HSPS/svcRequest"      // 测试环境服务器
 #else
-#define kHttpBase                          @"http://58.240.21.117:8080/HSPS/svcRequest"        // 正式环境服务器
+#define kHttpBase                          @"http://121.40.149.20/yuekong/core/app/"        // 正式环境服务器
 #endif
 
 //身份信息验证

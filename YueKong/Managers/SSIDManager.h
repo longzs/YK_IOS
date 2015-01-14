@@ -13,6 +13,9 @@
 
 DEFINE_SINGLETON_FOR_HEADER(SSIDManager)
 
+//Checks whether wifi is reachable or not
++(BOOL)isWiFiReachable;
+
 
 - (NSString *)currentWifiSSID;
 - (id)fetchSSIDInfo;

@@ -8,6 +8,7 @@
 
 #import "SSIDManager.h"
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import "Reachability.h"
 
 @implementation SSIDManager
 
@@ -38,6 +39,22 @@ DEFINE_SINGLETON_FOR_CLASS(SSIDManager)
         }
     }
     return ssid;
+}
+
+//Checks whether wifi is reachable or not
++(BOOL)isWiFiReachable
+{
+    Reachability *wifiReach = [Reachability reachabilityForLocalWiFi];
+    NetworkStatus netStatus2 = [wifiReach currentReachabilityStatus];
+    if(netStatus2 == NotReachable)
+    {
+        return NO;
+    }
+    else
+    {
+        return YES;
+    }
+    return YES;
 }
 
 @end
