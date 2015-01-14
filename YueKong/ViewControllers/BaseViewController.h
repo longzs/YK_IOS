@@ -32,5 +32,8 @@
 //返回按钮事件
 - (void)clickBackBarButton:(id)sender;
 
+-(void) showMessage:(NSString *)text withTitle:(NSString *)title;
+-(void) showMessage:(NSString *)text withTag:(int)tag withTarget:(id)target;
+-(void) showMessage:(NSString *)text ;
 
 @end

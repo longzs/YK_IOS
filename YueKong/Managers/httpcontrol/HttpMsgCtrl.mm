@@ -501,7 +501,7 @@ static HttpMsgCtrl* msgCtrl = nil;
 	
 	//  如果有结束完的请求
 	if (g_mapSend.end() != iter) {
-        NSLog(@"---RequestDidFailed---\n redID = 0x%x, errorID = %d\n", iter->second.cmdCode_, (int)codeid);
+        NSLog(@"---RequestDidFailed---\n redID = 0x%x, errorID = %d, errorMsg = %@", iter->second.cmdCode_, (int)codeid, [[request error] domain]);
 		[iter->second setDicRetHeader:request.responseHeaders];
         
         /// 当faile 时 response code 和 error code 一致

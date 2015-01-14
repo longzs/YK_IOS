@@ -107,6 +107,37 @@
     
 }
 
+#pragma mark UIAlertView methods
+
+- (void)showMessage:(NSString *)text withTitle:(NSString *)title {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:title
+                                                    message:text
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+-(void) showMessage:(NSString *)text withTag:(int)tag withTarget:(id)target
+{
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
+                                                    message:text
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil,nil];
+    [alert setDelegate:target];
+    [alert setTag:tag];
+    [alert show];
+}
+
+- (void)showMessage:(NSString *)text  {
+    UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
+                                                    message:text
+                                                   delegate:nil
+                                          cancelButtonTitle:@"OK"
+                                          otherButtonTitles:nil];
+    [alert show];
+}
+
 /*
  #pragma mark - Navigation
  
