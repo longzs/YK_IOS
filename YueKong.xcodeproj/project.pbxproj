@@ -102,6 +102,10 @@
 		FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB141A62BE8F0032D651 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1C1A62BE8F0032D651 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB161A62BE8F0032D651 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB181A62BE8F0032D651 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FC8647121A6D509E000CF612 /* RemoteControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647101A6D509E000CF612 /* RemoteControlViewController.m */; };
+		FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */; };
+		FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */; };
+		FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */; };
 		FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */; };
 		FCAF7B0A1A63ADE3001CC512 /* DeviceIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */; };
 		FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B061A63ADE3001CC512 /* mPacket.m */; };
@@ -318,6 +322,12 @@
 		FC5AFB161A62BE8F0032D651 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		FC5AFB171A62BE8F0032D651 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FC5AFB181A62BE8F0032D651 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteControlViewController.h; sourceTree = "<group>"; };
+		FC8647101A6D509E000CF612 /* RemoteControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControlViewController.m; sourceTree = "<group>"; };
+		FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemoteControlViewController.xib; sourceTree = "<group>"; };
+		FC8647141A6D57BE000CF612 /* HouseholdAppliancesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HouseholdAppliancesCell.h; path = ViewControllers/HouseholdAppliancesCell.h; sourceTree = "<group>"; };
+		FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HouseholdAppliancesCell.m; path = ViewControllers/HouseholdAppliancesCell.m; sourceTree = "<group>"; };
+		FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HouseholdAppliancesCell.xib; path = ViewControllers/HouseholdAppliancesCell.xib; sourceTree = "<group>"; };
 		FC8DB63C1A66B27500E0ED8E /* NetWorkDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkDetails.h; sourceTree = "<group>"; };
 		FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkDetails.m; sourceTree = "<group>"; };
 		FCAF7B031A63ADE3001CC512 /* DeviceIPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceIPAddress.h; sourceTree = "<group>"; };
@@ -770,6 +780,9 @@
 		FC147E311A5D2FBE00BA06F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				FC8647141A6D57BE000CF612 /* HouseholdAppliancesCell.h */,
+				FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */,
+				FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */,
 			);
 			name = Views;
 			path = ..;
@@ -784,6 +797,9 @@
 				FC147E341A5D341A00BA06F3 /* BaseViewController.m */,
 				FC1798021A6CB25900C04D1F /* DeviceManagerController.h */,
 				FC1798031A6CB25900C04D1F /* DeviceManagerController.m */,
+				FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */,
+				FC8647101A6D509E000CF612 /* RemoteControlViewController.m */,
+				FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -964,7 +980,9 @@
 				FC147CD91A5CDB3A00BA06F3 /* Main.storyboard in Resources */,
 				FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
+				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
+				FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */,
 				FC147E081A5D1D9600BA06F3 /* RegexKitLite.html in Resources */,
 				FC147E1C1A5D209A00BA06F3 /* LICENSE in Resources */,
 				FC147CDB1A5CDB3A00BA06F3 /* Images.xcassets in Resources */,
@@ -1057,6 +1075,7 @@
 				FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */,
 				FC147E001A5D1D9600BA06F3 /* ChineseToPinyinResource.m in Sources */,
 				FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */,
+				FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */,
 				FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */,
 				FC1AE59F1A5FCF6A00CD5611 /* ASIDownloadCache.m in Sources */,
 				FC1AE5A01A5FCF6A00CD5611 /* ASIFormDataRequest.m in Sources */,
@@ -1072,6 +1091,7 @@
 				FC147DDE1A5D1D9600BA06F3 /* CustomIOS7AlertView.m in Sources */,
 				FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */,
 				FC147DF21A5D1D9600BA06F3 /* IQTextView.m in Sources */,
+				FC8647121A6D509E000CF612 /* RemoteControlViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

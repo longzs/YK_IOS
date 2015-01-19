@@ -52,7 +52,7 @@
 }
 
 -(IBAction)clickBindYK:(UIButton*)sender{
-    [self bindYKDevice];UICollectionView
+    [self bindYKDevice];
 }
 
 -(void)checkCurrentSSID{
