@@ -27,6 +27,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    self.title = @"绑定悦控";
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,7 +52,7 @@
 }
 
 -(IBAction)clickBindYK:(UIButton*)sender{
-    [self bindYKDevice];
+    [self bindYKDevice];UICollectionView
 }
 
 -(void)checkCurrentSSID{
@@ -80,7 +82,7 @@
     {
         NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
         
-        NSDictionary *JSONValue =  [responseString JSONData];
+        NSDictionary *JSONValue = [responseString mutableObjectFromJSONString];
         NSArray *arrRecords = [JSONValue objectForKey:@"networks"];
         if (arrRecords)
         {
@@ -99,7 +101,6 @@
                 networkDetails.nf = [[myString objectAtIndex:5] intValue];
                 [arrResults addObject:networkDetails];
             }
-            NSLog(@"arr records count %lu",[arrRecords count]);
         }
     }
 }
@@ -266,7 +267,7 @@
     {
         NSData *data = [reciveData recData_];
         NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
+        NSDictionary *JSONValue = [responseString mutableObjectFromJSONString];
     }
     else
     {   //对于HTTP请求返回的错误,暂时不展开处理

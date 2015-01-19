@@ -7,6 +7,7 @@
 //
 
 #import "EHRootViewController.h"
+#import "DeviceManagerController.h"
 
 @interface EHRootViewController ()
 
@@ -24,7 +25,7 @@
     //给root view controller一个入口
     [Utils currentAppDelegate].rootViewController = self;
     
-    ViewController *vc = [ViewController instantiateFromMainStoryboard];
+    DeviceManagerController *vc = [DeviceManagerController instantiateFromMainStoryboard];
     //_homeController = vc;
     _mainNavController = [[EHBaseNavController alloc] initWithRootViewController:vc];
     

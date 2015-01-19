@@ -86,6 +86,7 @@
 		FC147E2C1A5D2CA700BA06F3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC147E2B1A5D2CA700BA06F3 /* Security.framework */; };
 		FC147E2E1A5D2CBE00BA06F3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */; };
 		FC147E351A5D341A00BA06F3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC147E341A5D341A00BA06F3 /* BaseViewController.m */; };
+		FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1798031A6CB25900C04D1F /* DeviceManagerController.m */; };
 		FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5811A5FCF1700CD5611 /* HttpMsgCtrl.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5861A5FCF1700CD5611 /* HttpMsgDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5831A5FCF1700CD5611 /* HttpMsgDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE59C1A5FCF6A00CD5611 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5891A5FCF6A00CD5611 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -278,6 +279,8 @@
 		FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FC147E331A5D341A00BA06F3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		FC147E341A5D341A00BA06F3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		FC1798021A6CB25900C04D1F /* DeviceManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManagerController.h; sourceTree = "<group>"; };
+		FC1798031A6CB25900C04D1F /* DeviceManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerController.m; sourceTree = "<group>"; };
 		FC1AE5801A5FCF1700CD5611 /* HttpMsgCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMsgCtrl.h; sourceTree = "<group>"; };
 		FC1AE5811A5FCF1700CD5611 /* HttpMsgCtrl.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = HttpMsgCtrl.mm; sourceTree = "<group>"; };
 		FC1AE5821A5FCF1700CD5611 /* HttpMsgDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMsgDefine.h; sourceTree = "<group>"; };
@@ -779,6 +782,8 @@
 				FC147E311A5D2FBE00BA06F3 /* Views */,
 				FC147E331A5D341A00BA06F3 /* BaseViewController.h */,
 				FC147E341A5D341A00BA06F3 /* BaseViewController.m */,
+				FC1798021A6CB25900C04D1F /* DeviceManagerController.h */,
+				FC1798031A6CB25900C04D1F /* DeviceManagerController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1052,6 +1057,7 @@
 				FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */,
 				FC147E001A5D1D9600BA06F3 /* ChineseToPinyinResource.m in Sources */,
 				FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */,
+				FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */,
 				FC1AE59F1A5FCF6A00CD5611 /* ASIDownloadCache.m in Sources */,
 				FC1AE5A01A5FCF6A00CD5611 /* ASIFormDataRequest.m in Sources */,
 				FC147E0C1A5D1D9600BA06F3 /* UIViewController+RESideMenu.m in Sources */,
