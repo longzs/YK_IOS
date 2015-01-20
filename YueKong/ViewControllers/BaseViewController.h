@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+EHBase.h"
 #import "HttpMsgCtrl.h"
+#import "EHUserDefaultManager.h"
 
 /**
  *  通过storyboard加载的协议，满足此协议代表是在storyboard中绘制的界面，可以通过instantiateFromMainStoryboard实例化

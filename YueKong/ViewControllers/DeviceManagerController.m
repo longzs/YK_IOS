@@ -10,6 +10,7 @@
 #import "RemoteControlViewController.h"
 #import "ViewController.h"
 #import "HouseholdAppliancesCell.h"
+#import "DeviceManagerCollectionHeaderView.h"
 
 @interface DeviceManagerController ()
 @property(nonatomic, weak)IBOutlet UIButton *btnBind;
@@ -27,7 +28,12 @@
     // Do any additional setup after loading the view.
     self.title = @"设备管理";
     
+    self.collectionDevices.alwaysBounceVertical = YES;
+    self.collectionDevices.allowsMultipleSelection = YES;
     [self.collectionDevices registerClass:[HouseholdAppliancesCell class] forCellWithReuseIdentifier:@"HouseholdAppliancesCell"];
+    [self.collectionDevices registerClass:[DeviceManagerCollectionHeaderView class]
+               forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"DeviceManagerCollectionHeaderView"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,6 +43,17 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
+        // 如果已经存在pdsn
+        self.labNoBindTip.hidden = YES;
+        self.collectionDevices.hidden = NO;
+    }
+    else{
+        //
+        self.labNoBindTip.hidden = NO;
+        self.collectionDevices.hidden = YES;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -79,6 +96,24 @@
     return 2;
 }
 
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath
+{
+    DeviceManagerCollectionHeaderView *header=nil;
+    if([kind isEqual:UICollectionElementKindSectionHeader])
+    {
+        header = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:@"DeviceManagerCollectionHeaderView" forIndexPath:indexPath];
+    }
+    if (nil == header) {
+        header  = [[DeviceManagerCollectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, collectionView.frame.size.width, collectionView.frame.size.width*0.11)];
+    }
+    header.labTitle.text= @"我的设备";
+    
+    return header;
+    
+}
+
 //每个UICollectionView展示的内容
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -110,6 +145,9 @@
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.width*0.11);
+}
 #pragma mark --UICollectionViewDelegate
 
 //UICollectionView被选中时调用的方法

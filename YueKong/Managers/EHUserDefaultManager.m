@@ -9,16 +9,6 @@
 #import "EHUserDefaultManager.h"
 #import "JSONKit.h"
 
-//key
-#define UserDefaultKey(var) [NSString stringWithFormat:@"%@_%@",var,@"user"]
-
-#define k_LastRefreshTime_HospitalInfo  UserDefaultKey(@"k_LastRefreshTime_HospitalInfo")
-#define k_LastHospitalCode  UserDefaultKey(@"k_LastHospitalCode")
-
-#define k_LastDepartCode  UserDefaultKey(@"k_LastDepartCode")
-
-#define k_LastUserInfo  UserDefaultKey(@"k_LastUserInfo")
-
 #define     kHasLaunched                @"kHasLaunched"
 
 #define kTagAlertForce 1001
@@ -44,8 +34,7 @@ DEFINE_SINGLETON_FOR_CLASS(EHUserDefaultManager)
     if (self) {
         userDefailts  = [NSUserDefaults standardUserDefaults];
         
-        _lastHCode = [userDefailts objectForKey:k_LastHospitalCode];
-        _lastDCode = [userDefailts objectForKey:k_LastDepartCode];
+        _lastPdsn = [userDefailts objectForKey:k_LastPdsn];
     }
     return self;
 }
@@ -61,99 +50,66 @@ DEFINE_SINGLETON_FOR_CLASS(EHUserDefaultManager)
     [userDefailts synchronize];
 }
 
-//- (void)updateUserInfo:(EHUserInfoModel *)userInfo
+- (NSString*)LastPdsn{
+    self.lastPdsn = [userDefailts objectForKey:k_LastPdsn];
+    return _lastPdsn;
+}
+
+- (void)updatelastLastPdsn:(NSString*)refrashTime{
+    
+    self.lastPdsn = refrashTime;
+    
+    [userDefailts setObject:(nil == self.lastPdsn)?@"":self.lastPdsn forKey:k_LastPdsn];
+    [userDefailts synchronize];
+}
+
+- (void)removelastLastPdsn{
+    [userDefailts removeObjectForKey:k_LastPdsn];
+    [userDefailts synchronize];
+}
+
+//- (NSString*)currentUserSSID{
+//    
+//}
+//
+//- (void)updateCurrentUserSSID:(NSString*)dCode;
+//- (void)removeCurrentUserSSID;
+//
+//- (NSString*)currentUserWIFIPWD;
+//- (void)updateCurrentUserWIFIPWD:(NSString*)dCode;
+//- (void)removeCurrentUserWIFIPWD;
+
+//- (void)removeLastUserInfo
 //{
-//    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:userInfo];
-//    [userDefailts setObject:data forKey:k_LastUserInfo];
+//    [userDefailts removeObjectForKey:k_LastUserInfo];
 //    [userDefailts synchronize];
 //}
 //
-//- (EHUserInfoModel *)lastUserInfo
-//{
-//    NSData *data = [userDefailts objectForKey:k_LastUserInfo];
+//- (NSString*)lastHostialInfoRefresh{
+//    NSString *lastData = [userDefailts objectForKey:k_LastRefreshTime_HospitalInfo];
+//    //self.lastUsedCard = [NSKeyedUnarchiver unarchiveObjectWithData:lastUsedCardData];
 //    
-//    if (data) {
-//        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    }
-//    else {
-//        return nil;
-//    }
-//    
+//    return lastData;
 //}
-
-- (void)removeLastUserInfo
-{
-    [userDefailts removeObjectForKey:k_LastUserInfo];
-    [userDefailts synchronize];
-}
-
-- (NSString*)lastHostialInfoRefresh{
-    NSString *lastData = [userDefailts objectForKey:k_LastRefreshTime_HospitalInfo];
-    //self.lastUsedCard = [NSKeyedUnarchiver unarchiveObjectWithData:lastUsedCardData];
-    
-    return lastData;
-}
-
-- (void)updatelastHostialInfoRefresh:(NSString*)refrashTime{
-    //NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:card];
-    if (0 == refrashTime.length) {
-        return;
-    }
-    [userDefailts setObject:refrashTime forKey:k_LastRefreshTime_HospitalInfo];
-    [userDefailts synchronize];
-}
-
-- (void)removelastHostialInfoRefresh{
-    
-    [userDefailts removeObjectForKey:k_LastRefreshTime_HospitalInfo];
-    [userDefailts synchronize];
-}
-
-- (NSString*)lastHospitalCode{
-    self.lastHCode = [userDefailts objectForKey:k_LastHospitalCode];
-
-    return self.lastHCode;
-}
-
-- (void)updateHospitalCode:(NSString*)hCode{
-    self.lastHCode = hCode;
-    
-    [userDefailts setObject:(nil == self.lastHCode)?@"":self.lastHCode forKey:k_LastHospitalCode];
-    [userDefailts synchronize];
-}
-
-- (void)removeHospitalCode{
-    self.lastHCode = nil;
-    [userDefailts removeObjectForKey:k_LastHospitalCode];
-    [userDefailts synchronize];
-}
-
-- (NSString*)lastDepartID{
-    self.lastDCode = [userDefailts objectForKey:k_LastDepartCode];
-    
-    return self.lastDCode;
-}
-
-- (void)updateLastDepartID:(NSString*)dCode{
-    self.lastDCode = dCode;
-    
-    [userDefailts setObject:(nil == self.lastDCode)?@"":self.lastDCode forKey:k_LastDepartCode];
-    [userDefailts synchronize];
-}
-
-- (void)removeLastDepartID{
-    self.lastDCode = nil;
-    [userDefailts removeObjectForKey:k_LastDepartCode];
-    [userDefailts synchronize];
-}
+//
+//- (void)updatelastHostialInfoRefresh:(NSString*)refrashTime{
+//    //NSData *myEncodedObject = [NSKeyedArchiver archivedDataWithRootObject:card];
+//    if (0 == refrashTime.length) {
+//        return;
+//    }
+//    [userDefailts setObject:refrashTime forKey:k_LastRefreshTime_HospitalInfo];
+//    [userDefailts synchronize];
+//}
+//
+//- (void)removelastHostialInfoRefresh{
+//    
+//    [userDefailts removeObjectForKey:k_LastRefreshTime_HospitalInfo];
+//    [userDefailts synchronize];
+//}
 
 - (void)removeAllUserDefaults{
     //[userDefailts removeObjectForKey:kLastUsedCard];
     [userDefailts removeObjectForKey:kHasLaunched];
-    [userDefailts removeObjectForKey:k_LastRefreshTime_HospitalInfo];
-    [userDefailts removeObjectForKey:k_LastHospitalCode];
-    [userDefailts removeObjectForKey:k_LastUserInfo];
-    [userDefailts removeObjectForKey:k_LastDepartCode];
     [userDefailts synchronize];
 }
 

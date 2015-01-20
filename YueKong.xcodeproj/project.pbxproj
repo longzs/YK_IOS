@@ -86,6 +86,8 @@
 		FC147E2C1A5D2CA700BA06F3 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC147E2B1A5D2CA700BA06F3 /* Security.framework */; };
 		FC147E2E1A5D2CBE00BA06F3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */; };
 		FC147E351A5D341A00BA06F3 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC147E341A5D341A00BA06F3 /* BaseViewController.m */; };
+		FC177B761A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */; };
+		FC177B771A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */; };
 		FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1798031A6CB25900C04D1F /* DeviceManagerController.m */; };
 		FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5811A5FCF1700CD5611 /* HttpMsgCtrl.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5861A5FCF1700CD5611 /* HttpMsgDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5831A5FCF1700CD5611 /* HttpMsgDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -145,8 +147,8 @@
 		FC147CCF1A5CDB3A00BA06F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC147CD11A5CDB3A00BA06F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FC147CD21A5CDB3A00BA06F3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		FC147CD41A5CDB3A00BA06F3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		FC147CD51A5CDB3A00BA06F3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FC147CD41A5CDB3A00BA06F3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ViewController.h; path = ../ViewController.h; sourceTree = "<group>"; };
+		FC147CD51A5CDB3A00BA06F3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = ViewController.m; path = ../ViewController.m; sourceTree = "<group>"; };
 		FC147CD81A5CDB3A00BA06F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC147CDA1A5CDB3A00BA06F3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		FC147CDD1A5CDB3A00BA06F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -283,6 +285,9 @@
 		FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FC147E331A5D341A00BA06F3 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		FC147E341A5D341A00BA06F3 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		FC177B731A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManagerCollectionHeaderView.h; sourceTree = "<group>"; };
+		FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerCollectionHeaderView.m; sourceTree = "<group>"; };
+		FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceManagerCollectionHeaderView.xib; sourceTree = "<group>"; };
 		FC1798021A6CB25900C04D1F /* DeviceManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManagerController.h; sourceTree = "<group>"; };
 		FC1798031A6CB25900C04D1F /* DeviceManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerController.m; sourceTree = "<group>"; };
 		FC1AE5801A5FCF1700CD5611 /* HttpMsgCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMsgCtrl.h; sourceTree = "<group>"; };
@@ -437,8 +442,6 @@
 				FC147CF31A5D1D1900BA06F3 /* Utils */,
 				FC147CD11A5CDB3A00BA06F3 /* AppDelegate.h */,
 				FC147CD21A5CDB3A00BA06F3 /* AppDelegate.m */,
-				FC147CD41A5CDB3A00BA06F3 /* ViewController.h */,
-				FC147CD51A5CDB3A00BA06F3 /* ViewController.m */,
 				FC147CD71A5CDB3A00BA06F3 /* Main.storyboard */,
 				FC147CDA1A5CDB3A00BA06F3 /* Images.xcassets */,
 				FC147CDC1A5CDB3A00BA06F3 /* LaunchScreen.xib */,
@@ -783,6 +786,9 @@
 				FC8647141A6D57BE000CF612 /* HouseholdAppliancesCell.h */,
 				FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */,
 				FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */,
+				FC177B731A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.h */,
+				FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */,
+				FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */,
 			);
 			name = Views;
 			path = ..;
@@ -795,6 +801,8 @@
 				FC147E311A5D2FBE00BA06F3 /* Views */,
 				FC147E331A5D341A00BA06F3 /* BaseViewController.h */,
 				FC147E341A5D341A00BA06F3 /* BaseViewController.m */,
+				FC147CD41A5CDB3A00BA06F3 /* ViewController.h */,
+				FC147CD51A5CDB3A00BA06F3 /* ViewController.m */,
 				FC1798021A6CB25900C04D1F /* DeviceManagerController.h */,
 				FC1798031A6CB25900C04D1F /* DeviceManagerController.m */,
 				FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */,
@@ -978,6 +986,7 @@
 				FC147E0D1A5D1D9600BA06F3 /* sr_refresh.png in Resources */,
 				FC147E0E1A5D1D9600BA06F3 /* sr_refresh@2X.png in Resources */,
 				FC147CD91A5CDB3A00BA06F3 /* Main.storyboard in Resources */,
+				FC177B771A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib in Resources */,
 				FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
 				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
@@ -1036,6 +1045,7 @@
 				FC147D111A5D1D1900BA06F3 /* SFHFKeychainUtils.m in Sources */,
 				FC1AE5861A5FCF1700CD5611 /* HttpMsgDefine.m in Sources */,
 				FC147CD31A5CDB3A00BA06F3 /* AppDelegate.m in Sources */,
+				FC177B761A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m in Sources */,
 				FC147DF41A5D1D9600BA06F3 /* IQTitleBarButtonItem.m in Sources */,
 				FC147D0D1A5D1D1900BA06F3 /* NSDate+TKCategory.m in Sources */,
 				FC147E071A5D1D9600BA06F3 /* PopoverView.m in Sources */,

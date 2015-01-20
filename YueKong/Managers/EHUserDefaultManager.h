@@ -8,13 +8,20 @@
 
 #import <Foundation/Foundation.h>
 
+
+#define k_LastPdsn  @"k_LastPdsn"
+
+#define k_UserSSID  @"k_UserSSID"
+
+#define k_UserWIFIPWD  @"k_UserWIFIPWD"
+
 @interface EHUserDefaultManager : NSObject
 
 DEFINE_SINGLETON_FOR_HEADER(EHUserDefaultManager)
 
 //上次选择的医院/科室id，在首页中显示
-@property(nonatomic, copy)NSString* lastHCode;
-@property(nonatomic, copy)NSString* lastDCode;
+@property(nonatomic, copy)NSString* lastPdsn;
+
 
 - (BOOL)isFirstLaunch;
 - (void)appDidLaunched;
@@ -24,17 +31,17 @@ DEFINE_SINGLETON_FOR_HEADER(EHUserDefaultManager)
 //- (void)updateUserInfo:(EHUserInfoModel *)userInfo;
 //- (void)removeLastUserInfo;
 
-- (NSString*)lastHostialInfoRefresh;
-- (void)updatelastHostialInfoRefresh:(NSString*)refrashTime;
-- (void)removelastHostialInfoRefresh;
+- (NSString*)LastPdsn;
+- (void)updatelastLastPdsn:(NSString*)refrashTime;
+- (void)removelastLastPdsn;
 
-- (NSString*)lastDepartID;
-- (void)updateLastDepartID:(NSString*)dCode;
-- (void)removeLastDepartID;
+- (NSString*)currentUserSSID;
+- (void)updateCurrentUserSSID:(NSString*)dCode;
+- (void)removeCurrentUserSSID;
 
-- (NSString*)lastHospitalCode;
-- (void)updateHospitalCode:(NSString*)hCode;
-- (void)removeHospitalCode;
+- (NSString*)currentUserWIFIPWD;
+- (void)updateCurrentUserWIFIPWD:(NSString*)dCode;
+- (void)removeCurrentUserWIFIPWD;
 
 - (void)removeAllUserDefaults;
 

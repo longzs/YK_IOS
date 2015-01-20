@@ -36,9 +36,22 @@ typedef enum commandCode{                           //push 开始的都是推送
     CC_UNKONW = -1
 }E_COMMAND;
 
-/*i.	请求或推送的状态值为0XFF
- ii.	响应的状态值为0表示成功响应，非0表示响应失败。
+/*
+ 1. TCP server 通信端口：7000， 数据长度定义使用大端模式，低位在前，高位在后
+ 2. 数据包定义： App －＞server ：    功能ID（1byte） + 数据长度低8位（1byte） + 数据长度高8位（1byte） + 数据（长度有数据长度指定）
+ Server －＞App  ： （功能ID + 0x80） + 数据长度低8位（1byte） + 数据长度高8位（1byte） + 数据（长度有数据长度指定）
+ 
+ 目前定义了3个功能ID
+ 1 ：获得ＰＤＳＮ　　　  App —>server  :     0x1     0x0     0x0
+ Server －＞App :    0x81     0x10   0x0  P000000000011111  #数据长度为16, 数据为“P000000000011111”
+ 
+ 2：获取按键K的红外码    App —>server  :     0x2     0x1      0x0   0x1          #0x1表示按键的序号， 开始学习按键0x1
+ Server －＞App :     0x82   0x3     0x0   0x1  OK    #暂时返回按键序号 + "OK" 3个字节数据, 表示按键0x1学习成功
+ 
+ 3：系统reboot              App —>server  :     0x3     0x2     0x0   0x88  0x13  #0x1388表示延时5000ms后系统重启
+ Server －＞App :    0x83   0x1     0x0   0x0             #数据0表示命令执行成功， 系统稍后重启
  */
+
 #define kState_SendAndNotify    0xFF
 #define kState_Recive_Success   0
 
