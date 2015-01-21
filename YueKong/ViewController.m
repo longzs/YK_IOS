@@ -82,7 +82,8 @@ typedef enum wifiStatus_{
             break;
         case wifiStatus_NoHomeSSID:
         {
-            if (0 == self.tfSSID.text) {
+            [self bindYKDevice];
+            if (0 == self.tfSSID.text.length) {
                 [self showMessage:@"请输入您家里使用的wifi名称和密码用来记录在悦控，如果wifi没有密码请不用输入" withTag:11 withTarget:self];
                 return;
             }
@@ -330,6 +331,25 @@ typedef enum wifiStatus_{
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     
+    /*1.手机 APP 向设备（基座）发送信息，参数如下：
+     ssid：wifi 名称 String
+     key：wifi 密码 String
+     security:加密方式
+     channel:
+     ip:内网 IP
+     pid：手机设备号 String
+     设备返回：
+     pdsn
+     */
+    NSMutableDictionary* dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
+    dicBody[@"ssid"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserSSID];
+    dicBody[@"key"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
+    dicBody[@"security"] = @"";
+    dicBody[@"channel"] = @"";
+    dicBody[@"ip"] = @"";
+    NSString* pid = [OpenUDID value];
+    dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
+    
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
     [sent setMethod_Http:HTTP_METHOD_GET];
@@ -338,6 +358,7 @@ typedef enum wifiStatus_{
     [sent setIReqType:HTTP_REQ_SHORTRUN];
     [sent setTimeout_:30];
     [sent setDicHeader:header];
+    [sent setPostData:[dicBody JSONData]];
     [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 

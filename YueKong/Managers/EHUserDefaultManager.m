@@ -73,7 +73,7 @@ DEFINE_SINGLETON_FOR_CLASS(EHUserDefaultManager)
         return @"";
     }
     NSString* strValue = [userDefailts objectForKey:key];
-    return strValue;
+    return nil == strValue?@"":strValue;
 }
 
 -(void)updateDefaultValue:(NSString*)key
