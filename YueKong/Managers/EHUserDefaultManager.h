@@ -35,6 +35,11 @@ DEFINE_SINGLETON_FOR_HEADER(EHUserDefaultManager)
 - (void)updatelastLastPdsn:(NSString*)refrashTime;
 - (void)removelastLastPdsn;
 
+-(NSString*)getValueFromDefault:(NSString*)key;
+-(void)updateDefaultValue:(NSString*)key
+                         Value:(NSString*)valueStr;
+-(void)removeDefaultValue:(NSString*)key;
+
 - (NSString*)currentUserSSID;
 - (void)updateCurrentUserSSID:(NSString*)dCode;
 - (void)removeCurrentUserSSID;

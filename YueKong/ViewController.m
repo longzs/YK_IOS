@@ -11,15 +11,28 @@
 #import "Reachability.h"
 #import "NetWorkDetails.h"
 
+typedef enum wifiStatus_{
+    wifiStatus_OK = 0, //
+    wifiStatus_NoHomeSSID,
+    wifiStatus_IsNotYKSSID,
+    
+}wifiStatus;
+
 @interface ViewController ()
 
 @property(weak, nonatomic)IBOutlet UITextField* tfSSID;
 @property(weak, nonatomic)IBOutlet UITextField* tfSSIDPWD;
 
+@property(weak, nonatomic)IBOutlet UIButton* btnBind;
+
 @property(nonatomic, strong)NSString* strCurrentSSID;
 
+@property(nonatomic, assign)wifiStatus wifiStatu;
+
 -(IBAction)clickBindYK:(UIButton*)sender;
+
 -(void)checkCurrentSSID;
+
 @end
 
 @implementation ViewController
@@ -27,7 +40,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
     self.title = @"绑定悦控";
 }
 
@@ -39,11 +51,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self performSelector:@selector(checkCurrentSSID) withObject:nil afterDelay:0.3];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterForground) name:UIApplicationDidBecomeActiveNotification object:nil];
+    
+    [self performSelector:@selector(checkCurrentSSID) withObject:nil afterDelay:0.1];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 + (instancetype)instantiateFromMainStoryboard
@@ -51,13 +66,82 @@
     return (ViewController *)[Utils controllerInMainStroyboardWithID:@"ViewController"];
 }
 
+-(void)didEnterForground{
+    [self performSelector:@selector(checkCurrentSSID) withObject:nil afterDelay:0.1];
+}
+
 -(IBAction)clickBindYK:(UIButton*)sender{
-    [self bindYKDevice];
+    [_tfSSID resignFirstResponder];
+    [_tfSSIDPWD resignFirstResponder];
+    
+    switch (self.wifiStatu) {
+        case wifiStatus_OK:
+        {
+            [self bindYKDevice];
+        }
+            break;
+        case wifiStatus_NoHomeSSID:
+        {
+            if (0 == self.tfSSID.text) {
+                [self showMessage:@"请输入您家里使用的wifi名称和密码用来记录在悦控，如果wifi没有密码请不用输入" withTag:11 withTarget:self];
+                return;
+            }
+            [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserSSID Value:self.tfSSID.text];
+            [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserWIFIPWD Value:self.tfSSIDPWD.text];
+            
+            //
+            [self showMessage:[NSString stringWithFormat:@"记录成功，请将手机连接至悦控的wifi %@，在返回点击绑定", MARVELL_NETWORK_NAME] withTag:13 withTarget:nil];
+        }
+            break;
+        case wifiStatus_IsNotYKSSID:
+        {
+            [self showMessage:[NSString stringWithFormat:@"请将手机连接至悦控的wifi %@", MARVELL_NETWORK_NAME] withTag:12 withTarget:nil];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 -(void)checkCurrentSSID{
-    //NSDictionary* dic = [[SSIDManager sharedInstance] fetchSSIDInfo];
-    self.tfSSID.text = [[SSIDManager sharedInstance] currentWifiSSID];
+    NSString* strSSID = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserSSID];
+    NSString    *wifiPWD = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
+    self.strCurrentSSID = [[SSIDManager sharedInstance] currentWifiSSID];
+    
+    if ([self.strCurrentSSID isEqualToString:MARVELL_NETWORK_NAME]
+        && strSSID.length
+        && wifiPWD.length) {
+        //  所有条件符合，可以发起绑定
+            self.tfSSID.text = self.strCurrentSSID;
+        self.tfSSID.enabled = NO;
+        self.tfSSIDPWD.hidden = YES;
+        [self.btnBind setTitle:@"绑定悦控" forState:UIControlStateNormal];
+        
+        self.wifiStatu = wifiStatus_OK;
+    }
+    else if(0 == strSSID.length)
+    {
+        self.tfSSID.text = self.strCurrentSSID;
+        self.tfSSIDPWD.text = wifiPWD;
+        self.tfSSID.enabled = YES;
+        self.tfSSIDPWD.hidden = NO;
+        [self.btnBind setTitle:@"记录wifi" forState:UIControlStateNormal];
+        
+        [self showMessage:@"请输入您家里使用的wifi名称和密码用来记录在悦控，如果wifi没有密码请不用输入" withTag:11 withTarget:self];
+        
+        self.wifiStatu = wifiStatus_NoHomeSSID;
+    }
+    else if(![self.strCurrentSSID isEqualToString:MARVELL_NETWORK_NAME]){
+        
+        self.tfSSID.text = self.strCurrentSSID;
+        self.tfSSIDPWD.text = wifiPWD;
+        self.tfSSID.enabled = YES;
+        self.tfSSIDPWD.hidden = NO;
+        [self.btnBind setTitle:@"记录wifi" forState:UIControlStateNormal];
+        [self showMessage:[NSString stringWithFormat:@"请将手机连接至悦控的wifi %@", MARVELL_NETWORK_NAME] withTag:12 withTarget:nil];
+        self.wifiStatu = wifiStatus_IsNotYKSSID;
+    }
 }
 
 #pragma mark - from Marvell
@@ -200,21 +284,17 @@
         //[self setBusy:YES forMessage:@"Confirming network configuration..."];
         //[self performSelector:@selector(ContinueAttempts) withObject:nil afterDelay:1.0];
     }
-    else if (alertView.tag == 20 && buttonIndex == 0)
+    else if (11 == alertView.tag)
     {
-        //[self ValidateFields];
+        // 点击输入家庭wifi和pwd
     }
-    else if(alertView.tag == 30 && buttonIndex ==0)
-    {
-//        ScanViewController *scanViewController = [[ScanViewController alloc]initWithNibName:@"ScanView" bundle:nil];
-//        [self.navigationController pushViewController:scanViewController animated:YES];
-    }
-//    else if (alertView.tag == 50 || alertView.tag == 60 || alertView.tag == 70)
-//    {
-//        self.view.userInteractionEnabled = NO;
-//    }
 }
 
+#pragma mark UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    [textField resignFirstResponder];
+    return YES;
+}
 #pragma mark - Request & Process
 
 -(void)GetAck
@@ -254,7 +334,7 @@
     [sent setMethod_Req:requestURL];
     [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:self];
-    [sent setCmdCode_:CC_GetLocalNumber];
+    [sent setCmdCode_:CC_BindYKDecive];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
     [sent setTimeout_:30];
     [sent setDicHeader:header];
@@ -265,9 +345,7 @@
     
     if ([reciveData isRequestSuccess])
     {
-        NSData *data = [reciveData recData_];
-        NSString *responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSDictionary *JSONValue = [responseString mutableObjectFromJSONString];
+        NSDictionary *jsonData = [reciveData responsdData];
     }
     else
     {   //对于HTTP请求返回的错误,暂时不展开处理
@@ -294,10 +372,11 @@
     NSString *responseString = [[NSString alloc] initWithData:ReciveMsg.recData_ encoding:NSUTF8StringEncoding];
     NSLog(@"id = %d, httpRsp = %d\nReciveHttpMsg = \n%@,",  ReciveMsg.cmdCode_ , ReciveMsg.httpRsp_,responseString);
 #endif
+    
     [self hideLoading];
     switch (ReciveMsg.cmdCode_)
     {
-        case CC_GetLocalNumber:
+        case CC_BindYKDecive:
         {
             [self processBindYKDevice:ReciveMsg];
             break;

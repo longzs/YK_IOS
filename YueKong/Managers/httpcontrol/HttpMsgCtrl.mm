@@ -441,7 +441,10 @@ static HttpMsgCtrl* msgCtrl = nil;
 	else {
 		char tch = 0 ;
 		[iter_Sent->second.recData_ setData:tempData];
-		[iter_Sent->second.recData_ appendBytes: &tch length:1] ;
+		[iter_Sent->second.recData_ appendBytes: &tch length:1];
+        
+        NSString *responseString = [[NSString alloc] initWithData:iter_Sent->second.recData_ encoding:NSUTF8StringEncoding];
+        iter_Sent->second.responseJsonString = responseString;
 	}
 	return;
 }

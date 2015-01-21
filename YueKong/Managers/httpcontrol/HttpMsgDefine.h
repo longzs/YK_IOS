@@ -117,20 +117,23 @@ typedef enum HttpErr{
 @property(nonatomic, copy)NSString*     method_Http;
 @property(nonatomic, copy)NSString*     method_Req;
 @property(assign)id<HTTP_MSG_RESPOND>   delegate_;
-@property(nonatomic, retain)NSMutableData*	recData_;			// 返回的请求内容
+@property(nonatomic, strong)NSMutableData*	recData_;			// 返回的请求内容
 @property(nonatomic, assign)int             httpRsp_;
 @property(nonatomic, assign)int             msgSessionId; //消息序列号
-@property(nonatomic, retain)NSMutableDictionary*    dicHeader;
-@property(nonatomic, retain)NSDictionary*           dicRetHeader;
-@property(nonatomic, retain)NSData*               postData;
-@property(nonatomic, retain)NSMutableDictionary*  userInfo;
+@property(nonatomic, strong)NSMutableDictionary*    dicHeader;
+@property(nonatomic, strong)NSDictionary*           dicRetHeader;
+@property(nonatomic, strong)NSData*               postData;
+@property(nonatomic, strong)NSMutableDictionary*  userInfo;
 @property(nonatomic, assign)int             iReqType;
 @property(nonatomic, assign)int             iFailedCode;
 @property (nonatomic, assign)BOOL           retryOnConnection;
+
+@property (nonatomic, strong)NSString*           responseJsonString;
+
 + (NSString*)mbase64forData:(NSData*)theData;
 
 -(BOOL)isRequestSuccess;
-
+-(NSDictionary*)responsdData;
 @end
 
 #pragma mark delegate_

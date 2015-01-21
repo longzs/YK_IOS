@@ -122,7 +122,7 @@
     UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
                                                     message:text
                                                    delegate:nil
-                                          cancelButtonTitle:@"OK"
+                                          cancelButtonTitle:@"确定"
                                           otherButtonTitles:nil,nil];
     [alert setDelegate:target];
     [alert setTag:tag];

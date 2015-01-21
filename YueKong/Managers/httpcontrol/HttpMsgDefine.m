@@ -8,7 +8,9 @@
 
 #import "HttpMsgDefine.h"
 
-
+#define kErrorCode      @"Code"
+#define kErrorMsg       @"Msg"
+#define kResponse       @"Data"
 
 ////  for tcp socket define 
 //@implementation MsgHeader
@@ -92,6 +94,7 @@
 @synthesize userInfo;
 @synthesize iReqType;
 @synthesize dicRetHeader;
+@synthesize responseJsonString;
 - (id) init{
 	
 	self = [super init];
@@ -100,7 +103,7 @@
 		self.httpRsp_ = 0;
 		timeout_ = HTTP_TIMEOUT;
 		//method_ = [[NSString alloc] initWithString:HTTP_METHOD_POST];
-		self.method_Http = HTTP_METHOD_GET;
+		self.method_Http = HTTP_METHOD_POST;
 		recData_ = [[NSMutableData alloc] init];
         iReqType = HTTP_REQ_SHORTRUN;
         iFailedCode = 0;
@@ -119,6 +122,7 @@
     [postData release];
     [userInfo release];
     [dicRetHeader release];
+    [responseJsonString release];
 	[super dealloc];
 }
 
@@ -142,7 +146,7 @@
     [returnString appendFormat:@"iFailedCode: %d\n", iFailedCode];
     [returnString appendFormat:@"iReqType: %d\n", iReqType];
     [returnString appendFormat:@"httpRspCode: %d\n", httpRsp_];
-    [returnString appendFormat:@"timeout: %d\n", timeout_];
+    [returnString appendFormat:@"timeout: %ld\n", timeout_];
     
     if (method_Http)
     {
@@ -227,6 +231,13 @@
 -(BOOL)isRequestSuccess{
     
     return 200 == self.httpRsp_;
+}
+
+-(NSDictionary*)responsdData{
+    NSString *responseString = self.responseJsonString;
+    NSDictionary *JSONValue = [responseString mutableObjectFromJSONString];
+    
+    return JSONValue[kResponse];
 }
 
 + (NSString*)mbase64forData:(NSData*)theData {

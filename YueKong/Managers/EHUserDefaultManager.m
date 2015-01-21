@@ -68,6 +68,32 @@ DEFINE_SINGLETON_FOR_CLASS(EHUserDefaultManager)
     [userDefailts synchronize];
 }
 
+-(NSString*)getValueFromDefault:(NSString*)key{
+    if (nil == key) {
+        return @"";
+    }
+    NSString* strValue = [userDefailts objectForKey:key];
+    return strValue;
+}
+
+-(void)updateDefaultValue:(NSString*)key
+                    Value:(NSString*)valueStr{
+    if (nil == key
+        || nil == valueStr) {
+        return;
+    }
+    [userDefailts setObject:valueStr forKey:key];
+    [userDefailts synchronize];
+}
+
+-(void)removeDefaultValue:(NSString*)key{
+    if (nil == key) {
+        return;
+    }
+    [userDefailts removeObjectForKey:key];
+    [userDefailts synchronize];
+}
+
 //- (NSString*)currentUserSSID{
 //    
 //}
