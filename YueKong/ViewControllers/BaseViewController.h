@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "UIViewController+EHBase.h"
 #import "HttpMsgCtrl.h"
+#import "NetControl.h"
 #import "EHUserDefaultManager.h"
 #import "OpenUDID.h"
 

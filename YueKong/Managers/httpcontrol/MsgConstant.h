@@ -53,7 +53,7 @@ typedef enum CmdCode
     CC_GetBalance               = 0x0107,
     CC_GetACK               = 0x0108,
     CC_BindYKDecive           = 0x0109,
-    CC_SetAPNS                  = 0x010A,
+    CC_CheckYKBindSuccess                  = 0x010A,
     CC_ResignAPNS               = 0x010B,
 
 	CC_Unknown                  = -1,

@@ -28,7 +28,6 @@
     dispatch_queue_t tcpQueue_;
 }
 @property(nonatomic, getter = serialNumber)Byte   cSerial_;
-@property(nonatomic, strong)NSString*   strIP;
 @property(nonatomic, strong)NSTimer* timerGetState;
 @end
 
@@ -73,12 +72,6 @@ static NetControl* g_ins = nil;
 }
 
 -(void)ConnectTo3gRouter{
-    // 此ip 为网管ip
-#if 1
-    self.strIP = @"10.10.10.254";
-#else
-    self.strIP = @"114.221.79.172";
-#endif
     // 10.10.10.254 [self localWiFiIPAddress];
     if (!isConnect)
     {

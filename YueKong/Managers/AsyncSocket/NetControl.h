@@ -10,8 +10,6 @@
 #import "netMsgDefine.h"
 #import "mPacket.h"
 
-
-
 @class GCDAsyncSocket;
 
 
@@ -46,6 +44,8 @@
 @property(nonatomic, assign)BOOL b3gOpen;
 @property(nonatomic)BOOL   isConnect;
 @property(nonatomic)BOOL   isVerifySuccess;
+
+@property(nonatomic, strong)NSString*   strIP;
 
 +(NetControl*)shareInstance;
 
