@@ -109,6 +109,7 @@
 		FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */; };
 		FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */; };
 		FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */; };
+		FCA519231A722602006B0A5C /* HomeAppliancesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA519221A722602006B0A5C /* HomeAppliancesManager.m */; };
 		FCAF7B0A1A63ADE3001CC512 /* DeviceIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */; };
 		FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B061A63ADE3001CC512 /* mPacket.m */; };
 		FCAF7B0C1A63ADE3001CC512 /* NetControl.mm in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B081A63ADE3001CC512 /* NetControl.mm */; };
@@ -335,6 +336,8 @@
 		FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HouseholdAppliancesCell.xib; path = ViewControllers/HouseholdAppliancesCell.xib; sourceTree = "<group>"; };
 		FC8DB63C1A66B27500E0ED8E /* NetWorkDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetWorkDetails.h; sourceTree = "<group>"; };
 		FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetWorkDetails.m; sourceTree = "<group>"; };
+		FCA519211A722602006B0A5C /* HomeAppliancesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeAppliancesManager.h; sourceTree = "<group>"; };
+		FCA519221A722602006B0A5C /* HomeAppliancesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeAppliancesManager.m; sourceTree = "<group>"; };
 		FCAF7B031A63ADE3001CC512 /* DeviceIPAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceIPAddress.h; sourceTree = "<group>"; };
 		FCAF7B041A63ADE3001CC512 /* DeviceIPAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceIPAddress.m; sourceTree = "<group>"; };
 		FCAF7B051A63ADE3001CC512 /* mPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mPacket.h; sourceTree = "<group>"; };
@@ -383,6 +386,8 @@
 				FC0BA9651A5E26BF00748B4E /* EHUserDefaultManager.m */,
 				FC0BA9751A5E81E600748B4E /* SSIDManager.h */,
 				FC0BA9761A5E81E600748B4E /* SSIDManager.m */,
+				FCA519211A722602006B0A5C /* HomeAppliancesManager.h */,
+				FCA519221A722602006B0A5C /* HomeAppliancesManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1063,6 +1068,7 @@
 				FC147DE21A5D1D9600BA06F3 /* CXAlertViewController.m in Sources */,
 				FC147E021A5D1D9600BA06F3 /* NSString+PinYin4Cocoa.m in Sources */,
 				FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */,
+				FCA519231A722602006B0A5C /* HomeAppliancesManager.m in Sources */,
 				FC147DF31A5D1D9600BA06F3 /* IQBarButtonItem.m in Sources */,
 				FC147DE11A5D1D9600BA06F3 /* CXAlertView.m in Sources */,
 				FC1AE59D1A5FCF6A00CD5611 /* ASIDataCompressor.m in Sources */,

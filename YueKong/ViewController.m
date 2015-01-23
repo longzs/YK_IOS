@@ -10,6 +10,7 @@
 #import "SSIDManager.h"
 #import "Reachability.h"
 #import "NetWorkDetails.h"
+#import "RemoteControlViewController.h"
 
 typedef enum wifiStatus_{
     wifiStatus_OK = 0, //
@@ -144,7 +145,7 @@ typedef enum wifiStatus_{
     }
     else if(![self.strCurrentSSID isEqualToString:MARVELL_NETWORK_NAME]){
         
-        self.tfSSID.text = self.strCurrentSSID;
+        self.tfSSID.text = strSSID;
         self.tfSSIDPWD.text = wifiPWD;
         self.tfSSID.enabled = YES;
         self.tfSSIDPWD.hidden = NO;
@@ -284,19 +285,19 @@ typedef enum wifiStatus_{
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag ==10 && buttonIndex==0)
-    {
-        [self GetAck];
-    }
-    else if (alertView.tag == 10 && buttonIndex ==1)
-    {
-        //[self ShowProgressView:@"Confirming network configuration..."];
-        //[self setBusy:YES forMessage:@"Confirming network configuration..."];
-        //[self performSelector:@selector(ContinueAttempts) withObject:nil afterDelay:1.0];
-    }
-    else if (11 == alertView.tag)
+    if (11 == alertView.tag)
     {
         // 点击输入家庭wifi和pwd
+    }
+    else if (18 == alertView.tag){
+        
+        if (0 == buttonIndex) {
+            RemoteControlViewController* vc = [RemoteControlViewController instantiateFromMainStoryboard];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if (1 == buttonIndex){
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 
@@ -497,6 +498,7 @@ typedef enum wifiStatus_{
         }
         else{
             [self hideLoading];
+            [Utils showSimpleAlert:@"请求超时"];
         }
     }
 }

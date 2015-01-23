@@ -9,6 +9,7 @@
 
 //  业务处理管理基类
 #import <Foundation/Foundation.h>
+#import "HttpMsgCtrl.h"
 //#import "EHHttpManager.h"
 
 

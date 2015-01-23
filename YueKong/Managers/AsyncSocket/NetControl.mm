@@ -15,13 +15,10 @@
 #import "GCDAsyncSocket.h"
 #import "ASIHTTPRequest.h"
 
-#define k_Tcp_Port  1800
+
 
 #define k_Tag_Read_Header    0
 #define k_Tag_Read_Body      1
-
-#define k_TimeOut_Tcp       5
-#define k_Length_Header     11
 
 @interface NetControl()<GCDAsyncSocketDelegate>
 {
@@ -293,16 +290,6 @@ static NetControl* g_ins = nil;
                 const char* lpcData = (const char*)[resData bytes];
                 //aes_context ctx;
                 Byte bb[64];
-//                unsigned char buf[16];
-//                unsigned char key[32];
-//                memset(key,0,32);
-//                aes_set_key( &ctx, key, 256);
-//                for(int i=0;i<4;i++)
-//                {
-//                    memcpy(buf,(lpcData+i*16),16);
-//                    aes_encrypt(&ctx,buf,buf);
-//                    memcpy(bb+i*16,buf,16);
-//                }
                 mPacket* sendMp = [[mPacket alloc] init];
                 sendMp.cmdID = CC_Verify_Response2;
                 sendMp.stateOper = 0x03;
@@ -343,129 +330,7 @@ static NetControl* g_ins = nil;
                 dispatch_async(dispatch_get_main_queue(), block);
             }
         }
-            break;
-        case 0x0131:{
-            //:Param:0x00表示当前状态为默认状态,不转发,0x01:表示转发已经打开.
-            self.b3gOpen = NO;
-            if (0x00 == mp.stateOper) {
-            }
-            else if (0x01 == mp.stateOper){
-                // success
-                self.b3gOpen = YES;
-            }
-            
-            dispatch_block_t block = ^{
-                if (!self.b3gOpen) {
-                }
-                else{
-                    
-                }
-                if ([delegate_ respondsToSelector:@selector(check3gIsOpen:)]) {
-                    [delegate_ check3gIsOpen:[NSNumber numberWithBool:self.b3gOpen]];
-                }
-            };
-            
-            if ([NSThread isMainThread]) {
-                block();
-            }
-            else{
-                dispatch_async(dispatch_get_main_queue(), block);
-            }
-        }
-            break;
-        case 0x0141:{
-            //Param:0x10:状态设置成功,0x11:状态设置失败
-            __block BOOL Suc = NO;
-            if (0x11 == mp.stateOper) {
-            }
-            else if (0x10 == mp.stateOper){
-                // success
-                Suc = YES;
-            }
-            if (Suc)
-            {
-                self.b3gOpen = !self.b3gOpen;
-                /*
-                // 转发开关不控制状态查询
-                if (self.b3gOpen)
-                {
-                    [self createTimerFor3gState];
-                }
-                else
-                {
-                    [self stop3gStateTimer];
-                }
-                 */
-            }
-            dispatch_block_t block = ^{
-                
-                if ([delegate_ respondsToSelector:@selector(openOrClose3gSuccess)]) {
-                    [delegate_ openOrClose3gSuccess];
-                }
-            };
-            if ([NSThread isMainThread]) {
-                block();
-            }
-            else{
-                dispatch_async(dispatch_get_main_queue(), block);
-            }
-        }
-            break;
-        case CC_CheckState_Res:{
-            NSData* resData = mp.responseData;
-            if (16 == resData.length)
-            {
-                ROUTERSTATE* pState = (ROUTERSTATE*)[resData bytes];
-                if (pState)
-                {
-                    __block ROUTERSTATE nState;
-                    nState.signal = pState->signal;
-                    nState.connected = pState->connected;
-                    nState.electricity = pState->electricity;
-                    nState.userNum = pState->userNum;
-                    nState.upSpeed = pState->upSpeed;
-                    nState.downSpeed = pState->downSpeed;
-                    nState.upStream = pState->upStream;
-                    nState.downStream = pState->downStream;
-                    
-                    dispatch_block_t block = ^{
-                        if ([delegate_ respondsToSelector:@selector(refresh3GDatas:)]) {
-                            [delegate_ refresh3GDatas:nState];
-                        }
-                    };
-                    if ([NSThread isMainThread]) {
-                        block();
-                    }
-                    else{
-                        dispatch_async(dispatch_get_main_queue(), block);
-                    }
-                }
-            }
-        }
-            break;
-        case CC_ClearData_Res:{
-            __block BOOL Suc = NO;
-           if (0x00 == mp.stateOper){
-                // success
-                Suc = YES;
-            }
-            dispatch_block_t block = ^{
-                
-                if (Suc
-                    && [delegate_ respondsToSelector:@selector(clear3gDatasSuccess)]) {
-                    [delegate_ clear3gDatasSuccess];
-                }
-            };
-            if ([NSThread isMainThread]) {
-                block();
-            }
-            else{
-                dispatch_async(dispatch_get_main_queue(), block);
-            }
-
-        }
-            break;
-        default:
+            break;default:
             break;
     }
 }

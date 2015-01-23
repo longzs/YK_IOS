@@ -46,9 +46,9 @@ typedef enum CmdCode
 	// aas
 	CC_Login                    = 0x0101,
 	CC_Logout					= 0x0102, // 
-    CC_RefreshToken             = 0x0103,
-    CC_HeartBeat                = 0x0104,
-    CC_CreatUser                = 0x0105,
+    CC_GetCategory              = 0x0103,
+    CC_GetBrand                = 0x0104,
+    CC_GetCity                = 0x0105,
     CC_UpdateProfile            = 0x0106,
     CC_GetBalance               = 0x0107,
     CC_GetACK               = 0x0108,

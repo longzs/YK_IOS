@@ -56,13 +56,19 @@
 #endif
 
 //App获取绑定信息
-#define k_URL_GetBindData              @"" kHttpBase"api/getBindData.php"
+#define k_URL_GetBindData               @"" kHttpBase"api/getBindData.php"
 
-//验证是否可注册
-#define k_URL_canUserRegsiter              @"canUserRegister"
 
-//获取短信验证码
-#define k_URL_getCheckCode                  @"getCheckCode"
+//Client获取系统可适配的遥控器的类型
+#define k_URL_GetCategory               @"" kHttpBase"api/getCategory.php"
+
+//Client获取系统可适配的遥控器的品牌
+#define k_URL_GetBrand                  @"" kHttpBase"api/getBrand.php"
+
+//Client获取系统目前支持的地区
+#define k_URL_GetCity                   @"" kHttpBase"api/getCity.php"
+
+
 
 //注册
 #define k_URL_userRegister                   @"userRegister"

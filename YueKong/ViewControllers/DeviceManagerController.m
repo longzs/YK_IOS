@@ -44,7 +44,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
+    if (![[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
@@ -87,7 +87,7 @@
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return 1;
 }
 
 //定义展示的Section的个数
@@ -108,8 +108,12 @@
     if (nil == header) {
         header  = [[DeviceManagerCollectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, collectionView.frame.size.width, collectionView.frame.size.width*0.11)];
     }
-    header.labTitle.text= @"我的设备";
-    
+    if (0 == indexPath.section) {
+        header.labTitle.text= @"我的设备";
+    }
+    else {
+        header.labTitle.text= @"电器预约";
+    }
     return header;
     
 }

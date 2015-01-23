@@ -10,6 +10,12 @@
 #import "netMsgDefine.h"
 #import "mPacket.h"
 
+
+#define k_Tcp_Port  7000
+#define k_TimeOut_Tcp       5
+#define k_Length_Header     11
+
+
 @class GCDAsyncSocket;
 
 
