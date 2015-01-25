@@ -12,6 +12,23 @@
 
 DEFINE_SINGLETON_FOR_CLASS(HomeAppliancesManager)
 
+-(void)testHttp{
+    NSString *requestURL = @"http://192.168.1.200:8081/yuekong/hello/test_post";//@"http://192.168.1.200:8081/yuekong/hello/test?name=xxx";
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+   
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_POST];
+    [sent setDelegate_:nil];
+    [sent setCmdCode_:CC_CheckYKBindSuccess];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setTimeout_:5];
+    [sent setDicHeader:header];
+    //[sent setPostData:[dicBody JSONData]];
+    [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
+}
+
 //App获取绑定信息
 -(int)GetBindData:(NSMutableDictionary*)postBody
  responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{

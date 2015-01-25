@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "IQKeyboardManager.h"
+#import "HomeAppliancesManager.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +22,7 @@
     if (k_IS_Report_Exception) {
         
     }
+    [[HomeAppliancesManager sharedInstance] testHttp];
     //初始化
     //数据库
     //[self createDB];

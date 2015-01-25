@@ -13,6 +13,8 @@
 
 DEFINE_SINGLETON_FOR_HEADER(HomeAppliancesManager)
 
+-(void)testHttp;
+
 //App获取绑定信息
 -(int)GetBindData:(NSMutableDictionary*)postBody
  responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
