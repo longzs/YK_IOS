@@ -27,6 +27,8 @@
     //数据库
     //[self createDB];
     
+    //测试 wangxun..
+    
     //ui
     [self setupNavigationBarSytle];
     [self setupKeyboardManager];
