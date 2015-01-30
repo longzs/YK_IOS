@@ -41,7 +41,7 @@
 
 //字体
 #define kColorTextBlue                      RGB(29, 139, 242)
-#define kColorTextGray                      RGB(153, 153, 153)
+#define kColorTextGray                      RGB(50,50,50)
 
 //默认图片
 #define kImageDoctorDefault [UIImage imageNamed:@"doctor_default.png"]

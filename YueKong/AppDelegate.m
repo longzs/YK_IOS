@@ -22,7 +22,7 @@
     if (k_IS_Report_Exception) {
         
     }
-    [[HomeAppliancesManager sharedInstance] testHttp];
+    //[[HomeAppliancesManager sharedInstance] testHttp];
     //初始化
     //数据库
     //[self createDB];
@@ -78,17 +78,21 @@
 -(void)setupNavigationBarSytle{
     UIApplication* application = [UIApplication sharedApplication];
     if (IOS_VERSION_7_LATER) {
-        [[UINavigationBar appearance] setBarTintColor:kColorNavigationBar];
+        UIColor* barColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"title_shadow"]];
+        [[UINavigationBar appearance] setBarTintColor:kColorNavigationBar];//kColorNavigationBar
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        [application setStatusBarStyle:UIStatusBarStyleLightContent];
-    }else {
-        [[UINavigationBar appearance] setBackgroundImage:[Utils createImageWithColor:kColorNavigationBar] forBarMetrics:UIBarMetricsDefault];
-        [[UINavigationBar appearance] setShadowImage:[Utils createImageWithColor:[UIColor colorWithWhite:0.3 alpha:0.15]]];
-        [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+        [application setStatusBarStyle:UIStatusBarStyleDefault];
     }
+//    else {
+//        [[UINavigationBar appearance] setBackgroundImage:[Utils createImageWithColor:kColorNavigationBar] forBarMetrics:UIBarMetricsDefault];
+//        [[UINavigationBar appearance] setShadowImage:[Utils createImageWithColor:[UIColor colorWithWhite:0.3 alpha:0.15]]];
+//        [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+//    }
     NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [UIFont boldSystemFontOfSize:18.0f],  NSFontAttributeName,
-                                [UIColor whiteColor],                 NSForegroundColorAttributeName,
+                                [UIFont boldSystemFontOfSize:17.0f],
+                                NSFontAttributeName,
+                                kColorTextGray,
+                                NSForegroundColorAttributeName,
                                 nil];
     [[UINavigationBar appearance] setTitleTextAttributes:attributes];
     

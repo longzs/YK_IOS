@@ -60,8 +60,8 @@ typedef enum wifiStatus_{
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterForground) name:UIApplicationDidBecomeActiveNotification object:nil];
     
-    //[self performSelector:@selector(checkCurrentSSID) withObject:nil afterDelay:0.1];
-    [self bindYKDevice];
+    [self performSelector:@selector(checkCurrentSSID) withObject:nil afterDelay:0.1];
+    //[self bindYKDevice];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
