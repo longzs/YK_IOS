@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1849C8521A7E272700CA5E37 /* YKRoundRectView.m */; };
+		1849C8571A7E3B0600CA5E37 /* icon_equipment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C8561A7E3B0600CA5E37 /* icon_equipment@2x.png */; };
+		1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C8591A7E3C2F00CA5E37 /* button_285x80_click@2x.png */; };
+		1849C85C1A7E3C2F00CA5E37 /* button_285x80_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C85A1A7E3C2F00CA5E37 /* button_285x80_normal@2x.png */; };
+		1849C85F1A7E3C6D00CA5E37 /* button_510x80_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C85D1A7E3C6D00CA5E37 /* button_510x80_click@2x.png */; };
+		1849C8601A7E3C6D00CA5E37 /* button_510x80_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C85E1A7E3C6D00CA5E37 /* button_510x80_normal@2x.png */; };
+		1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */; };
+		186C77ED1A7E6CC3006C5649 /* bg_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */; };
 		FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9631A5E26BF00748B4E /* absManager.m */; };
 		FC0BA9671A5E26BF00748B4E /* EHUserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9651A5E26BF00748B4E /* EHUserDefaultManager.m */; };
 		FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA96A1A5E303E00748B4E /* EHBaseNavController.m */; };
@@ -130,6 +138,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1849C8511A7E272700CA5E37 /* YKRoundRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YKRoundRectView.h; path = ViewControllers/YKRoundRectView.h; sourceTree = "<group>"; };
+		1849C8521A7E272700CA5E37 /* YKRoundRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YKRoundRectView.m; path = ViewControllers/YKRoundRectView.m; sourceTree = "<group>"; };
+		1849C8561A7E3B0600CA5E37 /* icon_equipment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_equipment@2x.png"; sourceTree = "<group>"; };
+		1849C8591A7E3C2F00CA5E37 /* button_285x80_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_285x80_click@2x.png"; sourceTree = "<group>"; };
+		1849C85A1A7E3C2F00CA5E37 /* button_285x80_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_285x80_normal@2x.png"; sourceTree = "<group>"; };
+		1849C85D1A7E3C6D00CA5E37 /* button_510x80_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_510x80_click@2x.png"; sourceTree = "<group>"; };
+		1849C85E1A7E3C6D00CA5E37 /* button_510x80_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_510x80_normal@2x.png"; sourceTree = "<group>"; };
+		1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_UCON_my@2x.png"; sourceTree = "<group>"; };
+		186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_img@2x.png"; sourceTree = "<group>"; };
 		FC0BA9621A5E26BF00748B4E /* absManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = absManager.h; sourceTree = "<group>"; };
 		FC0BA9631A5E26BF00748B4E /* absManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = absManager.m; sourceTree = "<group>"; };
 		FC0BA9641A5E26BF00748B4E /* EHUserDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHUserDefaultManager.h; sourceTree = "<group>"; };
@@ -377,6 +394,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1849C8541A7E299F00CA5E37 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				1849C8511A7E272700CA5E37 /* YKRoundRectView.h */,
+				1849C8521A7E272700CA5E37 /* YKRoundRectView.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		1849C8551A7E3AEF00CA5E37 /* Icon */ = {
+			isa = PBXGroup;
+			children = (
+				1849C8561A7E3B0600CA5E37 /* icon_equipment@2x.png */,
+			);
+			path = Icon;
+			sourceTree = "<group>";
+		};
+		1849C8581A7E3B1D00CA5E37 /* Button */ = {
+			isa = PBXGroup;
+			children = (
+				1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */,
+				1849C85D1A7E3C6D00CA5E37 /* button_510x80_click@2x.png */,
+				1849C85E1A7E3C6D00CA5E37 /* button_510x80_normal@2x.png */,
+				1849C8591A7E3C2F00CA5E37 /* button_285x80_click@2x.png */,
+				1849C85A1A7E3C2F00CA5E37 /* button_285x80_normal@2x.png */,
+			);
+			path = Button;
+			sourceTree = "<group>";
+		};
+		186C77EB1A7E6CA8006C5649 /* BG */ = {
+			isa = PBXGroup;
+			children = (
+				186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */,
+			);
+			path = BG;
+			sourceTree = "<group>";
+		};
 		FC0BA9601A5E234E00748B4E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -797,6 +851,7 @@
 				FC177B731A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.h */,
 				FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */,
 				FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */,
+				1849C8541A7E299F00CA5E37 /* Common */,
 			);
 			name = Views;
 			path = ..;
@@ -862,6 +917,9 @@
 		FC5844A21A7BD6DC0038D681 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				186C77EB1A7E6CA8006C5649 /* BG */,
+				1849C8581A7E3B1D00CA5E37 /* Button */,
+				1849C8551A7E3AEF00CA5E37 /* Icon */,
 				FC5844A31A7BD6DC0038D681 /* title_shadow.png */,
 			);
 			path = Res;
@@ -1005,14 +1063,21 @@
 				FC177B771A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib in Resources */,
 				FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
+				1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */,
+				1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */,
+				1849C85F1A7E3C6D00CA5E37 /* button_510x80_click@2x.png in Resources */,
 				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
 				FC5844A41A7BD6DC0038D681 /* title_shadow.png in Resources */,
+				1849C85C1A7E3C2F00CA5E37 /* button_285x80_normal@2x.png in Resources */,
 				FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */,
 				FC147E081A5D1D9600BA06F3 /* RegexKitLite.html in Resources */,
+				186C77ED1A7E6CC3006C5649 /* bg_img@2x.png in Resources */,
+				1849C8571A7E3B0600CA5E37 /* icon_equipment@2x.png in Resources */,
 				FC147E1C1A5D209A00BA06F3 /* LICENSE in Resources */,
 				FC147CDB1A5CDB3A00BA06F3 /* Images.xcassets in Resources */,
 				FC147E061A5D1D9600BA06F3 /* unicode_to_hanyu_pinyin.txt in Resources */,
+				1849C8601A7E3C6D00CA5E37 /* button_510x80_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,6 +1097,7 @@
 			files = (
 				FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */,
 				FC147DEE1A5D1D9600BA06F3 /* IQUIWindow+Hierarchy.m in Sources */,
+				1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */,
 				FC147DF61A5D1D9600BA06F3 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */,
 				FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */,

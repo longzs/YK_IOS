@@ -49,7 +49,7 @@
 #define CurrentLanguage ([[NSLocale preferredLanguages] objectAtIndex:0])
 
 //判断是否 Retina屏、设备是否%fhone 5、是否是iPad
-#define isRetina ([UIScreen mainScreen] scale] == 2.0 ? YES : NO)
+#define isRetina ([UIScreen mainScreen] scale] >= 2.0 ? YES : NO)
 #define iPhone5 (CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size))
 
 

@@ -18,6 +18,8 @@
 @property(nonatomic, weak)IBOutlet UILabel  *labNoBindTip;
 @property(nonatomic, weak)IBOutlet UICollectionView  *collectionDevices;
 
+@property (nonatomic, weak) IBOutlet UIImageView *imvBG;
+
 -(IBAction)clickShowBind:(id)sender;
 @end
 
@@ -27,6 +29,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.title = @"设备管理";
+    
+    _imvBG.image = [[UIImage imageNamed:@"bg_img.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeTile];
     
     self.collectionDevices.alwaysBounceVertical = YES;
     self.collectionDevices.allowsMultipleSelection = YES;
