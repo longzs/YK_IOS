@@ -331,7 +331,8 @@ Cg
                                     <constraint firstAttribute="centerX" secondItem="aq3-ns-Cwi" secondAttribute="centerX" id="zXE-Dw-WU6"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GoC-ua-ZKC">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GoC-ua-ZKC">
+                                <rect key="frame" x="0.0" y="118" width="320" height="386"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="fVl-9p-Qgg">
                                     <size key="itemSize" width="50" height="50"/>
@@ -344,6 +345,7 @@ Cg
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
@@ -360,16 +362,20 @@ Cg
                         </subviews>
                         <color key="backgroundColor" red="0.94117653369903564" green="0.93725496530532837" blue="0.94117653369903564" alpha="1" colorSpace="deviceRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="GoC-ua-ZKC" secondAttribute="trailing" id="3hp-Zq-erP"/>
                             <constraint firstAttribute="trailing" secondItem="Sdt-7O-kha" secondAttribute="trailing" id="484-OL-6JN"/>
+                            <constraint firstItem="GoC-ua-ZKC" firstAttribute="leading" secondItem="Oy9-mA-7Y6" secondAttribute="leading" id="8rq-YG-OAu"/>
                             <constraint firstAttribute="trailing" secondItem="SRd-TN-T9U" secondAttribute="trailing" id="Aef-J7-pPg"/>
                             <constraint firstItem="3sV-p6-sw7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Sdt-7O-kha" secondAttribute="bottom" constant="10" id="B4B-cu-nYi"/>
                             <constraint firstItem="Sdt-7O-kha" firstAttribute="top" secondItem="Drt-GI-ftc" secondAttribute="bottom" priority="600" constant="50" id="CqA-La-Fg8"/>
                             <constraint firstItem="SRd-TN-T9U" firstAttribute="top" secondItem="1Ok-eV-EfR" secondAttribute="bottom" id="DPK-fG-CES"/>
                             <constraint firstItem="Drt-GI-ftc" firstAttribute="top" secondItem="Oy9-mA-7Y6" secondAttribute="top" id="Hrb-mJ-jn3"/>
+                            <constraint firstItem="GoC-ua-ZKC" firstAttribute="top" secondItem="Drt-GI-ftc" secondAttribute="bottom" id="VIN-ee-x2u"/>
                             <constraint firstItem="Sdt-7O-kha" firstAttribute="leading" secondItem="Oy9-mA-7Y6" secondAttribute="leading" id="VgP-LC-Mcz"/>
                             <constraint firstItem="Drt-GI-ftc" firstAttribute="leading" secondItem="Oy9-mA-7Y6" secondAttribute="leading" id="Z8S-wb-tep"/>
                             <constraint firstItem="3sV-p6-sw7" firstAttribute="top" secondItem="SRd-TN-T9U" secondAttribute="bottom" id="bVC-af-asr"/>
                             <constraint firstAttribute="trailing" secondItem="Drt-GI-ftc" secondAttribute="trailing" id="fdi-tc-xuM"/>
+                            <constraint firstItem="3sV-p6-sw7" firstAttribute="top" secondItem="GoC-ua-ZKC" secondAttribute="bottom" id="jL6-Hi-ucc"/>
                             <constraint firstItem="SRd-TN-T9U" firstAttribute="leading" secondItem="Oy9-mA-7Y6" secondAttribute="leading" id="pfe-1i-OBR"/>
                             <constraint firstItem="Sdt-7O-kha" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Drt-GI-ftc" secondAttribute="bottom" constant="10" id="zvC-Bx-KxJ"/>
                         </constraints>
@@ -386,7 +392,7 @@ Cg
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dD6-9z-Seq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="510.5" y="556.5"/>
+            <point key="canvasLocation" x="510" y="556"/>
         </scene>
     </scenes>
     <resources>
