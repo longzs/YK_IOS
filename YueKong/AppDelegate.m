@@ -30,6 +30,14 @@
     //测试 wangxun..
     
     //ui
+//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+//        //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
+//        self.window.frame = [[UIScreen mainScreen] applicationFrame];
+//        [application setStatusBarStyle:UIStatusBarStyleLightContent];
+//        // Override point for customization after application launch.
+//        self.window.backgroundColor = [UIColor clearColor];
+//    }
+    
     [self setupNavigationBarSytle];
     [self setupKeyboardManager];
     
@@ -80,10 +88,9 @@
 -(void)setupNavigationBarSytle{
     UIApplication* application = [UIApplication sharedApplication];
     if (IOS_VERSION_7_LATER) {
-        UIColor* barColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"title_shadow"]];
-        [[UINavigationBar appearance] setBarTintColor:kColorNavigationBar];//kColorNavigationBar
+        UIImage* barImage = [[UIImage imageNamed:@"NavBarShadow"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeStretch];
+        [[UINavigationBar appearance] setBackgroundImage:barImage forBarMetrics:UIBarMetricsDefault];//kColorNavigationBar
         [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-        [application setStatusBarStyle:UIStatusBarStyleDefault];
     }
 //    else {
 //        [[UINavigationBar appearance] setBackgroundImage:[Utils createImageWithColor:kColorNavigationBar] forBarMetrics:UIBarMetricsDefault];
