@@ -198,6 +198,49 @@ typedef enum HttpStatusCode_
     
 }HttpStatusCode;
 
+#pragma mark - YK Defines
+typedef enum YKControlKeys_{
+    
+    YKKey_Power = 0,
+    YKKey_Mute,     //静音
+    YKKey_Up,       //上
+    YKKey_Down,
+    YKKey_Left,
+    YKKey_Right,
+    YKKey_Middle,
+    YKKey_VolumeUp,
+    YKKey_VolumeDowm,
+    YKKey_Back,
+    YKKey_HomePage,
+    YKKey_Menu,
+    YKKey_Fun1,
+    YKKey_Fun2,
+    YKKey_Fun3,
+}YKControlKeys;
+
+typedef enum HomeAppliancesKey_ {
+    HAKey_Null = -1,    // 无
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Mute = YKKey_Mute,
+    //    HAKey_Power = YKKey_Up,
+    //    HAKey_Power = YKKey_Down,
+    //    HAKey_Power = YKKey_Left,
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Power = YKKey_Power,
+    //    HAKey_Power = YKKey_Power,
+}HomeAppliancesKey;
+
+typedef enum HouseholdAppliancesType_{
+    HAType_SetTopBox = 1, // 机顶盒
+    HAType_AirConditioner,  // 空调
+    HAType_TV,              //
+    HAType_LanBox,          //网络盒子
+}HouseholdAppliancesType;
+
 #pragma mark - Marvell
 
 #define ALPHANUMERIC @"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_.@-!#$%^*()"

@@ -30,14 +30,7 @@
     //测试 wangxun..
     
     //ui
-//    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
-//        //self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]];
-//        self.window.frame = [[UIScreen mainScreen] applicationFrame];
-//        [application setStatusBarStyle:UIStatusBarStyleLightContent];
-//        // Override point for customization after application launch.
-//        self.window.backgroundColor = [UIColor clearColor];
-//    }
-    //self.window.backgroundColor = [UIColor clearColor];
+    //self.window.backgroundColor = [UIColor blackColor];
     //[application setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setupNavigationBarSytle];
     [self setupKeyboardManager];

@@ -152,4 +152,124 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
+-(int)HomeAppliancesKey:(YKControlKeys)ykKey
+      HomeApplianceType:(HouseholdAppliancesType)haType{
+    
+    int i = ykKey;
+    switch (ykKey) {
+        case YKKey_Power:
+        {
+        }
+            break;
+        case YKKey_Mute:
+        {
+            if (HAType_AirConditioner == haType
+                || HAType_LanBox == haType) {
+                i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Up:
+        {
+            if (HAType_AirConditioner == haType) {
+            }
+        }
+            break;
+        case YKKey_Down:
+        {
+            if (HAType_AirConditioner == haType) {
+            }
+        }
+            break;
+        case YKKey_Left:
+        {
+            if (HAType_AirConditioner == haType) {
+                i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Right:
+        {
+            if (HAType_AirConditioner == haType) {
+                i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Middle:
+        {
+            if (HAType_AirConditioner == haType) {
+                i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_VolumeUp:
+        {
+            if (HAType_AirConditioner == haType) {
+                //i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_VolumeDowm:
+        {
+            if (HAType_AirConditioner == haType) {
+                //i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Back:
+        {
+            if (HAType_AirConditioner == haType) {
+                //i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_HomePage:
+        {
+            if (HAType_AirConditioner == haType) {
+                //i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Menu:
+        {
+            if (HAType_AirConditioner == haType) {
+                //i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Fun1:
+        {
+            if (HAType_AirConditioner == haType) {
+                
+            }
+            else{
+                i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Fun2:
+        {
+            if (HAType_AirConditioner == haType) {
+                
+            }
+            else{
+                i = HAKey_Null;
+            }
+        }
+            break;
+        case YKKey_Fun3:
+        {
+            if (HAType_AirConditioner == haType) {
+                
+            }
+            else{
+                i = HAKey_Null;
+            }
+        }
+            break;
+        default:
+            break;
+    }
+    return i;
+}
 @end
