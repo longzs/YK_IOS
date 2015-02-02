@@ -48,7 +48,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    if (![[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
+    if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;

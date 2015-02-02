@@ -32,11 +32,15 @@ typedef enum wifiStatus_{
 
 @property(weak, nonatomic)IBOutlet UIButton* btnBind;
 
+@property(weak, nonatomic)IBOutlet UIButton* btnRecordWifi;
+
 @property(nonatomic, strong)NSString* strCurrentSSID;
 
 @property(nonatomic, assign)wifiStatus wifiStatu;
 
 -(IBAction)clickBindYK:(UIButton*)sender;
+
+-(IBAction)clickRecordWifi:(UIButton*)sender;
 
 -(void)checkCurrentSSID;
 
@@ -114,6 +118,10 @@ typedef enum wifiStatus_{
         default:
             break;
     }
+}
+
+-(IBAction)clickRecordWifi:(UIButton*)sender{
+        
 }
 
 -(void)checkCurrentSSID{

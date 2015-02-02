@@ -37,7 +37,8 @@
 //        // Override point for customization after application launch.
 //        self.window.backgroundColor = [UIColor clearColor];
 //    }
-    
+    //self.window.backgroundColor = [UIColor clearColor];
+    //[application setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setupNavigationBarSytle];
     [self setupKeyboardManager];
     
@@ -86,11 +87,13 @@
 
 #pragma mark - Setup
 -(void)setupNavigationBarSytle{
-    UIApplication* application = [UIApplication sharedApplication];
+    //UIApplication* application = [UIApplication sharedApplication];
     if (IOS_VERSION_7_LATER) {
         UIImage* barImage = [[UIImage imageNamed:@"NavBarShadow"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeStretch];
         [[UINavigationBar appearance] setBackgroundImage:barImage forBarMetrics:UIBarMetricsDefault];//kColorNavigationBar
-        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTintColor:RGB(80, 80, 80)];
+//        [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back_normal"]];
+//        [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"icon_back_click"]];
     }
 //    else {
 //        [[UINavigationBar appearance] setBackgroundImage:[Utils createImageWithColor:kColorNavigationBar] forBarMetrics:UIBarMetricsDefault];
