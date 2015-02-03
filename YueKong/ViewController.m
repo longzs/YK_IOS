@@ -316,7 +316,7 @@ typedef enum wifiStatus_{
 
 -(int)bindYKDevice{
     
-    [self showLoadingWithTip:@"正在绑定悦控基座"];
+    [self showLoadingWithTip:@"正在连接悦控基座"];
     bLoading = YES;
     NSString *requestURL = [NSString stringWithFormat:@"%@%@",LOCAL_URL,@""];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
@@ -363,10 +363,12 @@ typedef enum wifiStatus_{
         if (strPdsn.length) {
             [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
             
-            //s开始轮询 向云端发起请求来判断设备是否绑定成功
-            [self showLoadingWithTip:@"正在查询绑定是否成功"];
-            bLoading = YES;
-            [self performSelector:@selector(checkIsBindYKSuccess) withObject:nil afterDelay:0.1];
+            // 提示设备连接成功，并且切回原有wifi
+            [self showMessage:@"请切回原有wifi查询是否绑定成功" withTitle:@"连接悦控基座成功"];
+//            //s开始轮询 向云端发起请求来判断设备是否绑定成功
+//            [self showLoadingWithTip:@"正在查询绑定是否成功"];
+//            bLoading = YES;
+//            [self performSelector:@selector(checkIsBindYKSuccess) withObject:nil afterDelay:0.1];
         }
     }
     else
