@@ -121,7 +121,12 @@ typedef enum wifiStatus_{
 }
 
 -(IBAction)clickRecordWifi:(UIButton*)sender{
-        
+    if (0 == self.tfSSID.text.length) {
+        [Utils showCenterToastWithMessage:@"wifi名称不能为空"];
+        return;
+    }
+    [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserSSID Value:self.tfSSID.text];
+    [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserWIFIPWD Value:self.tfSSIDPWD.text];
 }
 
 -(void)checkCurrentSSID{
@@ -130,23 +135,18 @@ typedef enum wifiStatus_{
     self.strCurrentSSID = [[SSIDManager sharedInstance] currentWifiSSID];
     
     if ([self.strCurrentSSID isEqualToString:MARVELL_NETWORK_NAME]
-        && strSSID.length
-        && wifiPWD.length) {
-        //  所有条件符合，可以发起绑定
-            self.tfSSID.text = self.strCurrentSSID;
-        self.tfSSID.enabled = NO;
-        self.tfSSIDPWD.hidden = YES;
-        [self.btnBind setTitle:@"绑定悦控" forState:UIControlStateNormal];
+        && strSSID.length) {
+        //  所有条件符合，可以发起绑定 && wifiPWD.length
+        self.tfSSID.text = self.strCurrentSSID;
         
         self.wifiStatu = wifiStatus_OK;
     }
     else if(0 == strSSID.length)
     {
         self.tfSSID.text = self.strCurrentSSID;
-        self.tfSSIDPWD.text = wifiPWD;
-        self.tfSSID.enabled = YES;
-        self.tfSSIDPWD.hidden = NO;
-        [self.btnBind setTitle:@"记录wifi" forState:UIControlStateNormal];
+        if (wifiPWD.length) {
+            self.tfSSIDPWD.text = wifiPWD;
+        }
         
         [self showMessage:@"请输入您家里使用的wifi名称和密码用来记录在悦控，如果wifi没有密码请不用输入" withTag:11 withTarget:self];
         
@@ -156,9 +156,6 @@ typedef enum wifiStatus_{
         
         self.tfSSID.text = strSSID;
         self.tfSSIDPWD.text = wifiPWD;
-        self.tfSSID.enabled = YES;
-        self.tfSSIDPWD.hidden = NO;
-        [self.btnBind setTitle:@"记录wifi" forState:UIControlStateNormal];
         [self showMessage:[NSString stringWithFormat:@"请将手机连接至悦控的wifi %@", MARVELL_NETWORK_NAME] withTag:12 withTarget:nil];
         self.wifiStatu = wifiStatus_IsNotYKSSID;
     }
@@ -317,32 +314,6 @@ typedef enum wifiStatus_{
 }
 #pragma mark - Request & Process
 
--(void)GetAck
-{
-    NSLog(@"GETACK");
-    [self showLoadingWithTip:@"Reset-to-provisioning..."];
-    
-    NSString *str = [NSString stringWithFormat:@"{\"connection\":{\"station\": {\"configured\":%@,}}}",@"0"];//\"prov\":{\"client_ack\":%@,},
-    
-    
-    NSLog(@"Requested string %@",str);
-    
-    NSString *requestURL = [NSString stringWithFormat:@"%@%@",LOCAL_URL,@""];
-    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [header setObject:@"application/json" forKey:@"Content-Type"];
-    
-    MsgSent *sent = [[MsgSent alloc] init];
-    [sent setMethod_Req:requestURL];
-    [sent setMethod_Http:HTTP_METHOD_POST];
-    [sent setDelegate_:self];
-    [sent setCmdCode_:CC_GetACK];
-    [sent setIReqType:HTTP_REQ_SHORTRUN];
-    [sent setTimeout_:30];
-    [sent setDicHeader:header];
-    [sent setPostData:[str dataUsingEncoding:NSUTF8StringEncoding]];
-    [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
-}
-
 -(int)bindYKDevice{
     
     [self showLoadingWithTip:@"正在绑定悦控基座"];
@@ -439,7 +410,7 @@ typedef enum wifiStatus_{
     
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
-    [sent setMethod_Http:HTTP_METHOD_POST];
+    [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:self];
     [sent setCmdCode_:CC_CheckYKBindSuccess];
     [sent setIReqType:HTTP_REQ_SHORTRUN];

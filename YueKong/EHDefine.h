@@ -50,13 +50,13 @@
 #pragma mark HTTP URL
 //http请求地址
 #if k_Server_Test
-#define kHttpBase                          @"http://121.40.149.20/yuekong/core/app/"      // 测试环境服务器
+#define kHttpBase                          @"http://121.40.149.20:8200"      // 测试环境服务器
 #else
-#define kHttpBase                          @"http://121.40.149.20/yuekong/core/app/"        // 正式环境服务器
+#define kHttpBase                          @"http://api.yuekong.com:8080"        // 正式环境服务器
 #endif
 
 //App获取绑定信息
-#define k_URL_GetBindData               @"" kHttpBase"api/getBindData.php"
+#define k_URL_GetBindData               @"" kHttpBase"/yuekong/device/get_device_by_pdsn"
 
 
 //Client获取系统可适配的遥控器的类型
