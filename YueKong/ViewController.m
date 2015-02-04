@@ -391,38 +391,6 @@ typedef enum wifiStatus_{
     bLoading = NO;
 }
 
-
--(int)checkIsBindYKSuccess{
-    
-    NSString *requestURL = [NSString stringWithFormat:@"%@",k_URL_GetBindData];
-    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
-    [header setObject:@"application/json" forKey:@"Content-Type"];
-    
-    /*手机 APP 向云端发起请求来判断设备是否绑定成功：
-     PID：手机设备号 String
-     云端返回：
-     PDSN：步骤 2 中向云端注册的设备 ID String
-     id：设备的内网 ip，用来进行之后的点对点连接
-     */
-    
-    NSMutableDictionary* dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-    NSString* pid = [OpenUDID value];
-    NSLog(@"pid = %@", pid);
-    dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
-    
-    MsgSent *sent = [[MsgSent alloc] init];
-    [sent setMethod_Req:requestURL];
-    [sent setMethod_Http:HTTP_METHOD_GET];
-    [sent setDelegate_:self];
-    [sent setCmdCode_:CC_CheckYKBindSuccess];
-    [sent setIReqType:HTTP_REQ_SHORTRUN];
-    [sent setTimeout_:5];
-    [sent setDicHeader:header];
-    [sent setPostData:[dicBody JSONData]];
-    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
-}
-
-
 -(void)processIsBindYKSuccess:(MsgSent*)reciveData{
     
     BOOL bOk = NO;
@@ -433,8 +401,6 @@ typedef enum wifiStatus_{
         NSString* strIp = [jsonData objectForKey:@"ip"];
         if (strPdsn.length
             && strIp.length) {
-            // 请求成功
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkIsBindYKSuccess) object:nil];
             bOk = YES;
             // 更新最后一次保存的pdsn
             [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
@@ -465,23 +431,8 @@ typedef enum wifiStatus_{
         {
             
         }
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkIsBindYKSuccess) object:nil];
         bOk = YES;
         [Utils showSimpleAlert:strError];
-    }
-    if (bOk) {
-        uReqCheckBindNumber = 0;
-        [self hideLoading];
-    }
-    else{
-        if (uReqCheckBindNumber < 10) {
-            uReqCheckBindNumber ++;
-            [self performSelector:@selector(checkIsBindYKSuccess) withObject:nil afterDelay:0.1];
-        }
-        else{
-            [self hideLoading];
-            [Utils showSimpleAlert:@"请求超时"];
-        }
     }
 }
 
@@ -492,12 +443,11 @@ typedef enum wifiStatus_{
     NSString *responseString = [[NSString alloc] initWithData:ReciveMsg.recData_ encoding:NSUTF8StringEncoding];
     NSLog(@"id = %d, httpRsp = %d\nReciveHttpMsg = \n%@,",  ReciveMsg.cmdCode_ , ReciveMsg.httpRsp_,responseString);
 #endif
-    
+    [self hideLoading];
     switch (ReciveMsg.cmdCode_)
     {
         case CC_BindYKDecive:
         {
-            [self hideLoading];
             [self processBindYKDevice:ReciveMsg];
             break;
         }
@@ -507,7 +457,6 @@ typedef enum wifiStatus_{
             break;
         }
         default:
-            [self hideLoading];
             break;
     }
     return 0;

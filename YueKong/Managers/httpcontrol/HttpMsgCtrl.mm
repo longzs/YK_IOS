@@ -321,6 +321,11 @@ static HttpMsgCtrl* msgCtrl = nil;
 
 -(void)insertSendMsg:(MsgSent*)SendMsg withTag:(int)msgTag
 {
+    
+#if 1
+    NSLog(@"---requestData---\n redID = 0x%x , %@", SendMsg.cmdCode_, SendMsg.method_Req);//
+#endif
+    
     [lock_ lock];
 	[SendMsg retain];
 	g_mapSend.insert(value_Send(msgTag, SendMsg));

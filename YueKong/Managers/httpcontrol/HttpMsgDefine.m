@@ -10,7 +10,8 @@
 
 #define kErrorCode      @"Code"
 #define kErrorMsg       @"Msg"
-#define kResponse       @"Data"
+#define kResponseEntity       @"entity"
+#define kResponseStatus       @"status"
 
 ////  for tcp socket define 
 //@implementation MsgHeader
@@ -235,9 +236,9 @@
 
 -(NSDictionary*)responsdData{
     NSString *responseString = self.responseJsonString;
-    NSDictionary *JSONValue = [responseString mutableObjectFromJSONString];
+    NSDictionary *JSONValue = [responseString mutableObjectFromJSONStringWithParseOptions:JKParseOptionValidFlags];
     
-    return JSONValue[kResponse];
+    return JSONValue[kResponseEntity];
 }
 
 + (NSString*)mbase64forData:(NSData*)theData {

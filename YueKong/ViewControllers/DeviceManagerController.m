@@ -8,11 +8,15 @@
 
 #import "DeviceManagerController.h"
 #import "RemoteControlViewController.h"
+#import "HomeAppliancesManager.h"
 #import "ViewController.h"
 #import "HouseholdAppliancesCell.h"
 #import "DeviceManagerCollectionHeaderView.h"
 
-@interface DeviceManagerController ()
+@interface DeviceManagerController ()<HTTP_MSG_RESPOND>{
+    // 检查是否绑定成功次数  最大请求10次；
+    NSInteger uReqCheckBindNumber;
+}
 @property(nonatomic, weak)IBOutlet UIButton *btnBind;
 @property(nonatomic, weak)IBOutlet UILabel  *labBind;
 @property(nonatomic, weak)IBOutlet UILabel  *labNoBindTip;
@@ -37,7 +41,6 @@
     [self.collectionDevices registerClass:[HouseholdAppliancesCell class] forCellWithReuseIdentifier:@"HouseholdAppliancesCell"];
     [self.collectionDevices registerClass:[DeviceManagerCollectionHeaderView class]
                forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"DeviceManagerCollectionHeaderView"];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +50,8 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    
+    [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:nil responseDelegate:self];
     
     if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
         // 如果已经存在pdsn
@@ -85,7 +90,94 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
+#pragma mark - Request & Process
+-(void)processIsBindYKSuccess:(MsgSent*)reciveData{
+    
+    BOOL bOk = NO;
+    if ([reciveData isRequestSuccess])
+    {
+        NSDictionary *jsonData = [reciveData responsdData];
+        NSString* strPdsn = [jsonData objectForKey:@"pdsn"];
+        NSString* strIp = [jsonData objectForKey:@"ip"];
+        if (strPdsn.length
+            && strIp.length) {
+            // 请求成功
+            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkIsBindYKSuccess) object:nil];
+            bOk = YES;
+            // 更新最后一次保存的pdsn
+            [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
+            // 记录内网yk ip
+            [NetControl shareInstance].strIP = strIp;
+            
+            UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
+                                                            message:@"绑定成功"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"继续添加遥控器"
+                                                  otherButtonTitles:@"先看看",nil];
+            [alert setTag:18];
+            [alert show];
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得wifi连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkIsBindYKSuccess) object:nil];
+        bOk = YES;
+        [Utils showSimpleAlert:strError];
+    }
+    if (bOk) {
+        uReqCheckBindNumber = 0;
+        [self hideLoading];
+    }
+    else{
+        if (uReqCheckBindNumber < 10) {
+            uReqCheckBindNumber ++;
+            [self performSelector:@selector(checkIsBindYKSuccess) withObject:nil afterDelay:0.1];
+        }
+        else{
+            [self hideLoading];
+            [Utils showSimpleAlert:@"请求超时"];
+        }
+    }
+}
 
+#pragma mark - httpResponse
+-(int)ReciveHttpMsg:(MsgSent*)ReciveMsg{
+    
+#if 0
+    NSString *responseString = [[NSString alloc] initWithData:ReciveMsg.recData_ encoding:NSUTF8StringEncoding];
+    NSLog(@"id = %d, httpRsp = %d\nReciveHttpMsg = \n%@,",  ReciveMsg.cmdCode_ , ReciveMsg.httpRsp_,responseString);
+#endif
+    
+    switch (ReciveMsg.cmdCode_)
+    {
+        case CC_CheckYKBindSuccess:
+        {
+            [self processIsBindYKSuccess:ReciveMsg];
+            break;
+        }
+        default:
+            [self hideLoading];
+            break;
+    }
+    return 0;
+}
+
+-(void)ReciveDidFailed:(MsgSent*)ReciveMsg{
+    
+}
 #pragma mark -- UICollectionViewDataSource
 
 //定义展示的UICollectionViewCell的个数

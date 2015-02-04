@@ -14,7 +14,7 @@
 #endif
 
 #ifndef k_Server_Test   
-#define k_Server_Test   0
+#define k_Server_Test   1
 #endif
 // 设置 Architectures      $(ARCHS_STANDARD)
 

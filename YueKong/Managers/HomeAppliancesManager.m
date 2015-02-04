@@ -152,6 +152,32 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
+-(int)checkIsBindYKSuccess:(NSMutableDictionary*)postBody
+          responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
+    
+    NSString* pdsn = @"P000000000000001";//[[EHUserDefaultManager sharedInstance] LastPdsn];
+    NSString *requestURL = [NSString stringWithFormat:@"%@?pdsn=%@",k_URL_GetBindData,pdsn];
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+//    NSMutableDictionary* dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
+//    NSString* pid = [OpenUDID value];
+//    //NSLog(@"pid = %@", pid);
+//    dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_CheckYKBindSuccess];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setTimeout_:20];
+    [sent setDicHeader:header];
+    //[sent setPostData:[dicBody JSONData]];
+    
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
+}
+
 -(int)HomeAppliancesKey:(YKControlKeys)ykKey
       HomeApplianceType:(HouseholdAppliancesType)haType{
     

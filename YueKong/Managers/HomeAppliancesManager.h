@@ -31,6 +31,8 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
 -(int)GetCity:(NSMutableDictionary*)postBody
 responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
 
+-(int)checkIsBindYKSuccess:(NSMutableDictionary*)postBody
+responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
 
 -(int)HomeAppliancesKey:(YKControlKeys)ykKey
       HomeApplianceType:(HouseholdAppliancesType)haType;
