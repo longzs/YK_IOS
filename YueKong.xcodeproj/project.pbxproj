@@ -110,6 +110,8 @@
 		FC1AE5A11A5FCF6A00CD5611 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5941A5FCF6A00CD5611 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5A21A5FCF6A00CD5611 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5981A5FCF6A00CD5611 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5A31A5FCF6A00CD5611 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE59A1A5FCF6A00CD5611 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FC2918651A8359450035961F /* YKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2918641A8359450035961F /* YKModel.m */; };
+		FC2918681A835A490035961F /* YKDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2918671A835A490035961F /* YKDeviceModel.m */; };
 		FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB0F1A62BE8F0032D651 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB121A62BE8F0032D651 /* BPushClass.m */; };
 		FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB141A62BE8F0032D651 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -339,6 +341,10 @@
 		FC1AE5991A5FCF6A00CD5611 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
 		FC1AE59A1A5FCF6A00CD5611 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		FC1AE59B1A5FCF6A00CD5611 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		FC2918631A8359450035961F /* YKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKModel.h; sourceTree = "<group>"; };
+		FC2918641A8359450035961F /* YKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKModel.m; sourceTree = "<group>"; };
+		FC2918661A835A490035961F /* YKDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDeviceModel.h; sourceTree = "<group>"; };
+		FC2918671A835A490035961F /* YKDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDeviceModel.m; sourceTree = "<group>"; };
 		FC5AFB0C1A62BE8F0032D651 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPush.h; path = LibBPush/BPush.h; sourceTree = "<group>"; };
 		FC5AFB0E1A62BE8F0032D651 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		FC5AFB0F1A62BE8F0032D651 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
@@ -459,6 +465,10 @@
 			children = (
 				FC8DB63C1A66B27500E0ED8E /* NetWorkDetails.h */,
 				FC8DB63D1A66B27500E0ED8E /* NetWorkDetails.m */,
+				FC2918631A8359450035961F /* YKModel.h */,
+				FC2918641A8359450035961F /* YKModel.m */,
+				FC2918661A835A490035961F /* YKDeviceModel.h */,
+				FC2918671A835A490035961F /* YKDeviceModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1105,6 +1115,7 @@
 			files = (
 				FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */,
 				FC147DEE1A5D1D9600BA06F3 /* IQUIWindow+Hierarchy.m in Sources */,
+				FC2918681A835A490035961F /* YKDeviceModel.m in Sources */,
 				1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */,
 				FC147DF61A5D1D9600BA06F3 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */,
@@ -1128,6 +1139,7 @@
 				FC147E0F1A5D1D9600BA06F3 /* SRRefreshView.m in Sources */,
 				FC147DE01A5D1D9600BA06F3 /* CXAlertButtonItem.m in Sources */,
 				FC147DEB1A5D1D9600BA06F3 /* HMSegmentedControl.m in Sources */,
+				FC2918651A8359450035961F /* YKModel.m in Sources */,
 				FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */,
 				FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */,
 				FC147E351A5D341A00BA06F3 /* BaseViewController.m in Sources */,

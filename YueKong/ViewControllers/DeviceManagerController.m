@@ -51,18 +51,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:nil responseDelegate:self];
-    
-    if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
-        // 如果已经存在pdsn
-        self.labNoBindTip.hidden = YES;
-        self.collectionDevices.hidden = NO;
-    }
-    else{
-        //
-        self.labNoBindTip.hidden = NO;
-        self.collectionDevices.hidden = YES;
-    }
+    [self updateControlState:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -72,6 +61,23 @@
 + (instancetype)instantiateFromMainStoryboard
 {
     return (DeviceManagerController *)[Utils controllerInMainStroyboardWithID:@"DeviceManagerController"];
+}
+
+-(void)updateControlState:(BOOL)bRequest{
+    
+    if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
+        // 如果已经存在pdsn
+        self.labNoBindTip.hidden = YES;
+        self.collectionDevices.hidden = NO;
+        if (bRequest) {
+            [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:self];
+        }
+    }
+    else{
+        //
+        self.labNoBindTip.hidden = NO;
+        self.collectionDevices.hidden = YES;
+    }
 }
 
 /*
@@ -94,15 +100,16 @@
 -(void)processIsBindYKSuccess:(MsgSent*)reciveData{
     
     BOOL bOk = NO;
+    HomeAppliancesManager* ham = [HomeAppliancesManager sharedInstance];
     if ([reciveData isRequestSuccess])
     {
         NSDictionary *jsonData = [reciveData responsdData];
         NSString* strPdsn = [jsonData objectForKey:@"pdsn"];
-        NSString* strIp = [jsonData objectForKey:@"ip"];
+        NSString* strIp = [jsonData objectForKey:@"ip_address"];
         if (strPdsn.length
             && strIp.length) {
             // 请求成功
-            [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkIsBindYKSuccess) object:nil];
+            [NSObject cancelPreviousPerformRequestsWithTarget:ham];
             bOk = YES;
             // 更新最后一次保存的pdsn
             [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
@@ -133,22 +140,26 @@
         {
             
         }
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(checkIsBindYKSuccess) object:nil];
+        [NSObject cancelPreviousPerformRequestsWithTarget:ham];
         bOk = YES;
         [Utils showSimpleAlert:strError];
     }
     if (bOk) {
         uReqCheckBindNumber = 0;
         [self hideLoading];
+        
+        [self updateControlState:NO];
     }
     else{
         if (uReqCheckBindNumber < 10) {
             uReqCheckBindNumber ++;
-            [self performSelector:@selector(checkIsBindYKSuccess) withObject:nil afterDelay:0.1];
+            [ham performSelector:@selector(checkIsBindYKSuccess:) withObject:self afterDelay:0.1];
         }
         else{
             [self hideLoading];
             [Utils showSimpleAlert:@"请求超时"];
+            
+            [self updateControlState:NO];
         }
     }
 }
@@ -205,10 +216,10 @@
         header  = [[DeviceManagerCollectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, collectionView.frame.size.width, collectionView.frame.size.width*0.11)];
     }
     if (0 == indexPath.section) {
-        header.labTitle.text= @"我的设备";
+        header.labTitle.text= @"我的家电";
     }
     else {
-        header.labTitle.text= @"电器预约";
+        header.labTitle.text= @"我的预约";
     }
     return header;
     

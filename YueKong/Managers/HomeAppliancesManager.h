@@ -15,10 +15,6 @@ DEFINE_SINGLETON_FOR_HEADER(HomeAppliancesManager)
 
 -(void)testHttp;
 
-//App获取绑定信息
--(int)GetBindData:(NSMutableDictionary*)postBody
- responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
-
 //Client获取系统可适配的遥控器的类型
 -(int)GetCategory:(NSMutableDictionary*)postBody
 responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
@@ -31,8 +27,8 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
 -(int)GetCity:(NSMutableDictionary*)postBody
 responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
 
--(int)checkIsBindYKSuccess:(NSMutableDictionary*)postBody
-responseDelegate:(id<HTTP_MSG_RESPOND>)delegate;
+//App获取绑定信息
+-(int)checkIsBindYKSuccess:(id<HTTP_MSG_RESPOND>)delegate;
 
 -(int)HomeAppliancesKey:(YKControlKeys)ykKey
       HomeApplianceType:(HouseholdAppliancesType)haType;
