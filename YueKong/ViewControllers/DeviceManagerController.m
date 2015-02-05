@@ -13,6 +13,8 @@
 #import "HouseholdAppliancesCell.h"
 #import "DeviceManagerCollectionHeaderView.h"
 
+#define kCollectionCellApplinceSize CGSizeMake(self.view.frame.size.width/4.0, 100)
+
 @interface DeviceManagerController ()<HTTP_MSG_RESPOND>{
     // 检查是否绑定成功次数  最大请求10次；
     NSInteger uReqCheckBindNumber;
@@ -259,15 +261,22 @@
 {
     static NSString * CellIdentifier = @"HouseholdAppliancesCell";
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor = [UIColor whiteColor];
     
-    cell.backgroundColor = [UIColor colorWithRed:((10 * indexPath.row) / 255.0) green:((20 * indexPath.row)/255.0) blue:((30 * indexPath.row)/255.0) alpha:1.0f];
+    CGSize cellSize = kCollectionCellApplinceSize;
+    UIImageView* ivBG = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellSize.width, cellSize.height)];
+    ivBG.image = [UIImage imageNamed:@"bg_menu_img"];
+    [cell.contentView addSubview:ivBG];
+//    
+//    UILabel *labContent = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 50, 20)];
+//    labContent.text = [NSString stringWithFormat:@"%ld %ld", indexPath.section, indexPath.row];
+//    labContent.backgroundColor = [UIColor clearColor];
+//    labContent.textColor = [UIColor redColor];
+//    [cell.contentView addSubview:labContent];
     
-    UILabel *labContent = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 50, 20)];
-    labContent.text = [NSString stringWithFormat:@"%ld %ld", indexPath.section, indexPath.row];
-    labContent.backgroundColor = [UIColor clearColor];
-    labContent.textColor = [UIColor redColor];
-    
-    [cell.contentView addSubview:labContent];
+    UIView* ivLine = [[UIView alloc] initWithFrame:CGRectMake(cellSize.width-1, 0, 1, cellSize.height)];
+    ivLine.backgroundColor = RGB(170, 170, 170);
+    [cell.contentView addSubview:ivLine];
     return cell;
 }
 
@@ -276,7 +285,7 @@
 //定义每个UICollectionView 的大小
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.view.frame.size.width/4.0, 80);
+    return kCollectionCellApplinceSize;
 }
 
 //定义每个UICollectionView 的 margin

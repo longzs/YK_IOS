@@ -130,6 +130,7 @@
 		FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */; };
 		FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */; };
 		FCEFDCD51A83B4F000377F22 /* button_UCON_Bind@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */; };
+		FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -381,6 +382,7 @@
 		FCAF7B141A63B3E1001CC512 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
 		FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_UCON_Bind@2x.png"; sourceTree = "<group>"; };
+		FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_menu_img@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -441,6 +443,7 @@
 		186C77EB1A7E6CA8006C5649 /* BG */ = {
 			isa = PBXGroup;
 			children = (
+				FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */,
 				186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */,
 			);
 			path = BG;
@@ -1084,6 +1087,7 @@
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
 				1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */,
 				1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */,
+				FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */,
 				FC15A19C1A7F662B0034F9D3 /* icon_back_click@2x.png in Resources */,
 				1849C85F1A7E3C6D00CA5E37 /* button_510x80_click@2x.png in Resources */,
 				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
