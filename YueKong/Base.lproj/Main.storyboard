@@ -407,8 +407,10 @@ Cg
                         <outlet property="btnBind" destination="jQz-BV-fha" id="vIr-yj-h0P"/>
                         <outlet property="collectionDevices" destination="GoC-ua-ZKC" id="xpt-hk-Qqh"/>
                         <outlet property="imvBG" destination="SRd-TN-T9U" id="gIQ-jH-Jfb"/>
+                        <outlet property="imvYKDevice" destination="H17-Lu-Di0" id="nIV-PN-iVP"/>
                         <outlet property="labBind" destination="QGd-X3-uGV" id="Ib3-D2-PiL"/>
                         <outlet property="labNoBindTip" destination="EyW-tX-Fg3" id="Jjo-x4-mHI"/>
+                        <outlet property="labOperationTip" destination="aq3-ns-Cwi" id="e63-zZ-YNI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dD6-9z-Seq" userLabel="First Responder" sceneMemberID="firstResponder"/>

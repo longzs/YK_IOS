@@ -129,6 +129,7 @@
 		FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7B111A63B3E1001CC512 /* Documentation.html */; };
 		FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */; };
 		FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */; };
+		FCEFDCD51A83B4F000377F22 /* button_UCON_Bind@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -379,6 +380,7 @@
 		FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		FCAF7B141A63B3E1001CC512 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_UCON_Bind@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -426,6 +428,7 @@
 		1849C8581A7E3B1D00CA5E37 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */,
 				1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */,
 				1849C85D1A7E3C6D00CA5E37 /* button_510x80_click@2x.png */,
 				1849C85E1A7E3C6D00CA5E37 /* button_510x80_normal@2x.png */,
@@ -1089,6 +1092,7 @@
 				FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */,
 				FC147E081A5D1D9600BA06F3 /* RegexKitLite.html in Resources */,
 				186C77ED1A7E6CC3006C5649 /* bg_img@2x.png in Resources */,
+				FCEFDCD51A83B4F000377F22 /* button_UCON_Bind@2x.png in Resources */,
 				FC15A1991A7F27C80034F9D3 /* NavBarShadow.png in Resources */,
 				1849C8571A7E3B0600CA5E37 /* icon_equipment@2x.png in Resources */,
 				FC15A19D1A7F662B0034F9D3 /* icon_back_normal@2x.png in Resources */,

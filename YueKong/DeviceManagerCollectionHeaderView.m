@@ -18,9 +18,9 @@
     self=[super initWithFrame:frame];
     
     if (self) {
-        self.labTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 200, 40)];
+        self.labTitle = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 200, 40)];
         self.labTitle.backgroundColor = [UIColor clearColor];
-        self.labTitle.font = [UIFont boldSystemFontOfSize:18.f];
+        self.labTitle.font = [UIFont boldSystemFontOfSize:17.f];
         self.labTitle.textAlignment = NSTextAlignmentLeft;
         self.labTitle.numberOfLines=2.0;
         self.labTitle.textColor = [UIColor darkGrayColor];

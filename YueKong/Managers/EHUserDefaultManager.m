@@ -68,6 +68,28 @@ DEFINE_SINGLETON_FOR_CLASS(EHUserDefaultManager)
     [userDefailts synchronize];
 }
 
+- (YKDeviceModel*)getCurrentDevice{
+    NSData* data = [userDefailts objectForKey:k_YKDevice];
+    if (data) {
+        return [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    return nil;
+}
+
+- (void)updateCurrentDevice:(YKDeviceModel*)dv{
+    if (nil == dv) {
+        return;
+    }
+    NSData  *data = [NSKeyedArchiver archivedDataWithRootObject:dv];
+    [userDefailts setObject:data forKey:k_YKDevice];
+    [userDefailts synchronize];
+}
+
+- (void)removeCurrentDevice{
+    [userDefailts removeObjectForKey:k_YKDevice];
+    [userDefailts synchronize];
+}
+
 -(NSString*)getValueFromDefault:(NSString*)key{
     if (nil == key) {
         return @"";

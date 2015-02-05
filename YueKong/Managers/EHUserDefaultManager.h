@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "YKDeviceModel.h"
 
 #define k_LastPdsn  @"k_LastPdsn"
 
@@ -15,12 +15,16 @@
 
 #define k_UserWIFIPWD  @"k_UserWIFIPWD"
 
+#define k_YKDevice      @"k_YKDevice_UserDefault"
+
 @interface EHUserDefaultManager : NSObject
 
 DEFINE_SINGLETON_FOR_HEADER(EHUserDefaultManager)
 
-//上次选择的医院/科室id，在首页中显示
+//基座返回的设备id
 @property(nonatomic, copy)NSString* lastPdsn;
+
+@property(nonatomic, strong)YKDeviceModel   *currentDevice;
 
 
 - (BOOL)isFirstLaunch;
@@ -34,6 +38,10 @@ DEFINE_SINGLETON_FOR_HEADER(EHUserDefaultManager)
 - (NSString*)LastPdsn;
 - (void)updatelastLastPdsn:(NSString*)refrashTime;
 - (void)removelastLastPdsn;
+
+- (YKDeviceModel*)getCurrentDevice;
+- (void)updateCurrentDevice:(YKDeviceModel*)dv;
+- (void)removeCurrentDevice;
 
 -(NSString*)getValueFromDefault:(NSString*)key;
 -(void)updateDefaultValue:(NSString*)key

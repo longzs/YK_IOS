@@ -24,6 +24,9 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *imvBG;
 
+@property (nonatomic, weak) IBOutlet UIImageView *imvYKDevice;
+@property(nonatomic, weak)IBOutlet UILabel  *labOperationTip;
+
 -(IBAction)clickShowBind:(id)sender;
 @end
 
@@ -65,18 +68,32 @@
 
 -(void)updateControlState:(BOOL)bRequest{
     
-    if ([[[EHUserDefaultManager sharedInstance] lastPdsn] length]) {
+    if ([[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
-        if (bRequest) {
-            [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:self];
-        }
+        self.labBind.text = @"我得悦控";
+        [self.btnBind setBackgroundImage:[UIImage imageNamed:@"button_UCON_Bind"]
+                                forState:UIControlStateNormal];
+        
+        self.labOperationTip.text = @"您还没有配置任何家电遥控器，\n点击“+”马上配置";
+        self.imvYKDevice.hidden = YES;
     }
     else{
         //
         self.labNoBindTip.hidden = NO;
         self.collectionDevices.hidden = YES;
+        
+        self.labBind.text = @"绑定悦控";
+        [self.btnBind setBackgroundImage:[UIImage imageNamed:@"button_UCON_my"]
+                                forState:UIControlStateNormal];
+        
+        self.labOperationTip.text = @"请保持电源及无线网络处于打开状态，\nUCON家族请勿分离";
+        self.imvYKDevice.hidden = NO;
+    }
+    if (bRequest
+        && nil == [[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
+        [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:self];
     }
 }
 
@@ -110,24 +127,36 @@
             && strIp.length) {
             // 请求成功
             [NSObject cancelPreviousPerformRequestsWithTarget:ham];
+            
+            if (nil == [[EHUserDefaultManager sharedInstance] getCurrentDevice]) {
+                UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"绑定成功"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"继续添加遥控器"
+                                                      otherButtonTitles:@"先看看",nil];
+                [alert setTag:18];
+                [alert show];
+            }
             bOk = YES;
             // 更新最后一次保存的pdsn
             [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
             // 记录内网yk ip
             [NetControl shareInstance].strIP = strIp;
             
-            UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"绑定成功"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"继续添加遥控器"
-                                                  otherButtonTitles:@"先看看",nil];
-            [alert setTag:18];
-            [alert show];
+            YKDeviceModel *dm = [[YKDeviceModel alloc] init];
+            dm.pdsn = strPdsn;
+            dm.ip_address = strIp;
+            dm.name = jsonData[@"name"];
+            dm.status = jsonData[@"status"];
+            dm.idNo = jsonData[@"idNo"];
+            dm.create_time = jsonData[@"create_time"];
+            [[EHUserDefaultManager sharedInstance] updateCurrentDevice:dm];
+            //[dm release];
         }
     }
     else
     {   //对于HTTP请求返回的错误,暂时不展开处理
-        NSString* strError = @"请检查您得wifi连接是否正常";
+        NSString* strError = @"请检查您得网络连接是否正常";
         if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
         {
             strError = @"请求超时";
@@ -194,13 +223,13 @@
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 1;
+    return 5;
 }
 
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 1;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
