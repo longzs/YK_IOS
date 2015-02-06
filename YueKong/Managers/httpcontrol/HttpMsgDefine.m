@@ -234,7 +234,7 @@
     return 200 == self.httpRsp_;
 }
 
--(NSDictionary*)responsdData{
+-(id)responsdData{
     NSString *responseString = self.responseJsonString;
     NSDictionary *JSONValue = [responseString mutableObjectFromJSONStringWithParseOptions:JKParseOptionValidFlags];
     

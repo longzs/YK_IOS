@@ -15,6 +15,8 @@
 
 #define kCollectionCellApplinceSize CGSizeMake(self.view.frame.size.width/4.0, 100)
 
+#define kAddCategory      @"kAddCategory"
+
 @interface DeviceManagerController ()<HTTP_MSG_RESPOND>{
     // 检查是否绑定成功次数  最大请求10次；
     NSInteger uReqCheckBindNumber;
@@ -29,6 +31,8 @@
 @property (nonatomic, weak) IBOutlet UIImageView *imvYKDevice;
 @property(nonatomic, weak)IBOutlet UILabel  *labOperationTip;
 
+@property(nonatomic, strong)NSMutableArray* aryRCCategories;
+
 -(IBAction)clickShowBind:(id)sender;
 @end
 
@@ -41,11 +45,20 @@
     
     _imvBG.image = [[UIImage imageNamed:@"bg_img.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeTile];
     
+    YKRemoteControlCategory* addCategory = [[YKRemoteControlCategory alloc] init];
+    addCategory.idNo = [NSString stringWithFormat:@"%d", HAType_Add];
+    self.aryRCCategories = [NSMutableArray arrayWithObject:addCategory];
+    
+    self.collectionDevices.backgroundColor = RGB(245, 245, 245);
     self.collectionDevices.alwaysBounceVertical = YES;
     self.collectionDevices.allowsMultipleSelection = YES;
     [self.collectionDevices registerClass:[HouseholdAppliancesCell class] forCellWithReuseIdentifier:@"HouseholdAppliancesCell"];
     [self.collectionDevices registerClass:[DeviceManagerCollectionHeaderView class]
                forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"DeviceManagerCollectionHeaderView"];
+    
+    //// test
+    [[HomeAppliancesManager sharedInstance] GetBrand:[NSMutableDictionary dictionaryWithObject:@"2" forKey:@"category_id"] responseDelegate:self];
+    [[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,6 +93,10 @@
         
         self.labOperationTip.text = @"您还没有配置任何家电遥控器，\n点击“+”马上配置";
         self.imvYKDevice.hidden = YES;
+        
+        if ([self.aryRCCategories count] <= 1) {
+            [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
+        }
     }
     else{
         //
@@ -149,8 +166,8 @@
             dm.pdsn = strPdsn;
             dm.ip_address = strIp;
             dm.name = jsonData[@"name"];
-            dm.status = jsonData[@"status"];
-            dm.idNo = jsonData[@"idNo"];
+            dm.status = [NSString stringWithFormat:@"%d", [jsonData[@"status"] intValue]];
+            dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
             dm.create_time = jsonData[@"create_time"];
             [[EHUserDefaultManager sharedInstance] updateCurrentDevice:dm];
             //[dm release];
@@ -195,6 +212,47 @@
     }
 }
 
+
+-(void)processGetCategorys:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSArray *jsonDataAry = [reciveData responsdData];
+        if ([jsonDataAry isKindOfClass:[NSArray class]]
+            && jsonDataAry.count) {
+            
+            for (NSDictionary* jsonData in jsonDataAry) {
+                
+                YKRemoteControlCategory *dm = [[YKRemoteControlCategory alloc] init];
+                dm.name = jsonData[@"name"];
+                dm.status = [NSString stringWithFormat:@"%d", [jsonData[@"status"] intValue]];
+                dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
+                dm.create_time = jsonData[@"create_time"];
+                
+                [self.aryRCCategories insertObject:dm atIndex:0];
+            }
+            [self.collectionDevices reloadData];
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+}
+
 #pragma mark - httpResponse
 -(int)ReciveHttpMsg:(MsgSent*)ReciveMsg{
     
@@ -208,6 +266,11 @@
         case CC_CheckYKBindSuccess:
         {
             [self processIsBindYKSuccess:ReciveMsg];
+            break;
+        }
+        case CC_GetCategory:
+        {
+            [self processGetCategorys:ReciveMsg];
             break;
         }
         default:
@@ -225,7 +288,7 @@
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 5;
+    return self.aryRCCategories.count;
 }
 
 //定义展示的Section的个数
@@ -261,22 +324,64 @@
 {
     static NSString * CellIdentifier = @"HouseholdAppliancesCell";
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor whiteColor];
+    cell.backgroundColor = [UIColor clearColor];
     
     CGSize cellSize = kCollectionCellApplinceSize;
-    UIImageView* ivBG = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, cellSize.width, cellSize.height)];
-    ivBG.image = [UIImage imageNamed:@"bg_menu_img"];
-    [cell.contentView addSubview:ivBG];
-//    
-//    UILabel *labContent = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 50, 20)];
-//    labContent.text = [NSString stringWithFormat:@"%ld %ld", indexPath.section, indexPath.row];
-//    labContent.backgroundColor = [UIColor clearColor];
-//    labContent.textColor = [UIColor redColor];
-//    [cell.contentView addSubview:labContent];
     
     UIView* ivLine = [[UIView alloc] initWithFrame:CGRectMake(cellSize.width-1, 0, 1, cellSize.height)];
     ivLine.backgroundColor = RGB(170, 170, 170);
     [cell.contentView addSubview:ivLine];
+    
+    ivLine = [[UIView alloc] initWithFrame:CGRectMake(0, -1, cellSize.width, 1)];
+    ivLine.backgroundColor = RGB(170, 170, 170);
+    [cell.contentView addSubview:ivLine];
+    
+    ivLine = [[UIView alloc] initWithFrame:CGRectMake(0, cellSize.height-1, cellSize.width, 1)];
+    ivLine.backgroundColor = RGB(170, 170, 170);
+    [cell.contentView addSubview:ivLine];
+    
+    if (0 == indexPath.section
+        && self.aryRCCategories.count <= indexPath.row) {
+        return cell;
+    }
+    
+    YKRemoteControlCategory* rcc = [self.aryRCCategories objectAtIndex:indexPath.row];
+    
+    NSString* imgName = @"";
+    CGRect rectImg;
+    
+    switch ([rcc.idNo intValue]) {
+        case HAType_Add:{
+            break;
+        }
+        case HAType_AirConditioner:{
+            break;
+        }
+        case HAType_TV:{
+            break;
+        }
+        case HAType_LanBox:{
+            break;
+        }
+        case HAType_SetTopBox:{
+            break;
+        }
+        default:
+            break;
+    }
+    
+    UIImageView* ivBG = [[UIImageView alloc] initWithFrame:rectImg];
+    ivBG.image = [UIImage imageNamed:imgName];
+    ivBG.backgroundColor = [UIColor clearColor];
+    [cell.contentView addSubview:ivBG];
+    
+    UILabel *labContent = [[UILabel alloc] initWithFrame:rectImg];
+    labContent.text = rcc.name;
+    labContent.backgroundColor = [UIColor clearColor];
+    labContent.textColor = RGB(100, 100, 100);
+    if (HAType_Add != [rcc.idNo intValue]) {
+        [cell.contentView addSubview:labContent];
+    }
     return cell;
 }
 

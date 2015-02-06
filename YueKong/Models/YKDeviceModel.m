@@ -52,3 +52,16 @@
 }
 
 @end
+
+
+@implementation YKRemoteControlCategory
+
+@end
+
+@implementation YKRemoteControlBrand
+
+@end
+
+@implementation YKCityModel
+
+@end

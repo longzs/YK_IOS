@@ -8,6 +8,8 @@
 
 #import "HomeAppliancesManager.h"
 
+#define kNeedPid        0
+
 @implementation HomeAppliancesManager
 
 DEFINE_SINGLETON_FOR_CLASS(HomeAppliancesManager)
@@ -32,22 +34,25 @@ DEFINE_SINGLETON_FOR_CLASS(HomeAppliancesManager)
 //Client获取系统可适配的遥控器的类型
 -(int)GetCategory:(NSMutableDictionary*)postBody
  responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
-    NSString *requestURL = [NSString stringWithFormat:@"%@",k_URL_GetCategory];
+    NSString *requestURL = [NSString stringWithFormat:@"%@?from=0&count=100",k_URL_GetCategory];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     /*App 等获取平台支持的遥控器的类型，如电视机的、机顶盒的、空调的等
      */
     NSMutableDictionary* dicBody = postBody;
+    
+#if kNeedPid
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
         NSString* pid = [OpenUDID value];
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
         dicBody[@"deviceid"] = RPLACE_EMPTY_STRING(pid);
     }
+#endif
     
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
-    [sent setMethod_Http:HTTP_METHOD_POST];
+    [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:delegate];
     [sent setCmdCode_:CC_GetCategory];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
@@ -60,12 +65,14 @@ DEFINE_SINGLETON_FOR_CLASS(HomeAppliancesManager)
 //获取系统可适配的遥控器的品牌
 -(int)GetBrand:(NSMutableDictionary*)postBody
 responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
-    NSString *requestURL = [NSString stringWithFormat:@"%@",k_URL_GetBrand];
+    
+    NSString *requestURL = [NSString stringWithFormat:@"%@?category_id=%@&from=0&count=100",k_URL_GetBrand, postBody[@"category_id"]];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     /*App 等获取平台支持的遥控器的品牌，如TCL、三星、海信等
      */
     NSMutableDictionary* dicBody = postBody;
+#if kNeedPid
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
         NSString* pid = [OpenUDID value];
@@ -73,6 +80,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
         dicBody[@"deviceid"] = RPLACE_EMPTY_STRING(pid);
         dicBody[@"catid"] = RPLACE_EMPTY_STRING(pid);
     }
+#endif
     
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
@@ -86,19 +94,21 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
-
--(int)GetCity:(NSMutableDictionary*)postBody
-responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
+/*
+ 列出(机顶盒)STB编码已覆盖的城市
+ 
+ from 	Query 	City ID起始值，如果从头开始，请赋值为0
+ count 	Query 	每页显示城市条目数量，建议为50以上
+ 
+ */
+-(int)GetCityCovered:(NSMutableDictionary*)postBody
+    responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
-    NSString *requestURL = [NSString stringWithFormat:@"%@",k_URL_GetCity];
+    NSString *requestURL = [NSString stringWithFormat:@"%@?frin=0&count=70",k_URL_GetCity_Covered];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
-    /*手机 APP 向云端发起请求来判断设备是否绑定成功：
-     PID：手机设备号 String
-     云端返回：
-     PDSN：步骤 2 中向云端注册的设备 ID String
-     id：设备的内网 ip，用来进行之后的点对点连接
-     */
+    
+#if kNeedPid
     NSMutableDictionary* dicBody = postBody;
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
@@ -106,12 +116,72 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
         NSLog(@"pid = %@", pid);
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
     }
+#endif
     
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
-    [sent setMethod_Http:HTTP_METHOD_POST];
+    [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:delegate];
-    [sent setCmdCode_:CC_GetCity];
+    [sent setCmdCode_:CC_GetCitesCovered];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setTimeout_:5];
+    [sent setDicHeader:header];
+    //[sent setPostData:[dicBody JSONData]];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
+}
+
+
+-(int)GetCityProvinces:(NSMutableDictionary*)postBody
+      responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
+    
+    NSString *requestURL = [NSString stringWithFormat:@"%@",k_URL_GetCity_Provinces];
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+#if kNeedPid
+    NSMutableDictionary* dicBody = postBody;
+    if (nil == dicBody) {
+        dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSString* pid = [OpenUDID value];
+        NSLog(@"pid = %@", pid);
+        dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
+    }
+#endif
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_GetCityProvinces];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setTimeout_:5];
+    [sent setDicHeader:header];
+    //[sent setPostData:[dicBody JSONData]];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
+}
+
+-(int)GetCity:(NSMutableDictionary*)postBody
+responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
+    
+    NSString *requestURL = [NSString stringWithFormat:@"%@?province_prefix=%@",k_URL_GetCity_Cities, postBody[@"province_prefix"]];
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+    NSMutableDictionary* dicBody = postBody;
+    #if kNeedPid
+    if (nil == dicBody) {
+        dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
+        NSString* pid = [OpenUDID value];
+        NSLog(@"pid = %@", pid);
+        dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
+    }
+#endif
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_GetCitesByProvinces];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
     [sent setTimeout_:5];
     [sent setDicHeader:header];

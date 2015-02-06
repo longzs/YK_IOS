@@ -48,14 +48,17 @@ typedef enum CmdCode
 	CC_Logout					= 0x0102, // 
     CC_GetCategory              = 0x0103,
     CC_GetBrand                = 0x0104,
-    CC_GetCity                = 0x0105,
     CC_UpdateProfile            = 0x0106,
     CC_GetBalance               = 0x0107,
     CC_GetACK               = 0x0108,
     CC_BindYKDecive           = 0x0109,
     CC_CheckYKBindSuccess                  = 0x010A,
     CC_ResignAPNS               = 0x010B,
-
+    
+    CC_GetCityProvinces                     = 0x0201,
+    CC_GetCitesByProvinces                  = 0x0202,
+    CC_GetCitesCovered                      = 0x0203,
+    
 	CC_Unknown                  = -1,
 }E_CMDCODE;
 

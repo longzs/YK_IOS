@@ -60,15 +60,19 @@
 
 
 //Client获取系统可适配的遥控器的类型
-#define k_URL_GetCategory               @"" kHttpBase"api/getCategory.php"
+#define k_URL_GetCategory               @"" kHttpBase"/yuekong/remote/list_categories"
 
 //Client获取系统可适配的遥控器的品牌
-#define k_URL_GetBrand                  @"" kHttpBase"api/getBrand.php"
+#define k_URL_GetBrand                  @"" kHttpBase"/yuekong/remote/list_brands"
 
-//Client获取系统目前支持的地区
-#define k_URL_GetCity                   @"" kHttpBase"api/getCity.php"
+//列出STB编码已覆盖的城市
+#define k_URL_GetCity_Covered                  @"" kHttpBase"/yuekong/city/list_covered_cities"
 
+//Client获取系统目前支持的省份
+#define k_URL_GetCity_Provinces                   @"" kHttpBase"/yuekong/city/list_provinces"
 
+//根据省份编码前缀列出地级市
+#define k_URL_GetCity_Cities                   @"" kHttpBase"/yuekong/city/list_cities"
 
 //注册
 #define k_URL_userRegister                   @"userRegister"
@@ -235,10 +239,13 @@ typedef enum HomeAppliancesKey_ {
 }HomeAppliancesKey;
 
 typedef enum HouseholdAppliancesType_{
-    HAType_SetTopBox = 1, // 机顶盒
-    HAType_AirConditioner,  // 空调
-    HAType_TV,              //
+    HAType_AirConditioner = 1,  // 空调
+    HAType_TV,
+    HAType_SetTopBox , // 机顶盒//
     HAType_LanBox,          //网络盒子
+    
+    HAType_Add = -1,
+    
 }HouseholdAppliancesType;
 
 #pragma mark - Marvell

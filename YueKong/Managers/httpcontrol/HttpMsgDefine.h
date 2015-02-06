@@ -133,7 +133,7 @@ typedef enum HttpErr{
 + (NSString*)mbase64forData:(NSData*)theData;
 
 -(BOOL)isRequestSuccess;
--(NSDictionary*)responsdData;
+-(id)responsdData;
 @end
 
 #pragma mark delegate_
