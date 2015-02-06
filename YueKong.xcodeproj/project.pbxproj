@@ -15,6 +15,8 @@
 		1849C8601A7E3C6D00CA5E37 /* button_510x80_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C85E1A7E3C6D00CA5E37 /* button_510x80_normal@2x.png */; };
 		1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */; };
 		186C77ED1A7E6CC3006C5649 /* bg_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */; };
+		18CE1B161A8510820031F076 /* DeviceSelectCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CE1B141A8510820031F076 /* DeviceSelectCollectionCell.m */; };
+		18CE1B171A8510820031F076 /* DeviceSelectCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CE1B151A8510820031F076 /* DeviceSelectCollectionCell.xib */; };
 		FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9631A5E26BF00748B4E /* absManager.m */; };
 		FC0BA9671A5E26BF00748B4E /* EHUserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9651A5E26BF00748B4E /* EHUserDefaultManager.m */; };
 		FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA96A1A5E303E00748B4E /* EHBaseNavController.m */; };
@@ -158,6 +160,9 @@
 		1849C85E1A7E3C6D00CA5E37 /* button_510x80_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_510x80_normal@2x.png"; sourceTree = "<group>"; };
 		1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_UCON_my@2x.png"; sourceTree = "<group>"; };
 		186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_img@2x.png"; sourceTree = "<group>"; };
+		18CE1B131A8510820031F076 /* DeviceSelectCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceSelectCollectionCell.h; path = ViewControllers/DeviceSelectCollectionCell.h; sourceTree = "<group>"; };
+		18CE1B141A8510820031F076 /* DeviceSelectCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceSelectCollectionCell.m; path = ViewControllers/DeviceSelectCollectionCell.m; sourceTree = "<group>"; };
+		18CE1B151A8510820031F076 /* DeviceSelectCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DeviceSelectCollectionCell.xib; path = ViewControllers/DeviceSelectCollectionCell.xib; sourceTree = "<group>"; };
 		FC0BA9621A5E26BF00748B4E /* absManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = absManager.h; sourceTree = "<group>"; };
 		FC0BA9631A5E26BF00748B4E /* absManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = absManager.m; sourceTree = "<group>"; };
 		FC0BA9641A5E26BF00748B4E /* EHUserDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHUserDefaultManager.h; sourceTree = "<group>"; };
@@ -888,6 +893,9 @@
 				FC177B731A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.h */,
 				FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */,
 				FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */,
+				18CE1B131A8510820031F076 /* DeviceSelectCollectionCell.h */,
+				18CE1B141A8510820031F076 /* DeviceSelectCollectionCell.m */,
+				18CE1B151A8510820031F076 /* DeviceSelectCollectionCell.xib */,
 				1849C8541A7E299F00CA5E37 /* Common */,
 			);
 			name = Views;
@@ -1124,6 +1132,7 @@
 				FC147E061A5D1D9600BA06F3 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				1849C8601A7E3C6D00CA5E37 /* button_510x80_normal@2x.png in Resources */,
 				FC82CCDF1A84F81500012F7D /* icon_add@2x.png in Resources */,
+				18CE1B171A8510820031F076 /* DeviceSelectCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1165,7 @@
 				FC147DEC1A5D1D9600BA06F3 /* IQNSArray+Sort.m in Sources */,
 				FC147DED1A5D1D9600BA06F3 /* IQUIView+Hierarchy.m in Sources */,
 				FC147E1D1A5D209A00BA06F3 /* MBProgressHUD.m in Sources */,
+				18CE1B161A8510820031F076 /* DeviceSelectCollectionCell.m in Sources */,
 				FCAF7B0A1A63ADE3001CC512 /* DeviceIPAddress.m in Sources */,
 				FC147CD61A5CDB3A00BA06F3 /* ViewController.m in Sources */,
 				FC147DF11A5D1D9600BA06F3 /* IQSegmentedNextPrevious.m in Sources */,

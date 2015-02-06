@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEG-we-H3s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEG-we-H3s">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -214,6 +214,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Drt-GI-ftc" userLabel="View-top">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F0W-lB-czJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="绑定UCON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGd-X3-uGV">
                                         <rect key="frame" x="123" y="90" width="75" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -250,9 +253,13 @@
                                     <constraint firstItem="jQz-BV-fha" firstAttribute="top" secondItem="Drt-GI-ftc" secondAttribute="top" constant="10" id="KFp-q3-ku5"/>
                                     <constraint firstItem="QGd-X3-uGV" firstAttribute="top" secondItem="jQz-BV-fha" secondAttribute="bottom" constant="5" id="RQZ-CU-yOX"/>
                                     <constraint firstAttribute="height" constant="118" id="h4W-eG-zDV"/>
+                                    <constraint firstAttribute="trailing" secondItem="F0W-lB-czJ" secondAttribute="trailing" id="hMj-A7-K1E"/>
                                     <constraint firstAttribute="centerX" secondItem="jQz-BV-fha" secondAttribute="centerX" id="itc-j3-fj7"/>
                                     <constraint firstAttribute="bottom" secondItem="TnB-2p-til" secondAttribute="bottom" id="qkz-h4-iPN"/>
                                     <constraint firstAttribute="trailing" secondItem="TnB-2p-til" secondAttribute="trailing" id="t7f-zI-TvB"/>
+                                    <constraint firstItem="F0W-lB-czJ" firstAttribute="leading" secondItem="Drt-GI-ftc" secondAttribute="leading" id="teK-mI-a1d"/>
+                                    <constraint firstItem="F0W-lB-czJ" firstAttribute="top" secondItem="Drt-GI-ftc" secondAttribute="top" id="toU-6G-wQp"/>
+                                    <constraint firstAttribute="bottom" secondItem="F0W-lB-czJ" secondAttribute="bottom" id="zAO-dF-TZ8"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdt-7O-kha" userLabel="View-bottom">
