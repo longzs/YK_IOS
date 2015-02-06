@@ -66,7 +66,7 @@ DEFINE_SINGLETON_FOR_CLASS(HomeAppliancesManager)
 -(int)GetBrand:(NSMutableDictionary*)postBody
 responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
-    NSString *requestURL = [NSString stringWithFormat:@"%@?category_id=%@&from=0&count=100",k_URL_GetBrand, postBody[@"category_id"]];
+    NSString *requestURL = [NSString stringWithFormat:@"%@?category_id=%@&from=0&count=20",k_URL_GetBrand, postBody[@"category_id"]];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     /*App 等获取平台支持的遥控器的品牌，如TCL、三星、海信等
@@ -84,13 +84,13 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
-    [sent setMethod_Http:HTTP_METHOD_POST];
+    [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:delegate];
     [sent setCmdCode_:CC_GetBrand];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
     [sent setTimeout_:5];
     [sent setDicHeader:header];
-    [sent setPostData:[dicBody JSONData]];
+    //[sent setPostData:[dicBody JSONData]];
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
@@ -104,7 +104,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
 -(int)GetCityCovered:(NSMutableDictionary*)postBody
     responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
-    NSString *requestURL = [NSString stringWithFormat:@"%@?frin=0&count=70",k_URL_GetCity_Covered];
+    NSString *requestURL = [NSString stringWithFormat:@"%@?from=0&count=70",k_URL_GetCity_Covered];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     

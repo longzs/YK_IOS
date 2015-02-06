@@ -117,6 +117,11 @@
 		FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB141A62BE8F0032D651 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1C1A62BE8F0032D651 /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB161A62BE8F0032D651 /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB181A62BE8F0032D651 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FC82CCDF1A84F81500012F7D /* icon_add@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDA1A84F81500012F7D /* icon_add@2x.png */; };
+		FC82CCE01A84F81500012F7D /* icon_AirCondition@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDB1A84F81500012F7D /* icon_AirCondition@2x.png */; };
+		FC82CCE11A84F81500012F7D /* icon_NetworkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */; };
+		FC82CCE21A84F81500012F7D /* icon_STB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */; };
+		FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */; };
 		FC8647121A6D509E000CF612 /* RemoteControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647101A6D509E000CF612 /* RemoteControlViewController.m */; };
 		FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */; };
 		FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */; };
@@ -359,6 +364,11 @@
 		FC5AFB161A62BE8F0032D651 /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		FC5AFB171A62BE8F0032D651 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		FC5AFB181A62BE8F0032D651 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		FC82CCDA1A84F81500012F7D /* icon_add@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_add@2x.png"; sourceTree = "<group>"; };
+		FC82CCDB1A84F81500012F7D /* icon_AirCondition@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_AirCondition@2x.png"; sourceTree = "<group>"; };
+		FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_NetworkBox@2x.png"; sourceTree = "<group>"; };
+		FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_STB@2x.png"; sourceTree = "<group>"; };
+		FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_TV@2x.png"; sourceTree = "<group>"; };
 		FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteControlViewController.h; sourceTree = "<group>"; };
 		FC8647101A6D509E000CF612 /* RemoteControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControlViewController.m; sourceTree = "<group>"; };
 		FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemoteControlViewController.xib; sourceTree = "<group>"; };
@@ -420,6 +430,11 @@
 		1849C8551A7E3AEF00CA5E37 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				FC82CCDA1A84F81500012F7D /* icon_add@2x.png */,
+				FC82CCDB1A84F81500012F7D /* icon_AirCondition@2x.png */,
+				FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */,
+				FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */,
+				FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */,
 				FC15A19A1A7F662B0034F9D3 /* icon_back_click@2x.png */,
 				FC15A19B1A7F662B0034F9D3 /* icon_back_normal@2x.png */,
 				1849C8561A7E3B0600CA5E37 /* icon_equipment@2x.png */,
@@ -1085,13 +1100,17 @@
 				FC177B771A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib in Resources */,
 				FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
+				FC82CCE11A84F81500012F7D /* icon_NetworkBox@2x.png in Resources */,
 				1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */,
 				1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */,
+				FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */,
 				FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */,
 				FC15A19C1A7F662B0034F9D3 /* icon_back_click@2x.png in Resources */,
+				FC82CCE21A84F81500012F7D /* icon_STB@2x.png in Resources */,
 				1849C85F1A7E3C6D00CA5E37 /* button_510x80_click@2x.png in Resources */,
 				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
+				FC82CCE01A84F81500012F7D /* icon_AirCondition@2x.png in Resources */,
 				1849C85C1A7E3C2F00CA5E37 /* button_285x80_normal@2x.png in Resources */,
 				FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */,
 				FC147E081A5D1D9600BA06F3 /* RegexKitLite.html in Resources */,
@@ -1104,6 +1123,7 @@
 				FC147CDB1A5CDB3A00BA06F3 /* Images.xcassets in Resources */,
 				FC147E061A5D1D9600BA06F3 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				1849C8601A7E3C6D00CA5E37 /* button_510x80_normal@2x.png in Resources */,
+				FC82CCDF1A84F81500012F7D /* icon_add@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1336,7 +1356,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cl Wu (4SK6835K85)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: wenjie xu (F8CAJ7A8V3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueKong/PrefixHeader.pch";
 				INFOPLIST_FILE = YueKong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1351,7 +1371,7 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "304d71ba-ca94-448b-bcb4-7094068afaad";
+				PROVISIONING_PROFILE = "d7b8d0c3-d8d5-4c45-aba3-e7e0e76c5a16";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1361,7 +1381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: cl Wu (4SK6835K85)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanjing yuekong Intelligent Technology Co., Ltd. (83Q7C7PFZK)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueKong/PrefixHeader.pch";
 				INFOPLIST_FILE = YueKong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1376,7 +1396,7 @@
 				);
 				OTHER_LDFLAGS = "-licucore";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "304d71ba-ca94-448b-bcb4-7094068afaad";
+				PROVISIONING_PROFILE = "c1dd64dc-3dea-413a-8552-8c54877baaf2";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

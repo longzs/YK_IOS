@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface RemoteControlViewController : BaseViewController
-
+@property(nonatomic, strong)NSString *rcCategoryID;
 @end
