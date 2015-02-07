@@ -68,7 +68,7 @@ static NetControl* g_ins = nil;
     
 }
 
--(void)ConnectTo3gRouter{
+-(void)ConnectToYKDevice{
     // 10.10.10.254 [self localWiFiIPAddress];
     if (!isConnect)
     {
@@ -275,6 +275,14 @@ static NetControl* g_ins = nil;
     return r;
 }
 
+#pragma mark -- YK
+-(int)sendYKDeviceCmd:(NSString*)cmd{
+    int iRet = 0;
+    
+    NSData* data  = [NSData dataWithBytes:[cmd UTF8String] length:cmd.length];
+    [tcpCtrl writeData:data withTimeout:5 tag:cmd.intValue];
+    return iRet;
+}
 -(void)processByResponse:(mPacket*)mp{
     
     if (nil == mp) {
@@ -461,7 +469,7 @@ static NetControl* g_ins = nil;
         isConnect = NO;
         // 断链了3秒钟不断重连
         [NSObject cancelPreviousPerformRequestsWithTarget:self];
-        [self performSelector:@selector(ConnectTo3gRouter) withObject:nil afterDelay:k_TimeOut_Tcp];
+        [self performSelector:@selector(ConnectToYKDevice) withObject:nil afterDelay:k_TimeOut_Tcp];
     };
     if ([NSThread isMainThread]) {
         block();

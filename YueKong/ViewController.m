@@ -89,11 +89,11 @@ typedef enum wifiStatus_{
     [_tfSSID resignFirstResponder];
     [_tfSSIDPWD resignFirstResponder];
     
-    [self bindYKDevice];
+    
     switch (self.wifiStatu) {
         case wifiStatus_OK:
         {
-            
+            [self bindYKDevice];
         }
             break;
         case wifiStatus_NoHomeSSID:
@@ -106,7 +106,7 @@ typedef enum wifiStatus_{
             [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserWIFIPWD Value:self.tfSSIDPWD.text];
             
             //
-            [self showMessage:[NSString stringWithFormat:@"记录成功，请将手机连接至悦控的wifi %@，在返回点击绑定", MARVELL_NETWORK_NAME] withTag:13 withTarget:nil];
+//            [self showMessage:[NSString stringWithFormat:@"记录成功，请将手机连接至悦控的wifi %@，在返回点击绑定", MARVELL_NETWORK_NAME] withTag:13 withTarget:nil];
         }
             break;
         case wifiStatus_IsNotYKSSID:
@@ -127,6 +127,10 @@ typedef enum wifiStatus_{
     }
     [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserSSID Value:self.tfSSID.text];
     [[EHUserDefaultManager sharedInstance] updateDefaultValue:k_UserWIFIPWD Value:self.tfSSIDPWD.text];
+    
+    [self showMessage:[NSString stringWithFormat:@"记录成功，请将手机wifi连接至悦控设备wifi热点，名称包含（%@），来发起绑定，O(∩_∩)O", MARVELL_NETWORK_NAME]
+              withTag:31
+           withTarget:self];
 }
 
 -(void)checkCurrentSSID{
@@ -134,12 +138,14 @@ typedef enum wifiStatus_{
     NSString    *wifiPWD = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
     self.strCurrentSSID = [[SSIDManager sharedInstance] currentWifiSSID];
     
-    if ([self.strCurrentSSID isEqualToString:MARVELL_NETWORK_NAME]
+    if ([self.strCurrentSSID rangeOfString:MARVELL_NETWORK_NAME options:NSCaseInsensitiveSearch].length
         && strSSID.length) {
         //  所有条件符合，可以发起绑定 && wifiPWD.length
         self.tfSSID.text = self.strCurrentSSID;
-        
         self.wifiStatu = wifiStatus_OK;
+        
+        [self showMessage:@"您已经连接上悦控wifi热点，请点击绑定按钮发起绑定"
+                  withTag:21 withTarget:self];
     }
     else if(0 == strSSID.length)
     {
@@ -314,9 +320,38 @@ typedef enum wifiStatus_{
 }
 #pragma mark - Request & Process
 
+-(int)isYkDevice{
+    [self showLoadingWithTip:@"正在连接悦控基座"];
+    bLoading = YES;
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@",LOCAL_URL,@""];
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+    NSMutableDictionary* dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
+    dicBody[@"ssid"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserSSID];
+    dicBody[@"key"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
+    dicBody[@"security"] = @"";
+    dicBody[@"channel"] = @"";
+    dicBody[@"ip"] = @"";
+    NSString* pid = [OpenUDID value];
+    NSLog(@"pid = %@", pid);
+    dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:self];
+    [sent setCmdCode_:CC_IsYKDecive];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setTimeout_:5];
+    [sent setDicHeader:header];
+    [sent setPostData:[dicBody JSONData]];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
+}
+
 -(int)bindYKDevice{
     
-    [self showLoadingWithTip:@"正在连接悦控基座"];
+    [self showLoadingWithTip:@"正在绑定悦控基座"];
     bLoading = YES;
     NSString *requestURL = [NSString stringWithFormat:@"%@%@",LOCAL_URL,@""];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];

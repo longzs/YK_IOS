@@ -15,6 +15,17 @@
 #define k_TimeOut_Tcp       5
 #define k_Length_Header     11
 
+/*
+ 
+ {"000", app_tick},
+	{"001", app_get_pdsn},
+	{"002", app_get_reboot},
+	{"003", app_study_irda},
+ 
+ 003,key=1,category=1,brand=1,city=-1
+ 
+ result=success, match=10 （match=1时学习成功， =0时 提示完全学习）
+ */
 
 @class GCDAsyncSocket;
 
@@ -65,7 +76,8 @@
 
 -(int)send3gPacket:(short)action Param:(char)param length:(short)len;
 
--(void)ConnectTo3gRouter;
+-(int)sendYKDeviceCmd:(NSString*)cmd;
+-(void)ConnectToYKDevice;
 -(void)closeTcp;
 @end
 

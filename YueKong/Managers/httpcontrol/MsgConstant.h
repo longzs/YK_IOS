@@ -55,6 +55,8 @@ typedef enum CmdCode
     CC_CheckYKBindSuccess                  = 0x010A,
     CC_ResignAPNS               = 0x010B,
     
+    CC_IsYKDecive           = 0x010C,
+    
     CC_GetCityProvinces                     = 0x0201,
     CC_GetCitesByProvinces                  = 0x0202,
     CC_GetCitesCovered                      = 0x0203,

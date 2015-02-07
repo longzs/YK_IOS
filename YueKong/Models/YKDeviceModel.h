@@ -53,5 +53,20 @@
 @end
 
 
+// 移动终端UE
+@interface YKMobileModel : YKModel
+@property(nonatomic, copy)NSString* idNo;
+@property(nonatomic, copy)NSString* pdsn;
+@property(nonatomic, copy)NSString* pid;
+@property(nonatomic, copy)NSString* ssid;
+@property(nonatomic, copy)NSString* sskey;
+@property(nonatomic, copy)NSString* ip_address;
+@property(nonatomic, copy)NSString* mobile_number;
 
+@property(nonatomic, copy)NSString* app_version;
+@property(nonatomic, copy)NSString* device_version;
+@property(nonatomic, copy)NSString* create_time;
+// 	是否有效(1: 有效, 0: 无效)，默认为1
+@property(nonatomic, copy)NSString* status;
+@end
 

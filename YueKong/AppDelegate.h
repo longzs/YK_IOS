@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "EHRootViewController.h"
 
+//psm-set nvram pdsn P00000000000013
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

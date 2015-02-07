@@ -74,8 +74,8 @@
 //根据省份编码前缀列出地级市
 #define k_URL_GetCity_Cities                   @"" kHttpBase"/yuekong/city/list_cities"
 
-//注册
-#define k_URL_userRegister                   @"userRegister"
+//UE注册
+#define k_URL_register_mobile                   @"" kHttpBase"/yuekong/mobile/register_mobile"
 
 //重置密码
 #define k_URL_passwordReset                   @"passwordReset"

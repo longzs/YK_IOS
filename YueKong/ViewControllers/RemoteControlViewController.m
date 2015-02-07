@@ -103,9 +103,8 @@
     }
     else {
         _lblStage.text = [NSString stringWithFormat:@"第%d步",(int)_currentStage+1];
-        [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.5f];
+        [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
     }
-    
 }
 
 //返回这个UICollectionView是否可以被选择

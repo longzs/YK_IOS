@@ -65,3 +65,7 @@
 @implementation YKCityModel
 
 @end
+
+@implementation YKMobileModel
+
+@end

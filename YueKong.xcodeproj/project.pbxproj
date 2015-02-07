@@ -101,6 +101,7 @@
 		FC15A19D1A7F662B0034F9D3 /* icon_back_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC15A19B1A7F662B0034F9D3 /* icon_back_normal@2x.png */; };
 		FC177B761A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */; };
 		FC177B771A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */; };
+		FC178F591A85A8A600F34D92 /* menu_click_@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC178F581A85A8A600F34D92 /* menu_click_@2x.png */; };
 		FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1798031A6CB25900C04D1F /* DeviceManagerController.m */; };
 		FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5811A5FCF1700CD5611 /* HttpMsgCtrl.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5861A5FCF1700CD5611 /* HttpMsgDefine.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5831A5FCF1700CD5611 /* HttpMsgDefine.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -326,6 +327,7 @@
 		FC177B731A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManagerCollectionHeaderView.h; sourceTree = "<group>"; };
 		FC177B741A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerCollectionHeaderView.m; sourceTree = "<group>"; };
 		FC177B751A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DeviceManagerCollectionHeaderView.xib; sourceTree = "<group>"; };
+		FC178F581A85A8A600F34D92 /* menu_click_@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu_click_@2x.png"; sourceTree = "<group>"; };
 		FC1798021A6CB25900C04D1F /* DeviceManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceManagerController.h; sourceTree = "<group>"; };
 		FC1798031A6CB25900C04D1F /* DeviceManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceManagerController.m; sourceTree = "<group>"; };
 		FC1AE5801A5FCF1700CD5611 /* HttpMsgCtrl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpMsgCtrl.h; sourceTree = "<group>"; };
@@ -450,6 +452,7 @@
 		1849C8581A7E3B1D00CA5E37 /* Button */ = {
 			isa = PBXGroup;
 			children = (
+				FC178F581A85A8A600F34D92 /* menu_click_@2x.png */,
 				FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */,
 				1849C8631A7E3F9300CA5E37 /* button_UCON_my@2x.png */,
 				1849C85D1A7E3C6D00CA5E37 /* button_510x80_click@2x.png */,
@@ -1110,6 +1113,7 @@
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
 				FC82CCE11A84F81500012F7D /* icon_NetworkBox@2x.png in Resources */,
 				1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */,
+				FC178F591A85A8A600F34D92 /* menu_click_@2x.png in Resources */,
 				1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */,
 				FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */,
 				FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */,

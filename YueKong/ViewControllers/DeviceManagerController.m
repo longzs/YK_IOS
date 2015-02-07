@@ -32,8 +32,10 @@
 @property(nonatomic, weak)IBOutlet UILabel  *labOperationTip;
 
 @property(nonatomic, strong)NSMutableArray* aryRCCategories;
+@property(nonatomic, strong)NSMutableArray* aryRCOrderTime;
 
 -(IBAction)clickShowBind:(id)sender;
+
 @end
 
 @implementation DeviceManagerController
@@ -48,6 +50,8 @@
     YKRemoteControlCategory* addCategory = [[YKRemoteControlCategory alloc] init];
     addCategory.idNo = [NSString stringWithFormat:@"%d", HAType_Add];
     self.aryRCCategories = [NSMutableArray arrayWithObject:addCategory];
+    
+    self.aryRCOrderTime = [NSMutableArray arrayWithObject:@"111"];
     
     self.collectionDevices.backgroundColor = RGB(245, 245, 245);
     self.collectionDevices.alwaysBounceVertical = YES;
@@ -83,7 +87,7 @@
 
 -(void)updateControlState:(BOOL)bRequest{
     
-    if (![[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
+    if ([[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
@@ -96,6 +100,9 @@
         
         if ([self.aryRCCategories count] <= 1) {
             [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
+        }
+        else{
+            [self.collectionDevices reloadData];
         }
     }
     else{
@@ -231,7 +238,6 @@
                 
                 [self.aryRCCategories insertObject:dm atIndex:0];
             }
-            [self.collectionDevices reloadData];
         }
     }
     else
@@ -251,6 +257,7 @@
         }
         [Utils showSimpleAlert:strError];
     }
+    [self.collectionDevices reloadData];
 }
 
 #pragma mark - httpResponse
@@ -288,13 +295,19 @@
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.aryRCCategories.count;
+    if (0 == section) {
+        return 8;//self.aryRCCategories.count;
+    }
+    else{
+        return self.aryRCOrderTime.count;
+    }
 }
 
 //定义展示的Section的个数
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 1;
+    // 如果有绑定成功的遥控器就显示两个 暂时返回2
+    return 2;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
@@ -332,6 +345,14 @@
     for (UIView* sub in aryViews) {
         [sub removeFromSuperview];
     }
+    cell.selectedBackgroundView = nil;
+    
+//    UIButton* butBG = [UIButton buttonWithType:UIButtonTypeCustom];
+//    butBG.backgroundColor = [UIColor clearColor];
+//    butBG.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
+//    [butBG setBackgroundImage:[UIImage imageNamed:@"menu_click_"] forState:UIControlStateNormal];
+//    [cell.contentView addSubview:butBG];
+    
     UIView* ivLine = [[UIView alloc] initWithFrame:CGRectMake(cellSize.width-1, 0, 1, cellSize.height)];
     ivLine.backgroundColor = RGB(170, 170, 170);
     [cell.contentView addSubview:ivLine];
@@ -344,55 +365,68 @@
     ivLine.backgroundColor = RGB(170, 170, 170);
     [cell.contentView addSubview:ivLine];
     
+    UIImageView *selectView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu_click_"]];
+    selectView.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
+    cell.selectedBackgroundView = selectView;
+    
     if (0 == indexPath.section
-        && self.aryRCCategories.count <= indexPath.row) {
-        return cell;
+        && indexPath.row < self.aryRCCategories.count) {
+        
+        YKRemoteControlCategory* rcc = [self.aryRCCategories objectAtIndex:indexPath.row];
+        NSString* imgName = @"icon_add";
+        CGRect rectImg = CGRectMake((cellSize.width-51)/2, (cellSize.height-35-51)/2, 51, 51);
+        
+        switch ([rcc.idNo intValue]) {
+            case HAType_Add:{
+                rectImg.origin.y = (cellSize.height-51)/2;
+                break;
+            }
+            case HAType_AirConditioner:{
+                imgName = @"icon_AirCondition";
+                break;
+            }
+            case HAType_TV:{
+                imgName = @"icon_TV";
+                break;
+            }
+            case HAType_LanBox:{
+                imgName = @"icon_NetworkBox";
+                break;
+            }
+            case HAType_SetTopBox:{
+                imgName = @"icon_STB";
+                break;
+            }
+            default:
+                break;
+        }
+        
+        UIImageView* ivBG = [[UIImageView alloc] initWithFrame:rectImg];
+        ivBG.image = [UIImage imageNamed:imgName];
+        ivBG.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:ivBG];
+        
+        rectImg = CGRectMake(0, cellSize.height-35, cellSize.width, 20);
+        UILabel *labContent = [[UILabel alloc] initWithFrame:rectImg];
+        labContent.text = rcc.name;
+        labContent.backgroundColor = [UIColor clearColor];
+        labContent.textColor = RGB(100, 100, 100);
+        labContent.textAlignment = NSTextAlignmentCenter;
+        if (HAType_Add != [rcc.idNo intValue]) {
+            [cell.contentView addSubview:labContent];
+        }
+    }
+    else if (1 == indexPath.section
+             && indexPath.row < self.aryRCOrderTime.count){
+        NSString* imgName = @"icon_add";
+        CGRect rectImg = CGRectMake((cellSize.width-51)/2, (cellSize.height-51)/2, 51, 51);
+        
+        UIImageView* ivBG = [[UIImageView alloc] initWithFrame:rectImg];
+        ivBG.image = [UIImage imageNamed:imgName];
+        ivBG.backgroundColor = [UIColor clearColor];
+        [cell.contentView addSubview:ivBG];
     }
     
-    YKRemoteControlCategory* rcc = [self.aryRCCategories objectAtIndex:indexPath.row];
-    
-    NSString* imgName = @"icon_add";
-    CGRect rectImg = CGRectMake((cellSize.width-51)/2, (cellSize.height-35-51)/2, 51, 51);
-    
-    switch ([rcc.idNo intValue]) {
-        case HAType_Add:{
-            rectImg.origin.y = (cellSize.height-51)/2;
-            break;
-        }
-        case HAType_AirConditioner:{
-            imgName = @"icon_AirCondition";
-            break;
-        }
-        case HAType_TV:{
-            imgName = @"icon_TV";
-            break;
-        }
-        case HAType_LanBox:{
-            imgName = @"icon_NetworkBox";
-            break;
-        }
-        case HAType_SetTopBox:{
-            imgName = @"icon_STB";
-            break;
-        }
-        default:
-            break;
-    }
-    
-    UIImageView* ivBG = [[UIImageView alloc] initWithFrame:rectImg];
-    ivBG.image = [UIImage imageNamed:imgName];
-    ivBG.backgroundColor = [UIColor clearColor];
-    [cell.contentView addSubview:ivBG];
-    
-    rectImg = CGRectMake(0, cellSize.height-35, cellSize.width, 20);
-    UILabel *labContent = [[UILabel alloc] initWithFrame:rectImg];
-    labContent.text = rcc.name;
-    labContent.backgroundColor = [UIColor clearColor];
-    labContent.textColor = RGB(100, 100, 100);
-    labContent.textAlignment = NSTextAlignmentCenter;
-    if (HAType_Add != [rcc.idNo intValue]) {
-        [cell.contentView addSubview:labContent];
-    }
     return cell;
 }
 
@@ -420,17 +454,17 @@
 {
     //UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     //cell.backgroundColor = [UIColor whiteColor];
+    [collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
     if (0 == indexPath.section
         && self.aryRCCategories.count <= indexPath.row) {
         return;
     }
     YKRemoteControlCategory* rcc = [self.aryRCCategories objectAtIndex:indexPath.row];
     if (HAType_Add == rcc.idNo.intValue) {
-        
+        RemoteControlViewController* vc = [RemoteControlViewController instantiateFromMainStoryboard];
+        vc.rcCategoryID = rcc.idNo;
+        [self.navigationController pushViewController:vc animated:YES];
     }
-    RemoteControlViewController* vc = [RemoteControlViewController instantiateFromMainStoryboard];
-    vc.rcCategoryID = rcc.idNo;
-    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //返回这个UICollectionView是否可以被选择
@@ -439,4 +473,8 @@
     return YES;
 }
 
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldDeselectItemAtIndexPath:(NSIndexPath *)indexPath;{
+    
+    return YES;
+}
 @end
