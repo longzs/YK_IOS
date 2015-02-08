@@ -11,6 +11,7 @@
 #import "Reachability.h"
 #import "NetWorkDetails.h"
 #import "RemoteControlViewController.h"
+#import "JSONKit.h"
 
 typedef enum wifiStatus_{
     wifiStatus_OK = 0, //
@@ -25,6 +26,8 @@ typedef enum wifiStatus_{
     
     // 检查是否绑定成功次数  最大请求10次；
     NSInteger uReqCheckBindNumber;
+    
+    int Mode;       // 网络连接类型
 }
 
 @property(weak, nonatomic)IBOutlet UITextField* tfSSID;
@@ -35,6 +38,10 @@ typedef enum wifiStatus_{
 @property(weak, nonatomic)IBOutlet UIButton* btnRecordWifi;
 
 @property(nonatomic, strong)NSString* strCurrentSSID;
+
+@property(nonatomic, strong)NSString* security;
+
+@property(nonatomic, strong)NSString* channel;
 
 @property(nonatomic, assign)wifiStatus wifiStatu;
 
@@ -93,7 +100,7 @@ typedef enum wifiStatus_{
     switch (self.wifiStatu) {
         case wifiStatus_OK:
         {
-            [self bindYKDevice];
+            [self isYkDevice];
         }
             break;
         case wifiStatus_NoHomeSSID:
@@ -134,6 +141,11 @@ typedef enum wifiStatus_{
 }
 
 -(void)checkCurrentSSID{
+    Mode = 0;
+    if (![SSIDManager isWiFiReachable]) {
+        Mode = -1;
+        [self showMessage:MARVELL_NO_NETWORK_IPHONE withTag:70 withTarget:nil];
+    }
     NSString* strSSID = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserSSID];
     NSString    *wifiPWD = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
     self.strCurrentSSID = [[SSIDManager sharedInstance] currentWifiSSID];
@@ -160,8 +172,8 @@ typedef enum wifiStatus_{
     }
     else if(![self.strCurrentSSID isEqualToString:MARVELL_NETWORK_NAME]){
         
-        self.tfSSID.text = strSSID;
-        self.tfSSIDPWD.text = wifiPWD;
+        self.tfSSID.text = self.strCurrentSSID;
+        self.tfSSIDPWD.text = @"";//wifiPWD;
         [self showMessage:[NSString stringWithFormat:@"请将手机连接至悦控的wifi %@", MARVELL_NETWORK_NAME] withTag:12 withTarget:nil];
         self.wifiStatu = wifiStatus_IsNotYKSSID;
     }
@@ -238,7 +250,7 @@ typedef enum wifiStatus_{
 {
     if ([SSIDManager isWiFiReachable])
     {
-        [self bindYKDevice];
+        [self isYkDevice];
     }
     else
     {
@@ -327,52 +339,129 @@ typedef enum wifiStatus_{
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     
-    NSMutableDictionary* dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-    dicBody[@"ssid"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserSSID];
-    dicBody[@"key"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
-    dicBody[@"security"] = @"";
-    dicBody[@"channel"] = @"";
-    dicBody[@"ip"] = @"";
-    NSString* pid = [OpenUDID value];
-    NSLog(@"pid = %@", pid);
-    dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
-    
     MsgSent *sent = [[MsgSent alloc] init];
     [sent setMethod_Req:requestURL];
     [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:self];
     [sent setCmdCode_:CC_IsYKDecive];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
-    [sent setTimeout_:5];
     [sent setDicHeader:header];
-    [sent setPostData:[dicBody JSONData]];
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
+}
+
+-(void)processIsYkDevice:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSDictionary *JSONValue =  [reciveData.responseJsonString mutableObjectFromJSONStringWithParseOptions:JKParseOptionValidFlags];
+       
+        DLog(@"startProvisioning::Output:%@",JSONValue);
+        
+        int configured = [[[[JSONValue objectForKey:@"connection"] objectForKey:@"station"] objectForKey:@"configured"] intValue];
+        int Status =[[[[JSONValue objectForKey:@"connection"] objectForKey:@"station"] objectForKey:@"status"] intValue];
+        
+        NSString *pdsn = [[JSONValue objectForKey:@"connection"] objectForKey:@"pdsn"];
+        if ([pdsn isKindOfClass:[NSString class]]
+            && 5 < pdsn.length) {
+            [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:pdsn];
+        }
+        if (Mode==-1)
+        {
+//            SetBSSID([[[JSONValue objectForKey:@"connection"] objectForKey:@"uap"] objectForKey:@"bssid"]);
+//            NSLog(@"bssid %@",GetBSSID);
+        }
+        if (configured == 1 && Status == 2)
+        {
+            [self showMessage:MARVELL_PROVISIONED withTitle:@""];//@"Device is already provisioned Please connect to another device"
+//            ScanViewController *scanViewController = [[ScanViewController alloc]initWithNibName:@"ScanView" bundle:Nil];
+//            [self.navigationController pushViewController:scanViewController animated:YES];
+        }
+        else if (configured == 0)
+        {
+            if (Mode ==0)
+            {
+                self.security = [[[JSONValue objectForKey:@"connection"] objectForKey:@"uap"] objectForKey:@"security"];
+                self.channel = [[[JSONValue objectForKey:@"connection"] objectForKey:@"uap"] objectForKey:@"channel"];
+                [self bindYKDevice];
+            }
+            else if(Mode != -1)
+            {
+//                txtPassword.text = @"";
+//                sleep(3);
+//                CGRect frame = self.popViewSecurity.frame;
+//                frame.size.height = 0;
+//                self.popViewSecurity.frame = frame;
+//                self.viewPassphrase.hidden = YES;
+//                frame = self.imgViewPassword.frame;
+//                self.btnProvision.frame = frame;
+//                
+//                [self.btnNetwork setTitle:@"Choose Network" forState:UIControlStateNormal];
+//                [self showMessage:MARVELL_RESET];//@"Reset to provisioning successful"
+//                self.btnProvision.enabled = NO;
+//                TimerCount=0;
+            }
+            
+        }
+        else if ((configured == 1 && Status == 1) || (configured == 1 && Status == 0))
+        {
+            //Device is already configured\n Do you want to proceed?
+//            alertVw = [[UIAlertView alloc]initWithTitle:@"" message:@"Device is trying to connect \n Do you want to Reset to provisioning or continue attempts?" delegate:self cancelButtonTitle:nil otherButtonTitles:nil, nil];
+//            [alertVw addButtonWithTitle:@"Reset"];
+//            [alertVw addButtonWithTitle:@"Continue"];
+//            alertVw.tag = 10;
+//            [alertVw show];
+//            [alertVw release];
+            //[self showMessage:@"Device is already configured"];
+        }
+        else
+        {
+            NSString *status = [[JSONValue objectForKey:@"prov"] objectForKey:@"types"] ;
+            NSLog(@"prov->types  status:%@",status);
+            
+            if([status isEqualToString:@"no \"marvell\""])
+            {
+                [self showMessage:@"Not a valid device, try WPS"];
+            }
+            else
+            {
+                [self showMessage:@"Not a valid device"];
+            }
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得wifi连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    bLoading = NO;
 }
 
 -(int)bindYKDevice{
     
-    [self showLoadingWithTip:@"正在绑定悦控基座"];
+    [self showLoadingWithTip:@"正在配置悦控基座"];
     bLoading = YES;
-    NSString *requestURL = [NSString stringWithFormat:@"%@%@",LOCAL_URL,@""];
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@",LOCAL_URL,@"network"];
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     
-    /*1.手机 APP 向设备（基座）发送信息，参数如下：
-     ssid：wifi 名称 String
-     key：wifi 密码 String
-     security:加密方式
-     channel:
-     ip:内网 IP
-     pid：手机设备号 String
-     设备返回：
-     pdsn
-     */
     NSMutableDictionary* dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
     dicBody[@"ssid"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserSSID];
     dicBody[@"key"] = [[EHUserDefaultManager sharedInstance] getValueFromDefault:k_UserWIFIPWD];
-    dicBody[@"security"] = @"";
-    dicBody[@"channel"] = @"";
-    dicBody[@"ip"] = @"";
+    dicBody[@"security"] = RPLACE_EMPTY_STRING(self.security);
+    dicBody[@"channel"] = RPLACE_EMPTY_STRING(self.channel);
+    dicBody[@"ip"] = @"1";
     NSString* pid = [OpenUDID value];
     NSLog(@"pid = %@", pid);
     dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
@@ -383,7 +472,6 @@ typedef enum wifiStatus_{
     [sent setDelegate_:self];
     [sent setCmdCode_:CC_BindYKDecive];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
-    [sent setTimeout_:5];
     [sent setDicHeader:header];
     [sent setPostData:[dicBody JSONData]];
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
@@ -393,17 +481,27 @@ typedef enum wifiStatus_{
     
     if ([reciveData isRequestSuccess])
     {
-        NSDictionary *jsonData = [reciveData responsdData];
-        NSString* strPdsn = [jsonData objectForKey:@"pdsn"];
-        if (strPdsn.length) {
-            [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
-            
+        NSDictionary *JSONValue =  [reciveData.responseJsonString mutableObjectFromJSONStringWithParseOptions:JKParseOptionValidFlags];
+        NSString *strValue = [JSONValue objectForKey:@"success"];
+        
+        if(strValue)
+        {
+//            [self ShowProgressView:@"Confirming network configuration..."];
+//            timer=  [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:           @selector(startProvisioning) userInfo:nil repeats:YES];
             // 提示设备连接成功，并且切回原有wifi
             [self showMessage:@"请切回原有wifi查询是否绑定成功" withTitle:@"连接悦控基座成功"];
-//            //s开始轮询 向云端发起请求来判断设备是否绑定成功
-//            [self showLoadingWithTip:@"正在查询绑定是否成功"];
-//            bLoading = YES;
-//            [self performSelector:@selector(checkIsBindYKSuccess) withObject:nil afterDelay:0.1];
+        }
+        else
+        {
+            strValue = [JSONValue objectForKey:@"error"];
+            if (strValue)
+            {
+                [self showMessage:strValue];
+            }
+            else
+            {
+                [self showMessage:MARVELL_INCORRECT_DATA];
+            }
         }
     }
     else
@@ -489,6 +587,11 @@ typedef enum wifiStatus_{
         case CC_CheckYKBindSuccess:
         {
             [self processIsBindYKSuccess:ReciveMsg];
+            break;
+        }
+        case CC_IsYKDecive:
+        {
+            [self processIsYkDevice:ReciveMsg];
             break;
         }
         default:

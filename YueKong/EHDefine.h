@@ -284,7 +284,7 @@ typedef enum HouseholdAppliancesType_{
 #define  MARVELL_NETWORK_NOT_FOUND_MSG @"Network not found"
 
 /* alert messages handling validations */
-#define  MARVELL_NO_NETWORK_IPHONE @"Please connect your iPhone to the WiFi network wmdemo-xxxx"
+#define  MARVELL_NO_NETWORK_IPHONE @"请将手机连接至可用wifi wmdemo-xxxx"
 #define  MARVELL_NO_NETWORK_IPOD @"Please connect your iPod to the WiFi network wmdemo-xxxx"
 #define  MARVELL_NO_NETWORK_IPAD @"Please connect your iPad to the WiFi network wmdemo-xxxx"
 #define  MARVELL_BSSIDNOT_MATCH @"The device has been successfully configured with provided settings. Please check the indicators on the device for the connectivity status"
