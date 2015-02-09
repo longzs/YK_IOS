@@ -12,6 +12,7 @@
 #import "ViewController.h"
 #import "HouseholdAppliancesCell.h"
 #import "DeviceManagerCollectionHeaderView.h"
+#import "YKButtonPopoverView.h"
 
 #define kCollectionCellApplinceSize CGSizeMake(self.view.frame.size.width/4.0, 100)
 
@@ -135,9 +136,17 @@
 */
 
 -(IBAction)clickShowBind:(id)sender{
+
+    NSArray *imageArray = @[[UIImage imageNamed:@"icon_search.png"],[UIImage imageNamed:@"icon_ShortcutKeys.png"],[UIImage imageNamed:@"icon_delete.png"]];
+    YKButtonPopoverView *view = [[YKButtonPopoverView alloc] initWithTitleArray:@[@"查看",@"快捷键设置",@"删除"] imageArray:imageArray];
+    [view setSelectIndexBlock:^(NSInteger selectIndex) {
+        DLog(@"click%d",selectIndex);
+    }];
+    [view show];
+    return;
     ViewController *vc = [ViewController instantiateFromMainStoryboard];
     [self.navigationController pushViewController:vc animated:YES];
-}
+}0
 
 #pragma mark - Request & Process
 -(void)processIsBindYKSuccess:(MsgSent*)reciveData{
