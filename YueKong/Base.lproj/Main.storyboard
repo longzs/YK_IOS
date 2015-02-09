@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEG-we-H3s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEG-we-H3s">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
     </dependencies>
     <scenes>
         <!--Root View Controller-->
@@ -32,7 +32,7 @@
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7pe-pg-95m">
@@ -127,7 +127,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CeS-Y3-gYC">
-                                <rect key="frame" x="33" y="356" width="255" height="40"/>
+                                <rect key="frame" x="33" y="455" width="255" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="WaM-o9-gBc"/>
@@ -144,7 +144,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hKg-Th-4Sh">
-                                <rect key="frame" x="33" y="310" width="255" height="40"/>
+                                <rect key="frame" x="33" y="395" width="255" height="40"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="255" id="4Kv-z7-q4l"/>
@@ -161,7 +161,7 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_equipment.png" translatesAutoresizingMaskIntoConstraints="NO" id="r08-du-itL">
-                                <rect key="frame" x="46" y="145" width="228" height="180"/>
+                                <rect key="frame" x="46" y="182" width="228" height="180"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="228" id="BFr-k9-qcd"/>
                                     <constraint firstAttribute="height" constant="180" id="Hui-Uh-rFK"/>
@@ -176,15 +176,15 @@
                             <constraint firstAttribute="centerX" secondItem="hKg-Th-4Sh" secondAttribute="centerX" id="771-Xt-Qyh"/>
                             <constraint firstAttribute="centerX" secondItem="r08-du-itL" secondAttribute="centerX" id="JVn-FG-36P"/>
                             <constraint firstItem="7pe-pg-95m" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="OqG-Kp-9rB"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CeS-Y3-gYC" secondAttribute="bottom" constant="20" id="UXv-nc-xIu"/>
-                            <constraint firstItem="CeS-Y3-gYC" firstAttribute="top" secondItem="hKg-Th-4Sh" secondAttribute="bottom" constant="6" id="aRr-Fq-jiR"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="CeS-Y3-gYC" secondAttribute="bottom" constant="9" id="UXv-nc-xIu"/>
+                            <constraint firstItem="CeS-Y3-gYC" firstAttribute="top" secondItem="hKg-Th-4Sh" secondAttribute="bottom" constant="20" id="aRr-Fq-jiR"/>
                             <constraint firstAttribute="trailing" secondItem="7pe-pg-95m" secondAttribute="trailing" id="eAZ-Rd-TWT"/>
                             <constraint firstItem="CeS-Y3-gYC" firstAttribute="top" secondItem="r08-du-itL" secondAttribute="bottom" priority="750" constant="93" id="g4c-ya-AMj"/>
                             <constraint firstItem="7pe-pg-95m" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="vYv-wR-uiq"/>
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnBind" destination="CeS-Y3-gYC" id="i2F-qn-22a"/>
                         <outlet property="btnRecordWifi" destination="hKg-Th-4Sh" id="x91-GU-kNu"/>

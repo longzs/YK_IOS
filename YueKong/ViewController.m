@@ -12,6 +12,7 @@
 #import "NetWorkDetails.h"
 #import "RemoteControlViewController.h"
 #import "JSONKit.h"
+#import "HomeAppliancesManager.h"
 
 typedef enum wifiStatus_{
     wifiStatus_OK = 0, //
@@ -486,10 +487,10 @@ typedef enum wifiStatus_{
         
         if(strValue)
         {
-//            [self ShowProgressView:@"Confirming network configuration..."];
-//            timer=  [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:           @selector(startProvisioning) userInfo:nil repeats:YES];
             // 提示设备连接成功，并且切回原有wifi
-            [self showMessage:@"请切回原有wifi查询是否绑定成功" withTitle:@"连接悦控基座成功"];
+            //[self showMessage:@"请切回原有wifi查询是否绑定成功" withTitle:@"连接悦控基座成功"];
+            [self showLoadingWithTip:@"正在检查悦控基座是否绑定成功，请稍等 ^_^"];
+            [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:self];
         }
         else
         {
@@ -524,34 +525,55 @@ typedef enum wifiStatus_{
     bLoading = NO;
 }
 
+-(int)checkYKIsBindSuccess{
+    
+    [self showLoadingWithTip:@"正在检查悦控基座是否绑定成功，请稍等 ^_^"];
+    return [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:self];
+}
+
 -(void)processIsBindYKSuccess:(MsgSent*)reciveData{
     
     BOOL bOk = NO;
+    HomeAppliancesManager* ham = [HomeAppliancesManager sharedInstance];
     if ([reciveData isRequestSuccess])
     {
         NSDictionary *jsonData = [reciveData responsdData];
         NSString* strPdsn = [jsonData objectForKey:@"pdsn"];
-        NSString* strIp = [jsonData objectForKey:@"ip"];
+        NSString* strIp = [jsonData objectForKey:@"ip_address"];
         if (strPdsn.length
             && strIp.length) {
+            // 请求成功
+            [NSObject cancelPreviousPerformRequestsWithTarget:ham];
+            
+            if (nil == [[EHUserDefaultManager sharedInstance] getCurrentDevice]) {
+                UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
+                                                                message:@"绑定成功"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"继续添加遥控器"
+                                                      otherButtonTitles:@"先看看",nil];
+                [alert setTag:18];
+                [alert show];
+            }
             bOk = YES;
             // 更新最后一次保存的pdsn
             [[EHUserDefaultManager sharedInstance] updatelastLastPdsn:strPdsn];
             // 记录内网yk ip
             [NetControl shareInstance].strIP = strIp;
             
-            UIAlertView * alert =[[UIAlertView alloc] initWithTitle:@""
-                                                            message:@"绑定成功"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"继续添加遥控器"
-                                                  otherButtonTitles:@"先看看",nil];
-            [alert setTag:18];
-            [alert show];
+            YKDeviceModel *dm = [[YKDeviceModel alloc] init];
+            dm.pdsn = strPdsn;
+            dm.ip_address = strIp;
+            dm.name = jsonData[@"name"];
+            dm.status = [NSString stringWithFormat:@"%d", [jsonData[@"status"] intValue]];
+            dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
+            dm.create_time = jsonData[@"create_time"];
+            [[EHUserDefaultManager sharedInstance] updateCurrentDevice:dm];
+            //[dm release];
         }
     }
     else
     {   //对于HTTP请求返回的错误,暂时不展开处理
-        NSString* strError = @"请检查您得wifi连接是否正常";
+        NSString* strError = @"请检查您得网络连接是否正常";
         if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
         {
             strError = @"请求超时";
@@ -564,8 +586,24 @@ typedef enum wifiStatus_{
         {
             
         }
-        bOk = YES;
-        [Utils showSimpleAlert:strError];
+//        [NSObject cancelPreviousPerformRequestsWithTarget:ham];
+//        bOk = YES;
+//        [Utils showSimpleAlert:strError];
+    }
+    // 请求10次，每次相隔1秒
+    if (bOk) {
+        uReqCheckBindNumber = 0;
+        [self hideLoading];
+    }
+    else{
+        if (uReqCheckBindNumber < 10) {
+            uReqCheckBindNumber ++;
+            [ham performSelector:@selector(checkIsBindYKSuccess:) withObject:self afterDelay:1];
+        }
+        else{
+            [self hideLoading];
+            [Utils showSimpleAlert:@"请求超时, 请重新在查询"];
+        }
     }
 }
 
@@ -576,7 +614,10 @@ typedef enum wifiStatus_{
     NSString *responseString = [[NSString alloc] initWithData:ReciveMsg.recData_ encoding:NSUTF8StringEncoding];
     NSLog(@"id = %d, httpRsp = %d\nReciveHttpMsg = \n%@,",  ReciveMsg.cmdCode_ , ReciveMsg.httpRsp_,responseString);
 #endif
-    [self hideLoading];
+    
+    if (CC_CheckYKBindSuccess != ReciveMsg.cmdCode_) {
+       [self hideLoading];
+    }
     switch (ReciveMsg.cmdCode_)
     {
         case CC_BindYKDecive:
