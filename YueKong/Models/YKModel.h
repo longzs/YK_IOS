@@ -47,5 +47,5 @@
 @end
 
 @interface YKModel : NSObject
-
+@property(nonatomic, assign)BOOL bSelect;
 @end

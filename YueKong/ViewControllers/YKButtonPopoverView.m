@@ -180,6 +180,7 @@
     if (self.selectIndexBlock) {
         self.selectIndexBlock(index);
     }
+    [self dismiss];
 }
 
 @end

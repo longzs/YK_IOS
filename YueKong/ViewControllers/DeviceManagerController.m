@@ -88,7 +88,7 @@
 
 -(void)updateControlState:(BOOL)bRequest{
     
-    if ([[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
+    if (![[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
@@ -137,16 +137,9 @@
 
 -(IBAction)clickShowBind:(id)sender{
 
-    NSArray *imageArray = @[[UIImage imageNamed:@"icon_search.png"],[UIImage imageNamed:@"icon_ShortcutKeys.png"],[UIImage imageNamed:@"icon_delete.png"]];
-    YKButtonPopoverView *view = [[YKButtonPopoverView alloc] initWithTitleArray:@[@"查看",@"快捷键设置",@"删除"] imageArray:imageArray];
-    [view setSelectIndexBlock:^(NSInteger selectIndex) {
-        DLog(@"click%d",selectIndex);
-    }];
-    [view show];
-    return;
     ViewController *vc = [ViewController instantiateFromMainStoryboard];
     [self.navigationController pushViewController:vc animated:YES];
-}0
+}
 
 #pragma mark - Request & Process
 -(void)processIsBindYKSuccess:(MsgSent*)reciveData{
@@ -356,12 +349,6 @@
     }
     cell.selectedBackgroundView = nil;
     
-//    UIButton* butBG = [UIButton buttonWithType:UIButtonTypeCustom];
-//    butBG.backgroundColor = [UIColor clearColor];
-//    butBG.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
-//    [butBG setBackgroundImage:[UIImage imageNamed:@"menu_click_"] forState:UIControlStateNormal];
-//    [cell.contentView addSubview:butBG];
-    
     UIView* ivLine = [[UIView alloc] initWithFrame:CGRectMake(cellSize.width-1, 0, 1, cellSize.height)];
     ivLine.backgroundColor = RGB(170, 170, 170);
     [cell.contentView addSubview:ivLine];
@@ -375,8 +362,9 @@
     [cell.contentView addSubview:ivLine];
     
     UIImageView *selectView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu_click_"]];
-    selectView.frame = CGRectMake(0, 0, cellSize.width, cellSize.height);
-    cell.selectedBackgroundView = selectView;
+    selectView.backgroundColor = [UIColor clearColor];
+    selectView.frame = CGRectMake(-1, -1, cellSize.width, cellSize.height);
+    //cell.selectedBackgroundView = selectView;
     
     if (0 == indexPath.section
         && indexPath.row < self.aryRCCategories.count) {
@@ -424,6 +412,9 @@
         if (HAType_Add != [rcc.idNo intValue]) {
             [cell.contentView addSubview:labContent];
         }
+        if (rcc.bSelect) {
+            [cell.contentView addSubview:selectView];
+        }
     }
     else if (1 == indexPath.section
              && indexPath.row < self.aryRCOrderTime.count){
@@ -463,17 +454,31 @@
 {
     //UICollectionViewCell * cell = (UICollectionViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
     //cell.backgroundColor = [UIColor whiteColor];
+    
+    if ((0 == indexPath.section && indexPath.row < self.aryRCCategories.count)) {
+        for (YKRemoteControlCategory* rcc in self.aryRCCategories) {
+            rcc.bSelect = NO;
+        }
+        YKRemoteControlCategory* rcc = [self.aryRCCategories objectAtIndex:indexPath.row];
+        if (HAType_Add == rcc.idNo.intValue) {
+            RemoteControlViewController* vc = [RemoteControlViewController instantiateFromMainStoryboard];
+            vc.rcCategoryID = [rcc.idNo intValue];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+            rcc.bSelect = YES;
+            NSArray *imageArray = @[[UIImage imageNamed:@"icon_search.png"],[UIImage imageNamed:@"icon_ShortcutKeys.png"],[UIImage imageNamed:@"icon_delete.png"]];
+            YKButtonPopoverView *view = [[YKButtonPopoverView alloc] initWithTitleArray:@[@"查看",@"快捷键设置",@"删除"] imageArray:imageArray];
+            [view setSelectIndexBlock:^(NSInteger selectIndex) {
+                
+            }];
+            [view show];
+        }
+    }
+    else if(1 == indexPath.section){
+        
+    }
     [collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
-    if (0 == indexPath.section
-        && self.aryRCCategories.count <= indexPath.row) {
-        return;
-    }
-    YKRemoteControlCategory* rcc = [self.aryRCCategories objectAtIndex:indexPath.row];
-    if (HAType_Add == rcc.idNo.intValue) {
-        RemoteControlViewController* vc = [RemoteControlViewController instantiateFromMainStoryboard];
-        vc.rcCategoryID = rcc.idNo;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
 }
 
 //返回这个UICollectionView是否可以被选择

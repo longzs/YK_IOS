@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface RemoteControlViewController : BaseViewController
-@property(nonatomic, strong)NSString *rcCategoryID;
+@property(nonatomic, assign)HouseholdAppliancesType rcCategoryID;
 @end

@@ -11,5 +11,6 @@
 @interface DeviceSelectCollectionCell : UICollectionViewCell
 
 @property (nonatomic, copy) NSString *textOfCell;
+@property (nonatomic, assign) BOOL showSelected;
 
 @end
