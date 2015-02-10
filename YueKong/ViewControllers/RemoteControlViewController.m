@@ -237,15 +237,46 @@ typedef enum stageType_{
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    self.currentStage += 1;
+    YKModel* ykm = nil;
+    switch (_currentStage) {
+        case StageType_Category:
+        {
+            if (indexPath.row < self.aryCategorys.count) {
+                if (HAType_SetTopBox == _rcCategoryID) {
+                    //
+                }
+                else{
+                    ykm = [self.aryCategorys objectAtIndex:indexPath.row];
+                    [[HomeAppliancesManager sharedInstance] GetBrand:[NSMutableDictionary dictionaryWithObject:((YKRemoteControlCategory*)ykm).idNo forKey:@"category_id"]
+                                                responseDelegate:self];
+                }
+            }
+            break;
+        }
+        case StageType_Brands:
+        {
+            if (indexPath.row < self.aryBrands.count) {
+                ykm = [self.aryBrands objectAtIndex:indexPath.row];
+            }
+            break;
+        }
+        case StageType_City:
+        {
+            if (indexPath.row < self.aryCitys.count) {
+                ykm = [self.aryCitys objectAtIndex:indexPath.row];
+            }
+            break;
+        }
+        case StageType_Bind:
+        {
+            break;
+        }
+        default:
+            break;
+    }
     
-    if (self.currentStage > 2) {
-        self.currentStage = 2;
-    }
-    else {
-        _lblStage.text = [NSString stringWithFormat:@"第%d步",(int)_currentStage+1];
-        //[self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
-    }
+    _lblStage.text = [NSString stringWithFormat:@"第%d步",(int)_currentStage];
+    [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
 }
 
 //返回这个UICollectionView是否可以被选择

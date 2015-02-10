@@ -88,7 +88,7 @@
 
 -(void)updateControlState:(BOOL)bRequest{
     
-    if (![[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
+    if ([[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
@@ -364,7 +364,7 @@
     UIImageView *selectView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu_click_"]];
     selectView.backgroundColor = [UIColor clearColor];
     selectView.frame = CGRectMake(-1, -1, cellSize.width, cellSize.height);
-    //cell.selectedBackgroundView = selectView;
+    cell.selectedBackgroundView = selectView;
     
     if (0 == indexPath.section
         && indexPath.row < self.aryRCCategories.count) {
