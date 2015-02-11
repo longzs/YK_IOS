@@ -9,6 +9,7 @@
 #import "RemoteControlViewController.h"
 #import "DeviceSelectCollectionCell.h"
 #import "HomeAppliancesManager.h"
+#import "ConfigFinishViewController.h"
 
 typedef enum stageType_{
     StageType_Category = 1,
@@ -59,6 +60,10 @@ typedef enum stageType_{
     [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -73,15 +78,32 @@ typedef enum stageType_{
 
 #pragma mark - clickEvents
 -(IBAction)clickCategory:(id)sender{
-    
+    _currentStage = StageType_Category;
+    [self.collectionView reloadData];
 }
 
 -(IBAction)clickBrandOrCity:(id)sender{
+    if (0 == self.aryCategorys.count) {
+        return;
+    }
     
+    if (HAType_SetTopBox == _rcCategoryID) {
+        
+        //[[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
+        _currentStage = StageType_City;
+    }
+    else{
+        
+//        [[HomeAppliancesManager sharedInstance] GetBrand:[NSMutableDictionary dictionaryWithObject:((YKRemoteControlCategory*)ykm).idNo forKey:@"category_id"]
+//                                        responseDelegate:self];
+        _currentStage = StageType_Brands;
+    }
+    [self.collectionView reloadData];
 }
 
 -(IBAction)clickBind:(id)sender{
-    
+    ConfigFinishViewController* vc = [ConfigFinishViewController instantiateFromMainStoryboard];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Request & Process
@@ -374,8 +396,8 @@ typedef enum stageType_{
             if (indexPath.row < self.aryCategorys.count) {
                 ykm = [self.aryCategorys objectAtIndex:indexPath.row];
                 ykm.bSelect = YES;
-                
-                if (HAType_SetTopBox == ((YKRemoteControlCategory*)ykm).idNo.intValue) {
+                _rcCategoryID = ((YKRemoteControlCategory*)ykm).idNo.intValue;
+                if (HAType_SetTopBox == _rcCategoryID) {
                     
                     [[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
                     
@@ -396,7 +418,7 @@ typedef enum stageType_{
             if (indexPath.row < self.aryBrands.count) {
                 ykm = [self.aryBrands objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
-                //_currentStage = StageType_Bind;
+                _currentStage = StageType_Bind;
             }
             
             break;
@@ -406,7 +428,7 @@ typedef enum stageType_{
             if (indexPath.row < self.aryCitys.count) {
                 ykm = [self.aryCitys objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
-                //_currentStage = StageType_Bind;
+                _currentStage = StageType_Bind;
             }
             break;
         }
@@ -417,9 +439,8 @@ typedef enum stageType_{
         default:
             break;
     }
-    NSInteger pageNum = _currentStage;
-    if (StageType_Brands < pageNum) {
-        --pageNum;
+    if (StageType_Bind == _currentStage) {
+        
     }
     [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
 }

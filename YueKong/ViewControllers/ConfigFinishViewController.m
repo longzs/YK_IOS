@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.title = @"配置家电遥控器";
 }
 
 - (void)didReceiveMemoryWarning {
