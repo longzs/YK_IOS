@@ -23,6 +23,7 @@
 		3BC848881A88A652002D0C15 /* icon_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848851A88A652002D0C15 /* icon_delete@2x.png */; };
 		3BC848891A88A652002D0C15 /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848861A88A652002D0C15 /* icon_search@2x.png */; };
 		3BC8488A1A88A652002D0C15 /* icon_ShortcutKeys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848871A88A652002D0C15 /* icon_ShortcutKeys@2x.png */; };
+		3BDC5A1B1A8B3E8900C2813D /* ConfigFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */; };
 		FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9631A5E26BF00748B4E /* absManager.m */; };
 		FC0BA9671A5E26BF00748B4E /* EHUserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9651A5E26BF00748B4E /* EHUserDefaultManager.m */; };
 		FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA96A1A5E303E00748B4E /* EHBaseNavController.m */; };
@@ -177,6 +178,8 @@
 		3BC848851A88A652002D0C15 /* icon_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete@2x.png"; sourceTree = "<group>"; };
 		3BC848861A88A652002D0C15 /* icon_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_search@2x.png"; sourceTree = "<group>"; };
 		3BC848871A88A652002D0C15 /* icon_ShortcutKeys@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ShortcutKeys@2x.png"; sourceTree = "<group>"; };
+		3BDC5A191A8B3E8900C2813D /* ConfigFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFinishViewController.h; sourceTree = "<group>"; };
+		3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFinishViewController.m; sourceTree = "<group>"; };
 		FC0BA9621A5E26BF00748B4E /* absManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = absManager.h; sourceTree = "<group>"; };
 		FC0BA9631A5E26BF00748B4E /* absManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = absManager.m; sourceTree = "<group>"; };
 		FC0BA9641A5E26BF00748B4E /* EHUserDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHUserDefaultManager.h; sourceTree = "<group>"; };
@@ -939,6 +942,8 @@
 				FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */,
 				FC8647101A6D509E000CF612 /* RemoteControlViewController.m */,
 				FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */,
+				3BDC5A191A8B3E8900C2813D /* ConfigFinishViewController.h */,
+				3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1256,6 +1261,7 @@
 				FC1AE5A11A5FCF6A00CD5611 /* ASIHTTPRequest.m in Sources */,
 				FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */,
 				FC147E001A5D1D9600BA06F3 /* ChineseToPinyinResource.m in Sources */,
+				3BDC5A1B1A8B3E8900C2813D /* ConfigFinishViewController.m in Sources */,
 				FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */,
 				FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */,
 				FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */,
