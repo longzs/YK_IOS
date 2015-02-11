@@ -22,7 +22,6 @@ typedef enum stageType_{
 @interface RemoteControlViewController ()<HTTP_MSG_RESPOND>
 
 //ui
-@property (nonatomic, weak) IBOutlet UILabel *lblStage;
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
 
 //目前走到了哪一步
@@ -33,6 +32,9 @@ typedef enum stageType_{
 @property (nonatomic, strong)NSMutableArray* aryBrands;
 @property (nonatomic, strong)NSMutableArray* aryCitys;
 
+-(IBAction)clickCategory:(id)sender;
+-(IBAction)clickBrandOrCity:(id)sender;
+-(IBAction)clickBind:(id)sender;
 @end
 
 @implementation RemoteControlViewController
@@ -41,7 +43,7 @@ typedef enum stageType_{
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"遥控器配置";
-    
+
 //    _aryTest = @[@[@"空调",@"电视机",@"机顶盒",@"冰箱"],
 //                 @[@"小米",@"创维",@"小米",@"索尼",@"松下",@"夏普"],
 //                 @[@"上海",@"北京",@"杭州",@"南京",@"无锡",@"天津"]];
@@ -69,12 +71,28 @@ typedef enum stageType_{
     return rc;
 }
 
+#pragma mark - clickEvents
+-(IBAction)clickCategory:(id)sender{
+    
+}
+
+-(IBAction)clickBrandOrCity:(id)sender{
+    
+}
+
+-(IBAction)clickBind:(id)sender{
+    
+}
+
 #pragma mark - Request & Process
 -(void)processGetCategorys:(MsgSent*)reciveData{
     
     if ([reciveData isRequestSuccess])
     {
         NSArray *jsonDataAry = [reciveData responsdData];
+        if (0 < jsonDataAry.count) {
+            [self.aryCategorys removeAllObjects];
+        }
         if ([jsonDataAry isKindOfClass:[NSArray class]]
             && jsonDataAry.count) {
             
@@ -110,6 +128,94 @@ typedef enum stageType_{
     [self.collectionView reloadData];
 }
 
+-(void)processGetBrands:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSArray *jsonDataAry = [reciveData responsdData];
+        if (0 < jsonDataAry.count) {
+            [self.aryBrands removeAllObjects];
+        }
+        if ([jsonDataAry isKindOfClass:[NSArray class]]
+            && jsonDataAry.count) {
+            
+            for (NSDictionary* jsonData in jsonDataAry) {
+                
+                YKRemoteControlBrand *dm = [[YKRemoteControlBrand alloc] init];
+                dm.name = jsonData[@"name"];
+                dm.category_name = jsonData[@"category_name"];
+                dm.status = [NSString stringWithFormat:@"%d", [jsonData[@"status"] intValue]];
+                dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
+                dm.category_id = [NSString stringWithFormat:@"%d", [jsonData[@"category_id"] intValue]];
+                dm.create_time = jsonData[@"create_time"];
+                
+                [self.aryBrands addObject:dm];
+            }
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    [self.collectionView reloadData];
+}
+
+-(void)processCitesCovered:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSArray *jsonDataAry = [reciveData responsdData];
+        if (0 < jsonDataAry.count) {
+            [self.aryCitys removeAllObjects];
+        }
+        if ([jsonDataAry isKindOfClass:[NSArray class]]
+            && jsonDataAry.count) {
+            
+            for (NSDictionary* jsonData in jsonDataAry) {
+                
+                YKCityModel *dm = [[YKCityModel alloc] init];
+                dm.name = jsonData[@"name"];
+                dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
+                dm.code = jsonData[@"code"];
+                dm.latitide = [NSString stringWithFormat:@"%f", [jsonData[@"latitide"] doubleValue]];
+                dm.longitude = [NSString stringWithFormat:@"%f", [jsonData[@"longitude"] doubleValue]];
+                [self.aryCitys addObject:dm];
+            }
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    [self.collectionView reloadData];
+}
+
 #pragma mark - httpResponse
 -(int)ReciveHttpMsg:(MsgSent*)ReciveMsg{
     
@@ -117,6 +223,7 @@ typedef enum stageType_{
     NSString *responseString = [[NSString alloc] initWithData:ReciveMsg.recData_ encoding:NSUTF8StringEncoding];
     NSLog(@"id = %d, httpRsp = %d\nReciveHttpMsg = \n%@,",  ReciveMsg.cmdCode_ , ReciveMsg.httpRsp_,responseString);
 #endif
+    [self hideLoading];
     
     switch (ReciveMsg.cmdCode_)
     {
@@ -125,8 +232,28 @@ typedef enum stageType_{
             [self processGetCategorys:ReciveMsg];
             break;
         }
+        case CC_GetBrand:
+        {
+            [self processGetBrands:ReciveMsg];
+            break;
+        }
+        case CC_GetCitesCovered:
+        {
+            [self processCitesCovered:ReciveMsg];
+            break;
+        }
+        case CC_GetCityProvinces:
+        {
+            //[self processGetCategorys:ReciveMsg];
+            break;
+        }
+        case CC_GetCitesByProvinces:
+        {
+            //[self processGetCategorys:ReciveMsg];
+            break;
+        }
         default:
-            [self hideLoading];
+            
             break;
     }
     return 0;
@@ -165,6 +292,9 @@ typedef enum stageType_{
         default:
             break;
     }
+    if (0 != ret%4) {
+        ret = (ret/4 + 1)*4;
+    }
     return ret;
 }
 
@@ -180,7 +310,7 @@ typedef enum stageType_{
     static NSString * CellIdentifier = @"DeviceSelectCollectionCell";
     DeviceSelectCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
-    
+    cell.textOfCell = nil;
     YKModel* ykm = nil;
     switch (_currentStage) {
         case StageType_Category:
@@ -242,13 +372,21 @@ typedef enum stageType_{
         case StageType_Category:
         {
             if (indexPath.row < self.aryCategorys.count) {
-                if (HAType_SetTopBox == _rcCategoryID) {
-                    //
+                ykm = [self.aryCategorys objectAtIndex:indexPath.row];
+                ykm.bSelect = YES;
+                
+                if (HAType_SetTopBox == ((YKRemoteControlCategory*)ykm).idNo.intValue) {
+                    
+                    [[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
+                    
+                    _currentStage = StageType_City;
                 }
                 else{
-                    ykm = [self.aryCategorys objectAtIndex:indexPath.row];
+                    
+                    
                     [[HomeAppliancesManager sharedInstance] GetBrand:[NSMutableDictionary dictionaryWithObject:((YKRemoteControlCategory*)ykm).idNo forKey:@"category_id"]
                                                 responseDelegate:self];
+                    _currentStage = StageType_Brands;
                 }
             }
             break;
@@ -257,13 +395,18 @@ typedef enum stageType_{
         {
             if (indexPath.row < self.aryBrands.count) {
                 ykm = [self.aryBrands objectAtIndex:indexPath.row];
+                 ykm.bSelect = YES;
+                //_currentStage = StageType_Bind;
             }
+            
             break;
         }
         case StageType_City:
         {
             if (indexPath.row < self.aryCitys.count) {
                 ykm = [self.aryCitys objectAtIndex:indexPath.row];
+                 ykm.bSelect = YES;
+                //_currentStage = StageType_Bind;
             }
             break;
         }
@@ -274,8 +417,10 @@ typedef enum stageType_{
         default:
             break;
     }
-    
-    _lblStage.text = [NSString stringWithFormat:@"第%d步",(int)_currentStage];
+    NSInteger pageNum = _currentStage;
+    if (StageType_Brands < pageNum) {
+        --pageNum;
+    }
     [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
 }
 
