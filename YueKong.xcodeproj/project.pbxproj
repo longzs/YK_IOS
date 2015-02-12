@@ -120,6 +120,19 @@
 		FC1AE5A11A5FCF6A00CD5611 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5941A5FCF6A00CD5611 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5A21A5FCF6A00CD5611 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE5981A5FCF6A00CD5611 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC1AE5A31A5FCF6A00CD5611 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AE59A1A5FCF6A00CD5611 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FC1B6AE81A8CA6A50053DC22 /* step01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6ADB1A8CA6A50053DC22 /* step01@2x.png */; };
+		FC1B6AE91A8CA6A50053DC22 /* step02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6ADC1A8CA6A50053DC22 /* step02@2x.png */; };
+		FC1B6AEA1A8CA6A50053DC22 /* step03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6ADD1A8CA6A50053DC22 /* step03@2x.png */; };
+		FC1B6AEB1A8CA6A50053DC22 /* step04@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6ADE1A8CA6A50053DC22 /* step04@2x.png */; };
+		FC1B6AEC1A8CA6A50053DC22 /* step05@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6ADF1A8CA6A50053DC22 /* step05@2x.png */; };
+		FC1B6AED1A8CA6A50053DC22 /* step06@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE01A8CA6A50053DC22 /* step06@2x.png */; };
+		FC1B6AEE1A8CA6A50053DC22 /* step07@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE11A8CA6A50053DC22 /* step07@2x.png */; };
+		FC1B6AEF1A8CA6A50053DC22 /* step08@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE21A8CA6A50053DC22 /* step08@2x.png */; };
+		FC1B6AF01A8CA6A50053DC22 /* step09@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE31A8CA6A50053DC22 /* step09@2x.png */; };
+		FC1B6AF11A8CA6A50053DC22 /* step10@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE41A8CA6A50053DC22 /* step10@2x.png */; };
+		FC1B6AF21A8CA6A50053DC22 /* step11@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE51A8CA6A50053DC22 /* step11@2x.png */; };
+		FC1B6AF31A8CA6A50053DC22 /* step12@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE61A8CA6A50053DC22 /* step12@2x.png */; };
+		FC1B6AF41A8CA6A50053DC22 /* step13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE71A8CA6A50053DC22 /* step13@2x.png */; };
 		FC2918651A8359450035961F /* YKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2918641A8359450035961F /* YKModel.m */; };
 		FC2918681A835A490035961F /* YKDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2918671A835A490035961F /* YKDeviceModel.m */; };
 		FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB0F1A62BE8F0032D651 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -371,6 +384,19 @@
 		FC1AE5991A5FCF6A00CD5611 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
 		FC1AE59A1A5FCF6A00CD5611 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
 		FC1AE59B1A5FCF6A00CD5611 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		FC1B6ADB1A8CA6A50053DC22 /* step01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step01@2x.png"; sourceTree = "<group>"; };
+		FC1B6ADC1A8CA6A50053DC22 /* step02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step02@2x.png"; sourceTree = "<group>"; };
+		FC1B6ADD1A8CA6A50053DC22 /* step03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step03@2x.png"; sourceTree = "<group>"; };
+		FC1B6ADE1A8CA6A50053DC22 /* step04@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step04@2x.png"; sourceTree = "<group>"; };
+		FC1B6ADF1A8CA6A50053DC22 /* step05@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step05@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE01A8CA6A50053DC22 /* step06@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step06@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE11A8CA6A50053DC22 /* step07@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step07@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE21A8CA6A50053DC22 /* step08@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step08@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE31A8CA6A50053DC22 /* step09@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step09@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE41A8CA6A50053DC22 /* step10@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step10@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE51A8CA6A50053DC22 /* step11@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step11@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE61A8CA6A50053DC22 /* step12@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step12@2x.png"; sourceTree = "<group>"; };
+		FC1B6AE71A8CA6A50053DC22 /* step13@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "step13@2x.png"; sourceTree = "<group>"; };
 		FC2918631A8359450035961F /* YKModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKModel.h; sourceTree = "<group>"; };
 		FC2918641A8359450035961F /* YKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKModel.m; sourceTree = "<group>"; };
 		FC2918661A835A490035961F /* YKDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDeviceModel.h; sourceTree = "<group>"; };
@@ -987,9 +1013,30 @@
 			path = ASIHttpRequest;
 			sourceTree = "<group>";
 		};
+		FC1B6ADA1A8CA6A50053DC22 /* Bind */ = {
+			isa = PBXGroup;
+			children = (
+				FC1B6ADB1A8CA6A50053DC22 /* step01@2x.png */,
+				FC1B6ADC1A8CA6A50053DC22 /* step02@2x.png */,
+				FC1B6ADD1A8CA6A50053DC22 /* step03@2x.png */,
+				FC1B6ADE1A8CA6A50053DC22 /* step04@2x.png */,
+				FC1B6ADF1A8CA6A50053DC22 /* step05@2x.png */,
+				FC1B6AE01A8CA6A50053DC22 /* step06@2x.png */,
+				FC1B6AE11A8CA6A50053DC22 /* step07@2x.png */,
+				FC1B6AE21A8CA6A50053DC22 /* step08@2x.png */,
+				FC1B6AE31A8CA6A50053DC22 /* step09@2x.png */,
+				FC1B6AE41A8CA6A50053DC22 /* step10@2x.png */,
+				FC1B6AE51A8CA6A50053DC22 /* step11@2x.png */,
+				FC1B6AE61A8CA6A50053DC22 /* step12@2x.png */,
+				FC1B6AE71A8CA6A50053DC22 /* step13@2x.png */,
+			);
+			path = Bind;
+			sourceTree = "<group>";
+		};
 		FC5844A21A7BD6DC0038D681 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				FC1B6ADA1A8CA6A50053DC22 /* Bind */,
 				FC15A1981A7F27C80034F9D3 /* NavBarShadow.png */,
 				186C77EB1A7E6CA8006C5649 /* BG */,
 				1849C8581A7E3B1D00CA5E37 /* Button */,
@@ -1131,6 +1178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC147E0D1A5D1D9600BA06F3 /* sr_refresh.png in Resources */,
+				FC1B6AEA1A8CA6A50053DC22 /* step03@2x.png in Resources */,
 				FC147E0E1A5D1D9600BA06F3 /* sr_refresh@2X.png in Resources */,
 				FC147CD91A5CDB3A00BA06F3 /* Main.storyboard in Resources */,
 				FC177B771A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.xib in Resources */,
@@ -1140,13 +1188,20 @@
 				FC82CCE11A84F81500012F7D /* icon_NetworkBox@2x.png in Resources */,
 				1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */,
 				FC178F591A85A8A600F34D92 /* menu_click_@2x.png in Resources */,
+				FC1B6AEB1A8CA6A50053DC22 /* step04@2x.png in Resources */,
 				1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */,
+				FC1B6AEC1A8CA6A50053DC22 /* step05@2x.png in Resources */,
 				FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */,
 				FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */,
 				3BC848891A88A652002D0C15 /* icon_search@2x.png in Resources */,
+				FC1B6AF01A8CA6A50053DC22 /* step09@2x.png in Resources */,
+				FC1B6AEE1A8CA6A50053DC22 /* step07@2x.png in Resources */,
+				FC1B6AF31A8CA6A50053DC22 /* step12@2x.png in Resources */,
+				FC1B6AF41A8CA6A50053DC22 /* step13@2x.png in Resources */,
 				FC15A19C1A7F662B0034F9D3 /* icon_back_click@2x.png in Resources */,
 				FC82CCE21A84F81500012F7D /* icon_STB@2x.png in Resources */,
 				1849C85F1A7E3C6D00CA5E37 /* button_510x80_click@2x.png in Resources */,
+				FC1B6AE81A8CA6A50053DC22 /* step01@2x.png in Resources */,
 				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
 				FC82CCE01A84F81500012F7D /* icon_AirCondition@2x.png in Resources */,
@@ -1155,12 +1210,17 @@
 				FC8647181A6D57BE000CF612 /* HouseholdAppliancesCell.xib in Resources */,
 				FC147E081A5D1D9600BA06F3 /* RegexKitLite.html in Resources */,
 				186C77ED1A7E6CC3006C5649 /* bg_img@2x.png in Resources */,
+				FC1B6AE91A8CA6A50053DC22 /* step02@2x.png in Resources */,
+				FC1B6AED1A8CA6A50053DC22 /* step06@2x.png in Resources */,
 				FCEFDCD51A83B4F000377F22 /* button_UCON_Bind@2x.png in Resources */,
 				3BC848881A88A652002D0C15 /* icon_delete@2x.png in Resources */,
+				FC1B6AF11A8CA6A50053DC22 /* step10@2x.png in Resources */,
 				FC15A1991A7F27C80034F9D3 /* NavBarShadow.png in Resources */,
 				1849C8571A7E3B0600CA5E37 /* icon_equipment@2x.png in Resources */,
 				FC15A19D1A7F662B0034F9D3 /* icon_back_normal@2x.png in Resources */,
 				FC147E1C1A5D209A00BA06F3 /* LICENSE in Resources */,
+				FC1B6AF21A8CA6A50053DC22 /* step11@2x.png in Resources */,
+				FC1B6AEF1A8CA6A50053DC22 /* step08@2x.png in Resources */,
 				FC147CDB1A5CDB3A00BA06F3 /* Images.xcassets in Resources */,
 				FC147E061A5D1D9600BA06F3 /* unicode_to_hanyu_pinyin.txt in Resources */,
 				1849C8601A7E3C6D00CA5E37 /* button_510x80_normal@2x.png in Resources */,

@@ -24,6 +24,7 @@ typedef enum stageType_{
 
 //ui
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, strong) UIImageView *ivStudy;
 
 //目前走到了哪一步
 @property (nonatomic) NSInteger currentStage;
@@ -32,6 +33,8 @@ typedef enum stageType_{
 @property (nonatomic, strong)NSMutableArray* aryCategorys;
 @property (nonatomic, strong)NSMutableArray* aryBrands;
 @property (nonatomic, strong)NSMutableArray* aryCitys;
+
+@property (nonatomic, strong)NSMutableArray* aryStudyImgaes;
 
 -(IBAction)clickCategory:(id)sender;
 -(IBAction)clickBrandOrCity:(id)sender;
@@ -56,12 +59,31 @@ typedef enum stageType_{
     self.aryCategorys = [NSMutableArray arrayWithCapacity:0];
     self.aryBrands = [NSMutableArray arrayWithCapacity:0];
     self.aryCitys = [NSMutableArray arrayWithCapacity:0];
+    self.aryStudyImgaes = [NSMutableArray arrayWithCapacity:0];
+    for (int i = 1; i <=13; ++i) {
+        if (i < 10) {
+            [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step0%d", i]];
+        }
+        else{
+            [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step%d", i]];
+        }
+    }
     
     [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    if (nil == _ivStudy) {
+        _ivStudy  = [[UIImageView alloc] initWithFrame:_collectionView.frame];
+        [self.view addSubview:_ivStudy];
+    }
+    if (StageType_Bind ==  _currentStage) {
+        _ivStudy.hidden = NO;
+    }
+    else{
+        _ivStudy.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -386,6 +408,12 @@ typedef enum stageType_{
 
 #pragma mark --UICollectionViewDelegate
 
+-(void)setSelectToNO:(NSArray*)setArray{
+    for (YKModel* ykm in setArray) {
+        ykm.bSelect = NO;
+    }
+}
+
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -394,6 +422,7 @@ typedef enum stageType_{
         case StageType_Category:
         {
             if (indexPath.row < self.aryCategorys.count) {
+                [self setSelectToNO:self.aryCategorys];
                 ykm = [self.aryCategorys objectAtIndex:indexPath.row];
                 ykm.bSelect = YES;
                 _rcCategoryID = ((YKRemoteControlCategory*)ykm).idNo.intValue;
@@ -416,6 +445,7 @@ typedef enum stageType_{
         case StageType_Brands:
         {
             if (indexPath.row < self.aryBrands.count) {
+                [self setSelectToNO:self.aryBrands];
                 ykm = [self.aryBrands objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
                 _currentStage = StageType_Bind;
@@ -426,6 +456,7 @@ typedef enum stageType_{
         case StageType_City:
         {
             if (indexPath.row < self.aryCitys.count) {
+                [self setSelectToNO:self.aryCitys];
                 ykm = [self.aryCitys objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
                 _currentStage = StageType_Bind;
@@ -442,7 +473,9 @@ typedef enum stageType_{
     if (StageType_Bind == _currentStage) {
         
     }
-    [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
+    else{
+        [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
+    }
 }
 
 //返回这个UICollectionView是否可以被选择
