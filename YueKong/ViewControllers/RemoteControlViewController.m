@@ -75,7 +75,7 @@ typedef enum stageType_{
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     if (nil == _ivStudy) {
-        _ivStudy  = [[UIImageView alloc] initWithFrame:_collectionView.frame];
+        _ivStudy  = [[UIImageView alloc] initWithFrame:CGRectZero];
         [self.view addSubview:_ivStudy];
     }
     if (StageType_Bind ==  _currentStage) {
@@ -84,6 +84,12 @@ typedef enum stageType_{
     else{
         _ivStudy.hidden = YES;
     }
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    _ivStudy.frame = _collectionView.frame;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -98,13 +104,25 @@ typedef enum stageType_{
     return rc;
 }
 
+-(void)showStudyImage{
+    _collectionView.hidden = YES;
+    _ivStudy.hidden = NO;
+    _ivStudy.image = [UIImage imageNamed:_aryStudyImgaes[0]];
+}
+
 #pragma mark - clickEvents
 -(IBAction)clickCategory:(id)sender{
+    _collectionView.hidden = NO;
+    _ivStudy.hidden = YES;
+    
     _currentStage = StageType_Category;
     [self.collectionView reloadData];
 }
 
 -(IBAction)clickBrandOrCity:(id)sender{
+    _collectionView.hidden = NO;
+    _ivStudy.hidden = YES;
+    
     if (0 == self.aryCategorys.count) {
         return;
     }
@@ -471,7 +489,7 @@ typedef enum stageType_{
             break;
     }
     if (StageType_Bind == _currentStage) {
-        
+        [self performSelector:@selector(showStudyImage) withObject:nil afterDelay:.1f];
     }
     else{
         [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];

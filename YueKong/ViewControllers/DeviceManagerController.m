@@ -88,7 +88,7 @@
 
 -(void)updateControlState:(BOOL)bRequest{
     
-    if (![[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
+    if ([[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
