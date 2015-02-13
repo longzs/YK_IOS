@@ -36,6 +36,11 @@ typedef enum stageType_{
 
 @property (nonatomic, strong)NSMutableArray* aryStudyImgaes;
 
+@property (nonatomic, strong) IBOutlet UIImageView *imvFirst;
+@property (nonatomic, strong) IBOutlet UIImageView *imvSecond;
+@property (nonatomic, strong) IBOutlet UIImageView *imvThrid;
+@property (nonatomic, strong) NSMutableArray *aryImages;
+
 -(IBAction)clickCategory:(id)sender;
 -(IBAction)clickBrandOrCity:(id)sender;
 -(IBAction)clickBind:(id)sender;
@@ -70,6 +75,44 @@ typedef enum stageType_{
     }
     
     [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
+    
+    
+    NSMutableArray *firstArray = [NSMutableArray array];
+    for (int i = 0; i < 11; i++) {
+        NSString *aName = [NSString stringWithFormat:@"01_%02d",i+1];
+        UIImage *aImage = [UIImage imageNamed:aName];
+        if (aImage) {
+            [firstArray addObject:aImage];
+        }
+    }
+    
+    NSMutableArray *secondArray = [NSMutableArray array];
+    for (int i = 0; i < 12; i++) {
+        NSString *aName = [NSString stringWithFormat:@"02_%02d",i+1];
+        UIImage *aImage = [UIImage imageNamed:aName];
+        if (aImage) {
+            [secondArray addObject:aImage];
+        }
+    }
+    
+    NSMutableArray *thirdArray = [NSMutableArray array];
+    for (int i = 0; i < 14; i++) {
+        NSString *aName = [NSString stringWithFormat:@"03_%02d",i+1];
+        UIImage *aImage = [UIImage imageNamed:aName];
+        if (aImage) {
+            [thirdArray addObject:aImage];
+        }
+    }
+    
+    _aryImages = [[NSMutableArray alloc] init];
+    [_aryImages addObject:firstArray];
+    [_aryImages addObject:secondArray];
+    [_aryImages addObject:thirdArray];
+    
+    _imvFirst.image = _aryImages[0][0];
+    _imvSecond.image = _aryImages[1][0];
+    _imvThrid.image = _aryImages[2][0];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -110,6 +153,43 @@ typedef enum stageType_{
     _ivStudy.image = [UIImage imageNamed:_aryStudyImgaes[0]];
 }
 
+- (void)showAnimation
+{
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFired:) userInfo:nil repeats:YES];
+}
+
+- (void)timeFired:(NSTimer *)timer
+{
+    
+    //第一步
+    if (_imvFirst.image != _aryImages[0][10]) {
+        NSInteger index = [_aryImages[0] indexOfObject:_imvFirst.image];
+        _imvFirst.image = _aryImages[0][index+1];
+        if (_imvSecond.image == _aryImages[1][0]) {
+            _imvSecond.image = _aryImages[1][1];
+        }
+    }
+    //第二步
+    else if (_imvSecond.image != _aryImages[1][11]) {
+        NSInteger index = [_aryImages[1] indexOfObject:_imvSecond.image];
+        _imvSecond.image = _aryImages[1][index+1];
+        if (index == 8) {
+            _imvThrid.image = _aryImages[2][1];
+        }
+    }
+    
+    //第三步
+    else if (_imvThrid.image != _aryImages[2][13]) {
+        NSInteger index = [_aryImages[2] indexOfObject:_imvThrid.image];
+        _imvThrid.image = _aryImages[2][index+1];
+    }
+    
+    //结束
+    else {
+        [timer invalidate];
+    }
+}
+
 #pragma mark - clickEvents
 -(IBAction)clickCategory:(id)sender{
     _collectionView.hidden = NO;
@@ -117,6 +197,8 @@ typedef enum stageType_{
     
     _currentStage = StageType_Category;
     [self.collectionView reloadData];
+    
+    [self showAnimation];
 }
 
 -(IBAction)clickBrandOrCity:(id)sender{
