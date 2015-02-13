@@ -207,7 +207,7 @@
 		FC0BA9701A5E303E00748B4E /* EHWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EHWebViewController.m; sourceTree = "<group>"; };
 		FC0BA9751A5E81E600748B4E /* SSIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSIDManager.h; sourceTree = "<group>"; };
 		FC0BA9761A5E81E600748B4E /* SSIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSIDManager.m; sourceTree = "<group>"; };
-		FC147CCA1A5CDB3A00BA06F3 /* YueKong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YueKong.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC147CCA1A5CDB3A00BA06F3 /* 悦控.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "悦控.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC147CCE1A5CDB3A00BA06F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC147CCF1A5CDB3A00BA06F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC147CD11A5CDB3A00BA06F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -576,7 +576,7 @@
 		FC147CCB1A5CDB3A00BA06F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC147CCA1A5CDB3A00BA06F3 /* YueKong.app */,
+				FC147CCA1A5CDB3A00BA06F3 /* 悦控.app */,
 				FC147CE31A5CDB3A00BA06F3 /* YueKongTests.xctest */,
 			);
 			name = Products;
@@ -1114,7 +1114,7 @@
 			);
 			name = YueKong;
 			productName = YueKong;
-			productReference = FC147CCA1A5CDB3A00BA06F3 /* YueKong.app */;
+			productReference = FC147CCA1A5CDB3A00BA06F3 /* 悦控.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FC147CE21A5CDB3A00BA06F3 /* YueKongTests */ = {
@@ -1476,7 +1476,7 @@
 					"$(PROJECT_DIR)/YueKong",
 				);
 				OTHER_LDFLAGS = "-licucore";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "悦控";
 				PROVISIONING_PROFILE = "d7b8d0c3-d8d5-4c45-aba3-e7e0e76c5a16";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1501,7 +1501,7 @@
 					"$(PROJECT_DIR)/YueKong",
 				);
 				OTHER_LDFLAGS = "-licucore";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "悦控";
 				PROVISIONING_PROFILE = "c1dd64dc-3dea-413a-8552-8c54877baaf2";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
