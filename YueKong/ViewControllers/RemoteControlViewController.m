@@ -66,7 +66,7 @@ typedef enum stageType_{
     [self.collectionView registerClass:[DeviceSelectCollectionCell class] forCellWithReuseIdentifier:@"DeviceSelectCollectionCell"];
     [self.collectionView registerNib:[UINib nibWithNibName:@"DeviceSelectCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"DeviceSelectCollectionCell"];
     
-    _currentStage = StageType_Category;
+    _currentStage = StageType_other;
     self.aryCategorys = [NSMutableArray arrayWithCapacity:0];
     self.aryBrands = [NSMutableArray arrayWithCapacity:0];
     self.aryCitys = [NSMutableArray arrayWithCapacity:0];
@@ -74,9 +74,6 @@ typedef enum stageType_{
     for (int i = 1; i <=13; ++i) {
         [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step%02d", i]];
     }
-    
-    [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
-    
     
     NSMutableArray *firstArray = [NSMutableArray array];
     for (int i = 0; i < 11; i++) {
@@ -118,6 +115,7 @@ typedef enum stageType_{
     _btnStageSecond.enabled = NO;
     _btnStageThird.enabled = NO;
     
+    [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -160,6 +158,10 @@ typedef enum stageType_{
 
 - (void)showAnimation
 {
+    if (self.timerAnimation) {
+        [self.timerAnimation invalidate];
+        self.timerAnimation = nil;
+    }
     self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFired:) userInfo:nil repeats:YES];
 }
 
@@ -208,7 +210,7 @@ typedef enum stageType_{
     _currentStage = StageType_Category;
     [self.collectionView reloadData];
     
-    [self showAnimation];
+    //[self showAnimation];
 }
 
 -(IBAction)clickBrandOrCity:(id)sender{
@@ -260,7 +262,9 @@ typedef enum stageType_{
                 
                 [self.aryCategorys addObject:dm];
             }
+            [self showAnimation];
         }
+        _currentStage = StageType_Category;
     }
     else
     {   //对于HTTP请求返回的错误,暂时不展开处理
@@ -348,6 +352,10 @@ typedef enum stageType_{
                 dm.longitude = [NSString stringWithFormat:@"%f", [jsonData[@"longitude"] doubleValue]];
                 [self.aryCitys addObject:dm];
             }
+            YKCityModel *otherCity = [[YKCityModel alloc] init];
+            otherCity.name = @"其它城市";
+            otherCity.idNo = kOtherCityName;
+            [self.aryCitys addObject:otherCity];
         }
     }
     else

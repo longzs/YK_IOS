@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "YKModel.h"
 
+#define kOtherCityName    @"kOtherCityName"
+
 @interface YKDeviceModel :YKModel<NSCoding>
 @property(nonatomic, copy)NSString* pdsn;
 @property(nonatomic, copy)NSString* idNo;
