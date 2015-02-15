@@ -36,10 +36,14 @@ typedef enum stageType_{
 
 @property (nonatomic, strong)NSMutableArray* aryStudyImgaes;
 
-@property (nonatomic, strong) IBOutlet UIImageView *imvFirst;
-@property (nonatomic, strong) IBOutlet UIImageView *imvSecond;
-@property (nonatomic, strong) IBOutlet UIImageView *imvThrid;
+@property (nonatomic, weak) IBOutlet UIImageView *imvFirst;
+@property (nonatomic, weak) IBOutlet UIImageView *imvSecond;
+@property (nonatomic, weak) IBOutlet UIImageView *imvThrid;
 @property (nonatomic, strong) NSMutableArray *aryImages;
+
+@property (nonatomic, weak) IBOutlet UIButton *btnStageFirst;
+@property (nonatomic, weak) IBOutlet UIButton *btnStageSecond;
+@property (nonatomic, weak) IBOutlet UIButton *btnStageThird;
 
 @property (nonatomic, strong)NSTimer*       timerAnimation;
 
@@ -110,6 +114,10 @@ typedef enum stageType_{
     _imvSecond.image = _aryImages[1][0];
     _imvThrid.image = _aryImages[2][0];
 
+    _btnStageFirst.enabled = YES;
+    _btnStageSecond.enabled = NO;
+    _btnStageThird.enabled = NO;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -164,6 +172,8 @@ typedef enum stageType_{
         _imvFirst.image = _aryImages[0][index+1];
         if (_imvSecond.image == _aryImages[1][0]) {
             _imvSecond.image = _aryImages[1][1];
+            _btnStageFirst.selected = YES;
+            _btnStageSecond.enabled = YES;
         }
     }
     //第二步
@@ -172,6 +182,8 @@ typedef enum stageType_{
         _imvSecond.image = _aryImages[1][index+1];
         if (index == 8) {
             _imvThrid.image = _aryImages[2][1];
+            _btnStageSecond.selected = YES;
+            _btnStageThird.enabled = YES;
         }
     }
     
@@ -183,6 +195,7 @@ typedef enum stageType_{
     
     //结束
     else {
+        _btnStageThird.selected = YES;
         [timer invalidate];
     }
 }
