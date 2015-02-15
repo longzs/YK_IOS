@@ -41,6 +41,8 @@ typedef enum stageType_{
 @property (nonatomic, strong) IBOutlet UIImageView *imvThrid;
 @property (nonatomic, strong) NSMutableArray *aryImages;
 
+@property (nonatomic, strong)NSTimer*       timerAnimation;
+
 -(IBAction)clickCategory:(id)sender;
 -(IBAction)clickBrandOrCity:(id)sender;
 -(IBAction)clickBind:(id)sender;
@@ -66,12 +68,7 @@ typedef enum stageType_{
     self.aryCitys = [NSMutableArray arrayWithCapacity:0];
     self.aryStudyImgaes = [NSMutableArray arrayWithCapacity:0];
     for (int i = 1; i <=13; ++i) {
-        if (i < 10) {
-            [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step0%d", i]];
-        }
-        else{
-            [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step%d", i]];
-        }
+        [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step%02d", i]];
     }
     
     [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
@@ -155,7 +152,7 @@ typedef enum stageType_{
 
 - (void)showAnimation
 {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFired:) userInfo:nil repeats:YES];
+    self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFired:) userInfo:nil repeats:YES];
 }
 
 - (void)timeFired:(NSTimer *)timer
