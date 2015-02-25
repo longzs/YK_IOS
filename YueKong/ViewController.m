@@ -489,8 +489,7 @@ typedef enum wifiStatus_{
         {
             // 提示设备连接成功，并且切回原有wifi
             //[self showMessage:@"请切回原有wifi查询是否绑定成功" withTitle:@"连接悦控基座成功"];
-            [self showLoadingWithTip:@"正在检查悦控基座是否绑定成功，请稍等 ^_^"];
-            [[HomeAppliancesManager sharedInstance] checkIsBindYKSuccess:self];
+            [self checkYKIsBindSuccess];
         }
         else
         {

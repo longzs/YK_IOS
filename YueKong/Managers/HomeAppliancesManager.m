@@ -183,9 +183,8 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     [sent setDelegate_:delegate];
     [sent setCmdCode_:CC_GetCitesByProvinces];
     [sent setIReqType:HTTP_REQ_SHORTRUN];
-    [sent setTimeout_:5];
     [sent setDicHeader:header];
-    [sent setPostData:[dicBody JSONData]];
+    //[sent setPostData:[dicBody JSONData]];
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 

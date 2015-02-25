@@ -88,7 +88,12 @@
 
 -(void)updateControlState:(BOOL)bRequest{
     
-    if (![[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn) {
+#if 0
+    NSString* pdsn = [[EHUserDefaultManager sharedInstance] getCurrentDevice].pdsn;
+#else
+    NSString* pdsn = @"11";
+#endif
+    if (pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
         self.collectionDevices.hidden = NO;
