@@ -17,6 +17,9 @@
 		186C77ED1A7E6CC3006C5649 /* bg_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */; };
 		18CE1B161A8510820031F076 /* DeviceSelectCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CE1B141A8510820031F076 /* DeviceSelectCollectionCell.m */; };
 		18CE1B171A8510820031F076 /* DeviceSelectCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CE1B151A8510820031F076 /* DeviceSelectCollectionCell.xib */; };
+		3BC2AFDD1A9F046A003CA9DD /* ReservationTypeSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC2AFDC1A9F046A003CA9DD /* ReservationTypeSelectViewController.m */; };
+		3BC2AFE11A9F0700003CA9DD /* DeviceTypeViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC2AFDF1A9F0700003CA9DD /* DeviceTypeViewCell.m */; };
+		3BC2AFE21A9F0700003CA9DD /* DeviceTypeViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BC2AFE01A9F0700003CA9DD /* DeviceTypeViewCell.xib */; };
 		3BC848801A8887F3002D0C15 /* YKButtonPopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC8487F1A8887F3002D0C15 /* YKButtonPopoverView.m */; };
 		3BC848821A889133002D0C15 /* bg_window_670x315@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848811A889133002D0C15 /* bg_window_670x315@2x.png */; };
 		3BC848841A889155002D0C15 /* window_580x350@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848831A889155002D0C15 /* window_580x350@2x.png */; };
@@ -221,6 +224,11 @@
 		18CE1B131A8510820031F076 /* DeviceSelectCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceSelectCollectionCell.h; path = ViewControllers/DeviceSelectCollectionCell.h; sourceTree = "<group>"; };
 		18CE1B141A8510820031F076 /* DeviceSelectCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceSelectCollectionCell.m; path = ViewControllers/DeviceSelectCollectionCell.m; sourceTree = "<group>"; };
 		18CE1B151A8510820031F076 /* DeviceSelectCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DeviceSelectCollectionCell.xib; path = ViewControllers/DeviceSelectCollectionCell.xib; sourceTree = "<group>"; };
+		3BC2AFDB1A9F046A003CA9DD /* ReservationTypeSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReservationTypeSelectViewController.h; sourceTree = "<group>"; };
+		3BC2AFDC1A9F046A003CA9DD /* ReservationTypeSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReservationTypeSelectViewController.m; sourceTree = "<group>"; };
+		3BC2AFDE1A9F0700003CA9DD /* DeviceTypeViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceTypeViewCell.h; path = ViewControllers/DeviceTypeViewCell.h; sourceTree = "<group>"; };
+		3BC2AFDF1A9F0700003CA9DD /* DeviceTypeViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceTypeViewCell.m; path = ViewControllers/DeviceTypeViewCell.m; sourceTree = "<group>"; };
+		3BC2AFE01A9F0700003CA9DD /* DeviceTypeViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DeviceTypeViewCell.xib; path = ViewControllers/DeviceTypeViewCell.xib; sourceTree = "<group>"; };
 		3BC8487E1A8887F3002D0C15 /* YKButtonPopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YKButtonPopoverView.h; path = ViewControllers/YKButtonPopoverView.h; sourceTree = "<group>"; };
 		3BC8487F1A8887F3002D0C15 /* YKButtonPopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YKButtonPopoverView.m; path = ViewControllers/YKButtonPopoverView.m; sourceTree = "<group>"; };
 		3BC848811A889133002D0C15 /* bg_window_670x315@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_window_670x315@2x.png"; sourceTree = "<group>"; };
@@ -591,6 +599,15 @@
 				186C77EC1A7E6CC3006C5649 /* bg_img@2x.png */,
 			);
 			path = BG;
+			sourceTree = "<group>";
+		};
+		3BC2AFDA1A9F03FB003CA9DD /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				3BC2AFDB1A9F046A003CA9DD /* ReservationTypeSelectViewController.h */,
+				3BC2AFDC1A9F046A003CA9DD /* ReservationTypeSelectViewController.m */,
+			);
+			name = Reservation;
 			sourceTree = "<group>";
 		};
 		3BD14DC51A8DE5E600B75F68 /* Animation */ = {
@@ -1066,6 +1083,9 @@
 				18CE1B131A8510820031F076 /* DeviceSelectCollectionCell.h */,
 				18CE1B141A8510820031F076 /* DeviceSelectCollectionCell.m */,
 				18CE1B151A8510820031F076 /* DeviceSelectCollectionCell.xib */,
+				3BC2AFDE1A9F0700003CA9DD /* DeviceTypeViewCell.h */,
+				3BC2AFDF1A9F0700003CA9DD /* DeviceTypeViewCell.m */,
+				3BC2AFE01A9F0700003CA9DD /* DeviceTypeViewCell.xib */,
 				1849C8541A7E299F00CA5E37 /* Common */,
 			);
 			name = Views;
@@ -1088,6 +1108,7 @@
 				FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */,
 				3BDC5A191A8B3E8900C2813D /* ConfigFinishViewController.h */,
 				3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */,
+				3BC2AFDA1A9F03FB003CA9DD /* Reservation */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1340,6 +1361,7 @@
 				3BD14DFA1A8DE5E600B75F68 /* 02_05@2x.png in Resources */,
 				FC1B6AE81A8CA6A50053DC22 /* step01@2x.png in Resources */,
 				FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */,
+				3BC2AFE21A9F0700003CA9DD /* DeviceTypeViewCell.xib in Resources */,
 				3BD14E061A8DE5E600B75F68 /* 03_05@2x.png in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
 				3BD14DF81A8DE5E600B75F68 /* 02_03@2x.png in Resources */,
@@ -1406,6 +1428,7 @@
 				1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */,
 				FC147DF61A5D1D9600BA06F3 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */,
+				3BC2AFE11A9F0700003CA9DD /* DeviceTypeViewCell.m in Sources */,
 				FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */,
 				FC0BA9731A5E303E00748B4E /* EHRootViewController.m in Sources */,
 				FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */,
@@ -1425,6 +1448,7 @@
 				FC0BA9741A5E303E00748B4E /* EHWebViewController.m in Sources */,
 				FC147E101A5D1D9600BA06F3 /* SRSlimeView.m in Sources */,
 				FC147E0F1A5D1D9600BA06F3 /* SRRefreshView.m in Sources */,
+				3BC2AFDD1A9F046A003CA9DD /* ReservationTypeSelectViewController.m in Sources */,
 				FC147DE01A5D1D9600BA06F3 /* CXAlertButtonItem.m in Sources */,
 				FC147DEB1A5D1D9600BA06F3 /* HMSegmentedControl.m in Sources */,
 				FC2918651A8359450035961F /* YKModel.m in Sources */,

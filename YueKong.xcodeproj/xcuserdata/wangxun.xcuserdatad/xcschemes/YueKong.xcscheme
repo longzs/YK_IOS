@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "FC147CC91A5CDB3A00BA06F3"
-               BuildableName = "YueKong.app"
+               BuildableName = "&#x60a6;&#x63a7;.app"
                BlueprintName = "YueKong"
                ReferencedContainer = "container:YueKong.xcodeproj">
             </BuildableReference>
@@ -57,7 +57,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FC147CC91A5CDB3A00BA06F3"
-            BuildableName = "YueKong.app"
+            BuildableName = "&#x60a6;&#x63a7;.app"
             BlueprintName = "YueKong"
             ReferencedContainer = "container:YueKong.xcodeproj">
          </BuildableReference>
@@ -76,7 +76,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FC147CC91A5CDB3A00BA06F3"
-            BuildableName = "YueKong.app"
+            BuildableName = "&#x60a6;&#x63a7;.app"
             BlueprintName = "YueKong"
             ReferencedContainer = "container:YueKong.xcodeproj">
          </BuildableReference>
@@ -94,7 +94,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "FC147CC91A5CDB3A00BA06F3"
-            BuildableName = "YueKong.app"
+            BuildableName = "&#x60a6;&#x63a7;.app"
             BlueprintName = "YueKong"
             ReferencedContainer = "container:YueKong.xcodeproj">
          </BuildableReference>

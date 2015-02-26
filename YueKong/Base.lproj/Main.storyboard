@@ -24,6 +24,67 @@
             </objects>
             <point key="canvasLocation" x="-515" y="552"/>
         </scene>
+        <!--Reservation Type Select View Controller-->
+        <scene sceneID="oTh-AV-qsl">
+            <objects>
+                <viewController storyboardIdentifier="ReservationTypeSelectViewController" id="TcB-eb-qyC" customClass="ReservationTypeSelectViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fWG-4w-TnB"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xvi-KB-Aqb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Yp1-6F-h1F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="smC-Yq-8Yw">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择需要预约的电器" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAl-Iw-Vhg">
+                                        <rect key="frame" x="10" y="6" width="150" height="18"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                        <color key="textColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="VAl-Iw-Vhg" secondAttribute="centerY" id="cfQ-gJ-3gh"/>
+                                    <constraint firstAttribute="height" constant="30" id="pBI-ZT-I2A"/>
+                                    <constraint firstItem="VAl-Iw-Vhg" firstAttribute="leading" secondItem="smC-Yq-8Yw" secondAttribute="leading" constant="10" id="rdQ-dH-fgQ"/>
+                                </constraints>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="nPS-iW-507">
+                                <rect key="frame" x="0.0" y="38" width="320" height="466"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wgr-v7-DGk">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <connections>
+                                    <outlet property="dataSource" destination="TcB-eb-qyC" id="dYh-gk-sKl"/>
+                                    <outlet property="delegate" destination="TcB-eb-qyC" id="Vyn-XP-Nff"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="nPS-iW-507" firstAttribute="leading" secondItem="Yp1-6F-h1F" secondAttribute="leading" id="A1x-lb-bb5"/>
+                            <constraint firstItem="nPS-iW-507" firstAttribute="top" secondItem="smC-Yq-8Yw" secondAttribute="bottom" constant="8" id="ECd-Fq-60d"/>
+                            <constraint firstAttribute="trailing" secondItem="smC-Yq-8Yw" secondAttribute="trailing" id="FIv-r8-XEJ"/>
+                            <constraint firstItem="smC-Yq-8Yw" firstAttribute="leading" secondItem="Yp1-6F-h1F" secondAttribute="leading" id="Flc-uf-JMm"/>
+                            <constraint firstItem="Xvi-KB-Aqb" firstAttribute="top" secondItem="nPS-iW-507" secondAttribute="bottom" id="c0g-Yb-6Ct"/>
+                            <constraint firstAttribute="trailing" secondItem="nPS-iW-507" secondAttribute="trailing" id="kPT-yW-TOS"/>
+                            <constraint firstItem="smC-Yq-8Yw" firstAttribute="top" secondItem="fWG-4w-TnB" secondAttribute="bottom" id="xKc-h2-dWv"/>
+                        </constraints>
+                    </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cT7-zo-4j9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-515" y="1300"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
