@@ -89,7 +89,7 @@ UIGestureRecognizerDelegate>
     
     NSMutableArray *secondArray = [NSMutableArray array];
     for (int i = 0; i < 12; i++) {
-        NSString *aName = [NSString stringWithFormat:@"02_%02d                                                                                                             ",i+1];
+        NSString *aName = [NSString stringWithFormat:@"02_%02d",i+1];
         UIImage *aImage = [UIImage imageNamed:aName];
         if (aImage) {
             [secondArray addObject:aImage];
