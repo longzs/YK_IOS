@@ -69,3 +69,8 @@
 @implementation YKMobileModel
 
 @end
+
+@implementation YKMApplicaonSchedueModel
+
+
+@end

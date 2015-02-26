@@ -72,3 +72,10 @@
 @property(nonatomic, copy)NSString* status;
 @end
 
+// 家电预约
+@interface YKMApplicaonSchedueModel : YKModel
+@property(nonatomic, copy)NSString* idNo;
+@property(nonatomic, copy)NSString* name;
+@property(nonatomic, copy)NSString* start_time;
+@property(nonatomic, copy)NSString* end_time;
+@end

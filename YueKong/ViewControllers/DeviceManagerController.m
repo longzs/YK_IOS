@@ -54,7 +54,7 @@
     
     self.aryRCOrderTime = [NSMutableArray arrayWithObject:@"111"];
     
-    self.collectionDevices.backgroundColor = RGB(245, 245, 245);
+    self.collectionDevices.backgroundColor = [UIColor clearColor];//RGB(245, 245, 245);
     self.collectionDevices.alwaysBounceVertical = YES;
     self.collectionDevices.allowsMultipleSelection = YES;
     [self.collectionDevices registerClass:[HouseholdAppliancesCell class] forCellWithReuseIdentifier:@"HouseholdAppliancesCell"];
@@ -96,6 +96,7 @@
     if (pdsn) {
         // 如果已经存在pdsn
         self.labNoBindTip.hidden = YES;
+        self.labOperationTip.hidden = YES;
         self.collectionDevices.hidden = NO;
         self.labBind.text = @"我得悦控";
         [self.btnBind setBackgroundImage:[UIImage imageNamed:@"button_UCON_Bind"]
@@ -114,6 +115,7 @@
     else{
         //
         self.labNoBindTip.hidden = NO;
+        self.labOperationTip.hidden = NO;
         self.collectionDevices.hidden = YES;
         
         self.labBind.text = @"绑定悦控";
@@ -306,7 +308,7 @@
         return 8;//self.aryRCCategories.count;
     }
     else{
-        return self.aryRCOrderTime.count;
+        return 4;//self.aryRCOrderTime.count;
     }
 }
 
@@ -330,10 +332,10 @@
         header  = [[DeviceManagerCollectionHeaderView alloc] initWithFrame:CGRectMake(0, 0, collectionView.frame.size.width, collectionView.frame.size.width*0.11)];
     }
     if (0 == indexPath.section) {
-        header.labTitle.text= @"我的家电";
+        header.labTitle.text= @"我的设备";
     }
     else {
-        header.labTitle.text= @"我的预约";
+        header.labTitle.text= @"电器预约";
     }
     return header;
     
@@ -344,7 +346,7 @@
 {
     static NSString * CellIdentifier = @"HouseholdAppliancesCell";
     UICollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = RGB(252, 252, 252);//[UIColor clearColor];
     
     CGSize cellSize = kCollectionCellApplinceSize;
     
@@ -358,9 +360,9 @@
     ivLine.backgroundColor = RGB(170, 170, 170);
     [cell.contentView addSubview:ivLine];
     
-    ivLine = [[UIView alloc] initWithFrame:CGRectMake(0, -1, cellSize.width, 1)];
-    ivLine.backgroundColor = RGB(170, 170, 170);
-    [cell.contentView addSubview:ivLine];
+//    ivLine = [[UIView alloc] initWithFrame:CGRectMake(0, -1, cellSize.width, 1)];
+//    ivLine.backgroundColor = RGB(170, 170, 170);
+//    [cell.contentView addSubview:ivLine];
     
     ivLine = [[UIView alloc] initWithFrame:CGRectMake(0, cellSize.height-1, cellSize.width, 1)];
     ivLine.backgroundColor = RGB(170, 170, 170);
