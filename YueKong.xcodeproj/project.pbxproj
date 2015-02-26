@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1812E2CB1A9F6D9100FF005E /* ReservationDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1812E2CA1A9F6D9100FF005E /* ReservationDetailViewController.m */; };
 		1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1849C8521A7E272700CA5E37 /* YKRoundRectView.m */; };
 		1849C8571A7E3B0600CA5E37 /* icon_equipment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C8561A7E3B0600CA5E37 /* icon_equipment@2x.png */; };
 		1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1849C8591A7E3C2F00CA5E37 /* button_285x80_click@2x.png */; };
@@ -212,6 +213,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1812E2C91A9F6D9100FF005E /* ReservationDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReservationDetailViewController.h; sourceTree = "<group>"; };
+		1812E2CA1A9F6D9100FF005E /* ReservationDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReservationDetailViewController.m; sourceTree = "<group>"; };
 		1849C8511A7E272700CA5E37 /* YKRoundRectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YKRoundRectView.h; path = ViewControllers/YKRoundRectView.h; sourceTree = "<group>"; };
 		1849C8521A7E272700CA5E37 /* YKRoundRectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YKRoundRectView.m; path = ViewControllers/YKRoundRectView.m; sourceTree = "<group>"; };
 		1849C8561A7E3B0600CA5E37 /* icon_equipment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_equipment@2x.png"; sourceTree = "<group>"; };
@@ -606,6 +609,8 @@
 			children = (
 				3BC2AFDB1A9F046A003CA9DD /* ReservationTypeSelectViewController.h */,
 				3BC2AFDC1A9F046A003CA9DD /* ReservationTypeSelectViewController.m */,
+				1812E2C91A9F6D9100FF005E /* ReservationDetailViewController.h */,
+				1812E2CA1A9F6D9100FF005E /* ReservationDetailViewController.m */,
 			);
 			name = Reservation;
 			sourceTree = "<group>";
@@ -1433,6 +1438,7 @@
 				FC0BA9731A5E303E00748B4E /* EHRootViewController.m in Sources */,
 				FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */,
 				FC147DF01A5D1D9600BA06F3 /* IQKeyboardReturnKeyHandler.m in Sources */,
+				1812E2CB1A9F6D9100FF005E /* ReservationDetailViewController.m in Sources */,
 				FC147DFF1A5D1D9600BA06F3 /* ChineseInclude.m in Sources */,
 				FC147D101A5D1D1900BA06F3 /* NSString+URLEncoding.m in Sources */,
 				FC147DEC1A5D1D9600BA06F3 /* IQNSArray+Sort.m in Sources */,

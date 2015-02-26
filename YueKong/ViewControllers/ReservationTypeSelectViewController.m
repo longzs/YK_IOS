@@ -8,6 +8,7 @@
 
 #import "ReservationTypeSelectViewController.h"
 #import "DeviceTypeViewCell.h"
+#import "ReservationDetailViewController.h"
 
 @interface ReservationTypeSelectViewController ()
 <UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
@@ -24,6 +25,7 @@
     // Do any additional setup after loading the view.
     
     [self.collectionView registerNib:[UINib nibWithNibName:@"DeviceTypeViewCell" bundle:nil] forCellWithReuseIdentifier:@"DeviceTypeViewCell"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -79,7 +81,8 @@
 //UICollectionView被选中时调用的方法
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    ReservationDetailViewController *vc = [ReservationDetailViewController instantiateFromMainStoryboard];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 //返回这个UICollectionView是否可以被选择

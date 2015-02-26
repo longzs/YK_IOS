@@ -13,6 +13,7 @@
 #import "HouseholdAppliancesCell.h"
 #import "DeviceManagerCollectionHeaderView.h"
 #import "YKButtonPopoverView.h"
+#import "ReservationTypeSelectViewController.h"
 
 #define kCollectionCellApplinceSize CGSizeMake(self.view.frame.size.width/4.0, 100)
 
@@ -483,7 +484,8 @@
         }
     }
     else if(1 == indexPath.section){
-        
+        ReservationTypeSelectViewController *vc = [ReservationTypeSelectViewController instantiateFromMainStoryboard];
+        [self.navigationController pushViewController:vc animated:YES];
     }
     [collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
 }
