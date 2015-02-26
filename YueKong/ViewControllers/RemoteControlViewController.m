@@ -14,13 +14,16 @@
 typedef enum stageType_{
     StageType_Category = 1,
     StageType_Brands ,
-    StageType_City ,
+    StageType_City ,            // 热点城市
+    StageType_CityProvince ,    // 省会
+    StageType_CityByProvince ,
     StageType_Bind,
     
     StageType_other = -1
 }StageType;
 
-@interface RemoteControlViewController ()<HTTP_MSG_RESPOND>
+@interface RemoteControlViewController ()<HTTP_MSG_RESPOND,
+UIGestureRecognizerDelegate>
 
 //ui
 @property (nonatomic, weak) IBOutlet UICollectionView *collectionView;
@@ -115,6 +118,7 @@ typedef enum stageType_{
     _btnStageSecond.enabled = NO;
     _btnStageThird.enabled = NO;
     
+    [self showLoadingWithTip:@"正在请求数据。。"];
     [[HomeAppliancesManager sharedInstance] GetCategory:nil responseDelegate:self];
 }
 
@@ -122,7 +126,11 @@ typedef enum stageType_{
     [super viewWillAppear:animated];
     if (nil == _ivStudy) {
         _ivStudy  = [[UIImageView alloc] initWithFrame:CGRectZero];
+        _ivStudy.userInteractionEnabled = YES;
         [self.view addSubview:_ivStudy];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapStudyIv:)];
+        [_ivStudy addGestureRecognizer:tap];
     }
     if (StageType_Bind ==  _currentStage) {
         _ivStudy.hidden = NO;
@@ -162,24 +170,51 @@ typedef enum stageType_{
         [self.timerAnimation invalidate];
         self.timerAnimation = nil;
     }
-    self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFired:) userInfo:nil repeats:YES];
+    switch (_currentStage) {
+        case StageType_Category:{
+            self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFiredFirst:) userInfo:nil repeats:YES];
+        }
+            break;
+        case StageType_City:
+        case StageType_Brands:{
+            self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFiredSecond:) userInfo:nil repeats:YES];
+        }
+            break;
+        case StageType_Bind:{
+            self.timerAnimation = [NSTimer scheduledTimerWithTimeInterval:0.05f target:self selector:@selector(timeFiredThird:) userInfo:nil repeats:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
-- (void)timeFired:(NSTimer *)timer
+- (void)timeFiredFirst:(NSTimer *)timer
 {
-    
     //第一步
-    if (_imvFirst.image != _aryImages[0][10]) {
+    if (_imvFirst.image != _aryImages[0][10]
+        && StageType_Category == _currentStage) {
         NSInteger index = [_aryImages[0] indexOfObject:_imvFirst.image];
         _imvFirst.image = _aryImages[0][index+1];
+    }
+    //结束
+    else {
         if (_imvSecond.image == _aryImages[1][0]) {
             _imvSecond.image = _aryImages[1][1];
             _btnStageFirst.selected = YES;
             _btnStageSecond.enabled = YES;
         }
+        [timer invalidate];
     }
+}
+
+- (void)timeFiredSecond:(NSTimer *)timer
+{
+    
     //第二步
-    else if (_imvSecond.image != _aryImages[1][11]) {
+    if (_imvSecond.image != _aryImages[1][11]
+        && (StageType_Brands == _currentStage || StageType_City == _currentStage)) {
         NSInteger index = [_aryImages[1] indexOfObject:_imvSecond.image];
         _imvSecond.image = _aryImages[1][index+1];
         if (index == 8) {
@@ -188,21 +223,44 @@ typedef enum stageType_{
             _btnStageThird.enabled = YES;
         }
     }
-    
+    //结束
+    else {
+        [timer invalidate];
+    }
+}
+- (void)timeFiredThird:(NSTimer *)timer
+{
     //第三步
-    else if (_imvThrid.image != _aryImages[2][13]) {
+    if (_imvThrid.image != _aryImages[2][13]) {
         NSInteger index = [_aryImages[2] indexOfObject:_imvThrid.image];
         _imvThrid.image = _aryImages[2][index+1];
     }
-    
     //结束
     else {
         _btnStageThird.selected = YES;
         [timer invalidate];
+        
+        ConfigFinishViewController* vc = [ConfigFinishViewController instantiateFromMainStoryboard];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 #pragma mark - clickEvents
+-(void)tapStudyIv:(UITapGestureRecognizer*)recognizer{
+    static int iTapCount = 1;
+    if (iTapCount < 7) {
+        [UIView animateWithDuration:0.3 animations:^(){
+            _ivStudy.image = [UIImage imageNamed:[_aryStudyImgaes objectAtIndex:iTapCount]];
+        }];
+    }
+    iTapCount ++;
+    if (7 == iTapCount) {
+        _currentStage = StageType_Bind;
+        [_btnStageThird setTitle:@"配置成功" forState:UIControlStateNormal];
+        [self showAnimation];
+    }
+}
+
 -(IBAction)clickCategory:(id)sender{
     _collectionView.hidden = NO;
     _ivStudy.hidden = YES;
@@ -210,7 +268,6 @@ typedef enum stageType_{
     _currentStage = StageType_Category;
     [self.collectionView reloadData];
     
-    //[self showAnimation];
 }
 
 -(IBAction)clickBrandOrCity:(id)sender{
@@ -236,6 +293,11 @@ typedef enum stageType_{
 }
 
 -(IBAction)clickBind:(id)sender{
+    if (0 == self.aryCategorys.count
+        &&( 0== self.aryBrands.count
+           || 0 == self.aryCitys.count)){
+        return;
+    }
     ConfigFinishViewController* vc = [ConfigFinishViewController instantiateFromMainStoryboard];
     [self.navigationController pushViewController:vc animated:YES];
 }
@@ -262,9 +324,9 @@ typedef enum stageType_{
                 
                 [self.aryCategorys addObject:dm];
             }
+            _currentStage = StageType_Category;
             [self showAnimation];
         }
-        _currentStage = StageType_Category;
     }
     else
     {   //对于HTTP请求返回的错误,暂时不展开处理
@@ -309,6 +371,8 @@ typedef enum stageType_{
                 
                 [self.aryBrands addObject:dm];
             }
+            _currentStage = StageType_Brands;
+            [self showAnimation];
         }
     }
     else
@@ -356,6 +420,98 @@ typedef enum stageType_{
             otherCity.name = @"其它城市";
             otherCity.idNo = kOtherCityName;
             [self.aryCitys addObject:otherCity];
+            
+            _currentStage = StageType_City;
+            [self showAnimation];
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    [self.collectionView reloadData];
+}
+
+-(void)processCityProvinces:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSArray *jsonDataAry = [reciveData responsdData];
+        if (0 < jsonDataAry.count) {
+            [self.aryCitys removeAllObjects];
+        }
+        if ([jsonDataAry isKindOfClass:[NSArray class]]
+            && jsonDataAry.count) {
+            
+            for (NSDictionary* jsonData in jsonDataAry) {
+                
+                YKCityModel *dm = [[YKCityModel alloc] init];
+                dm.name = jsonData[@"name"];
+                dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
+                dm.code = jsonData[@"code"];
+                dm.latitide = [NSString stringWithFormat:@"%f", [jsonData[@"latitide"] doubleValue]];
+                dm.longitude = [NSString stringWithFormat:@"%f", [jsonData[@"longitude"] doubleValue]];
+                [self.aryCitys addObject:dm];
+            }
+            _currentStage = StageType_CityProvince;
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    [self.collectionView reloadData];
+}
+
+-(void)processCitesByProvinces:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSArray *jsonDataAry = [reciveData responsdData];
+        if (0 < jsonDataAry.count) {
+            [self.aryCitys removeAllObjects];
+        }
+        if ([jsonDataAry isKindOfClass:[NSArray class]]
+            && jsonDataAry.count) {
+            
+            for (NSDictionary* jsonData in jsonDataAry) {
+                
+                YKCityModel *dm = [[YKCityModel alloc] init];
+                dm.name = jsonData[@"name"];
+                dm.idNo = [NSString stringWithFormat:@"%d", [jsonData[@"id"] intValue]];
+                dm.code = jsonData[@"code"];
+                dm.latitide = [NSString stringWithFormat:@"%f", [jsonData[@"latitide"] doubleValue]];
+                dm.longitude = [NSString stringWithFormat:@"%f", [jsonData[@"longitude"] doubleValue]];
+                [self.aryCitys addObject:dm];
+            }
+            
+            _currentStage = StageType_CityByProvince;
         }
     }
     else
@@ -406,12 +562,12 @@ typedef enum stageType_{
         }
         case CC_GetCityProvinces:
         {
-            //[self processGetCategorys:ReciveMsg];
+            [self processCityProvinces:ReciveMsg];
             break;
         }
         case CC_GetCitesByProvinces:
         {
-            //[self processGetCategorys:ReciveMsg];
+            [self processCitesByProvinces:ReciveMsg];
             break;
         }
         default:
@@ -443,6 +599,8 @@ typedef enum stageType_{
             break;
         }
         case StageType_City:
+        case StageType_CityProvince:
+        case StageType_CityByProvince:
         {
             ret = self.aryCitys.count;
             break;
@@ -492,6 +650,8 @@ typedef enum stageType_{
             break;
         }
         case StageType_City:
+        case StageType_CityProvince:
+        case StageType_CityByProvince:
         {
             if (indexPath.row < self.aryCitys.count) {
                 ykm = [self.aryCitys objectAtIndex:indexPath.row];
@@ -544,18 +704,16 @@ typedef enum stageType_{
                 ykm = [self.aryCategorys objectAtIndex:indexPath.row];
                 ykm.bSelect = YES;
                 _rcCategoryID = ((YKRemoteControlCategory*)ykm).idNo.intValue;
+                [_btnStageFirst setTitle:((YKRemoteControlCategory*)ykm).name forState:UIControlStateNormal];
                 if (HAType_SetTopBox == _rcCategoryID) {
                     
                     [[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
-                    
-                    _currentStage = StageType_City;
                 }
                 else{
                     
                     
                     [[HomeAppliancesManager sharedInstance] GetBrand:[NSMutableDictionary dictionaryWithObject:((YKRemoteControlCategory*)ykm).idNo forKey:@"category_id"]
                                                 responseDelegate:self];
-                    _currentStage = StageType_Brands;
                 }
             }
             break;
@@ -566,6 +724,7 @@ typedef enum stageType_{
                 [self setSelectToNO:self.aryBrands];
                 ykm = [self.aryBrands objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
+                [_btnStageSecond setTitle:((YKRemoteControlBrand*)ykm).name forState:UIControlStateNormal];
                 _currentStage = StageType_Bind;
             }
             
@@ -577,6 +736,37 @@ typedef enum stageType_{
                 [self setSelectToNO:self.aryCitys];
                 ykm = [self.aryCitys objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
+                
+                if ([((YKCityModel*)ykm).idNo isEqualToString:kOtherCityName]) {
+                    [[HomeAppliancesManager sharedInstance] GetCityProvinces:nil responseDelegate:self];
+                }
+                else{
+                    [_btnStageSecond setTitle:((YKCityModel*)ykm).name forState:UIControlStateNormal];
+                    _currentStage = StageType_Bind;
+                }
+            }
+            break;
+        }
+        case StageType_CityProvince:{
+            if (indexPath.row < self.aryCitys.count) {
+                [self setSelectToNO:self.aryCitys];
+                ykm = [self.aryCitys objectAtIndex:indexPath.row];
+                ykm.bSelect = YES;
+                if (2 < [((YKCityModel*)ykm).code length]) {
+                    NSString* provinceCode = [((YKCityModel*)ykm).code substringToIndex:2];
+                    [[HomeAppliancesManager sharedInstance] GetCity:[NSMutableDictionary dictionaryWithObject:provinceCode forKey:@"province_prefix"]
+                                                            responseDelegate:self];
+                }
+            }
+            break;
+        }
+        case StageType_CityByProvince:{
+            if (indexPath.row < self.aryCitys.count) {
+                [self setSelectToNO:self.aryCitys];
+                ykm = [self.aryCitys objectAtIndex:indexPath.row];
+                ykm.bSelect = YES;
+               
+                [_btnStageSecond setTitle:((YKCityModel*)ykm).name forState:UIControlStateNormal];
                 _currentStage = StageType_Bind;
             }
             break;
