@@ -10,10 +10,15 @@
 
 @interface ReservationDetailViewController ()
 
+@property (nonatomic, weak) IBOutlet UIButton *btnOpen;
+@property (nonatomic, weak) IBOutlet UITextField *txfChannel;
+@property (nonatomic, weak) IBOutlet UIDatePicker *datePicker;
+
 @end
 
 @implementation ReservationDetailViewController
 
+#pragma mark Basic
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -34,7 +39,13 @@
     return (ReservationDetailViewController *)[Utils controllerInMainStroyboardWithID:@"ReservationDetailViewController"];
 }
 
+#pragma mrak - Actions
 - (void)clickRightBarButton:(id)sender
+{
+    
+}
+
+- (IBAction)clickOpenButton:(id)sender
 {
     
 }

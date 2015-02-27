@@ -248,6 +248,11 @@
                         </constraints>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <connections>
+                        <outlet property="btnOpen" destination="h1L-hi-kyk" id="Iyg-HN-1NP"/>
+                        <outlet property="datePicker" destination="0nJ-ji-TD4" id="Y8V-nN-By2"/>
+                        <outlet property="txfChannel" destination="iWy-5X-ecn" id="tbz-oP-hfb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9vN-Ux-tVK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

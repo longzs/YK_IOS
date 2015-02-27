@@ -19,6 +19,11 @@
 
 - (void)awakeFromNib {
     // Initialization code
+    
+    UIImageView *selectView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"menu_click_"]];
+    selectView.backgroundColor = [UIColor clearColor];
+    selectView.frame = CGRectMake(-1, -1, self.bounds.size.width, self.bounds.size.height);
+    self.selectedBackgroundView = selectView;
 }
 
 - (void)setDeviceType:(HouseholdAppliancesType)deviceType
