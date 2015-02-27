@@ -14,7 +14,7 @@
 #endif
 
 
-#define HTTP_TIMEOUT			8  // 默认超时时间10妙
+#define HTTP_TIMEOUT			30  // 默认超时时间10妙
 #define HTTP_METHOD_POST		@"POST"
 #define HTTP_METHOD_GET			@"GET"
 #define HTTP_METHOD_PUT         @"PUT"
