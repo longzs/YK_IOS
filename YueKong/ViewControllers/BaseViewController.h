@@ -12,7 +12,7 @@
 #import "NetControl.h"
 #import "EHUserDefaultManager.h"
 #import "OpenUDID.h"
-
+#import "YKDeviceModel.h"
 /**
  *  通过storyboard加载的协议，满足此协议代表是在storyboard中绘制的界面，可以通过instantiateFromMainStoryboard实例化
  */
@@ -38,5 +38,7 @@
 -(void) showMessage:(NSString *)text withTitle:(NSString *)title;
 -(void) showMessage:(NSString *)text withTag:(int)tag withTarget:(id)target;
 -(void) showMessage:(NSString *)text ;
+
+-(NSInteger)cellNumbersForDataCount:(NSUInteger)dataCount;
 
 @end

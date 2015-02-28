@@ -612,9 +612,7 @@ UIGestureRecognizerDelegate>
         default:
             break;
     }
-    if (0 != ret%4) {
-        ret = (ret/4 + 1)*4;
-    }
+    ret = [self cellNumbersForDataCount:ret];
     return ret;
 }
 
@@ -629,7 +627,7 @@ UIGestureRecognizerDelegate>
 {
     static NSString * CellIdentifier = @"DeviceSelectCollectionCell";
     DeviceSelectCollectionCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
+    cell.backgroundColor = RGB(252, 252, 252);;
     cell.textOfCell = nil;
     YKModel* ykm = nil;
     switch (_currentStage) {

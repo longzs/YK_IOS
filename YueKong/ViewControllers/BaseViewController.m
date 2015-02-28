@@ -107,6 +107,15 @@
     
 }
 
+-(NSInteger)cellNumbersForDataCount:(NSUInteger)dataCount{
+    
+    NSUInteger ret = dataCount;
+    if (0 != ret%4) {
+        ret = (ret/4 + 1)*4;
+    }
+    return ret;
+}
+
 #pragma mark UIAlertView methods
 
 - (void)showMessage:(NSString *)text withTitle:(NSString *)title {

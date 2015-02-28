@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.title = @"我的预约";
     [self.collectionView registerNib:[UINib nibWithNibName:@"DeviceTypeViewCell" bundle:nil] forCellWithReuseIdentifier:@"DeviceTypeViewCell"];
     
 }
@@ -43,7 +43,7 @@
 //定义展示的UICollectionViewCell的个数
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return 4;
+    return [self cellNumbersForDataCount:5];
 }
 
 //定义展示的Section的个数
@@ -57,8 +57,8 @@
 {
     static NSString * CellIdentifier = @"DeviceTypeViewCell";
     DeviceTypeViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
-    cell.backgroundColor = [UIColor clearColor];
-    cell.deviceText = @"123";
+    cell.backgroundColor = RGB(252, 252, 252);
+    cell.deviceText = @"机顶盒";
     cell.deviceType = HAType_SetTopBox;
     return cell;
 }
@@ -82,6 +82,9 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ReservationDetailViewController *vc = [ReservationDetailViewController instantiateFromMainStoryboard];
+    if (indexPath.row < self.aryReservationMAppType.count) {
+        vc.currentSchedue = self.aryReservationMAppType[indexPath.row];
+    }
     [self.navigationController pushViewController:vc animated:YES];
 }
 

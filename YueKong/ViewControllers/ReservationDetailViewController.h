@@ -9,5 +9,5 @@
 #import "BaseViewController.h"
 
 @interface ReservationDetailViewController : BaseViewController
-
+@property(nonatomic, strong)YKMApplicaonSchedueModel* currentSchedue;
 @end

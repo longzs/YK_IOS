@@ -14,6 +14,7 @@
 #import "DeviceManagerCollectionHeaderView.h"
 #import "YKButtonPopoverView.h"
 #import "ReservationTypeSelectViewController.h"
+#import "ReservationDetailViewController.h"
 
 #define kCollectionCellApplinceSize CGSizeMake(self.view.frame.size.width/4.0, 100)
 
@@ -52,19 +53,26 @@
     YKRemoteControlCategory* addCategory = [[YKRemoteControlCategory alloc] init];
     addCategory.idNo = [NSString stringWithFormat:@"%d", HAType_Add];
     self.aryRCCategories = [NSMutableArray arrayWithObject:addCategory];
-    
-    self.aryRCOrderTime = [NSMutableArray arrayWithObject:@"111"];
-    
+    {
+        self.aryRCOrderTime = [NSMutableArray arrayWithCapacity:0];
+        for (int i = 1; i < 3; ++i) {
+            YKMApplicaonSchedueModel* yms = [[YKMApplicaonSchedueModel alloc] init];
+            yms.idNo = [NSString stringWithFormat:@"%d", i];
+            yms.name = (i == 1?@"空调":@"电视机");
+            yms.start_time = @"15:00";
+            yms.end_time = @"21:00";
+            [self.aryRCOrderTime addObject:yms];
+        }
+        YKMApplicaonSchedueModel* yms = [[YKMApplicaonSchedueModel alloc] init];
+        yms.idNo = [NSString stringWithFormat:@"%d", HAType_Add];
+        [self.aryRCOrderTime addObject:yms];
+    }
     self.collectionDevices.backgroundColor = [UIColor clearColor];//RGB(245, 245, 245);
     self.collectionDevices.alwaysBounceVertical = YES;
     self.collectionDevices.allowsMultipleSelection = YES;
     [self.collectionDevices registerClass:[HouseholdAppliancesCell class] forCellWithReuseIdentifier:@"HouseholdAppliancesCell"];
     [self.collectionDevices registerClass:[DeviceManagerCollectionHeaderView class]
                forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"DeviceManagerCollectionHeaderView"];
-    
-    //// test
-    //[[HomeAppliancesManager sharedInstance] GetBrand:[NSMutableDictionary dictionaryWithObject:@"1" forKey:@"category_id"] responseDelegate:self];
-    //[[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -309,7 +317,8 @@
         return 8;//self.aryRCCategories.count;
     }
     else{
-        return 4;//self.aryRCOrderTime.count;
+        NSUInteger ret = [self cellNumbersForDataCount:self.aryRCOrderTime.count];
+        return ret;
     }
 }
 
@@ -340,6 +349,74 @@
     }
     return header;
     
+}
+
+-(void)cellforData:(YKMApplicaonSchedueModel*)ysm collectionViewCell:(UICollectionViewCell*)cell{
+    
+    
+    CGSize cellSize = kCollectionCellApplinceSize;
+    CGRect rectImg = CGRectMake((cellSize.width-51)/2, (cellSize.height-51)/2, 51, 51);
+    
+    switch ([ysm.idNo intValue]) {
+        case HAType_Add:{
+            NSString* imgName = @"icon_add";
+            UIImageView* ivBG = [[UIImageView alloc] initWithFrame:rectImg];
+            ivBG.image = [UIImage imageNamed:imgName];
+            ivBG.backgroundColor = [UIColor clearColor];
+            [cell.contentView addSubview:ivBG];
+            return;
+        }
+        case HAType_AirConditioner:{
+            break;
+        }
+        case HAType_TV:{
+            break;
+        }
+        case HAType_LanBox:{
+            break;
+        }
+        case HAType_SetTopBox:{
+            break;
+        }
+        default:
+            break;
+    }
+    rectImg = CGRectMake(0, 0, cellSize.width, 50);
+    UILabel *labName = [[UILabel alloc] initWithFrame:rectImg];
+    labName.text = ysm.name;
+    labName.font = [UIFont boldSystemFontOfSize:18];
+    labName.backgroundColor = [UIColor clearColor];
+    labName.textColor = RGB(100, 100, 100);
+    labName.textAlignment = NSTextAlignmentCenter;
+    if (HAType_Add != [ysm.idNo intValue]) {
+        [cell.contentView addSubview:labName];
+    }
+    
+    // 开始时间
+    rectImg.origin.y += 50;
+    rectImg.size.height = 20;
+    
+    labName = [[UILabel alloc] initWithFrame:rectImg];
+    labName.text = [NSString stringWithFormat:@"开启   %@", ysm.start_time];
+    labName.font = [UIFont systemFontOfSize:13];
+    labName.backgroundColor = [UIColor clearColor];
+    labName.textColor = RGB(65, 65, 65);
+    labName.textAlignment = NSTextAlignmentCenter;
+    [cell.contentView addSubview:labName];
+    
+    // 结束时间
+    rectImg.origin.y += 20;
+    labName = [[UILabel alloc] initWithFrame:rectImg];
+    labName.text = [NSString stringWithFormat:@"关闭   %@", ysm.end_time];
+    labName.font = [UIFont systemFontOfSize:13];
+    labName.backgroundColor = [UIColor clearColor];
+    labName.textColor = RGB(83, 83, 83);
+    labName.textAlignment = NSTextAlignmentCenter;
+    [cell.contentView addSubview:labName];
+    
+//    if (ysm.bSelect) {
+//        [cell.contentView addSubview:selectView];
+//    }
 }
 
 //每个UICollectionView展示的内容
@@ -426,13 +503,7 @@
     }
     else if (1 == indexPath.section
              && indexPath.row < self.aryRCOrderTime.count){
-        NSString* imgName = @"icon_add";
-        CGRect rectImg = CGRectMake((cellSize.width-51)/2, (cellSize.height-51)/2, 51, 51);
-        
-        UIImageView* ivBG = [[UIImageView alloc] initWithFrame:rectImg];
-        ivBG.image = [UIImage imageNamed:imgName];
-        ivBG.backgroundColor = [UIColor clearColor];
-        [cell.contentView addSubview:ivBG];
+        [self cellforData:[self.aryRCOrderTime objectAtIndex:indexPath.row] collectionViewCell:cell];
     }
     
     return cell;
@@ -483,9 +554,19 @@
             [view show];
         }
     }
-    else if(1 == indexPath.section){
-        ReservationTypeSelectViewController *vc = [ReservationTypeSelectViewController instantiateFromMainStoryboard];
-        [self.navigationController pushViewController:vc animated:YES];
+    else if(1 == indexPath.section && indexPath.row < self.aryRCOrderTime.count){
+        
+        YKMApplicaonSchedueModel* rcc = [self.aryRCOrderTime objectAtIndex:indexPath.row];
+        rcc.bSelect = YES;
+        if (HAType_Add == rcc.idNo.intValue) {
+            ReservationTypeSelectViewController *vc = [ReservationTypeSelectViewController instantiateFromMainStoryboard];
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+            ReservationDetailViewController *vc = [ReservationDetailViewController instantiateFromMainStoryboard];
+            vc.currentSchedue = rcc;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
     }
     [collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3];
 }

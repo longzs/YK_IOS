@@ -10,4 +10,6 @@
 
 @interface ReservationTypeSelectViewController : BaseViewController
 
+@property(nonatomic, strong)NSMutableArray* aryReservationMAppType;
+
 @end

@@ -20,13 +20,6 @@
                             <constraint firstAttribute="width" constant="1" id="dAx-sT-Fb9"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I6s-l3-fKh">
-                        <rect key="frame" x="1" y="0.0" width="79" height="1"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="1" id="BwR-31-zc6"/>
-                        </constraints>
-                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nUn-wk-zpB">
                         <rect key="frame" x="0.0" y="99" width="80" height="1"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -58,14 +51,11 @@
                 <constraint firstItem="tSW-8w-zc3" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Ghh-Dp-RDD"/>
                 <constraint firstItem="tSW-8w-zc3" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="I2g-1j-6ST"/>
                 <constraint firstAttribute="trailing" secondItem="u5Y-Ow-hlG" secondAttribute="trailing" id="TyL-97-PJQ"/>
-                <constraint firstItem="I6s-l3-fKh" firstAttribute="leading" secondItem="V8j-ek-lun" secondAttribute="trailing" id="Xsz-8V-MSK"/>
                 <constraint firstItem="nUn-wk-zpB" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="cI5-YU-Gt1"/>
                 <constraint firstAttribute="bottom" secondItem="nUn-wk-zpB" secondAttribute="bottom" id="cej-qu-9MQ"/>
                 <constraint firstAttribute="trailing" secondItem="tSW-8w-zc3" secondAttribute="trailing" id="ck8-c5-zic"/>
-                <constraint firstItem="I6s-l3-fKh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="gfC-V8-2rK"/>
                 <constraint firstAttribute="bottom" secondItem="tSW-8w-zc3" secondAttribute="bottom" id="mEl-ub-aus"/>
                 <constraint firstAttribute="trailing" secondItem="nUn-wk-zpB" secondAttribute="trailing" id="nZd-VN-ha2"/>
-                <constraint firstAttribute="trailing" secondItem="I6s-l3-fKh" secondAttribute="trailing" id="u8i-W3-IKy"/>
                 <constraint firstAttribute="bottom" secondItem="u5Y-Ow-hlG" secondAttribute="bottom" id="wvM-vJ-Clk"/>
             </constraints>
             <size key="customSize" width="157" height="69"/>

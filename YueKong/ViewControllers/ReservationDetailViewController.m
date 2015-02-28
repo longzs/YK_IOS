@@ -22,6 +22,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title = self.currentSchedue.name;
     
     [self addRightBarButtonWithType:BarButtonTypeText title:@"保存" action:@selector(clickRightBarButton:)];
     UIBarButtonItem *item = self.navigationItem.rightBarButtonItem;
