@@ -229,12 +229,9 @@ static NetControl* g_ins = nil;
 }
 
 -(void)sendHeartBeat{
-    return;
+    
     if (isConnect) {
-        mPacket* mp = [[mPacket alloc] init];
-        mp.cmdID = CC_heartBeat;
-        mp.stateOper = 0x01;
-        [[NetControl shareInstance] sendPacket:mp];
+        [self sendYKDeviceCmd:k_YKCMD_app_tick param:@""];
     }
     
     [self performSelector:@selector(sendHeartBeat) withObject:nil afterDelay:5];
@@ -276,13 +273,30 @@ static NetControl* g_ins = nil;
 }
 
 #pragma mark -- YK
--(int)sendYKDeviceCmd:(NSString*)cmd{
+/*
+ 
+ {"000", app_tick},
+	{"001", app_get_pdsn},
+	{"002", app_get_reboot},
+	{"003", app_study_irda},
+ 
+ 003,key=1,category=1,brand=1,city=-1
+ 
+ result=success, match=10 （match=1时学习成功， =0时 提示完全学习）
+ */
+
+-(int)sendYKDeviceCmd:(NSString*)cmd param:(NSString*)params;{
     int iRet = 0;
     
-    NSData* data  = [NSData dataWithBytes:[cmd UTF8String] length:cmd.length];
+    NSString* sentStr = cmd;
+    if ([k_YKCMD_app_study_irda isEqualToString:cmd]) {
+        sentStr = [NSString stringWithFormat:@"%@,%@",cmd, params];
+    }
+    NSData* data  = [NSData dataWithBytes:[sentStr UTF8String] length:sentStr.length];
     [tcpCtrl writeData:data withTimeout:5 tag:cmd.intValue];
     return iRet;
 }
+
 -(void)processByResponse:(mPacket*)mp{
     
     if (nil == mp) {
@@ -372,9 +386,7 @@ static NetControl* g_ins = nil;
         [NSObject cancelPreviousPerformRequestsWithTarget:self
                                                  selector:@selector(sendVerify3g)
                                                    object:nil];
-        //[self sendHeartBeat];
-        
-        [self sendVerify3g];
+        [self sendHeartBeat];
         
     };
     if ([NSThread isMainThread]) {

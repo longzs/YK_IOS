@@ -15,17 +15,13 @@
 #define k_TimeOut_Tcp       5
 #define k_Length_Header     11
 
-/*
- 
- {"000", app_tick},
-	{"001", app_get_pdsn},
-	{"002", app_get_reboot},
-	{"003", app_study_irda},
- 
- 003,key=1,category=1,brand=1,city=-1
- 
- result=success, match=10 （match=1时学习成功， =0时 提示完全学习）
- */
+#define k_YKCMD_app_tick @"000"
+
+#define k_YKCMD_app_get_pdsn @"001"
+
+#define k_YKCMD_app_get_reboot @"002"
+
+#define k_YKCMD_app_study_irda @"003"
 
 @class GCDAsyncSocket;
 
@@ -76,7 +72,19 @@
 
 -(int)send3gPacket:(short)action Param:(char)param length:(short)len;
 
--(int)sendYKDeviceCmd:(NSString*)cmd;
+/*
+ 
+ {"000", app_tick},
+	{"001", app_get_pdsn},
+	{"002", app_get_reboot},
+	{"003", app_study_irda},
+ 
+ 003,key=1,category=1,brand=1,city=-1
+ 
+ result=success, match=10 （match=1时学习成功， =0时 提示完全学习）
+ */
+
+-(int)sendYKDeviceCmd:(NSString*)cmd param:(NSString*)params;
 -(void)ConnectToYKDevice;
 -(void)closeTcp;
 @end

@@ -43,7 +43,7 @@
 #pragma mrak - Actions
 - (void)clickRightBarButton:(id)sender
 {
-    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)clickOpenButton:(id)sender
