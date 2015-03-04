@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEG-we-H3s">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="cEG-we-H3s">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
@@ -800,6 +800,12 @@ Cg
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="F0W-lB-czJ">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="118"/>
                                     </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title_shadow_750.png" translatesAutoresizingMaskIntoConstraints="NO" id="TR4-kv-Je8">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="10"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="10" id="RuH-we-qap"/>
+                                        </constraints>
+                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="绑定UCON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QGd-X3-uGV">
                                         <rect key="frame" x="123" y="90" width="75" height="18"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
@@ -831,10 +837,13 @@ Cg
                                 </subviews>
                                 <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="TR4-kv-Je8" firstAttribute="top" secondItem="Drt-GI-ftc" secondAttribute="top" id="19V-wg-RhC"/>
                                     <constraint firstAttribute="centerX" secondItem="QGd-X3-uGV" secondAttribute="centerX" id="3BA-gg-XBi"/>
                                     <constraint firstItem="TnB-2p-til" firstAttribute="leading" secondItem="Drt-GI-ftc" secondAttribute="leading" id="FC9-d9-sPN"/>
                                     <constraint firstItem="jQz-BV-fha" firstAttribute="top" secondItem="Drt-GI-ftc" secondAttribute="top" constant="10" id="KFp-q3-ku5"/>
                                     <constraint firstItem="QGd-X3-uGV" firstAttribute="top" secondItem="jQz-BV-fha" secondAttribute="bottom" constant="5" id="RQZ-CU-yOX"/>
+                                    <constraint firstAttribute="trailing" secondItem="TR4-kv-Je8" secondAttribute="trailing" id="fYa-qL-TFR"/>
+                                    <constraint firstItem="TR4-kv-Je8" firstAttribute="leading" secondItem="Drt-GI-ftc" secondAttribute="leading" id="gip-NL-y1d"/>
                                     <constraint firstAttribute="height" constant="118" id="h4W-eG-zDV"/>
                                     <constraint firstAttribute="trailing" secondItem="F0W-lB-czJ" secondAttribute="trailing" id="hMj-A7-K1E"/>
                                     <constraint firstAttribute="centerX" secondItem="jQz-BV-fha" secondAttribute="centerX" id="itc-j3-fj7"/>
@@ -1014,6 +1023,7 @@ Cg
         <image name="button_510x80_normal.png" width="255" height="40"/>
         <image name="button_UCON_my.png" width="70" height="70"/>
         <image name="icon_equipment.png" width="233" height="179"/>
+        <image name="title_shadow_750.png" width="375" height="9"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

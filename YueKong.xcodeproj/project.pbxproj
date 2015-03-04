@@ -176,6 +176,7 @@
 		FC1B6AF41A8CA6A50053DC22 /* step13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1B6AE71A8CA6A50053DC22 /* step13@2x.png */; };
 		FC2918651A8359450035961F /* YKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2918641A8359450035961F /* YKModel.m */; };
 		FC2918681A835A490035961F /* YKDeviceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2918671A835A490035961F /* YKDeviceModel.m */; };
+		FC39CBBD1AA562C400EB1609 /* title_shadow_750@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC39CBBC1AA562C400EB1609 /* title_shadow_750@2x.png */; };
 		FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB0F1A62BE8F0032D651 /* Base64.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB121A62BE8F0032D651 /* BPushClass.m */; };
 		FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC5AFB141A62BE8F0032D651 /* GzipCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -186,6 +187,28 @@
 		FC82CCE11A84F81500012F7D /* icon_NetworkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */; };
 		FC82CCE21A84F81500012F7D /* icon_STB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */; };
 		FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */; };
+		FC8470E01AA6A5D000444761 /* LBleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC8470DF1AA6A5D000444761 /* LBleManager.mm */; };
+		FC8470E21AA6A76200444761 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC8470E11AA6A76200444761 /* CoreBluetooth.framework */; };
+		FC8470F71AA6E32E00444761 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470E61AA6E32E00444761 /* NSMutableArray+fifoQueue.m */; };
+		FC8470F81AA6E32E00444761 /* YMS128.c in Sources */ = {isa = PBXBuildFile; fileRef = FC8470E71AA6E32E00444761 /* YMS128.c */; };
+		FC8470F91AA6E32E00444761 /* YMSCBCentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470EA1AA6E32E00444761 /* YMSCBCentralManager.m */; };
+		FC8470FA1AA6E32E00444761 /* YMSCBCharacteristic.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470EC1AA6E32E00444761 /* YMSCBCharacteristic.m */; };
+		FC8470FB1AA6E32E00444761 /* YMSCBDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470EE1AA6E32E00444761 /* YMSCBDescriptor.m */; };
+		FC8470FC1AA6E32E00444761 /* YMSCBPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470F01AA6E32E00444761 /* YMSCBPeripheral.m */; };
+		FC8470FD1AA6E32E00444761 /* YMSCBService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470F21AA6E32E00444761 /* YMSCBService.m */; };
+		FC8470FE1AA6E32E00444761 /* YMSCBStoredPeripherals.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470F41AA6E32E00444761 /* YMSCBStoredPeripherals.m */; };
+		FC8470FF1AA6E32E00444761 /* YMSCBUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470F61AA6E32E00444761 /* YMSCBUtils.m */; };
+		FC8471021AA6F35200444761 /* DEACentralManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471011AA6F35200444761 /* DEACentralManager.m */; };
+		FC84711A1AA6F7B900444761 /* DEASensorTag.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471051AA6F7B900444761 /* DEASensorTag.m */; };
+		FC84711B1AA6F7B900444761 /* DEAAccelerometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471081AA6F7B900444761 /* DEAAccelerometerService.m */; };
+		FC84711C1AA6F7B900444761 /* DEABarometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC84710A1AA6F7B900444761 /* DEABarometerService.m */; };
+		FC84711D1AA6F7B900444761 /* DEABaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC84710C1AA6F7B900444761 /* DEABaseService.m */; };
+		FC84711E1AA6F7B900444761 /* DEADeviceInfoService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC84710E1AA6F7B900444761 /* DEADeviceInfoService.m */; };
+		FC84711F1AA6F7B900444761 /* DEAGyroscopeService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471101AA6F7B900444761 /* DEAGyroscopeService.m */; };
+		FC8471201AA6F7B900444761 /* DEAHumidityService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471121AA6F7B900444761 /* DEAHumidityService.m */; };
+		FC8471211AA6F7B900444761 /* DEAMagnetometerService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471141AA6F7B900444761 /* DEAMagnetometerService.m */; };
+		FC8471221AA6F7B900444761 /* DEASimpleKeysService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471161AA6F7B900444761 /* DEASimpleKeysService.m */; };
+		FC8471231AA6F7B900444761 /* DEATemperatureService.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8471181AA6F7B900444761 /* DEATemperatureService.m */; };
 		FC8647121A6D509E000CF612 /* RemoteControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647101A6D509E000CF612 /* RemoteControlViewController.m */; };
 		FC8647131A6D509E000CF612 /* RemoteControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */; };
 		FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */; };
@@ -486,6 +509,7 @@
 		FC2918641A8359450035961F /* YKModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKModel.m; sourceTree = "<group>"; };
 		FC2918661A835A490035961F /* YKDeviceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKDeviceModel.h; sourceTree = "<group>"; };
 		FC2918671A835A490035961F /* YKDeviceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKDeviceModel.m; sourceTree = "<group>"; };
+		FC39CBBC1AA562C400EB1609 /* title_shadow_750@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "title_shadow_750@2x.png"; sourceTree = "<group>"; };
 		FC5AFB0C1A62BE8F0032D651 /* BPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BPush.h; path = LibBPush/BPush.h; sourceTree = "<group>"; };
 		FC5AFB0E1A62BE8F0032D651 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
 		FC5AFB0F1A62BE8F0032D651 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
@@ -503,6 +527,50 @@
 		FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_NetworkBox@2x.png"; sourceTree = "<group>"; };
 		FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_STB@2x.png"; sourceTree = "<group>"; };
 		FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_TV@2x.png"; sourceTree = "<group>"; };
+		FC8470DE1AA6A5D000444761 /* LBleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBleManager.h; path = ../LBleManager.h; sourceTree = "<group>"; };
+		FC8470DF1AA6A5D000444761 /* LBleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LBleManager.mm; path = ../LBleManager.mm; sourceTree = "<group>"; };
+		FC8470E11AA6A76200444761 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		FC8470E51AA6E32E00444761 /* NSMutableArray+fifoQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+fifoQueue.h"; sourceTree = "<group>"; };
+		FC8470E61AA6E32E00444761 /* NSMutableArray+fifoQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+fifoQueue.m"; sourceTree = "<group>"; };
+		FC8470E71AA6E32E00444761 /* YMS128.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = YMS128.c; sourceTree = "<group>"; };
+		FC8470E81AA6E32E00444761 /* YMS128.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMS128.h; sourceTree = "<group>"; };
+		FC8470E91AA6E32E00444761 /* YMSCBCentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCentralManager.h; sourceTree = "<group>"; };
+		FC8470EA1AA6E32E00444761 /* YMSCBCentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCentralManager.m; sourceTree = "<group>"; };
+		FC8470EB1AA6E32E00444761 /* YMSCBCharacteristic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBCharacteristic.h; sourceTree = "<group>"; };
+		FC8470EC1AA6E32E00444761 /* YMSCBCharacteristic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBCharacteristic.m; sourceTree = "<group>"; };
+		FC8470ED1AA6E32E00444761 /* YMSCBDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBDescriptor.h; sourceTree = "<group>"; };
+		FC8470EE1AA6E32E00444761 /* YMSCBDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBDescriptor.m; sourceTree = "<group>"; };
+		FC8470EF1AA6E32E00444761 /* YMSCBPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBPeripheral.h; sourceTree = "<group>"; };
+		FC8470F01AA6E32E00444761 /* YMSCBPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBPeripheral.m; sourceTree = "<group>"; };
+		FC8470F11AA6E32E00444761 /* YMSCBService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBService.h; sourceTree = "<group>"; };
+		FC8470F21AA6E32E00444761 /* YMSCBService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBService.m; sourceTree = "<group>"; };
+		FC8470F31AA6E32E00444761 /* YMSCBStoredPeripherals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBStoredPeripherals.h; sourceTree = "<group>"; };
+		FC8470F41AA6E32E00444761 /* YMSCBStoredPeripherals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBStoredPeripherals.m; sourceTree = "<group>"; };
+		FC8470F51AA6E32E00444761 /* YMSCBUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YMSCBUtils.h; sourceTree = "<group>"; };
+		FC8470F61AA6E32E00444761 /* YMSCBUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YMSCBUtils.m; sourceTree = "<group>"; };
+		FC8471001AA6F35200444761 /* DEACentralManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEACentralManager.h; sourceTree = "<group>"; };
+		FC8471011AA6F35200444761 /* DEACentralManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEACentralManager.m; sourceTree = "<group>"; };
+		FC8471041AA6F7B900444761 /* DEASensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASensorTag.h; sourceTree = "<group>"; };
+		FC8471051AA6F7B900444761 /* DEASensorTag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASensorTag.m; sourceTree = "<group>"; };
+		FC8471071AA6F7B900444761 /* DEAAccelerometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAAccelerometerService.h; sourceTree = "<group>"; };
+		FC8471081AA6F7B900444761 /* DEAAccelerometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAAccelerometerService.m; sourceTree = "<group>"; };
+		FC8471091AA6F7B900444761 /* DEABarometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABarometerService.h; sourceTree = "<group>"; };
+		FC84710A1AA6F7B900444761 /* DEABarometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABarometerService.m; sourceTree = "<group>"; };
+		FC84710B1AA6F7B900444761 /* DEABaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEABaseService.h; sourceTree = "<group>"; };
+		FC84710C1AA6F7B900444761 /* DEABaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEABaseService.m; sourceTree = "<group>"; };
+		FC84710D1AA6F7B900444761 /* DEADeviceInfoService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEADeviceInfoService.h; sourceTree = "<group>"; };
+		FC84710E1AA6F7B900444761 /* DEADeviceInfoService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEADeviceInfoService.m; sourceTree = "<group>"; };
+		FC84710F1AA6F7B900444761 /* DEAGyroscopeService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAGyroscopeService.h; sourceTree = "<group>"; };
+		FC8471101AA6F7B900444761 /* DEAGyroscopeService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAGyroscopeService.m; sourceTree = "<group>"; };
+		FC8471111AA6F7B900444761 /* DEAHumidityService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAHumidityService.h; sourceTree = "<group>"; };
+		FC8471121AA6F7B900444761 /* DEAHumidityService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAHumidityService.m; sourceTree = "<group>"; };
+		FC8471131AA6F7B900444761 /* DEAMagnetometerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEAMagnetometerService.h; sourceTree = "<group>"; };
+		FC8471141AA6F7B900444761 /* DEAMagnetometerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEAMagnetometerService.m; sourceTree = "<group>"; };
+		FC8471151AA6F7B900444761 /* DEASimpleKeysService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEASimpleKeysService.h; sourceTree = "<group>"; };
+		FC8471161AA6F7B900444761 /* DEASimpleKeysService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEASimpleKeysService.m; sourceTree = "<group>"; };
+		FC8471171AA6F7B900444761 /* DEATemperatureService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DEATemperatureService.h; sourceTree = "<group>"; };
+		FC8471181AA6F7B900444761 /* DEATemperatureService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DEATemperatureService.m; sourceTree = "<group>"; };
+		FC8471191AA6F7B900444761 /* TISensorTag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TISensorTag.h; sourceTree = "<group>"; };
 		FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteControlViewController.h; sourceTree = "<group>"; };
 		FC8647101A6D509E000CF612 /* RemoteControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteControlViewController.m; sourceTree = "<group>"; };
 		FC8647111A6D509E000CF612 /* RemoteControlViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RemoteControlViewController.xib; sourceTree = "<group>"; };
@@ -534,6 +602,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC8470E21AA6A76200444761 /* CoreBluetooth.framework in Frameworks */,
 				FC147E2E1A5D2CBE00BA06F3 /* SystemConfiguration.framework in Frameworks */,
 				FC147E2C1A5D2CA700BA06F3 /* Security.framework in Frameworks */,
 				FC147E2A1A5D2C9500BA06F3 /* libiconv.dylib in Frameworks */,
@@ -596,6 +665,7 @@
 		186C77EB1A7E6CA8006C5649 /* BG */ = {
 			isa = PBXGroup;
 			children = (
+				FC39CBBC1AA562C400EB1609 /* title_shadow_750@2x.png */,
 				3BC848831A889155002D0C15 /* window_580x350@2x.png */,
 				3BC848811A889133002D0C15 /* bg_window_670x315@2x.png */,
 				FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */,
@@ -662,6 +732,7 @@
 		FC0BA9601A5E234E00748B4E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				FC8470E31AA6E32E00444761 /* BLE */,
 				FCAF7B021A63ADE3001CC512 /* AsyncSocket */,
 				FC1AE57F1A5FCF1700CD5611 /* httpcontrol */,
 				FC0BA9621A5E26BF00748B4E /* absManager.h */,
@@ -746,6 +817,7 @@
 		FC147CCD1A5CDB3A00BA06F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FC8470E11AA6A76200444761 /* CoreBluetooth.framework */,
 				FC5844A21A7BD6DC0038D681 /* Res */,
 				FC6AF53F1A63CB56000C1226 /* include */,
 				FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */,
@@ -1216,6 +1288,80 @@
 			path = include;
 			sourceTree = "<group>";
 		};
+		FC8470E31AA6E32E00444761 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				FC8471001AA6F35200444761 /* DEACentralManager.h */,
+				FC8471011AA6F35200444761 /* DEACentralManager.m */,
+				FC8471031AA6F7B900444761 /* SensorTag */,
+				FC8470DE1AA6A5D000444761 /* LBleManager.h */,
+				FC8470DF1AA6A5D000444761 /* LBleManager.mm */,
+				FC8470E41AA6E32E00444761 /* YmsCoreBluetooth */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
+		FC8470E41AA6E32E00444761 /* YmsCoreBluetooth */ = {
+			isa = PBXGroup;
+			children = (
+				FC8470E51AA6E32E00444761 /* NSMutableArray+fifoQueue.h */,
+				FC8470E61AA6E32E00444761 /* NSMutableArray+fifoQueue.m */,
+				FC8470E71AA6E32E00444761 /* YMS128.c */,
+				FC8470E81AA6E32E00444761 /* YMS128.h */,
+				FC8470E91AA6E32E00444761 /* YMSCBCentralManager.h */,
+				FC8470EA1AA6E32E00444761 /* YMSCBCentralManager.m */,
+				FC8470EB1AA6E32E00444761 /* YMSCBCharacteristic.h */,
+				FC8470EC1AA6E32E00444761 /* YMSCBCharacteristic.m */,
+				FC8470ED1AA6E32E00444761 /* YMSCBDescriptor.h */,
+				FC8470EE1AA6E32E00444761 /* YMSCBDescriptor.m */,
+				FC8470EF1AA6E32E00444761 /* YMSCBPeripheral.h */,
+				FC8470F01AA6E32E00444761 /* YMSCBPeripheral.m */,
+				FC8470F11AA6E32E00444761 /* YMSCBService.h */,
+				FC8470F21AA6E32E00444761 /* YMSCBService.m */,
+				FC8470F31AA6E32E00444761 /* YMSCBStoredPeripherals.h */,
+				FC8470F41AA6E32E00444761 /* YMSCBStoredPeripherals.m */,
+				FC8470F51AA6E32E00444761 /* YMSCBUtils.h */,
+				FC8470F61AA6E32E00444761 /* YMSCBUtils.m */,
+			);
+			path = YmsCoreBluetooth;
+			sourceTree = "<group>";
+		};
+		FC8471031AA6F7B900444761 /* SensorTag */ = {
+			isa = PBXGroup;
+			children = (
+				FC8471041AA6F7B900444761 /* DEASensorTag.h */,
+				FC8471051AA6F7B900444761 /* DEASensorTag.m */,
+				FC8471061AA6F7B900444761 /* Services */,
+				FC8471191AA6F7B900444761 /* TISensorTag.h */,
+			);
+			path = SensorTag;
+			sourceTree = "<group>";
+		};
+		FC8471061AA6F7B900444761 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FC8471071AA6F7B900444761 /* DEAAccelerometerService.h */,
+				FC8471081AA6F7B900444761 /* DEAAccelerometerService.m */,
+				FC8471091AA6F7B900444761 /* DEABarometerService.h */,
+				FC84710A1AA6F7B900444761 /* DEABarometerService.m */,
+				FC84710B1AA6F7B900444761 /* DEABaseService.h */,
+				FC84710C1AA6F7B900444761 /* DEABaseService.m */,
+				FC84710D1AA6F7B900444761 /* DEADeviceInfoService.h */,
+				FC84710E1AA6F7B900444761 /* DEADeviceInfoService.m */,
+				FC84710F1AA6F7B900444761 /* DEAGyroscopeService.h */,
+				FC8471101AA6F7B900444761 /* DEAGyroscopeService.m */,
+				FC8471111AA6F7B900444761 /* DEAHumidityService.h */,
+				FC8471121AA6F7B900444761 /* DEAHumidityService.m */,
+				FC8471131AA6F7B900444761 /* DEAMagnetometerService.h */,
+				FC8471141AA6F7B900444761 /* DEAMagnetometerService.m */,
+				FC8471151AA6F7B900444761 /* DEASimpleKeysService.h */,
+				FC8471161AA6F7B900444761 /* DEASimpleKeysService.m */,
+				FC8471171AA6F7B900444761 /* DEATemperatureService.h */,
+				FC8471181AA6F7B900444761 /* DEATemperatureService.m */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		FCAF7B021A63ADE3001CC512 /* AsyncSocket */ = {
 			isa = PBXGroup;
 			children = (
@@ -1336,6 +1482,7 @@
 				3BC848821A889133002D0C15 /* bg_window_670x315@2x.png in Resources */,
 				3BD14E0C1A8DE5E600B75F68 /* 03_11@2x.png in Resources */,
 				3BD14DF41A8DE5E600B75F68 /* 01_10@2x.png in Resources */,
+				FC39CBBD1AA562C400EB1609 /* title_shadow_750@2x.png in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
 				3BD14DF91A8DE5E600B75F68 /* 02_04@2x.png in Resources */,
 				3BD14DFF1A8DE5E600B75F68 /* 02_10@2x.png in Resources */,
@@ -1428,7 +1575,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCAF7B0B1A63ADE3001CC512 /* mPacket.m in Sources */,
+				FC84711D1AA6F7B900444761 /* DEABaseService.m in Sources */,
 				FC147DEE1A5D1D9600BA06F3 /* IQUIWindow+Hierarchy.m in Sources */,
+				FC8470E01AA6A5D000444761 /* LBleManager.mm in Sources */,
 				FC2918681A835A490035961F /* YKDeviceModel.m in Sources */,
 				1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */,
 				FC147DF61A5D1D9600BA06F3 /* IQUIView+IQKeyboardToolbar.m in Sources */,
@@ -1436,12 +1585,15 @@
 				3BC2AFE11A9F0700003CA9DD /* DeviceTypeViewCell.m in Sources */,
 				FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */,
 				FC0BA9731A5E303E00748B4E /* EHRootViewController.m in Sources */,
+				FC84711A1AA6F7B900444761 /* DEASensorTag.m in Sources */,
 				FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */,
 				FC147DF01A5D1D9600BA06F3 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				1812E2CB1A9F6D9100FF005E /* ReservationDetailViewController.m in Sources */,
 				FC147DFF1A5D1D9600BA06F3 /* ChineseInclude.m in Sources */,
 				FC147D101A5D1D1900BA06F3 /* NSString+URLEncoding.m in Sources */,
+				FC8470FF1AA6E32E00444761 /* YMSCBUtils.m in Sources */,
 				FC147DEC1A5D1D9600BA06F3 /* IQNSArray+Sort.m in Sources */,
+				FC8470FB1AA6E32E00444761 /* YMSCBDescriptor.m in Sources */,
 				FC147DED1A5D1D9600BA06F3 /* IQUIView+Hierarchy.m in Sources */,
 				FC147E1D1A5D209A00BA06F3 /* MBProgressHUD.m in Sources */,
 				18CE1B161A8510820031F076 /* DeviceSelectCollectionCell.m in Sources */,
@@ -1454,8 +1606,10 @@
 				FC0BA9741A5E303E00748B4E /* EHWebViewController.m in Sources */,
 				FC147E101A5D1D9600BA06F3 /* SRSlimeView.m in Sources */,
 				FC147E0F1A5D1D9600BA06F3 /* SRRefreshView.m in Sources */,
+				FC8470FD1AA6E32E00444761 /* YMSCBService.m in Sources */,
 				3BC2AFDD1A9F046A003CA9DD /* ReservationTypeSelectViewController.m in Sources */,
 				FC147DE01A5D1D9600BA06F3 /* CXAlertButtonItem.m in Sources */,
+				FC8471231AA6F7B900444761 /* DEATemperatureService.m in Sources */,
 				FC147DEB1A5D1D9600BA06F3 /* HMSegmentedControl.m in Sources */,
 				FC2918651A8359450035961F /* YKModel.m in Sources */,
 				FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */,
@@ -1469,6 +1623,7 @@
 				FC177B761A6E3FD4008C953E /* DeviceManagerCollectionHeaderView.m in Sources */,
 				FC147DF41A5D1D9600BA06F3 /* IQTitleBarButtonItem.m in Sources */,
 				FC147D0D1A5D1D1900BA06F3 /* NSDate+TKCategory.m in Sources */,
+				FC8471201AA6F7B900444761 /* DEAHumidityService.m in Sources */,
 				FC147E071A5D1D9600BA06F3 /* PopoverView.m in Sources */,
 				FC147E091A5D1D9600BA06F3 /* RegexKitLite.m in Sources */,
 				FC147DE51A5D1D9600BA06F3 /* EGORefreshTableHeaderView.m in Sources */,
@@ -1477,30 +1632,39 @@
 				FC147D0C1A5D1D1900BA06F3 /* NSArray+BaseKit.m in Sources */,
 				FC147DF81A5D1D9600BA06F3 /* JSONKit.m in Sources */,
 				FC147D0B1A5D1D1900BA06F3 /* MD5Util.m in Sources */,
+				FC8470F81AA6E32E00444761 /* YMS128.c in Sources */,
 				FC147DEA1A5D1D9600BA06F3 /* FMResultSet.m in Sources */,
 				FC147E011A5D1D9600BA06F3 /* HanyuPinyinOutputFormat.m in Sources */,
+				FC84711B1AA6F7B900444761 /* DEAAccelerometerService.m in Sources */,
 				FC147E041A5D1D9600BA06F3 /* PinYinForObjc.m in Sources */,
 				FC147DE91A5D1D9600BA06F3 /* FMDatabaseQueue.m in Sources */,
 				FC147DE21A5D1D9600BA06F3 /* CXAlertViewController.m in Sources */,
+				FC8471211AA6F7B900444761 /* DEAMagnetometerService.m in Sources */,
 				FC147E021A5D1D9600BA06F3 /* NSString+PinYin4Cocoa.m in Sources */,
 				FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */,
 				FCA519231A722602006B0A5C /* HomeAppliancesManager.m in Sources */,
 				FC147DF31A5D1D9600BA06F3 /* IQBarButtonItem.m in Sources */,
 				FC147DE11A5D1D9600BA06F3 /* CXAlertView.m in Sources */,
 				FC1AE59D1A5FCF6A00CD5611 /* ASIDataCompressor.m in Sources */,
+				FC8471021AA6F35200444761 /* DEACentralManager.m in Sources */,
+				FC8470F91AA6E32E00444761 /* YMSCBCentralManager.m in Sources */,
 				FC5AFB1C1A62BE8F0032D651 /* OpenUDID.m in Sources */,
 				FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */,
 				FC147E0A1A5D1D9600BA06F3 /* RECommonFunctions.m in Sources */,
+				FC84711F1AA6F7B900444761 /* DEAGyroscopeService.m in Sources */,
 				FC147CD01A5CDB3A00BA06F3 /* main.m in Sources */,
 				FC147DE71A5D1D9600BA06F3 /* FMDatabaseAdditions.m in Sources */,
 				FC1AE59C1A5FCF6A00CD5611 /* ASIAuthenticationDialog.m in Sources */,
 				FC147D0E1A5D1D1900BA06F3 /* NSDictionary+BaseKit.m in Sources */,
+				FC8470FA1AA6E32E00444761 /* YMSCBCharacteristic.m in Sources */,
 				FC147DF51A5D1D9600BA06F3 /* IQToolbar.m in Sources */,
 				3BC848801A8887F3002D0C15 /* YKButtonPopoverView.m in Sources */,
+				FC8471221AA6F7B900444761 /* DEASimpleKeysService.m in Sources */,
 				FC147D131A5D1D1900BA06F3 /* UIViewController+EHBase.m in Sources */,
 				FC0BA9771A5E81E600748B4E /* SSIDManager.m in Sources */,
 				FC1AE5A31A5FCF6A00CD5611 /* ASINetworkQueue.m in Sources */,
 				FC147DE41A5D1D9600BA06F3 /* EGORefreshTableFooterView.m in Sources */,
+				FC84711E1AA6F7B900444761 /* DEADeviceInfoService.m in Sources */,
 				FC147E051A5D1D9600BA06F3 /* PinyinHelper.m in Sources */,
 				FC147D0F1A5D1D1900BA06F3 /* NSObject+Null.m in Sources */,
 				FC147DDF1A5D1D9600BA06F3 /* CXAlertButtonContainerView.m in Sources */,
@@ -1510,13 +1674,17 @@
 				3BDC5A1B1A8B3E8900C2813D /* ConfigFinishViewController.m in Sources */,
 				FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */,
 				FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */,
+				FC8470FE1AA6E32E00444761 /* YMSCBStoredPeripherals.m in Sources */,
+				FC84711C1AA6F7B900444761 /* DEABarometerService.m in Sources */,
 				FC1798041A6CB25900C04D1F /* DeviceManagerController.m in Sources */,
 				FC1AE59F1A5FCF6A00CD5611 /* ASIDownloadCache.m in Sources */,
 				FC1AE5A01A5FCF6A00CD5611 /* ASIFormDataRequest.m in Sources */,
 				FC147E0C1A5D1D9600BA06F3 /* UIViewController+RESideMenu.m in Sources */,
 				FC147DEF1A5D1D9600BA06F3 /* IQKeyboardManager.m in Sources */,
 				FC147D121A5D1D1900BA06F3 /* UIView+BaseKit.m in Sources */,
+				FC8470F71AA6E32E00444761 /* NSMutableArray+fifoQueue.m in Sources */,
 				FC147E0B1A5D1D9600BA06F3 /* RESideMenu.m in Sources */,
+				FC8470FC1AA6E32E00444761 /* YMSCBPeripheral.m in Sources */,
 				FC147D0A1A5D1D1900BA06F3 /* InfoUIDevice.m in Sources */,
 				FC147DE81A5D1D9600BA06F3 /* FMDatabasePool.m in Sources */,
 				FC147E111A5D1D9600BA06F3 /* SMPageControl.m in Sources */,
@@ -1651,7 +1819,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer: wenjie xu (F8CAJ7A8V3)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueKong/PrefixHeader.pch";
 				INFOPLIST_FILE = YueKong/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1676,7 +1844,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Nanjing yuekong Intelligent Technology Co., Ltd. (83Q7C7PFZK)";
 				GCC_PREFIX_HEADER = "$(SRCROOT)/YueKong/PrefixHeader.pch";
 				INFOPLIST_FILE = YueKong/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
