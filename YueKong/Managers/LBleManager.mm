@@ -29,4 +29,11 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     return self;
 }
 
+-(void)scanWithDelegate:(id)delegate{
+    _centralManager = [DEACentralManager sharedService];
+    if (nil == _centralManager) {
+        _centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
+    }
+    [_centralManager startScan];
+}
 @end

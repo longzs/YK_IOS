@@ -14,4 +14,6 @@
 
 DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 
+-(void)scanWithDelegate:(id)delegate;
+
 @end
