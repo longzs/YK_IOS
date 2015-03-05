@@ -12,9 +12,11 @@
 
 @interface LBleManager()
 
-@property(nonatomic, strong)DEACentralManager* centralManager;
+@property(nonatomic, strong)CBCentralManager* centralManager;
 
 @property(nonatomic, strong)CBPeripheral*       currentPeripheral;
+
+@property(nonatomic, strong)CBCharacteristic*       currentCharacteristic;
 
 @property(nonatomic, strong)NSTimer* connectTimer;
 
@@ -35,10 +37,11 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 
 -(void)scanWithDelegate:(id)delegate{
     if (nil == _centralManager) {
-        _centralManager = [DEACentralManager initSharedServiceWithDelegate:self];
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }
     // 查找， 成功了在找到合适得然后连接
-    [_centralManager startScan];
+    [_centralManager scanForPeripheralsWithServices:nil
+                                            options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
 }
 
 -(void)stopScan{
@@ -46,15 +49,23 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     [_centralManager stopScan];
 }
 
+-(void)connectServer{
+    
+    [_centralManager connectPeripheral:_currentPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
+    
+    //开一个定时器监控连接超时的情况
+    _connectTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(connectTimeout:) userInfo:_currentPeripheral repeats:NO];
+}
+
 -(void)disConnectServer{
     
-    [_centralManager.manager cancelPeripheralConnection:_currentPeripheral];
+    [_centralManager cancelPeripheralConnection:_currentPeripheral];
 }
 
 -(void)connectTimeout:(NSTimer*)timer{
     // 连接超时
     _connectTimer = nil;
-    [_centralManager.manager cancelPeripheralConnection:_currentPeripheral];
+    [_centralManager cancelPeripheralConnection:timer.userInfo];
 }
 
 -(void)stopConnectTimer{
@@ -63,6 +74,20 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         [_connectTimer invalidate];
     }
     _connectTimer = nil;
+}
+
+//写数据
+-(void)writeChar:(NSData *)data
+{
+    [self startSubscribe];
+    const char* testChar = "testChar12345678";
+    [_currentPeripheral writeValue:[NSData dataWithBytes:testChar length:strlen(testChar)] forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
+}
+
+//监听设备
+-(void)startSubscribe
+{
+    [_currentPeripheral setNotifyValue:YES forCharacteristic:_currentCharacteristic];
 }
 
 #pragma mark - CBCentralManagerDelegate Methods
@@ -125,17 +150,14 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
     
     // 找到了服务
-    DEACentralManager *centralManager = [DEACentralManager sharedService];
     
-    YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+    //YMSCBPeripheral *yp = [_centralManager findPeripheral:peripheral];
     
-    // 尝试连接
+    // 测试代码
     _currentPeripheral = peripheral;
-    [_centralManager.manager connectPeripheral:yp.cbPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
-    
-    //开一个定时器监控连接超时的情况
-    _connectTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(connectTimeout:) userInfo:peripheral repeats:NO];
-    
+    [self stopScan];
+    // 尝试连接
+    [self performSelector:@selector(connectServer) withObject:nil afterDelay:1];
 //    if (yp.isRenderedInViewCell == NO) {
 //        [self.peripheralsTableView reloadData];
 //        yp.isRenderedInViewCell = YES;
@@ -197,7 +219,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     for (CBService *service in peripheral.services)
     {
         NSLog(@"Discovered services for UUID %@", [service.UUID UUIDString]);
-        if ([service.UUID isEqual:[CBUUID UUIDWithString:UUIDSTR_ISSC_YueKongYKQ_SERVICE]])
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:UUIDSTR_YueKongYKQ_SERVICE]])
         {
             [peripheral discoverCharacteristics:nil forService:service];
             
@@ -219,35 +241,58 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         return;
     }
     
-    
     for (CBCharacteristic *characteristic in service.characteristics)
     {
-         NSLog(@"Discovered read characteristics:%@ for service: %@", characteristic.UUID, service.UUID);
+         NSLog(@"Discovered characteristics:%@ for service: %@", characteristic.UUID, service.UUID);
         
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUIDSTR_ISSC_TRANS_TX]])
+        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUIDSTR_ISSC_TRANS_RW]])
         {
-//            _readCharacteristic = characteristic;//保存读的特征
+            
+            NSLog(@"Discovered readwrite characteristics:%@ for service: %@", characteristic.UUID, service.UUID);
+            
+            _currentCharacteristic = characteristic;//保存读的特征
 //            
 //            if ([self.delegate respondsToSelector:@selector(DidFoundReadChar:)])
 //                [self.delegate DidFoundReadChar:characteristic];
-//            
-            continue;
-        }
-        
-        if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:UUIDSTR_ISSC_TRANS_RX]])
-        {
-            
-//            NSLog(@"Discovered write characteristics:%@ for service: %@", characteristic.UUID, service.UUID);
-//            _writeCharacteristic = characteristic;//保存写的特征
-//            
-//            if ([self.delegate respondsToSelector:@selector(DidFoundWriteChar:)])
-//                [self.delegate DidFoundWriteChar:characteristic];
 //
+            [self performSelector:@selector(writeChar:) withObject:nil afterDelay:3.5];
+            break;
         }
     }
     
 //    if ([self.delegate respondsToSelector:@selector(DidFoundCharacteristic:withPeripheral:error:)])
 //        [self.delegate DidFoundCharacteristic:nil withPeripheral:nil error:nil];
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    
+    if (error)
+    {
+        NSLog(@"Error updating value for characteristic %@ error: %@", characteristic.UUID, [error localizedDescription]);
+        
+//        if ([_mainMenuDelegate respondsToSelector:@selector(DidNotifyReadError:)])
+//            [_mainMenuDelegate DidNotifyReadError:error];
+        
+        return;
+    }
+    
+//    [_recvData appendData:characteristic.value];
+//    
+//    
+//    if ([_recvData length] >= 5)//已收到长度
+//    {
+//        unsigned charchar *buffer = (unsigned charchar *)[_recvData bytes];
+//        int nLen = buffer[3]*256 + buffer[4];
+//        if ([_recvData length] == (nLen+3+2+2))
+//        {
+//            //接收完毕，通知代理做事
+//            if ([_mainMenuDelegate respondsToSelector:@selector(DidNotifyReadData)])
+//                [_mainMenuDelegate DidNotifyReadData];
+//            
+//        }
+//    }
+    
 }
 
 - (void)performUpdateRSSI:(NSArray *)args {

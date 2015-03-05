@@ -15,6 +15,7 @@
 #import "YKButtonPopoverView.h"
 #import "ReservationTypeSelectViewController.h"
 #import "ReservationDetailViewController.h"
+#import "LBleManager.h"
 
 #define kCollectionCellApplinceSize CGSizeMake(self.view.frame.size.width/4.0, 100)
 
@@ -152,7 +153,9 @@
 */
 
 -(IBAction)clickShowBind:(id)sender{
-
+    
+    [[LBleManager sharedInstance] scanWithDelegate:nil];
+    return;
     ViewController *vc = [ViewController instantiateFromMainStoryboard];
     [self.navigationController pushViewController:vc animated:YES];
 }

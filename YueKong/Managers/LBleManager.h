@@ -9,13 +9,15 @@
 #import "absManager.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define UUIDSTR_ISSC_YueKongYKQ_SERVICE    @""
+#define UUIDSTR_ISSC_YueKongYKQ_Identifier    @"6384E0F3-0642-032A-6DDD-B3499FB43079"
 
-// 读得特征
-#define UUIDSTR_ISSC_TRANS_TX               @""
+#define UUIDSTR_YueKongYKQ_SERVICE            @"FFF0"
+
+// 读写特征
+#define UUIDSTR_ISSC_TRANS_RW               @"FFF6"
 
 // 写
-#define UUIDSTR_ISSC_TRANS_RX               @""
+#define UUIDSTR_ISSC_TRANS_RX               @"FFF3"
 
 @interface LBleManager : absManager
 <CBPeripheralDelegate, CBCentralManagerDelegate>
@@ -26,6 +28,10 @@ DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 
 -(void)stopScan;
 
+-(void)connectServer;
+
 -(void)disConnectServer;
+
+-(void)writeChar:(NSData *)data;
 
 @end
