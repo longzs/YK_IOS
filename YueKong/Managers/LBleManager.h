@@ -9,11 +9,23 @@
 #import "absManager.h"
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#define UUIDSTR_ISSC_YueKongYKQ_SERVICE    @""
+
+// 读得特征
+#define UUIDSTR_ISSC_TRANS_TX               @""
+
+// 写
+#define UUIDSTR_ISSC_TRANS_RX               @""
+
 @interface LBleManager : absManager
-<CBPeripheralDelegate>
+<CBPeripheralDelegate, CBCentralManagerDelegate>
 
 DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 
 -(void)scanWithDelegate:(id)delegate;
+
+-(void)stopScan;
+
+-(void)disConnectServer;
 
 @end

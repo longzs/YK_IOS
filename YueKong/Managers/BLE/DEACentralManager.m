@@ -31,7 +31,7 @@ static DEACentralManager *sharedCentralManager;
 
 + (DEACentralManager *)initSharedServiceWithDelegate:(id)delegate {
     if (sharedCentralManager == nil) {
-        dispatch_queue_t queue = dispatch_queue_create("com.yummymelon.deanna", 0);
+        dispatch_queue_t queue = dispatch_queue_create("com.yuekong.yk", 0);
 
         NSArray *nameList = @[@"TI BLE Sensor Tag", @"SensorTag"];
         sharedCentralManager = [[super allocWithZone:NULL] initWithKnownPeripheralNames:nameList
@@ -74,12 +74,13 @@ static DEACentralManager *sharedCentralManager;
                                  options:options
                                withBlock:^(CBPeripheral *peripheral, NSDictionary *advertisementData, NSNumber *RSSI, NSError *error) {
                                    if (error) {
-                                       NSLog(@"Something bad happened with scanForPeripheralWithServices:options:withBlock:");
-                                       return;
+                                       NSLog(@"scanForPeripheralWithServices--error %@", error);
                                    }
-                                   
-                                   NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
-                                   [this handleFoundPeripheral:peripheral];
+                                   else
+                                   {
+                                       NSLog(@"DISCOVERED: %@, %@, %@ db", peripheral, peripheral.name, RSSI);
+                                       [this handleFoundPeripheral:peripheral];
+                                   }
                                }];
     
 #else
@@ -89,8 +90,8 @@ static DEACentralManager *sharedCentralManager;
 }
 
 - (void)handleFoundPeripheral:(CBPeripheral *)peripheral {
-    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
     
+    YMSCBPeripheral *yp = [self findPeripheral:peripheral];
     if (yp == nil) {
         BOOL isUnknownPeripheral = YES;
         for (NSString *pname in self.knownPeripheralNames) {
@@ -103,9 +104,7 @@ static DEACentralManager *sharedCentralManager;
                 [self addPeripheral:sensorTag];
                 isUnknownPeripheral = NO;
                 break;
-                
             }
-            
         }
         
         if (isUnknownPeripheral) {
