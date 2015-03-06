@@ -221,6 +221,8 @@
 		FCAF7B161A63B3E1001CC512 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FCAF7B111A63B3E1001CC512 /* Documentation.html */; };
 		FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */; };
 		FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */; };
+		FCB278631AA97F7A000A582F /* BLePeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB278611AA97F7A000A582F /* BLePeripheralViewController.m */; };
+		FCB278641AA97F7A000A582F /* BLePeripheralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB278621AA97F7A000A582F /* BLePeripheralViewController.xib */; };
 		FCEFDCD51A83B4F000377F22 /* button_UCON_Bind@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */; };
 		FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */; };
 /* End PBXBuildFile section */
@@ -593,6 +595,9 @@
 		FCAF7B131A63B3E1001CC512 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		FCAF7B141A63B3E1001CC512 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		FCB278601AA97F7A000A582F /* BLePeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLePeripheralViewController.h; sourceTree = "<group>"; };
+		FCB278611AA97F7A000A582F /* BLePeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLePeripheralViewController.m; sourceTree = "<group>"; };
+		FCB278621AA97F7A000A582F /* BLePeripheralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLePeripheralViewController.xib; sourceTree = "<group>"; };
 		FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_UCON_Bind@2x.png"; sourceTree = "<group>"; };
 		FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_menu_img@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1186,6 +1191,9 @@
 				3BDC5A191A8B3E8900C2813D /* ConfigFinishViewController.h */,
 				3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */,
 				3BC2AFDA1A9F03FB003CA9DD /* Reservation */,
+				FCB278601AA97F7A000A582F /* BLePeripheralViewController.h */,
+				FCB278611AA97F7A000A582F /* BLePeripheralViewController.m */,
+				FCB278621AA97F7A000A582F /* BLePeripheralViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1482,6 +1490,7 @@
 				3BC848821A889133002D0C15 /* bg_window_670x315@2x.png in Resources */,
 				3BD14E0C1A8DE5E600B75F68 /* 03_11@2x.png in Resources */,
 				3BD14DF41A8DE5E600B75F68 /* 01_10@2x.png in Resources */,
+				FCB278641AA97F7A000A582F /* BLePeripheralViewController.xib in Resources */,
 				FC39CBBD1AA562C400EB1609 /* title_shadow_750@2x.png in Resources */,
 				FC147CDE1A5CDB3A00BA06F3 /* LaunchScreen.xib in Resources */,
 				3BD14DF91A8DE5E600B75F68 /* 02_04@2x.png in Resources */,
@@ -1587,6 +1596,7 @@
 				FC0BA9731A5E303E00748B4E /* EHRootViewController.m in Sources */,
 				FC84711A1AA6F7B900444761 /* DEASensorTag.m in Sources */,
 				FC5AFB1A1A62BE8F0032D651 /* BPushClass.m in Sources */,
+				FCB278631AA97F7A000A582F /* BLePeripheralViewController.m in Sources */,
 				FC147DF01A5D1D9600BA06F3 /* IQKeyboardReturnKeyHandler.m in Sources */,
 				1812E2CB1A9F6D9100FF005E /* ReservationDetailViewController.m in Sources */,
 				FC147DFF1A5D1D9600BA06F3 /* ChineseInclude.m in Sources */,

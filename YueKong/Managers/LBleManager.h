@@ -7,7 +7,9 @@
 //
 
 #import "absManager.h"
-#import <CoreBluetooth/CoreBluetooth.h>
+#import "YMSCBPeripheral.h"
+#import "DEACentralManager.h"
+
 
 #define UUIDSTR_ISSC_YueKongYKQ_Identifier    @"6384E0F3-0642-032A-6DDD-B3499FB43079"
 
@@ -19,8 +21,22 @@
 // 写
 #define UUIDSTR_ISSC_TRANS_RX               @"FFF3"
 
+@protocol LBleProcessDelegate <NSObject>
+-(void)BLeState:(CBCentralManagerState)state;
+@end
+
+
 @interface LBleManager : absManager
-<CBPeripheralDelegate, CBCentralManagerDelegate>
+<CBPeripheralDelegate, CBCentralManagerDelegate>{
+    
+}
+@property(nonatomic, strong)CBCentralManager* centralManager;
+
+@property(nonatomic, strong)CBPeripheral*       currentPeripheral;
+
+@property(nonatomic, strong)CBCharacteristic*       currentCharacteristic;
+
+@property(nonatomic, weak)id<LBleProcessDelegate> LBledelegate;
 
 DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 

@@ -7,16 +7,8 @@
 //
 
 #import "LBleManager.h"
-#import "YMSCBPeripheral.h"
-#import "DEACentralManager.h"
 
 @interface LBleManager()
-
-@property(nonatomic, strong)CBCentralManager* centralManager;
-
-@property(nonatomic, strong)CBPeripheral*       currentPeripheral;
-
-@property(nonatomic, strong)CBCharacteristic*       currentCharacteristic;
 
 @property(nonatomic, strong)NSTimer* connectTimer;
 
@@ -39,6 +31,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     if (nil == _centralManager) {
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }
+    self.LBledelegate = delegate;
     // 查找， 成功了在找到合适得然后连接
     [_centralManager scanForPeripheralsWithServices:nil
                                             options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
@@ -100,13 +93,13 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         case CBCentralManagerStateUnauthorized:
         case CBCentralManagerStatePoweredOff:
         case CBCentralManagerStateUnsupported: {
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
-                                                            message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) Devices"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Dismiss"
-                                                  otherButtonTitles:nil];
-            
-            [alert show];
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
+//                                                            message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) Devices"
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:@"Dismiss"
+//                                                  otherButtonTitles:nil];
+//            
+//            [alert show];
             break;
         }
         case CBCentralManagerStateResetting: {
@@ -119,6 +112,10 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
             break;
         default:
             break;
+    }
+    if (self.LBledelegate
+        && [self.LBledelegate respondsToSelector:@selector(BLeState:)]) {
+        [self.LBledelegate BLeState:central.state];
     }
 }
 
