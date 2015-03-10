@@ -13,6 +13,8 @@
 
 #define UUIDSTR_ISSC_YueKongYKQ_Identifier    @"6384E0F3-0642-032A-6DDD-B3499FB43079"
 
+#define NAME_YueKongYKQ_Identifier              @""
+
 #define UUIDSTR_YueKongYKQ_SERVICE            @"FFF0"
 
 // 读写特征
@@ -23,6 +25,10 @@
 
 @protocol LBleProcessDelegate <NSObject>
 -(void)BLeState:(CBCentralManagerState)state;
+
+//  查找到得最新得 peripheral
+-(void)didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
+
 @end
 
 
@@ -37,6 +43,8 @@
 @property(nonatomic, strong)CBCharacteristic*       currentCharacteristic;
 
 @property(nonatomic, weak)id<LBleProcessDelegate> LBledelegate;
+
+@property(nonatomic, assign)BOOL isScaning;
 
 DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 

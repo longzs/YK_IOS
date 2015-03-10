@@ -12,6 +12,8 @@
 
 @property(nonatomic, strong)NSTimer* connectTimer;
 
+@property(nonatomic, strong)NSMutableArray* aryPeripherals;
+
 @end
 
 @implementation LBleManager
@@ -22,24 +24,36 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 {
     self = [super init];
     if (self) {
-        
+        self.aryPeripherals = [NSMutableArray arrayWithCapacity:0];
     }
     return self;
 }
 
 -(void)scanWithDelegate:(id)delegate{
     if (nil == _centralManager) {
-        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+        dispatch_queue_t queue = dispatch_queue_create("ykBLe", nil);
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
     }
     self.LBledelegate = delegate;
+    
+    if (self.isScaning) {
+        [self stopScan];
+    }
+//    do {
+//        
+//    } while (self.isScaning);
+    
     // 查找， 成功了在找到合适得然后连接
     [_centralManager scanForPeripheralsWithServices:nil
-                                            options:@{ CBCentralManagerScanOptionAllowDuplicatesKey: @YES }];
+                                            options:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                     @YES, CBCentralManagerScanOptionAllowDuplicatesKey,
+                                                     @YES, CBCentralManagerOptionShowPowerAlertKey,nil]];
 }
 
 -(void)stopScan{
     
     [_centralManager stopScan];
+    self.isScaning = NO;
 }
 
 -(void)connectServer{
@@ -100,6 +114,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 //                                                  otherButtonTitles:nil];
 //            
 //            [alert show];
+            self.isScaning = NO;
             break;
         }
         case CBCentralManagerStateResetting: {
@@ -109,6 +124,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         }
         case CBCentralManagerStateUnknown:
             NSLog(@"Bluetooth -- StateUnknown");
+            self.isScaning = NO;
             break;
         default:
             break;
@@ -142,6 +158,8 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"didDisconnectPeripheral: %@", peripheral);
+    
+    [self stopScan];
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
@@ -149,53 +167,56 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     // 找到了服务
     
     //YMSCBPeripheral *yp = [_centralManager findPeripheral:peripheral];
+    self.isScaning = YES;
     
-    // 测试代码
-    _currentPeripheral = peripheral;
-    [self stopScan];
+    BOOL bHave = NO;
+    for (CBPeripheral* per in self.aryPeripherals) {
+        if ([per.name isEqualToString:peripheral.name]
+            && [per.identifier isEqual:peripheral.identifier]) {
+            bHave = YES;
+            break;
+        }
+    }
+    if (!bHave) {
+        [self.aryPeripherals addObject:peripheral];
+    }
+    if ([peripheral.name isEqualToString:NAME_YueKongYKQ_Identifier]
+        && [peripheral.identifier isEqual:UUIDSTR_ISSC_YueKongYKQ_Identifier]) {
+        // 测试代码
+        self.currentPeripheral = peripheral;
+        [self stopScan];
+    }
+    
     // 尝试连接
-    [self performSelector:@selector(connectServer) withObject:nil afterDelay:1];
-//    if (yp.isRenderedInViewCell == NO) {
-//        [self.peripheralsTableView reloadData];
-//        yp.isRenderedInViewCell = YES;
-//    }
+    [self performSelector:@selector(connectServer) withObject:nil afterDelay:3];
+    if (self.LBledelegate
+        && [self.LBledelegate respondsToSelector:@selector(didDiscoverPeripheral:advertisementData:RSSI:)]) {
+        
+        [self.LBledelegate didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
+    }
+}
+
+//- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
+//    DEACentralManager *centralManager = [DEACentralManager sharedService];
 //    
-//    if (centralManager.isScanning) {
-//        for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-//            if (cell.yperipheral.cbPeripheral == peripheral) {
-//                if (peripheral.state == CBPeripheralStateDisconnected) {
-//                    cell.rssiLabel.text = [NSString stringWithFormat:@"%d", [RSSI integerValue]];
-//                    cell.peripheralStatusLabel.text = @"ADVERTISING";
-//                    [cell.peripheralStatusLabel setTextColor:[[DEATheme sharedTheme] advertisingColor]];
-//                } else {
-//                    continue;
-//                }
-//            }
+//    for (CBPeripheral *peripheral in peripherals) {
+//        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+//        if (yp) {
+//            yp.delegate = self;
 //        }
 //    }
-}
-
-- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {
-    DEACentralManager *centralManager = [DEACentralManager sharedService];
-    
-    for (CBPeripheral *peripheral in peripherals) {
-        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
-        if (yp) {
-            yp.delegate = self;
-        }
-    }
-}
-
-- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
-    DEACentralManager *centralManager = [DEACentralManager sharedService];
-    
-    for (CBPeripheral *peripheral in peripherals) {
-        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
-        if (yp) {
-            yp.delegate = self;
-        }
-    }
-}
+//}
+//
+//- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray *)peripherals {
+//    DEACentralManager *centralManager = [DEACentralManager sharedService];
+//    
+//    for (CBPeripheral *peripheral in peripherals) {
+//        YMSCBPeripheral *yp = [centralManager findPeripheral:peripheral];
+//        if (yp) {
+//            yp.delegate = self;
+//        }
+//    }
+//}
 
 #pragma mark - CBPeripheralDelegate Methods
 
