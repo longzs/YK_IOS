@@ -27,6 +27,14 @@
 		3BC848881A88A652002D0C15 /* icon_delete@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848851A88A652002D0C15 /* icon_delete@2x.png */; };
 		3BC848891A88A652002D0C15 /* icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848861A88A652002D0C15 /* icon_search@2x.png */; };
 		3BC8488A1A88A652002D0C15 /* icon_ShortcutKeys@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC848871A88A652002D0C15 /* icon_ShortcutKeys@2x.png */; };
+		3BC9AA911AB136D40049C2B3 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC9AA901AB136D40049C2B3 /* HomeViewController.m */; };
+		3BC9AA941AB1391E0049C2B3 /* icon_menu_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC9AA921AB1391E0049C2B3 /* icon_menu_click@2x.png */; };
+		3BC9AA951AB1391E0049C2B3 /* icon_menu_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC9AA931AB1391E0049C2B3 /* icon_menu_normal@2x.png */; };
+		3BC9AA971AB13B1F0049C2B3 /* icon_UCON_logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC9AA961AB13B1F0049C2B3 /* icon_UCON_logo@2x.png */; };
+		3BC9AA9A1AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BC9AA991AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.m */; };
+		3BC9AA9C1AB16F430049C2B3 /* YKAddDeviceTypePopoverView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BC9AA9B1AB16F430049C2B3 /* YKAddDeviceTypePopoverView.xib */; };
+		3BC9AA9F1AB170EE0049C2B3 /* icon_UCON1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC9AA9D1AB170EE0049C2B3 /* icon_UCON1@2x.png */; };
+		3BC9AAA01AB170EE0049C2B3 /* icon_UCON2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BC9AA9E1AB170EE0049C2B3 /* icon_UCON2@2x.png */; };
 		3BD14DEB1A8DE5E600B75F68 /* 01_01@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BD14DC61A8DE5E600B75F68 /* 01_01@2x.png */; };
 		3BD14DEC1A8DE5E600B75F68 /* 01_02@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BD14DC71A8DE5E600B75F68 /* 01_02@2x.png */; };
 		3BD14DED1A8DE5E600B75F68 /* 01_03@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BD14DC81A8DE5E600B75F68 /* 01_03@2x.png */; };
@@ -264,6 +272,16 @@
 		3BC848851A88A652002D0C15 /* icon_delete@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_delete@2x.png"; sourceTree = "<group>"; };
 		3BC848861A88A652002D0C15 /* icon_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_search@2x.png"; sourceTree = "<group>"; };
 		3BC848871A88A652002D0C15 /* icon_ShortcutKeys@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_ShortcutKeys@2x.png"; sourceTree = "<group>"; };
+		3BC9AA8F1AB136D40049C2B3 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		3BC9AA901AB136D40049C2B3 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		3BC9AA921AB1391E0049C2B3 /* icon_menu_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_click@2x.png"; sourceTree = "<group>"; };
+		3BC9AA931AB1391E0049C2B3 /* icon_menu_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_menu_normal@2x.png"; sourceTree = "<group>"; };
+		3BC9AA961AB13B1F0049C2B3 /* icon_UCON_logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_UCON_logo@2x.png"; sourceTree = "<group>"; };
+		3BC9AA981AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YKAddDeviceTypePopoverView.h; path = ViewControllers/YKAddDeviceTypePopoverView.h; sourceTree = "<group>"; };
+		3BC9AA991AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YKAddDeviceTypePopoverView.m; path = ViewControllers/YKAddDeviceTypePopoverView.m; sourceTree = "<group>"; };
+		3BC9AA9B1AB16F430049C2B3 /* YKAddDeviceTypePopoverView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = YKAddDeviceTypePopoverView.xib; path = ViewControllers/YKAddDeviceTypePopoverView.xib; sourceTree = "<group>"; };
+		3BC9AA9D1AB170EE0049C2B3 /* icon_UCON1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_UCON1@2x.png"; sourceTree = "<group>"; };
+		3BC9AA9E1AB170EE0049C2B3 /* icon_UCON2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_UCON2@2x.png"; sourceTree = "<group>"; };
 		3BD14DC61A8DE5E600B75F68 /* 01_01@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_01@2x.png"; sourceTree = "<group>"; };
 		3BD14DC71A8DE5E600B75F68 /* 01_02@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_02@2x.png"; sourceTree = "<group>"; };
 		3BD14DC81A8DE5E600B75F68 /* 01_03@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "01_03@2x.png"; sourceTree = "<group>"; };
@@ -638,6 +656,11 @@
 		1849C8551A7E3AEF00CA5E37 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				3BC9AA9D1AB170EE0049C2B3 /* icon_UCON1@2x.png */,
+				3BC9AA9E1AB170EE0049C2B3 /* icon_UCON2@2x.png */,
+				3BC9AA961AB13B1F0049C2B3 /* icon_UCON_logo@2x.png */,
+				3BC9AA921AB1391E0049C2B3 /* icon_menu_click@2x.png */,
+				3BC9AA931AB1391E0049C2B3 /* icon_menu_normal@2x.png */,
 				3BC848851A88A652002D0C15 /* icon_delete@2x.png */,
 				3BC848861A88A652002D0C15 /* icon_search@2x.png */,
 				3BC848871A88A652002D0C15 /* icon_ShortcutKeys@2x.png */,
@@ -822,8 +845,8 @@
 		FC147CCD1A5CDB3A00BA06F3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FC8470E11AA6A76200444761 /* CoreBluetooth.framework */,
 				FC5844A21A7BD6DC0038D681 /* Res */,
+				FC8470E11AA6A76200444761 /* CoreBluetooth.framework */,
 				FC6AF53F1A63CB56000C1226 /* include */,
 				FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */,
 				FC147E2B1A5D2CA700BA06F3 /* Security.framework */,
@@ -1156,6 +1179,9 @@
 			children = (
 				3BC8487E1A8887F3002D0C15 /* YKButtonPopoverView.h */,
 				3BC8487F1A8887F3002D0C15 /* YKButtonPopoverView.m */,
+				3BC9AA981AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.h */,
+				3BC9AA991AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.m */,
+				3BC9AA9B1AB16F430049C2B3 /* YKAddDeviceTypePopoverView.xib */,
 				FC8647141A6D57BE000CF612 /* HouseholdAppliancesCell.h */,
 				FC8647151A6D57BE000CF612 /* HouseholdAppliancesCell.m */,
 				FC8647161A6D57BE000CF612 /* HouseholdAppliancesCell.xib */,
@@ -1183,6 +1209,8 @@
 				FC147E341A5D341A00BA06F3 /* BaseViewController.m */,
 				FC147CD41A5CDB3A00BA06F3 /* ViewController.h */,
 				FC147CD51A5CDB3A00BA06F3 /* ViewController.m */,
+				3BC9AA8F1AB136D40049C2B3 /* HomeViewController.h */,
+				3BC9AA901AB136D40049C2B3 /* HomeViewController.m */,
 				FC1798021A6CB25900C04D1F /* DeviceManagerController.h */,
 				FC1798031A6CB25900C04D1F /* DeviceManagerController.m */,
 				FC86470F1A6D509E000CF612 /* RemoteControlViewController.h */,
@@ -1499,6 +1527,7 @@
 				3BD14E001A8DE5E600B75F68 /* 02_11@2x.png in Resources */,
 				1849C85B1A7E3C2F00CA5E37 /* button_285x80_click@2x.png in Resources */,
 				FC178F591A85A8A600F34D92 /* menu_click_@2x.png in Resources */,
+				3BC9AA9F1AB170EE0049C2B3 /* icon_UCON1@2x.png in Resources */,
 				3BD14E0B1A8DE5E600B75F68 /* 03_10@2x.png in Resources */,
 				FC1B6AEB1A8CA6A50053DC22 /* step04@2x.png in Resources */,
 				1849C8641A7E3F9300CA5E37 /* button_UCON_my@2x.png in Resources */,
@@ -1509,6 +1538,7 @@
 				3BD14E051A8DE5E600B75F68 /* 03_04@2x.png in Resources */,
 				FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */,
 				3BC848891A88A652002D0C15 /* icon_search@2x.png in Resources */,
+				3BC9AA951AB1391E0049C2B3 /* icon_menu_normal@2x.png in Resources */,
 				3BD14E041A8DE5E600B75F68 /* 03_03@2x.png in Resources */,
 				FC1B6AF01A8CA6A50053DC22 /* step09@2x.png in Resources */,
 				FC1B6AEE1A8CA6A50053DC22 /* step07@2x.png in Resources */,
@@ -1525,6 +1555,7 @@
 				3BC2AFE21A9F0700003CA9DD /* DeviceTypeViewCell.xib in Resources */,
 				3BD14E061A8DE5E600B75F68 /* 03_05@2x.png in Resources */,
 				FC147DF71A5D1D9600BA06F3 /* IQKeyboardManager.bundle in Resources */,
+				3BC9AA941AB1391E0049C2B3 /* icon_menu_click@2x.png in Resources */,
 				3BD14DF81A8DE5E600B75F68 /* 02_03@2x.png in Resources */,
 				FC82CCE01A84F81500012F7D /* icon_AirCondition@2x.png in Resources */,
 				3BC8488A1A88A652002D0C15 /* icon_ShortcutKeys@2x.png in Resources */,
@@ -1546,6 +1577,7 @@
 				3BC848881A88A652002D0C15 /* icon_delete@2x.png in Resources */,
 				FC1B6AF11A8CA6A50053DC22 /* step10@2x.png in Resources */,
 				FC15A1991A7F27C80034F9D3 /* NavBarShadow.png in Resources */,
+				3BC9AA971AB13B1F0049C2B3 /* icon_UCON_logo@2x.png in Resources */,
 				1849C8571A7E3B0600CA5E37 /* icon_equipment@2x.png in Resources */,
 				FC15A19D1A7F662B0034F9D3 /* icon_back_normal@2x.png in Resources */,
 				FC147E1C1A5D209A00BA06F3 /* LICENSE in Resources */,
@@ -1565,6 +1597,8 @@
 				FC82CCDF1A84F81500012F7D /* icon_add@2x.png in Resources */,
 				3BD14DF71A8DE5E600B75F68 /* 02_02@2x.png in Resources */,
 				3BC848841A889155002D0C15 /* window_580x350@2x.png in Resources */,
+				3BC9AAA01AB170EE0049C2B3 /* icon_UCON2@2x.png in Resources */,
+				3BC9AA9C1AB16F430049C2B3 /* YKAddDeviceTypePopoverView.xib in Resources */,
 				18CE1B171A8510820031F076 /* DeviceSelectCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1626,6 +1660,7 @@
 				FCAF7B171A63B3E1001CC512 /* GCDAsyncSocket.m in Sources */,
 				FC147E351A5D341A00BA06F3 /* BaseViewController.m in Sources */,
 				FCAF7B0C1A63ADE3001CC512 /* NetControl.mm in Sources */,
+				3BC9AA911AB136D40049C2B3 /* HomeViewController.m in Sources */,
 				FC147DE61A5D1D9600BA06F3 /* FMDatabase.m in Sources */,
 				FC147D111A5D1D1900BA06F3 /* SFHFKeychainUtils.m in Sources */,
 				FC1AE5861A5FCF1700CD5611 /* HttpMsgDefine.m in Sources */,
@@ -1653,6 +1688,7 @@
 				FC147E021A5D1D9600BA06F3 /* NSString+PinYin4Cocoa.m in Sources */,
 				FC8DB63E1A66B27500E0ED8E /* NetWorkDetails.m in Sources */,
 				FCA519231A722602006B0A5C /* HomeAppliancesManager.m in Sources */,
+				3BC9AA9A1AB166AA0049C2B3 /* YKAddDeviceTypePopoverView.m in Sources */,
 				FC147DF31A5D1D9600BA06F3 /* IQBarButtonItem.m in Sources */,
 				FC147DE11A5D1D9600BA06F3 /* CXAlertView.m in Sources */,
 				FC1AE59D1A5FCF6A00CD5611 /* ASIDataCompressor.m in Sources */,

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="YKAddDeviceTypePopoverView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="186"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="请选择您要添加的设备" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIE-XL-IuG">
+                    <rect key="frame" x="75" y="20" width="150" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.53333333333333333" green="0.53333333333333333" blue="0.53333333333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UCON1.png" translatesAutoresizingMaskIntoConstraints="NO" id="D6R-tb-oqU">
+                    <rect key="frame" x="50" y="57" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="5ma-eP-PeL"/>
+                        <constraint firstAttribute="width" constant="60" id="hub-pt-hKL"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_UCON2.png" translatesAutoresizingMaskIntoConstraints="NO" id="RRm-7q-Z7E">
+                    <rect key="frame" x="190" y="57" width="60" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="14Q-3S-Hd0"/>
+                        <constraint firstAttribute="width" constant="60" id="Jc6-sD-51h"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" tag="1001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ecb-LP-DoX">
+                    <rect key="frame" x="15" y="129" width="130" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="bLJ-ye-hw7"/>
+                        <constraint firstAttribute="width" constant="130" id="fpx-FL-Lcl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="UCON遥控器" backgroundImage="button_285x80_normal.png">
+                        <color key="titleColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="button_285x80_click.png"/>
+                    <connections>
+                        <action selector="clickButton:" destination="-1" eventType="touchUpInside" id="JEC-m1-HBS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" tag="1002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fdC-LH-6dT">
+                    <rect key="frame" x="155" y="129" width="130" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="130" id="aIF-HU-8Wn"/>
+                        <constraint firstAttribute="height" constant="40" id="m7j-VH-5Og"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <state key="normal" title="UCON家族" backgroundImage="button_285x80_normal.png">
+                        <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <state key="highlighted" backgroundImage="button_285x80_click.png"/>
+                    <connections>
+                        <action selector="clickButton:" destination="-1" eventType="touchUpInside" id="lYu-fY-HjN"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="D6R-tb-oqU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="50" id="1cy-xW-fux"/>
+                <constraint firstItem="D6R-tb-oqU" firstAttribute="top" secondItem="UIE-XL-IuG" secondAttribute="bottom" constant="19" id="2IV-O1-Cf1"/>
+                <constraint firstItem="fdC-LH-6dT" firstAttribute="top" secondItem="RRm-7q-Z7E" secondAttribute="bottom" constant="12" id="AC6-Kk-aHT"/>
+                <constraint firstItem="D6R-tb-oqU" firstAttribute="centerX" secondItem="Ecb-LP-DoX" secondAttribute="centerX" id="Leb-9w-H47"/>
+                <constraint firstAttribute="centerX" secondItem="UIE-XL-IuG" secondAttribute="centerX" id="P9T-8M-ZnC"/>
+                <constraint firstItem="RRm-7q-Z7E" firstAttribute="centerX" secondItem="fdC-LH-6dT" secondAttribute="centerX" id="XUr-Am-t08"/>
+                <constraint firstItem="UIE-XL-IuG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="hri-ya-FXj"/>
+                <constraint firstAttribute="trailing" secondItem="RRm-7q-Z7E" secondAttribute="trailing" constant="50" id="j4m-oU-nov"/>
+                <constraint firstItem="RRm-7q-Z7E" firstAttribute="top" secondItem="UIE-XL-IuG" secondAttribute="bottom" constant="19" id="syj-AB-R1u"/>
+                <constraint firstItem="Ecb-LP-DoX" firstAttribute="top" secondItem="D6R-tb-oqU" secondAttribute="bottom" constant="12" id="wEA-bn-oaE"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="505" y="370"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="button_285x80_click.png" width="142" height="40"/>
+        <image name="button_285x80_normal.png" width="142" height="40"/>
+        <image name="icon_UCON1.png" width="100" height="100"/>
+        <image name="icon_UCON2.png" width="100" height="100"/>
+    </resources>
+</document>
