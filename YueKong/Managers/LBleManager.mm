@@ -58,15 +58,15 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 
 -(void)connectServer{
     
-    [_centralManager connectPeripheral:_currentPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
+    [_centralManager connectPeripheral:self.currentPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
     
     //开一个定时器监控连接超时的情况
-    _connectTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(connectTimeout:) userInfo:_currentPeripheral repeats:NO];
+    _connectTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(connectTimeout:) userInfo:nil repeats:NO];
 }
 
 -(void)disConnectServer{
     
-    [_centralManager cancelPeripheralConnection:_currentPeripheral];
+    [_centralManager cancelPeripheralConnection:self.currentPeripheral];
 }
 
 -(void)connectTimeout:(NSTimer*)timer{
