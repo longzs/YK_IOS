@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BLePeripheralViewController">
             <connections>
+                <outlet property="btnResearch" destination="YaW-vT-EnH" id="MYH-yx-gjU"/>
+                <outlet property="imvBlueTooth" destination="Lz8-Bk-Iln" id="TMd-W6-aT3"/>
+                <outlet property="lblNoResult" destination="syB-UP-Ubt" id="qYz-7f-iNZ"/>
+                <outlet property="lblSearch" destination="2rV-dK-6NB" id="zjI-Md-4UU"/>
                 <outlet property="tabPeripheral" destination="bz8-RS-eAU" id="lsb-OQ-3PY"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBLNotOpen" destination="9Cx-8L-1Wh" id="hMK-Xc-hBQ"/>
@@ -27,7 +31,54 @@
                 </tableView>
                 <view alpha="0.80000000000000027" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Cx-8L-1Wh">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lz8-Bk-Iln">
+                            <rect key="frame" x="113" y="201" width="94" height="166"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="166" id="Z8h-s1-HbQ"/>
+                                <constraint firstAttribute="width" constant="94" id="sdE-VA-AL3"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在搜索..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2rV-dK-6NB">
+                            <rect key="frame" x="124" y="496" width="73" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.31372549019607843" green="0.31372549019607843" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="没有发现设备" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="syB-UP-Ubt">
+                            <rect key="frame" x="115" y="275" width="90" height="18"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="textColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YaW-vT-EnH">
+                            <rect key="frame" x="41" y="485" width="240" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="WlJ-Cj-J8g"/>
+                                <constraint firstAttribute="width" constant="240" id="e88-fK-3Nu"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <state key="normal" title="重新搜索" backgroundImage="button_510x80_normal.png">
+                                <color key="titleColor" red="0.31372549020000001" green="0.31372549020000001" blue="0.31372549020000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <state key="highlighted" backgroundImage="button_510x80_click.png"/>
+                            <connections>
+                                <action selector="clickResearch:" destination="-1" eventType="touchUpInside" id="KhL-3C-L3u"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="2rV-dK-6NB" secondAttribute="bottom" constant="54" id="8fh-fX-WJn"/>
+                        <constraint firstAttribute="centerX" secondItem="2rV-dK-6NB" secondAttribute="centerX" id="90b-uo-7eh"/>
+                        <constraint firstAttribute="centerX" secondItem="Lz8-Bk-Iln" secondAttribute="centerX" id="ENE-ai-e6I"/>
+                        <constraint firstAttribute="centerX" secondItem="syB-UP-Ubt" secondAttribute="centerX" id="Ma8-4J-fAD"/>
+                        <constraint firstAttribute="centerY" secondItem="Lz8-Bk-Iln" secondAttribute="centerY" id="ezB-XT-plt"/>
+                        <constraint firstItem="YaW-vT-EnH" firstAttribute="centerX" secondItem="2rV-dK-6NB" secondAttribute="centerX" id="fmk-hP-2To"/>
+                        <constraint firstItem="YaW-vT-EnH" firstAttribute="centerY" secondItem="2rV-dK-6NB" secondAttribute="centerY" id="qdi-3O-KMS"/>
+                        <constraint firstAttribute="centerY" secondItem="syB-UP-Ubt" secondAttribute="centerY" id="siG-qW-qRE"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -41,9 +92,14 @@
                 <constraint firstItem="bz8-RS-eAU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="q6a-M9-iZj"/>
                 <constraint firstAttribute="trailing" secondItem="bz8-RS-eAU" secondAttribute="trailing" id="t7P-1g-Dic"/>
             </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
             <point key="canvasLocation" x="482" y="353"/>
         </view>
     </objects>
+    <resources>
+        <image name="button_510x80_click.png" width="255" height="40"/>
+        <image name="button_510x80_normal.png" width="255" height="40"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

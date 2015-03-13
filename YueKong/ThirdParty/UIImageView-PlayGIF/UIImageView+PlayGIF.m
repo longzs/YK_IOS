@@ -8,6 +8,9 @@
 
 /**********************************************************************/
 #import <Foundation/Foundation.h>
+#import "UIImageView+PlayGIF.h"
+#import <objc/runtime.h>
+
 @interface PlayGIFManager : NSObject
 @property (nonatomic, strong) CADisplayLink     *displayLink;
 @property (nonatomic, strong) NSHashTable       *gifViewHashTable;
@@ -57,8 +60,6 @@
 @end
 /**********************************************************************/
 
-#import "UIImageView+PlayGIF.h"
-#import <objc/runtime.h>
 
 static const char * kGifPathKey         = "kGifPathKey";
 static const char * kGifDataKey         = "kGifDataKey";

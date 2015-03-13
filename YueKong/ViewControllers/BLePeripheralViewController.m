@@ -7,10 +7,17 @@
 //
 
 #import "BLePeripheralViewController.h"
+#import "UIImageView+PlayGIF.h"
 
 @interface BLePeripheralViewController ()
 @property(weak, nonatomic)IBOutlet UITableView* tabPeripheral;
 @property(weak, nonatomic)IBOutlet UIView*      viewBLNotOpen;
+
+@property (nonatomic, weak) IBOutlet UIImageView *imvBlueTooth;
+@property (nonatomic, weak) IBOutlet UILabel *lblSearch;
+@property (nonatomic, weak) IBOutlet UILabel *lblNoResult;
+@property (nonatomic, weak) IBOutlet UIButton *btnResearch;
+
 @end
 
 @implementation BLePeripheralViewController
@@ -19,6 +26,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"添加新设备";
+    NSString *gifPath = [[NSBundle mainBundle] pathForResource:@"bluetooth.gif" ofType:nil];
+    _imvBlueTooth.gifPath = gifPath;
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -28,6 +37,8 @@
     
     //[self showLoadingWithTip:@"正在搜索设备"];
     [[LBleManager sharedInstance] scanWithDelegate:self];
+    
+    [self startToSearch];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -49,9 +60,43 @@
     return rc;
 }
 
+#pragma mark - Method
+
 -(void)didBecomeActive:(NSNotification*)ntf{
     [[LBleManager sharedInstance] stopScan];
     [[LBleManager sharedInstance] scanWithDelegate:self];
+}
+
+- (void)startToSearch
+{
+    _imvBlueTooth.hidden = NO;
+    _lblSearch.hidden = NO;
+    _btnResearch.hidden = YES;
+    _lblNoResult.hidden = YES;
+    
+    [_imvBlueTooth startGIF];
+}
+
+- (void)stopSearchWithResult:(BOOL)successFlag
+{
+    [_imvBlueTooth stopGIF];
+    _imvBlueTooth.hidden = YES;
+    _lblSearch.hidden = YES;
+    if (successFlag) {
+        
+    }
+    else {
+        
+        
+        _btnResearch.hidden = NO;
+        _lblNoResult.hidden = NO;
+    }
+}
+
+#pragma mark - Action
+- (IBAction)clickResearch:(id)sender
+{
+    [self startToSearch];
 }
 
 /*

@@ -75,6 +75,9 @@
 		3BDC5A1B1A8B3E8900C2813D /* ConfigFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */; };
 		3BF1FC191AB2D4C8009B7127 /* UIImageView+PlayGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1FC161AB2D4C8009B7127 /* UIImageView+PlayGIF.m */; };
 		3BF1FC1A1AB2D4C8009B7127 /* YFGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1FC181AB2D4C8009B7127 /* YFGIFImageView.m */; };
+		3BF1FC1C1AB2D902009B7127 /* bluetooth.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3BF1FC1B1AB2D902009B7127 /* bluetooth.gif */; };
+		3BF1FC1E1AB2DBA5009B7127 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF1FC1D1AB2DBA5009B7127 /* ImageIO.framework */; };
+		3BF1FC201AB2DBC9009B7127 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF1FC1F1AB2DBC9009B7127 /* QuartzCore.framework */; };
 		FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9631A5E26BF00748B4E /* absManager.m */; };
 		FC0BA9671A5E26BF00748B4E /* EHUserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9651A5E26BF00748B4E /* EHUserDefaultManager.m */; };
 		FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA96A1A5E303E00748B4E /* EHBaseNavController.m */; };
@@ -327,6 +330,9 @@
 		3BF1FC161AB2D4C8009B7127 /* UIImageView+PlayGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PlayGIF.m"; sourceTree = "<group>"; };
 		3BF1FC171AB2D4C8009B7127 /* YFGIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFGIFImageView.h; sourceTree = "<group>"; };
 		3BF1FC181AB2D4C8009B7127 /* YFGIFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFGIFImageView.m; sourceTree = "<group>"; };
+		3BF1FC1B1AB2D902009B7127 /* bluetooth.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = bluetooth.gif; sourceTree = "<group>"; };
+		3BF1FC1D1AB2DBA5009B7127 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		3BF1FC1F1AB2DBC9009B7127 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		FC0BA9621A5E26BF00748B4E /* absManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = absManager.h; sourceTree = "<group>"; };
 		FC0BA9631A5E26BF00748B4E /* absManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = absManager.m; sourceTree = "<group>"; };
 		FC0BA9641A5E26BF00748B4E /* EHUserDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHUserDefaultManager.h; sourceTree = "<group>"; };
@@ -631,6 +637,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3BF1FC201AB2DBC9009B7127 /* QuartzCore.framework in Frameworks */,
+				3BF1FC1E1AB2DBA5009B7127 /* ImageIO.framework in Frameworks */,
 				FC8470E21AA6A76200444761 /* CoreBluetooth.framework in Frameworks */,
 				FC147E2E1A5D2CBE00BA06F3 /* SystemConfiguration.framework in Frameworks */,
 				FC147E2C1A5D2CA700BA06F3 /* Security.framework in Frameworks */,
@@ -662,6 +670,7 @@
 		1849C8551A7E3AEF00CA5E37 /* Icon */ = {
 			isa = PBXGroup;
 			children = (
+				3BF1FC1B1AB2D902009B7127 /* bluetooth.gif */,
 				3BC9AA9D1AB170EE0049C2B3 /* icon_UCON1@2x.png */,
 				3BC9AA9E1AB170EE0049C2B3 /* icon_UCON2@2x.png */,
 				3BC9AA961AB13B1F0049C2B3 /* icon_UCON_logo@2x.png */,
@@ -866,7 +875,9 @@
 				FC8470E11AA6A76200444761 /* CoreBluetooth.framework */,
 				FC6AF53F1A63CB56000C1226 /* include */,
 				FC147E2D1A5D2CBE00BA06F3 /* SystemConfiguration.framework */,
+				3BF1FC1F1AB2DBC9009B7127 /* QuartzCore.framework */,
 				FC147E2B1A5D2CA700BA06F3 /* Security.framework */,
+				3BF1FC1D1AB2DBA5009B7127 /* ImageIO.framework */,
 				FC147E291A5D2C9500BA06F3 /* libiconv.dylib */,
 				FC147E271A5D2C7B00BA06F3 /* libstdc++.dylib */,
 				FC147E251A5D2C7000BA06F3 /* libz.1.2.5.dylib */,
@@ -1553,6 +1564,7 @@
 				FC1B6AEC1A8CA6A50053DC22 /* step05@2x.png in Resources */,
 				FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */,
 				3BD14E091A8DE5E600B75F68 /* 03_08@2x.png in Resources */,
+				3BF1FC1C1AB2D902009B7127 /* bluetooth.gif in Resources */,
 				3BD14E051A8DE5E600B75F68 /* 03_04@2x.png in Resources */,
 				FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */,
 				3BC848891A88A652002D0C15 /* icon_search@2x.png in Resources */,
