@@ -18,14 +18,16 @@
 {
     self = [super initWithFrame:CGRectMake(0, 0, kWidthDefault, kHeightDefault)];
     if (self) {
-        [self commonInit];
+        [self commonInitSubviews];
     }
     return self;
 }
 
-- (void)commonInit
+- (void)commonInitSubviews
 {
     UIView *contentView = [[UINib nibWithNibName:@"YKAddDeviceTypePopoverView" bundle:nil] instantiateWithOwner:self options:nil].firstObject;
+    contentView.frame = self.bounds;
+    contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     if (contentView) {
         [self addSubview:contentView];
     }

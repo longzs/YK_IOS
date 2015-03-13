@@ -73,6 +73,8 @@
 		3BD14E0E1A8DE5E600B75F68 /* 03_13@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BD14DE91A8DE5E600B75F68 /* 03_13@2x.png */; };
 		3BD14E0F1A8DE5E600B75F68 /* 03_14@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BD14DEA1A8DE5E600B75F68 /* 03_14@2x.png */; };
 		3BDC5A1B1A8B3E8900C2813D /* ConfigFinishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */; };
+		3BF1FC191AB2D4C8009B7127 /* UIImageView+PlayGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1FC161AB2D4C8009B7127 /* UIImageView+PlayGIF.m */; };
+		3BF1FC1A1AB2D4C8009B7127 /* YFGIFImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF1FC181AB2D4C8009B7127 /* YFGIFImageView.m */; };
 		FC0BA9661A5E26BF00748B4E /* absManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9631A5E26BF00748B4E /* absManager.m */; };
 		FC0BA9671A5E26BF00748B4E /* EHUserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA9651A5E26BF00748B4E /* EHUserDefaultManager.m */; };
 		FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0BA96A1A5E303E00748B4E /* EHBaseNavController.m */; };
@@ -321,6 +323,10 @@
 		3BD14DEA1A8DE5E600B75F68 /* 03_14@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "03_14@2x.png"; sourceTree = "<group>"; };
 		3BDC5A191A8B3E8900C2813D /* ConfigFinishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfigFinishViewController.h; sourceTree = "<group>"; };
 		3BDC5A1A1A8B3E8900C2813D /* ConfigFinishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfigFinishViewController.m; sourceTree = "<group>"; };
+		3BF1FC151AB2D4C8009B7127 /* UIImageView+PlayGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+PlayGIF.h"; sourceTree = "<group>"; };
+		3BF1FC161AB2D4C8009B7127 /* UIImageView+PlayGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+PlayGIF.m"; sourceTree = "<group>"; };
+		3BF1FC171AB2D4C8009B7127 /* YFGIFImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YFGIFImageView.h; sourceTree = "<group>"; };
+		3BF1FC181AB2D4C8009B7127 /* YFGIFImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YFGIFImageView.m; sourceTree = "<group>"; };
 		FC0BA9621A5E26BF00748B4E /* absManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = absManager.h; sourceTree = "<group>"; };
 		FC0BA9631A5E26BF00748B4E /* absManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = absManager.m; sourceTree = "<group>"; };
 		FC0BA9641A5E26BF00748B4E /* EHUserDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EHUserDefaultManager.h; sourceTree = "<group>"; };
@@ -757,6 +763,17 @@
 			path = Animation;
 			sourceTree = "<group>";
 		};
+		3BF1FC141AB2D4C8009B7127 /* UIImageView-PlayGIF */ = {
+			isa = PBXGroup;
+			children = (
+				3BF1FC151AB2D4C8009B7127 /* UIImageView+PlayGIF.h */,
+				3BF1FC161AB2D4C8009B7127 /* UIImageView+PlayGIF.m */,
+				3BF1FC171AB2D4C8009B7127 /* YFGIFImageView.h */,
+				3BF1FC181AB2D4C8009B7127 /* YFGIFImageView.m */,
+			);
+			path = "UIImageView-PlayGIF";
+			sourceTree = "<group>";
+		};
 		FC0BA9601A5E234E00748B4E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -910,6 +927,7 @@
 		FC147D151A5D1D9600BA06F3 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				3BF1FC141AB2D4C8009B7127 /* UIImageView-PlayGIF */,
 				FCAF7B101A63B3E1001CC512 /* socket */,
 				FC5AFB0C1A62BE8F0032D651 /* BPush.h */,
 				FC5AFB0D1A62BE8F0032D651 /* opensource */,
@@ -1652,6 +1670,7 @@
 				FC147E0F1A5D1D9600BA06F3 /* SRRefreshView.m in Sources */,
 				FC8470FD1AA6E32E00444761 /* YMSCBService.m in Sources */,
 				3BC2AFDD1A9F046A003CA9DD /* ReservationTypeSelectViewController.m in Sources */,
+				3BF1FC191AB2D4C8009B7127 /* UIImageView+PlayGIF.m in Sources */,
 				FC147DE01A5D1D9600BA06F3 /* CXAlertButtonItem.m in Sources */,
 				FC8471231AA6F7B900444761 /* DEATemperatureService.m in Sources */,
 				FC147DEB1A5D1D9600BA06F3 /* HMSegmentedControl.m in Sources */,
@@ -1735,6 +1754,7 @@
 				FC147DE81A5D1D9600BA06F3 /* FMDatabasePool.m in Sources */,
 				FC147E111A5D1D9600BA06F3 /* SMPageControl.m in Sources */,
 				FC0BA9721A5E303E00748B4E /* EHMainTabController.m in Sources */,
+				3BF1FC1A1AB2D4C8009B7127 /* YFGIFImageView.m in Sources */,
 				FC147E031A5D1D9600BA06F3 /* PinyinFormatter.m in Sources */,
 				FC147DDE1A5D1D9600BA06F3 /* CustomIOS7AlertView.m in Sources */,
 				FC5AFB1B1A62BE8F0032D651 /* GzipCompressor.m in Sources */,
