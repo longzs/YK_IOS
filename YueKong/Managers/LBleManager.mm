@@ -29,6 +29,11 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     return self;
 }
 
++(BOOL)isSameBLEPeripheral:(CBPeripheral*)p1 Peripheral2:(CBPeripheral*)p2{
+    return [p1.name isEqualToString:p2.name]
+    && [p1.identifier isEqual:p2.identifier];
+}
+
 -(void)scanWithDelegate:(id)delegate{
     if (nil == _centralManager) {
         dispatch_queue_t queue = dispatch_queue_create("ykBLe", nil);
@@ -137,25 +142,37 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     
     NSLog(@"Did connect to peripheral: %@", peripheral);
     
-    [peripheral setDelegate:self];
-    [peripheral discoverServices:nil];
-    
-//    YMSCBPeripheral *yp = [_centralManager findPeripheral:peripheral];
-//    yp.delegate = self;
-//    [yp readRSSI];
-    
-//    for (DEAPeripheralTableViewCell *cell in [self.peripheralsTableView visibleCells]) {
-//        if (cell.yperipheral == yp) {
-//            [cell updateDisplay];
-//            break;
-//        }
-//    }
+    if ([LBleManager isSameBLEPeripheral:self.currentPeripheral Peripheral2:peripheral]) {
+        
+        [peripheral setDelegate:self];
+        //[peripheral readRSSI];
+        [peripheral discoverServices:nil];
+    }
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(didConnectPeripheral:)]) {
+            
+            [wSelf.LBledelegate didConnectPeripheral:peripheral];
+        }
+    });
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"didDisconnectPeripheral: %@", peripheral);
     
     [self stopScan];
+    
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(didDisconnectPeripheral:error:)]) {
+            
+            [wSelf.LBledelegate didDisconnectPeripheral:peripheral error:error];
+        }
+    });
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
@@ -167,8 +184,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     
     BOOL bHave = NO;
     for (CBPeripheral* per in self.aryPeripherals) {
-        if ([per.name isEqualToString:peripheral.name]
-            && [per.identifier isEqual:peripheral.identifier]) {
+        if ([LBleManager isSameBLEPeripheral:per Peripheral2:peripheral]) {
             bHave = YES;
             break;
         }
@@ -177,17 +193,17 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         [self.aryPeripherals addObject:peripheral];
     }
     if ([peripheral.name isEqualToString:NAME_YueKongYKQ_Identifier]
-        && [peripheral.identifier isEqual:UUIDSTR_ISSC_YueKongYKQ_Identifier]) {
+        || [peripheral.identifier isEqual:UUIDSTR_ISSC_YueKongYKQ_Identifier]) {
         // 测试代码
         self.currentPeripheral = peripheral;
         [self stopScan];
     }
     
-    // 尝试连接
-    [self performSelector:@selector(connectServer) withObject:nil afterDelay:3];
-    
     weakSelf(wSelf);
     _YMS_PERFORM_ON_MAIN_THREAD(^{
+        // 尝试连接
+        [wSelf performSelector:@selector(connectServer) withObject:nil afterDelay:3];
+        
         if (wSelf.LBledelegate
             && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverPeripheral:advertisementData:RSSI:)]) {
             
@@ -227,11 +243,6 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     if (error)
     {
         NSLog(@"Discovered services for %@ with error: %@", peripheral.name, [error localizedDescription]);
-        
-//        if ([self.delegate respondsToSelector:@selector(DidNotifyFailConnectService:withPeripheral:error:)])
-//            [self.delegate DidNotifyFailConnectService:nil withPeripheral:nil error:nil];
-        
-        return;
     }
     
     for (CBService *service in peripheral.services)
@@ -244,6 +255,14 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
             break;
         }
     }
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverServices::)]) {
+            
+            [wSelf.LBledelegate didDiscoverServices:peripheral :error];
+        }
+    });
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
@@ -278,8 +297,14 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         }
     }
     
-//    if ([self.delegate respondsToSelector:@selector(DidFoundCharacteristic:withPeripheral:error:)])
-//        [self.delegate DidFoundCharacteristic:nil withPeripheral:nil error:nil];
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {
+            
+            [wSelf.LBledelegate didDiscoverCharacteristicsForService:peripheral :service error:error];
+        }
+    });
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -310,7 +335,14 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 //            
 //        }
 //    }
-    
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(didUpdateValueForCharacteristic:error:Peripheral:)]) {
+            
+            [wSelf.LBledelegate didUpdateValueForCharacteristic:characteristic error:error Peripheral:peripheral];
+        }
+    });
 }
 
 - (void)performUpdateRSSI:(NSArray *)args {

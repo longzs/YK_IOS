@@ -29,6 +29,15 @@
 //  查找到得最新得 peripheral
 -(void)didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI;
 
+-(void)didConnectPeripheral:(CBPeripheral *)peripheral;
+
+-(void)didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
+
+-(void)didDiscoverServices:(CBPeripheral *)peripheral :(NSError *)error;
+
+-(void)didDiscoverCharacteristicsForService:(CBPeripheral *)peripheral :(CBService *)service error:(NSError *)error;
+
+-(void)didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error Peripheral:(CBPeripheral*)peripheral;
 @end
 
 
