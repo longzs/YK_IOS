@@ -107,18 +107,10 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         case CBCentralManagerStateUnauthorized:
         case CBCentralManagerStatePoweredOff:
         case CBCentralManagerStateUnsupported: {
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Dang."
-//                                                            message:@"Unfortunately this device can not talk to Bluetooth Smart (Low Energy) Devices"
-//                                                           delegate:nil
-//                                                  cancelButtonTitle:@"Dismiss"
-//                                                  otherButtonTitles:nil];
-//            
-//            [alert show];
             self.isScaning = NO;
             break;
         }
         case CBCentralManagerStateResetting: {
-            //[self.peripheralsTableView reloadData];
             // 更新一下数据
             break;
         }
@@ -129,10 +121,14 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         default:
             break;
     }
-    if (self.LBledelegate
-        && [self.LBledelegate respondsToSelector:@selector(BLeState:)]) {
-        [self.LBledelegate BLeState:central.state];
-    }
+    
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(BLeState:)]) {
+            [wSelf.LBledelegate BLeState:central.state];
+        }
+    });
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
@@ -189,11 +185,15 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     
     // 尝试连接
     [self performSelector:@selector(connectServer) withObject:nil afterDelay:3];
-    if (self.LBledelegate
-        && [self.LBledelegate respondsToSelector:@selector(didDiscoverPeripheral:advertisementData:RSSI:)]) {
-        
-        [self.LBledelegate didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
-    }
+    
+    weakSelf(wSelf);
+    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        if (wSelf.LBledelegate
+            && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverPeripheral:advertisementData:RSSI:)]) {
+            
+            [wSelf.LBledelegate didDiscoverPeripheral:peripheral advertisementData:advertisementData RSSI:RSSI];
+        }
+    });
 }
 
 //- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray *)peripherals {

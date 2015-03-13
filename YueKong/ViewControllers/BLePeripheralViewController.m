@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.title = @"UCON";
+    self.title = @"添加新设备";
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -74,6 +74,10 @@
     else{
         [_viewBLNotOpen setHidden:NO];
     }
+}
+
+-(void)didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
+    
 }
 
 #pragma mark -- UITableView

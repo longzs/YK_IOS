@@ -8,6 +8,8 @@
 
 #import "HomeViewController.h"
 #import "YKAddDeviceTypePopoverView.h"
+#import "BLePeripheralViewController.h"
+#import "ViewController.h"
 
 @interface HomeViewController ()
 
@@ -31,6 +33,19 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:animated];
+    
+    self.navigationController.navigationBar.hidden = YES;
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    self.navigationController.navigationBar.hidden = NO;
+}
+
 + (instancetype)instantiateFromMainStoryboard
 {
     return (HomeViewController *)[Utils controllerInMainStroyboardWithID:@"HomeViewController"];
@@ -39,12 +54,21 @@
 #pragma mark - Action
 - (IBAction)clickAddNewDevice:(id)sender
 {
+    weakSelf(wSelf);
     YKAddDeviceTypePopoverView *popoverView = [[YKAddDeviceTypePopoverView alloc] init];
     [popoverView setSelectIndexBlock:^(NSInteger selectIndex) {
         DLog(@"click %d",(int)selectIndex);
+        
+        if (1 == selectIndex) {
+            BLePeripheralViewController *vc = [BLePeripheralViewController instantiateFromMainStoryboard];
+            [wSelf.navigationController pushViewController:vc animated:YES];
+        }
+        else{
+            ViewController *vc = [ViewController instantiateFromMainStoryboard];
+            [wSelf.navigationController pushViewController:vc animated:YES];
+        }
     }];
     [popoverView show];
-    
 }
 
 - (IBAction)clickOptionButton:(id)sender

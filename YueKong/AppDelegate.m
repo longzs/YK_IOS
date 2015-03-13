@@ -31,7 +31,7 @@
     
     //ui
     //self.window.backgroundColor = [UIColor blackColor];
-    //[application setStatusBarStyle:UIStatusBarStyleLightContent];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setupNavigationBarSytle];
     [self setupKeyboardManager];
     
