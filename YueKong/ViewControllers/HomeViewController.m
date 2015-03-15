@@ -10,6 +10,7 @@
 #import "YKAddDeviceTypePopoverView.h"
 #import "BLePeripheralViewController.h"
 #import "ViewController.h"
+#import "RemoteControlViewController.h"
 
 @interface HomeViewController ()
 
@@ -24,8 +25,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    _imvBG.hidden = YES;
+//    _imvBG.image = [[UIImage imageNamed:@"bg_img.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeTile];
     
-    _imvBG.image = [[UIImage imageNamed:@"bg_img.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeTile];
+    [LBleManager sharedInstance];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,6 +41,7 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = YES;
+    self.imgBG.frame = self.imvBG.frame;
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -64,7 +68,7 @@
             [wSelf.navigationController pushViewController:vc animated:YES];
         }
         else{
-            ViewController *vc = [ViewController instantiateFromMainStoryboard];
+            RemoteControlViewController *vc = [RemoteControlViewController instantiateFromMainStoryboard];
             [wSelf.navigationController pushViewController:vc animated:YES];
         }
     }];

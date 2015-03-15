@@ -24,6 +24,8 @@
 #define UUIDSTR_ISSC_TRANS_RX               @"FFF3"
 
 @protocol LBleProcessDelegate <NSObject>
+
+@optional
 -(void)BLeState:(CBCentralManagerState)state;
 
 //  查找到得最新得 peripheral
@@ -66,5 +68,7 @@ DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 -(void)disConnectServer;
 
 -(void)writeChar:(NSData *)data;
+
+-(BOOL)bleEnable;
 
 @end

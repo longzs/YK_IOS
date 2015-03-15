@@ -18,6 +18,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblNoResult;
 @property (nonatomic, weak) IBOutlet UIButton *btnResearch;
 
+@property(weak, nonatomic)IBOutlet UIView*      viewFinishScan;
 @end
 
 @implementation BLePeripheralViewController
@@ -26,6 +27,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.title = @"添加新设备";
+    self.tabPeripheral.hidden = YES;
+    self.viewFinishScan.hidden = YES;
     NSString *gifPath = [[NSBundle mainBundle] pathForResource:@"bluetooth.gif" ofType:nil];
     _imvBlueTooth.gifPath = gifPath;
 }
@@ -35,10 +38,14 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     
-    //[self showLoadingWithTip:@"正在搜索设备"];
-    [[LBleManager sharedInstance] scanWithDelegate:self];
-    
-    [self startToSearch];
+    if ([[LBleManager sharedInstance] bleEnable]) {
+        [self startToSearch];
+    }
+    else{
+        _lblNoResult.text = @"请打开手机的蓝牙开关完成搜索";
+        _btnResearch.hidden = YES;
+        _lblSearch.hidden = YES;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -63,12 +70,17 @@
 #pragma mark - Method
 
 -(void)didBecomeActive:(NSNotification*)ntf{
-    [[LBleManager sharedInstance] stopScan];
-    [[LBleManager sharedInstance] scanWithDelegate:self];
+    
+    if (![[LBleManager sharedInstance] bleEnable]
+        || ![LBleManager sharedInstance].isScaning) {
+        [self startToSearch];
+    }
 }
 
 - (void)startToSearch
 {
+    [[LBleManager sharedInstance] scanWithDelegate:self];
+    
     _imvBlueTooth.hidden = NO;
     _lblSearch.hidden = NO;
     _btnResearch.hidden = YES;
@@ -80,23 +92,34 @@
 - (void)stopSearchWithResult:(BOOL)successFlag
 {
     [_imvBlueTooth stopGIF];
+    
     _imvBlueTooth.hidden = YES;
     _lblSearch.hidden = YES;
     if (successFlag) {
+        _btnResearch.hidden = YES;
+        _lblNoResult.hidden = YES;
         
+        [self.viewFinishScan setHidden:NO];
     }
     else {
         
-        
         _btnResearch.hidden = NO;
         _lblNoResult.hidden = NO;
+        _lblNoResult.text = @"没有发现设备";
     }
+    
+    [[LBleManager sharedInstance] stopScan];
 }
 
 #pragma mark - Action
 - (IBAction)clickResearch:(id)sender
 {
     [self startToSearch];
+}
+
+- (IBAction)clickFinish:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -114,15 +137,19 @@
 -(void)BLeState:(CBCentralManagerState)state{
     if (CBCentralManagerStatePoweredOn == state
         || CBCentralManagerStateResetting == state) {
-        [_viewBLNotOpen setHidden:YES];
+        if (![LBleManager sharedInstance].isScaning) {
+            [self startToSearch];
+        }
     }
     else{
-        [_viewBLNotOpen setHidden:NO];
+        _lblNoResult.text = @"请打开手机的蓝牙开关完成搜索";
+        _btnResearch.hidden = YES;
+        _lblSearch.hidden = YES;
     }
 }
 
 -(void)didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
-    
+    [self stopSearchWithResult:YES];
 }
 
 #pragma mark -- UITableView

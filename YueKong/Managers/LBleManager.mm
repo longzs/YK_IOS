@@ -25,6 +25,9 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     self = [super init];
     if (self) {
         self.aryPeripherals = [NSMutableArray arrayWithCapacity:0];
+        
+        dispatch_queue_t queue = dispatch_queue_create("ykBLe", nil);
+        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
     }
     return self;
 }
@@ -37,7 +40,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 -(void)scanWithDelegate:(id)delegate{
     if (nil == _centralManager) {
         dispatch_queue_t queue = dispatch_queue_create("ykBLe", nil);
-        _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
+        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
     }
     self.LBledelegate = delegate;
     
@@ -86,6 +89,12 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         [_connectTimer invalidate];
     }
     _connectTimer = nil;
+}
+
+-(BOOL)bleEnable{
+    
+    return (CBCentralManagerStatePoweredOn == self.centralManager.state
+            || CBCentralManagerStateResetting == self.centralManager.state);
 }
 
 //写数据

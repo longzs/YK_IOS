@@ -30,6 +30,8 @@
 // 不支持右滑返回  默认为NO
 @property (nonatomic, assign) BOOL NOSupportRightSwipe;
 
+@property (nonatomic, strong) UIImageView* imgBG;
+
 -(void)requestServerData;
 
 //返回按钮事件

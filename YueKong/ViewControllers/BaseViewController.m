@@ -57,6 +57,12 @@
     }
     
     [[IQKeyboardManager sharedManager] setEnable:YES];
+    if (nil == _imgBG) {
+        _imgBG = [[UIImageView alloc] initWithFrame:self.view.frame];
+        _imgBG.image = [[UIImage imageNamed:@"bg_img.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 0) resizingMode:UIImageResizingModeTile];
+        [self.view addSubview:_imgBG];
+        [self.view sendSubviewToBack:_imgBG];
+    }
 }
 
 - (void)rightSwipeToBack:(UISwipeGestureRecognizer*)sender{
