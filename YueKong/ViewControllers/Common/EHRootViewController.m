@@ -8,7 +8,8 @@
 
 #import "EHRootViewController.h"
 #import "DeviceManagerController.h"
-#import "HomeViewController.h"
+
+
 
 @interface EHRootViewController ()
 
@@ -27,14 +28,15 @@
     [Utils currentAppDelegate].rootViewController = self;
     
     //DeviceManagerController *vc = [DeviceManagerController instantiateFromMainStoryboard];
-    HomeViewController *vc = [HomeViewController instantiateFromMainStoryboard];
-    //_homeController = vc;
-    _mainNavController = [[EHBaseNavController alloc] initWithRootViewController:vc];
+    _homeController = [HomeViewController instantiateFromMainStoryboard];
+    _mainNavController = [[EHBaseNavController alloc] initWithRootViewController:_homeController];
     
-//    sideMenuController = [[RESideMenu alloc] initWithContentViewController:_mainNavController leftMenuViewController:ehuc rightMenuViewController:nil];
-//    sideMenuController.delegate = self;
-//    sideMenuController.contentViewInPortraitOffsetCenterY = 70;
-//    sideMenuController.backgroundImage = [UIImage imageNamed:@"bgUserCenter"];
+    LeftViewController* leftVc = [LeftViewController instantiateFromMainStoryboard];
+    
+    sideMenuController = [[RESideMenu alloc] initWithContentViewController:_mainNavController leftMenuViewController:leftVc rightMenuViewController:nil];
+    sideMenuController.delegate = self;
+    //sideMenuController.contentViewInPortraitOffsetCenterY = 70;
+    //sideMenuController.backgroundImage = [UIImage imageNamed:@"bgUserCenter"];
     
 //    //引导页
 //    if ([[EHUserDefaultManager sharedInstance] isFirstLaunch]) {
@@ -44,8 +46,8 @@
 //        [self showMainViewController];
 //    }
     
-    [self addChildViewController:_mainNavController];
-    [self.view addSubview:_mainNavController.view];
+    [self addChildViewController:sideMenuController];
+    [self.view addSubview:sideMenuController.view];
 }
 
 - (void)didReceiveMemoryWarning {

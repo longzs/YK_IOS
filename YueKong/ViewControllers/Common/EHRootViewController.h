@@ -9,15 +9,16 @@
 #import "BaseViewController.h"
 #import "EHBaseNavController.h"
 #import "EHMainTabController.h"
-//#import "EHHomeViewController.h"
+#import "HomeViewController.h"
 #import "RESideMenu.h"
 #import "ViewController.h"
+#import "LeftViewController.h"
 
 @interface EHRootViewController : BaseViewController
 <EHLoadByStoryboard, RESideMenuDelegate>
 
 @property (strong, nonatomic) EHBaseNavController *mainNavController;
-//@property (strong ,nonatomic) EHHomeViewController *homeController;
+@property (strong ,nonatomic) HomeViewController *homeController;
 @property (strong, nonatomic) RESideMenu *sideMenuController;
 @property (strong, nonatomic) ViewController *bindYKController;
 /**

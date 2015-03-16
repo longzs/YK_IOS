@@ -236,6 +236,8 @@
 		FCAF7B181A63B3E1001CC512 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAF7B151A63B3E1001CC512 /* GCDAsyncUdpSocket.m */; };
 		FCB278631AA97F7A000A582F /* BLePeripheralViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB278611AA97F7A000A582F /* BLePeripheralViewController.m */; };
 		FCB278641AA97F7A000A582F /* BLePeripheralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB278621AA97F7A000A582F /* BLePeripheralViewController.xib */; };
+		FCC938291AB6CED3002F83CD /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC938271AB6CED3002F83CD /* LeftViewController.m */; };
+		FCC9382A1AB6CED3002F83CD /* LeftViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC938281AB6CED3002F83CD /* LeftViewController.xib */; };
 		FCEFDCD51A83B4F000377F22 /* button_UCON_Bind@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */; };
 		FCEFDCD71A83C62400377F22 /* bg_menu_img@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */; };
 /* End PBXBuildFile section */
@@ -628,6 +630,9 @@
 		FCB278601AA97F7A000A582F /* BLePeripheralViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLePeripheralViewController.h; sourceTree = "<group>"; };
 		FCB278611AA97F7A000A582F /* BLePeripheralViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLePeripheralViewController.m; sourceTree = "<group>"; };
 		FCB278621AA97F7A000A582F /* BLePeripheralViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BLePeripheralViewController.xib; sourceTree = "<group>"; };
+		FCC938261AB6CED3002F83CD /* LeftViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftViewController.h; sourceTree = "<group>"; };
+		FCC938271AB6CED3002F83CD /* LeftViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftViewController.m; sourceTree = "<group>"; };
+		FCC938281AB6CED3002F83CD /* LeftViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LeftViewController.xib; sourceTree = "<group>"; };
 		FCEFDCD41A83B4F000377F22 /* button_UCON_Bind@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button_UCON_Bind@2x.png"; sourceTree = "<group>"; };
 		FCEFDCD61A83C62400377F22 /* bg_menu_img@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_menu_img@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1251,6 +1256,9 @@
 				FCB278601AA97F7A000A582F /* BLePeripheralViewController.h */,
 				FCB278611AA97F7A000A582F /* BLePeripheralViewController.m */,
 				FCB278621AA97F7A000A582F /* BLePeripheralViewController.xib */,
+				FCC938261AB6CED3002F83CD /* LeftViewController.h */,
+				FCC938271AB6CED3002F83CD /* LeftViewController.m */,
+				FCC938281AB6CED3002F83CD /* LeftViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1590,6 +1598,7 @@
 				FC82CCE01A84F81500012F7D /* icon_AirCondition@2x.png in Resources */,
 				3BC8488A1A88A652002D0C15 /* icon_ShortcutKeys@2x.png in Resources */,
 				3BD14DEC1A8DE5E600B75F68 /* 01_02@2x.png in Resources */,
+				FCC9382A1AB6CED3002F83CD /* LeftViewController.xib in Resources */,
 				3BD14DFB1A8DE5E600B75F68 /* 02_06@2x.png in Resources */,
 				3BD14E071A8DE5E600B75F68 /* 03_06@2x.png in Resources */,
 				3BD14DF21A8DE5E600B75F68 /* 01_08@2x.png in Resources */,
@@ -1728,6 +1737,7 @@
 				FC5AFB1C1A62BE8F0032D651 /* OpenUDID.m in Sources */,
 				FC0BA9711A5E303E00748B4E /* EHBaseNavController.m in Sources */,
 				FC147E0A1A5D1D9600BA06F3 /* RECommonFunctions.m in Sources */,
+				FCC938291AB6CED3002F83CD /* LeftViewController.m in Sources */,
 				FC84711F1AA6F7B900444761 /* DEAGyroscopeService.m in Sources */,
 				FC147CD01A5CDB3A00BA06F3 /* main.m in Sources */,
 				FC147DE71A5D1D9600BA06F3 /* FMDatabaseAdditions.m in Sources */,
