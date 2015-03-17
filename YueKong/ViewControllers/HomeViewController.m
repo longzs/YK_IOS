@@ -41,7 +41,16 @@
     [super viewWillAppear:animated];
     
     self.navigationController.navigationBar.hidden = YES;
-    self.imgBG.frame = self.imvBG.frame;
+    
+    if (self.navigationController.navigationBar.hidden) {
+        CGRect rect = self.view.frame;
+        rect.origin.y = 0;
+        rect.size.height += 64;
+        self.imgBG.frame = rect;
+    }
+    else{
+        self.imgBG.frame = self.view.frame;
+    }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
@@ -77,7 +86,7 @@
 
 - (IBAction)clickOptionButton:(id)sender
 {
-    
+    [[Utils currentAppDelegate].rootViewController.sideMenuController presentLeftMenuViewController];
 }
 
 

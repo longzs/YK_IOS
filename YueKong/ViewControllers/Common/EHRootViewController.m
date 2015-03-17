@@ -34,6 +34,8 @@
     LeftViewController* leftVc = [LeftViewController instantiateFromMainStoryboard];
     
     sideMenuController = [[RESideMenu alloc] initWithContentViewController:_mainNavController leftMenuViewController:leftVc rightMenuViewController:nil];
+    sideMenuController.scaleContentView = NO;
+    sideMenuController.scaleMenuView = NO;
     sideMenuController.delegate = self;
     //sideMenuController.contentViewInPortraitOffsetCenterY = 70;
     //sideMenuController.backgroundImage = [UIImage imageNamed:@"bgUserCenter"];

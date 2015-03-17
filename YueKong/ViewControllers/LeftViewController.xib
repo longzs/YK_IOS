@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6751"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeftViewController">
@@ -14,7 +14,19 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="0.11764705882352941" green="0.11764705882352941" blue="0.11764705882352941" alpha="1" colorSpace="calibratedRGB"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MV0-OT-b2T">
+                    <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.1176470588" blue="0.1176470588" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="MV0-OT-b2T" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MAp-s4-E0W"/>
+                <constraint firstItem="MV0-OT-b2T" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="OXI-wl-ee8"/>
+                <constraint firstAttribute="trailing" secondItem="MV0-OT-b2T" secondAttribute="trailing" id="WuT-Cr-HTV"/>
+                <constraint firstAttribute="bottom" secondItem="MV0-OT-b2T" secondAttribute="bottom" id="e8F-qV-EpE"/>
+            </constraints>
             <point key="canvasLocation" x="508" y="353"/>
         </view>
     </objects>
