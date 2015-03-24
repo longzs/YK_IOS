@@ -7,8 +7,14 @@
 //
 
 #import "LeftViewController.h"
+#import "LeftMenuTableViewCell.h"
 
 @interface LeftViewController ()
+<UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, weak) IBOutlet UIImageView *imvHeader;
+@property (nonatomic, weak) IBOutlet UILabel *lblName;
+@property (nonatomic, weak) IBOutlet UITableView *tabList;
 
 @end
 
@@ -38,14 +44,44 @@
     return rc;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - UITableViewDataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 4;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    LeftMenuTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    if (!cell) {
+        cell = [[[UINib nibWithNibName:@"LeftMenuTableViewCell" bundle:nil] instantiateWithOwner:self options:nil] lastObject];
+    }
+    
+    if (indexPath.row == 0) {
+        cell.cellTitle = @"Chirs的悦控";
+        cell.cellState = LeftMenuTableViewCellStateNomarl;
+    }
+    else if (indexPath.row == 1) {
+        cell.cellTitle = @"Lion的客厅";
+        cell.cellState = LeftMenuTableViewCellStateFull;
+    }
+    else if (indexPath.row == 2) {
+        cell.cellTitle = @"Carina的房间";
+        cell.cellState = LeftMenuTableViewCellStateFull;
+        cell.cellDisable = YES;
+    }
+    else if (indexPath.row == 3) {
+        cell.cellTitle = @"添加新设备";
+        cell.cellState = LeftMenuTableViewCellStateAddNew;
+    }
+    return cell;
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+}
 
 @end
