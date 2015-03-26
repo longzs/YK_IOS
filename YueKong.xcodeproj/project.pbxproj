@@ -226,6 +226,9 @@
 		FC82CCE11A84F81500012F7D /* icon_NetworkBox@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */; };
 		FC82CCE21A84F81500012F7D /* icon_STB@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */; };
 		FC82CCE31A84F81500012F7D /* icon_TV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */; };
+		FC84572B1AC3EBE8005C8646 /* gblcd.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = FC84572A1AC3EBE8005C8646 /* gblcd.sqlite */; };
+		FC84572E1AC3FDCA005C8646 /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC84572D1AC3FDCA005C8646 /* DBManager.m */; };
+		FC8457311AC407E8005C8646 /* YKRemoteControlModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8457301AC407E8005C8646 /* YKRemoteControlModel.m */; };
 		FC8470E01AA6A5D000444761 /* LBleManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = FC8470DF1AA6A5D000444761 /* LBleManager.mm */; };
 		FC8470E21AA6A76200444761 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC8470E11AA6A76200444761 /* CoreBluetooth.framework */; };
 		FC8470F71AA6E32E00444761 /* NSMutableArray+fifoQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8470E61AA6E32E00444761 /* NSMutableArray+fifoQueue.m */; };
@@ -614,6 +617,11 @@
 		FC82CCDC1A84F81500012F7D /* icon_NetworkBox@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_NetworkBox@2x.png"; sourceTree = "<group>"; };
 		FC82CCDD1A84F81500012F7D /* icon_STB@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_STB@2x.png"; sourceTree = "<group>"; };
 		FC82CCDE1A84F81500012F7D /* icon_TV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_TV@2x.png"; sourceTree = "<group>"; };
+		FC84572A1AC3EBE8005C8646 /* gblcd.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = gblcd.sqlite; sourceTree = "<group>"; };
+		FC84572C1AC3FDCA005C8646 /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		FC84572D1AC3FDCA005C8646 /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		FC84572F1AC407E8005C8646 /* YKRemoteControlModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YKRemoteControlModel.h; sourceTree = "<group>"; };
+		FC8457301AC407E8005C8646 /* YKRemoteControlModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YKRemoteControlModel.m; sourceTree = "<group>"; };
 		FC8470DE1AA6A5D000444761 /* LBleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LBleManager.h; path = ../LBleManager.h; sourceTree = "<group>"; };
 		FC8470DF1AA6A5D000444761 /* LBleManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = LBleManager.mm; path = ../LBleManager.mm; sourceTree = "<group>"; };
 		FC8470E11AA6A76200444761 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
@@ -879,6 +887,8 @@
 				FC0BA9761A5E81E600748B4E /* SSIDManager.m */,
 				FCA519211A722602006B0A5C /* HomeAppliancesManager.h */,
 				FCA519221A722602006B0A5C /* HomeAppliancesManager.m */,
+				FC84572C1AC3FDCA005C8646 /* DBManager.h */,
+				FC84572D1AC3FDCA005C8646 /* DBManager.m */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -892,6 +902,8 @@
 				FC2918641A8359450035961F /* YKModel.m */,
 				FC2918661A835A490035961F /* YKDeviceModel.h */,
 				FC2918671A835A490035961F /* YKDeviceModel.m */,
+				FC84572F1AC407E8005C8646 /* YKRemoteControlModel.h */,
+				FC8457301AC407E8005C8646 /* YKRemoteControlModel.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1405,6 +1417,7 @@
 		FC5844A21A7BD6DC0038D681 /* Res */ = {
 			isa = PBXGroup;
 			children = (
+				FC84572A1AC3EBE8005C8646 /* gblcd.sqlite */,
 				3BD14DC51A8DE5E600B75F68 /* Animation */,
 				FC1B6ADA1A8CA6A50053DC22 /* Bind */,
 				FC15A1981A7F27C80034F9D3 /* NavBarShadow.png */,
@@ -1729,6 +1742,7 @@
 				3BD14E011A8DE5E600B75F68 /* 02_12@2x.png in Resources */,
 				18FEE96D1AC1CDF700EFDBFD /* icon_UCON01_blue@2x.png in Resources */,
 				18FEE9781AC1CDF700EFDBFD /* icon_UCON02_white@3x.png in Resources */,
+				FC84572B1AC3EBE8005C8646 /* gblcd.sqlite in Resources */,
 				3BD14DED1A8DE5E600B75F68 /* 01_03@2x.png in Resources */,
 				FC147CDB1A5CDB3A00BA06F3 /* Images.xcassets in Resources */,
 				3BD14E0F1A8DE5E600B75F68 /* 03_14@2x.png in Resources */,
@@ -1766,6 +1780,7 @@
 				FC147DEE1A5D1D9600BA06F3 /* IQUIWindow+Hierarchy.m in Sources */,
 				FC8470E01AA6A5D000444761 /* LBleManager.mm in Sources */,
 				FC2918681A835A490035961F /* YKDeviceModel.m in Sources */,
+				FC8457311AC407E8005C8646 /* YKRemoteControlModel.m in Sources */,
 				1849C8531A7E272700CA5E37 /* YKRoundRectView.m in Sources */,
 				FC147DF61A5D1D9600BA06F3 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				FC5AFB1D1A62BE8F0032D651 /* Reachability.m in Sources */,
@@ -1864,6 +1879,7 @@
 				FC1AE5851A5FCF1700CD5611 /* HttpMsgCtrl.mm in Sources */,
 				FC147E001A5D1D9600BA06F3 /* ChineseToPinyinResource.m in Sources */,
 				3BDC5A1B1A8B3E8900C2813D /* ConfigFinishViewController.m in Sources */,
+				FC84572E1AC3FDCA005C8646 /* DBManager.m in Sources */,
 				FC5AFB191A62BE8F0032D651 /* Base64.m in Sources */,
 				FC8647171A6D57BE000CF612 /* HouseholdAppliancesCell.m in Sources */,
 				FC8470FE1AA6E32E00444761 /* YMSCBStoredPeripherals.m in Sources */,

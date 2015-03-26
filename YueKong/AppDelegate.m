@@ -24,8 +24,9 @@
     }
     //[[HomeAppliancesManager sharedInstance] testHttp];
     //初始化
+    
     //数据库
-    //[self createDB];
+    [self createDB];
     
     //测试 wangxun..
     
@@ -76,6 +77,20 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)createDB{
+    NSString* dbPath = [APP_DOC_PATH stringByAppendingPathComponent:@"gblcd.sqlite"];
+    if (![[NSFileManager defaultManager] fileExistsAtPath:dbPath]) {
+        // 移动文件
+        NSError* err = nil;
+        NSString* filePath = [[NSBundle mainBundle] pathForResource:@"gblcd" ofType:@"sqlite"];
+        [[NSFileManager defaultManager] copyItemAtPath:filePath toPath:dbPath error:&err];
+        
+        if (err) {
+            NSLog(@"copy file err %@", err);
+        }
+    }
 }
 
 #pragma mark - Setup
