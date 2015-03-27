@@ -11,3 +11,22 @@
 @implementation YKRemoteControlModel
 
 @end
+
+
+@implementation ykRemoteControlIndex
+
+@end
+
+
+@implementation ykRemoteControlINstance
+
+
+@end
+
+
+
+@implementation YKRemoteMode
+
+
+@end
+

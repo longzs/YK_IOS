@@ -55,6 +55,18 @@
 @end
 
 
+// 广电运营商 (Operator)
+@interface YKOperatorModel : YKModel
+@property(nonatomic, copy)NSString* idNo;
+@property(nonatomic, copy)NSString* operator_id;
+@property(nonatomic, copy)NSString* operator_name;
+@property(nonatomic, copy)NSString* city_code;
+@property(nonatomic, copy)NSString* city_name;
+// 	是否有效(1: 有效, 0: 无效)，默认为1
+@property(nonatomic, copy)NSString* status;
+@end
+
+
 // 移动终端UE
 @interface YKMobileModel : YKModel
 @property(nonatomic, copy)NSString* idNo;

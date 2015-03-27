@@ -66,6 +66,10 @@
 
 @end
 
+@implementation YKOperatorModel
+
+@end
+
 @implementation YKMobileModel
 
 @end
