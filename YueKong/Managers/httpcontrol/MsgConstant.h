@@ -61,6 +61,23 @@ typedef enum CmdCode
     CC_GetCitesByProvinces                  = 0x0202,
     CC_GetCitesCovered                      = 0x0203,
     
+    // remote
+    CC_list_remote_indexes                          = 0x0301,
+    
+    CC_Download_remote_binfile                      = 0x0302,
+    
+    CC_create_remote_instance                       = 0x0303,
+    
+    CC_list_remote_instances                        = 0x0304,
+    
+    CC_list_bind_remote_instance                    = 0x0305,
+    
+    CC_create_remote                                = 0x0306,
+    
+    CC_update_remote                                = 0x0307,
+    
+    CC_list_remotes                                 = 0x0308,
+    
 	CC_Unknown                  = -1,
 }E_CMDCODE;
 

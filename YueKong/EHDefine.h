@@ -74,104 +74,43 @@
 //根据省份编码前缀列出地级市
 #define k_URL_GetCity_Cities                   @"" kHttpBase"/yuekong/city/list_cities"
 
+//获取遥控器索引列表（用于码表下载模式）
+#define k_URL_List_remote_indexes                   @"" kHttpBase"/yuekong/remote/list_remote_indexes"
+
+
+//根据文件名下载代码二进制文件   http://121.41.109.117:8200/rb/ykir_upd6121g_remote_box_164.bin
+#define k_URL_RB                   @"" kHttpBase"/rb/"
+
+
+//创建遥控器实例
+#define k_URL_Create_remote_instance                   @"" kHttpBase"/yuekong/remote/create_remote_instance"
+
+
+
+//根据移动终端 ID 例举遥控器实例 (侧滑菜单列表)
+#define k_URL_List_remote_instances                   @"" kHttpBase"/yuekong/remote/list_remote_instances"
+
+
+//绑定遥控器
+#define k_URL_Bind_remote_instance                   @"" kHttpBase"/yuekong/remote/bind_remote_instance"
+
+
+//创建遥控器模式
+#define k_URL_Create_remote                   @"" kHttpBase"/yuekong/remote/create_remote"
+
+
+//更新遥控器模式
+#define k_URL_Update_remote                   @"" kHttpBase"/yuekong/remote/update_remote"
+
+
+//根据遥控器实例 ID 列举遥控器模式 (主面板)
+#define k_URL_List_remotes                   @"" kHttpBase"/yuekong/remote/list_remotes"
+
+
 //UE注册
 #define k_URL_register_mobile                   @"" kHttpBase"/yuekong/mobile/register_mobile"
 
-//重置密码
-#define k_URL_passwordReset                   @"passwordReset"
 
-//修改密码
-#define k_URL_modifyPassword                   @"modifyPassword"
-
-//登陆
-#define k_URL_userLogin                     @"userLogin"
-
-//系统参数初始化
-#define k_URL_initSystem                    @"initSystem"
-
-//医院信息查询
-#define k_URL_getHospitalInfo                   @"searchHospitalInfo"
-
-//医院参数初始化(可与2.1.8合并)
-#define k_URL_initHospitalParam                   @"initHospitalParam"
-
-//验证卡号是否可用
-#define k_URL_checkCtznCardRegister                   @"checkCtznCardRegister"
-
-//修改手机号码
-#define k_URL_modifyPhoneNum                   @"modifyPhoneNum"
-
-//查询常用就诊人信息
-#define k_URL_searchCommonlyUsers                  @"searchCommonlyUsers"
-
-//修改/增加/删除常用就诊人信息
-#define k_URL_modifyCommonlyUser                  @"modifyCommonlyUser"
-
-//医院、医生信息查询
-#define k_URL_searchHospitalAndDoctors                  @"searchHospitalAndDoctors"
-
-//获取用户百度推送Id
-#define k_URL_getUserBaiduPushId                  @"getUserBaiduPushId"
-
-//获取用户推送信息
-#define k_URL_getUserPushMsg                  @"getUserPushMsg"
-
-#pragma mark -- 预约挂号
-//查询科室排班（医生出诊情况）
-#define k_URL_searchSchedue                  @"searchSchedue"
-
-//查询就诊卡号
-#define k_URL_searchCardNo                  @"searchCardNo"
-
-//预约下单
-#define k_URL_preRegisterConfirm                  @"preRegisterConfirm"
-
-//预约取消
-#define k_URL_preRegisterCancel                  @"preRegisterCancel"
-
-#pragma mark -- 就诊查询
-
-//实时排队叫号查询(登录)
-#define k_URL_searchQueuingInfo                  @"searchQueuingInfo"
-
-//实时排队叫号查询(未登录)
-#define k_URL_searchDeptQueuingInfo             @"searchDeptQueuingInfo"
-
-//查询用户今日就诊排班列表（包括预约和挂号）
-#define k_URL_searchCurrentRegisterInfo                  @"searchCurrentRegisterInfo"
-
-//查询用户预约列表
-#define k_URL_searchPreRegisterInfo                  @"searchPreRegisterInfo"
-
-//查询用户就诊历史挂号单列表
-#define k_URL_searchHistoryRegisterInfo                  @"searchHistoryRegisterInfo"
-
-//查询用户预约/挂号记录列表
-#define k_URL_searchUserRegisterInfo                  @"searchUserRegisterInfo"
-
-#pragma mark -- 医检报告
-
-//根据条码查询医检报告
-#define k_URL_searchReportByBarCode                  @"searchReportByBarCode"
-
-//查询用户医检报告列表
-#define k_URL_searchHistoryReport                  @"searchHistoryReport"
-
-#pragma mark -- 缴费支付
-//查询用户挂号单缴费详情
-#define k_URL_searchPrenosInfo                  @"searchPrenosInfo"
-
-//挂号下单-请求支付
-#define k_URL_registerRequestPay                  @"registerRequestPay"
-
-//挂号下单-结果查询
-#define k_URL_registerResultQuery                  @"registerResultQuery"
-
-//划价单缴费-请求支付
-#define k_URL_prenosRequestPay                  @"prenosRequestPay"
-
-//划价单缴费-结果查询
-#define k_URL_prenosResultQuery                  @"prenosResultQuery"
 
 
 #pragma mark -- DataBase
