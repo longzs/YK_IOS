@@ -202,7 +202,21 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
 -(int)List_remote_indexes:(NSMutableDictionary*)postBody
          responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
-    return 0;
+    //http//121.41.109.117:8200/yuekong/remote/list_remote_indexes?category_id=3&brand_id=&city_code=320100&from=0&count=20
+    NSString *requestURL = [NSString stringWithFormat:@"%@?category_id=%@&brand_id=%@&city_code=%@&from=0&count=50",k_URL_List_remote_indexes, postBody[@"category_id"], postBody[@"brand_id"], postBody[@"city_code"]];
+    
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_list_remote_indexes];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setDicHeader:header];
+    //[sent setPostData:[dicBody JSONData]];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
 /*
@@ -212,6 +226,21 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
 -(int)DownloadRemoteBinFile:(NSMutableDictionary*)postBody
            responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
+    //121.41.109.117:8200/rb/ykir_upd6121g_remote_box_164.bin
+    NSString *requestURL = [NSString stringWithFormat:@"%@/%@",k_URL_RB, postBody[@"category_id"], postBody[@"brand_id"], postBody[@"city_code"]];
+    
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_list_remote_indexes];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setDicHeader:header];
+    //[sent setPostData:[dicBody JSONData]];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
     return 0;
 }
 /*
