@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "IQKeyboardManager.h"
 #import "HomeAppliancesManager.h"
+#import "DBManager.h"
 
 @interface AppDelegate ()
 
@@ -91,6 +92,7 @@
             NSLog(@"copy file err %@", err);
         }
     }
+    [[DBManager sharedInstance] initDbPath:dbPath];
 }
 
 #pragma mark - Setup

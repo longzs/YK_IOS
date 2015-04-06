@@ -8,9 +8,10 @@
 
 #import "LeftViewController.h"
 #import "LeftMenuTableViewCell.h"
+#import "HomeAppliancesManager.h"
 
 @interface LeftViewController ()
-<UITableViewDataSource,UITableViewDelegate>
+<UITableViewDataSource,UITableViewDelegate, HTTP_MSG_RESPOND>
 
 @property (nonatomic, weak) IBOutlet UIImageView *imvHeader;
 @property (nonatomic, weak) IBOutlet UILabel *lblName;
@@ -30,6 +31,10 @@
     [super viewWillAppear:animated];
     
     [self.imgBG removeFromSuperview];
+    
+    NSMutableDictionary* dic = [NSMutableDictionary dictionaryWithCapacity:0];
+    dic[@"mobile_id"] = [Utils currentUDID];
+    [[HomeAppliancesManager sharedInstance] List_remote_instances:dic responseDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -47,6 +52,32 @@
 #pragma mark - Actions
 - (IBAction)clickOptionButton:(id)sender
 {
+    
+}
+
+#pragma mark - httpResponse
+-(int)ReciveHttpMsg:(MsgSent*)ReciveMsg{
+    
+#if 0
+    NSString *responseString = [[NSString alloc] initWithData:ReciveMsg.recData_ encoding:NSUTF8StringEncoding];
+    NSLog(@"id = %d, httpRsp = %d\nReciveHttpMsg = \n%@,",  ReciveMsg.cmdCode_ , ReciveMsg.httpRsp_,responseString);
+#endif
+    
+    switch (ReciveMsg.cmdCode_)
+    {
+        case CC_list_remote_instances:
+        {
+            //[self processIsBindYKSuccess:ReciveMsg];
+            break;
+        }
+        default:
+            [self hideLoading];
+            break;
+    }
+    return 0;
+}
+
+-(void)ReciveDidFailed:(MsgSent*)ReciveMsg{
     
 }
 

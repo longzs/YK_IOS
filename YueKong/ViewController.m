@@ -463,7 +463,7 @@ typedef enum wifiStatus_{
     dicBody[@"security"] = RPLACE_EMPTY_STRING(self.security);
     dicBody[@"channel"] = RPLACE_EMPTY_STRING(self.channel);
     dicBody[@"ip"] = @"1";
-    NSString* pid = [OpenUDID value];
+    NSString* pid = [Utils currentUDID];
     NSLog(@"pid = %@", pid);
     dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
     

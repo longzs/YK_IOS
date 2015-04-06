@@ -491,6 +491,8 @@
                         toString:(NSString *)tarDateStr
                           format:(NSString*)formatStr;
 
++ (NSString*)currentUDID;
+
 #pragma mark - 控制器
 +(AppDelegate*)currentAppDelegate;
 

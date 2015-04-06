@@ -8,6 +8,7 @@
 
 #import "absManager.h"
 #import "NetControl.h"
+#import "YKRemoteControlModel.h"
 
 @interface HomeAppliancesManager : absManager
 

@@ -10,4 +10,6 @@
 
 @interface RemoteControlViewController : BaseViewController
 @property(nonatomic, assign)HouseholdAppliancesType rcCategoryID;
+@property(nonatomic, strong)NSString* selectBrandID;
+@property(nonatomic, strong)NSString* selectCityID;
 @end

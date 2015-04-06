@@ -18,6 +18,7 @@ typedef enum stageType_{
     StageType_CityProvince ,    // 省会
     StageType_CityByProvince ,
     StageType_Bind,
+    StageType_DownLoadIndex,
     
     StageType_other = -1
 }StageType;
@@ -36,6 +37,7 @@ UIGestureRecognizerDelegate>
 @property (nonatomic, strong)NSMutableArray* aryCategorys;
 @property (nonatomic, strong)NSMutableArray* aryBrands;
 @property (nonatomic, strong)NSMutableArray* aryCitys;
+@property (nonatomic, strong)NSMutableArray* aryRemoteIndex;
 
 @property (nonatomic, strong)NSMutableArray* aryStudyImgaes;
 
@@ -73,10 +75,12 @@ UIGestureRecognizerDelegate>
     self.aryCategorys = [NSMutableArray arrayWithCapacity:0];
     self.aryBrands = [NSMutableArray arrayWithCapacity:0];
     self.aryCitys = [NSMutableArray arrayWithCapacity:0];
-    self.aryStudyImgaes = [NSMutableArray arrayWithCapacity:0];
-    for (int i = 1; i <=13; ++i) {
-        [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step%02d", i]];
-    }
+    self.aryRemoteIndex = [NSMutableArray arrayWithCapacity:0];
+    
+//    self.aryStudyImgaes = [NSMutableArray arrayWithCapacity:0];
+//    for (int i = 1; i <=13; ++i) {
+//        [self.aryStudyImgaes addObject:[NSString stringWithFormat:@"step%02d", i]];
+//    }
     
     NSMutableArray *firstArray = [NSMutableArray array];
     for (int i = 0; i < 11; i++) {
@@ -277,7 +281,7 @@ UIGestureRecognizerDelegate>
     if (0 == self.aryCategorys.count) {
         return;
     }
-    
+    [self.aryRemoteIndex removeAllObjects];
     if (HAType_SetTopBox == _rcCategoryID) {
         
         //[[HomeAppliancesManager sharedInstance] GetCityCovered:nil responseDelegate:self];
@@ -534,6 +538,61 @@ UIGestureRecognizerDelegate>
     [self.collectionView reloadData];
 }
 
+-(void)processList_remote_indexes:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSArray *jsonDataAry = [reciveData responsdData];
+        if (0 < jsonDataAry.count) {
+            [self.aryRemoteIndex removeAllObjects];
+        }
+        if ([jsonDataAry isKindOfClass:[NSArray class]]
+            && jsonDataAry.count) {
+            
+            for (NSDictionary* jsonData in jsonDataAry) {
+                
+                ykRemoteControlIndex *dm = [[ykRemoteControlIndex alloc] init];
+                dm.idNo = [jsonData[@"id"] intValue];
+                dm.category_id = [jsonData[@"category_id"] intValue];
+                dm.brand_id = [jsonData[@"brand_id"] intValue];
+                dm.city_code = jsonData[@"city_code"];
+                dm.operator_id = [jsonData[@"operator_id"] intValue];
+                
+                dm.category_name = jsonData[@"category_name"];
+                dm.brand_name = jsonData[@"brand_name"];
+                dm.city_name = jsonData[@"city_name"];
+                dm.operator_name = jsonData[@"operator_name"];
+                
+                dm.protocol = jsonData[@"protocol"];
+                dm.remote = jsonData[@"remote"];
+                dm.remote_map = jsonData[@"remote_map"];
+                
+                dm.status = [jsonData[@"status"] intValue];
+                [self.aryRemoteIndex addObject:dm];
+            }
+            _currentStage = StageType_DownLoadIndex;
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else if(reciveData.httpRsp_ == E_HTTPERR_ASIAuthenticationErrorType)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    [self.collectionView reloadData];
+}
+
 #pragma mark - httpResponse
 -(int)ReciveHttpMsg:(MsgSent*)ReciveMsg{
     
@@ -568,6 +627,11 @@ UIGestureRecognizerDelegate>
         case CC_GetCitesByProvinces:
         {
             [self processCitesByProvinces:ReciveMsg];
+            break;
+        }
+        case CC_list_remote_indexes:
+        {
+            [self processList_remote_indexes:ReciveMsg];
             break;
         }
         default:
@@ -606,7 +670,9 @@ UIGestureRecognizerDelegate>
             break;
         }
         case StageType_Bind:
+        case StageType_DownLoadIndex:
         {
+            ret = self.aryRemoteIndex.count;
             break;
         }
         default:
@@ -658,7 +724,22 @@ UIGestureRecognizerDelegate>
             break;
         }
         case StageType_Bind:
+        case StageType_DownLoadIndex:
         {
+            if (indexPath.row < self.aryRemoteIndex.count) {
+                ykm = [self.aryRemoteIndex objectAtIndex:indexPath.row];
+                ykRemoteControlIndex* yrci = (ykRemoteControlIndex*)ykm;
+                if (HAType_AirConditioner == yrci.category_id
+                    || HAType_TV == yrci.category_id) {
+                    cell.textOfCell = [NSString stringWithFormat:@"%@_%@", yrci.brand_name, yrci.remote];
+                }
+                else if (HAType_SetTopBox == yrci.category_id){
+                    cell.textOfCell = [NSString stringWithFormat:@"%@_%@", yrci.city_name,yrci.remote];
+                }
+                else{
+                    cell.textOfCell = [NSString stringWithFormat:@"%@_%d", yrci.category_name,yrci.category_id];
+                }
+            }
             break;
         }
         default:
@@ -723,6 +804,7 @@ UIGestureRecognizerDelegate>
                 ykm = [self.aryBrands objectAtIndex:indexPath.row];
                  ykm.bSelect = YES;
                 [_btnStageSecond setTitle:((YKRemoteControlBrand*)ykm).name forState:UIControlStateNormal];
+                self.selectBrandID = ((YKRemoteControlBrand*)ykm).idNo;
                 _currentStage = StageType_Bind;
             }
             
@@ -740,6 +822,7 @@ UIGestureRecognizerDelegate>
                 }
                 else{
                     [_btnStageSecond setTitle:((YKCityModel*)ykm).name forState:UIControlStateNormal];
+                    self.selectCityID = ((YKCityModel*)ykm).idNo;
                     _currentStage = StageType_Bind;
                 }
             }
@@ -765,23 +848,45 @@ UIGestureRecognizerDelegate>
                 ykm.bSelect = YES;
                
                 [_btnStageSecond setTitle:((YKCityModel*)ykm).name forState:UIControlStateNormal];
+                self.selectCityID = ((YKCityModel*)ykm).idNo;
                 _currentStage = StageType_Bind;
             }
             break;
         }
         case StageType_Bind:
         {
+            
+            break;
+        }
+        case StageType_DownLoadIndex:
+        {
+            if (indexPath.row < self.aryRemoteIndex.count) {
+                [self setSelectToNO:self.aryRemoteIndex];
+                ykm = [self.aryRemoteIndex objectAtIndex:indexPath.row];
+                ykm.bSelect = YES;
+                _currentStage = StageType_DownLoadIndex;
+                
+                NSMutableDictionary *dicBody = [[NSMutableDictionary alloc] initWithCapacity:0];
+                dicBody[@"protocol"] = RPLACE_EMPTY_STRING(((ykRemoteControlIndex*)ykm).protocol);
+                dicBody[@"remote"] = RPLACE_EMPTY_STRING(((ykRemoteControlIndex*)ykm).remote);
+                [[HomeAppliancesManager sharedInstance] DownloadRemoteBinFile:dicBody responseDelegate:self];
+            }
             break;
         }
         default:
             break;
     }
     if (StageType_Bind == _currentStage) {
-        [self performSelector:@selector(showStudyImage) withObject:nil afterDelay:.1f];
+        //[self performSelector:@selector(showStudyImage) withObject:nil afterDelay:.1f];
+        
+        NSMutableDictionary *dicBody = [[NSMutableDictionary alloc] initWithCapacity:0];
+        dicBody[@"category_id"] = [NSString stringWithFormat:@"%d", _rcCategoryID];
+        dicBody[@"brand_id"] = RPLACE_EMPTY_STRING(self.selectBrandID);
+        dicBody[@"city_code"] = RPLACE_EMPTY_STRING(self.selectCityID);
+        [[HomeAppliancesManager sharedInstance] List_remote_indexes:dicBody responseDelegate:self];
     }
-    else{
-        [self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];
-    }
+    else
+    {[self.collectionView performSelector:@selector(reloadData) withObject:nil afterDelay:0.3f];}
 }
 
 //返回这个UICollectionView是否可以被选择

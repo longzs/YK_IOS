@@ -1032,6 +1032,11 @@
     return ((AppDelegate*)([UIApplication sharedApplication].delegate));
 }
 
++ (NSString*)currentUDID;{
+    
+    return [OpenUDID value];
+}
+
 + (UIViewController *)controllerInMainStroyboardWithID:(NSString *)storyboardID
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

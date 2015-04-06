@@ -44,7 +44,7 @@ DEFINE_SINGLETON_FOR_CLASS(HomeAppliancesManager)
 #if kNeedPid
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-        NSString* pid = [OpenUDID value];
+        NSString* pid = [Utils currentUDID];
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
         dicBody[@"deviceid"] = RPLACE_EMPTY_STRING(pid);
     }
@@ -75,7 +75,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
 #if kNeedPid
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-        NSString* pid = [OpenUDID value];
+        NSString* pid = [Utils currentUDID];
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
         dicBody[@"deviceid"] = RPLACE_EMPTY_STRING(pid);
         dicBody[@"catid"] = RPLACE_EMPTY_STRING(pid);
@@ -112,7 +112,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     NSMutableDictionary* dicBody = postBody;
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-        NSString* pid = [OpenUDID value];
+        NSString* pid = [Utils currentUDID];
         NSLog(@"pid = %@", pid);
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
     }
@@ -142,7 +142,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     NSMutableDictionary* dicBody = postBody;
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-        NSString* pid = [OpenUDID value];
+        NSString* pid = [Utils currentUDID];
         NSLog(@"pid = %@", pid);
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
     }
@@ -171,7 +171,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     #if kNeedPid
     if (nil == dicBody) {
         dicBody = [NSMutableDictionary dictionaryWithCapacity:0];
-        NSString* pid = [OpenUDID value];
+        NSString* pid = [Utils currentUDID];
         NSLog(@"pid = %@", pid);
         dicBody[@"pid"] = RPLACE_EMPTY_STRING(pid);
     }
@@ -227,21 +227,23 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
            responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     
     //121.41.109.117:8200/rb/ykir_upd6121g_remote_box_164.bin
-    NSString *requestURL = [NSString stringWithFormat:@"%@/%@",k_URL_RB, postBody[@"category_id"], postBody[@"brand_id"], postBody[@"city_code"]];
+    NSString* fileName = [NSString stringWithFormat:@"%@_%@.bin", postBody[@"protocol"], postBody[@"remote"]];
+    NSString *requestURL = [NSString stringWithFormat:@"%@%@",k_URL_RB,fileName];
     
+    requestURL = @"http://121.41.109.117:8200/rb/ykir_upd6121g_remote_box_164.bin";
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     
-    MsgSent *sent = [[MsgSent alloc] init];
+    DownLoadSent *sent = [[DownLoadSent alloc] init];
     [sent setMethod_Req:requestURL];
     [sent setMethod_Http:HTTP_METHOD_GET];
     [sent setDelegate_:delegate];
-    [sent setCmdCode_:CC_list_remote_indexes];
-    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setCmdCode_:CC_Download_remote_binfile];
+    [sent setIReqType:HTTP_REQ_DOWNLOAD];
     [sent setDicHeader:header];
+    [sent setStrDownLoadPath:[NSString stringWithFormat:@"%@/%@", APP_DOC_PATH, fileName]];
     //[sent setPostData:[dicBody JSONData]];
     return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
-    return 0;
 }
 /*
  创建遥控器实例
@@ -253,7 +255,35 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
             responseDelegate:(id<HTTP_MSG_RESPOND>)delegate
 {
     
-    return 0;
+    //://121.41.109.117:8200/yuekong/remote/create_remote_instance 表单参数(remote_instance)
+    NSString *requestURL = [NSString stringWithFormat:@"%@", k_URL_Create_remote_instance];
+    
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+    ykRemoteControlINstance* rcInstance = postBody[@"ykRemoteControlINstance"];
+    NSMutableDictionary *dicBody = [[NSMutableDictionary alloc] initWithCapacity:0];
+    if (rcInstance.is_bound) {
+        dicBody[@"device_ip"] = RPLACE_EMPTY_STRING(rcInstance.device_ip);
+        dicBody[@"device_pdsn"] = RPLACE_EMPTY_STRING(rcInstance.device_pdsn);
+    }
+    dicBody[@"is_bound"] = [NSString stringWithFormat:@"%d", rcInstance.is_bound];
+    dicBody[@"rsn"] = RPLACE_EMPTY_STRING(rcInstance.rsn);
+    dicBody[@"mobile_id"] = RPLACE_EMPTY_STRING(rcInstance.mobile_id);
+    dicBody[@"user_open_id"] = RPLACE_EMPTY_STRING(rcInstance.user_open_id);
+    dicBody[@"user_name"] = RPLACE_EMPTY_STRING(rcInstance.user_name);
+    dicBody[@"mac_address"] = RPLACE_EMPTY_STRING(rcInstance.mac_address);
+    //dicBody[@"identifier"] = rcInstance.identifier;
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_POST];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_create_remote_instance];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setDicHeader:header];
+    [sent setPostData:[dicBody JSONData]];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
 /*
@@ -266,7 +296,20 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
            responseDelegate:(id<HTTP_MSG_RESPOND>)delegate
 {
     
-    return 0;
+    //://121.41.109.117:8200/yuekong/remote/list_remote_instances?mobile_id=098f6bcd4621d373cade4e83
+    NSString *requestURL = [NSString stringWithFormat:@"%@?mobile_id=%@",k_URL_List_remote_instances, postBody[@"mobile_id"]];
+    
+    NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
+    [header setObject:@"application/json" forKey:@"Content-Type"];
+    
+    MsgSent *sent = [[MsgSent alloc] init];
+    [sent setMethod_Req:requestURL];
+    [sent setMethod_Http:HTTP_METHOD_GET];
+    [sent setDelegate_:delegate];
+    [sent setCmdCode_:CC_list_remote_instances];
+    [sent setIReqType:HTTP_REQ_SHORTRUN];
+    [sent setDicHeader:header];
+    return [[HttpMsgCtrl GetInstance] SendHttpMsg:sent];
 }
 
 /*

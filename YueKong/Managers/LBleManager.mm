@@ -202,7 +202,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         [self.aryPeripherals addObject:peripheral];
     }
     if ([peripheral.name isEqualToString:NAME_YueKongYKQ_Identifier]
-        || [peripheral.identifier isEqual:UUIDSTR_ISSC_YueKongYKQ_Identifier]) {
+        ) {//[peripheral.identifier isEqual:UUIDSTR_ISSC_YueKongYKQ_Identifier]
         // 测试代码
         self.currentPeripheral = peripheral;
         [self stopScan];

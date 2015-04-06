@@ -8,6 +8,7 @@
 
 #import "BLePeripheralViewController.h"
 #import "UIImageView+PlayGIF.h"
+#import "RemoteControlViewController.h"
 
 @interface BLePeripheralViewController ()
 @property(weak, nonatomic)IBOutlet UITableView* tabPeripheral;
@@ -31,6 +32,8 @@
     self.viewFinishScan.hidden = YES;
     NSString *gifPath = [[NSBundle mainBundle] pathForResource:@"bluetooth.gif" ofType:nil];
     _imvBlueTooth.gifPath = gifPath;
+    
+    [self addRightBarButtonWithType:BarButtonTypeText title:@"开始绑定" action:@selector(testFun)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -65,6 +68,12 @@
     BLePeripheralViewController* rc = [[BLePeripheralViewController alloc] initWithNibName:@"BLePeripheralViewController" bundle:nil];
     
     return rc;
+}
+
+-(void)testFun{
+    RemoteControlViewController* vc = [RemoteControlViewController instantiateFromMainStoryboard];
+    vc.rcCategoryID = HAType_Add;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Method
