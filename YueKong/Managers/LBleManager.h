@@ -11,9 +11,9 @@
 #import "DEACentralManager.h"
 
 
-#define UUIDSTR_ISSC_YueKongYKQ_Identifier    @"6384E0F3-0642-032A-6DDD-B3499FB43079"
+#define UUIDSTR_ISSC_YueKongYKQ_Identifier    @"F66BE5FB-41C1-E82B-F9F2-5F1EFF479D62"
 
-#define NAME_YueKongYKQ_Identifier              @"UCON"
+#define NAME_YueKongYKQ_Identifier              @"AmoMcu1.com"
 
 #define UUIDSTR_YueKongYKQ_SERVICE            @"FFF0"
 
@@ -22,6 +22,19 @@
 
 // 写
 #define UUIDSTR_ISSC_TRANS_RX               @"FFF3"
+
+@interface ykBlePacket : NSObject
+@property(nonatomic, assign)short       lengthBody;
+@property(nonatomic, assign)SignedByte  index;
+@property(nonatomic, strong)NSData*     body;
+@end
+
+@interface ykResBlePacket : NSObject
+@property(nonatomic, assign)Byte  dataType;
+@property(nonatomic, assign)Byte  resType;
+@property(nonatomic, strong)NSData*  body;
+@end
+
 
 @protocol LBleProcessDelegate <NSObject>
 
@@ -63,7 +76,7 @@ DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 
 -(void)stopScan;
 
--(void)connectServer;
+-(BOOL)connectServer;
 
 -(void)disConnectServer;
 

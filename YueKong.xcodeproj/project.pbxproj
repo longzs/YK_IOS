@@ -405,7 +405,7 @@
 		FC0BA9701A5E303E00748B4E /* EHWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EHWebViewController.m; sourceTree = "<group>"; };
 		FC0BA9751A5E81E600748B4E /* SSIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSIDManager.h; sourceTree = "<group>"; };
 		FC0BA9761A5E81E600748B4E /* SSIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSIDManager.m; sourceTree = "<group>"; };
-		FC147CCA1A5CDB3A00BA06F3 /* 悦控.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "悦控.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC147CCA1A5CDB3A00BA06F3 /* yuekong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = yuekong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC147CCE1A5CDB3A00BA06F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC147CCF1A5CDB3A00BA06F3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FC147CD11A5CDB3A00BA06F3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -876,7 +876,6 @@
 		FC0BA9601A5E234E00748B4E /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				FC8470E31AA6E32E00444761 /* BLE */,
 				FCAF7B021A63ADE3001CC512 /* AsyncSocket */,
 				FC1AE57F1A5FCF1700CD5611 /* httpcontrol */,
 				FC0BA9621A5E26BF00748B4E /* absManager.h */,
@@ -935,7 +934,7 @@
 		FC147CCB1A5CDB3A00BA06F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				FC147CCA1A5CDB3A00BA06F3 /* 悦控.app */,
+				FC147CCA1A5CDB3A00BA06F3 /* yuekong.app */,
 				FC147CE31A5CDB3A00BA06F3 /* YueKongTests.xctest */,
 			);
 			name = Products;
@@ -945,6 +944,7 @@
 			isa = PBXGroup;
 			children = (
 				FC0BA9601A5E234E00748B4E /* Managers */,
+				FC8470E31AA6E32E00444761 /* BLE */,
 				FC0BA9611A5E234E00748B4E /* Models */,
 				FC147E321A5D341A00BA06F3 /* ViewControllers */,
 				FC147E1F1A5D26AC00BA06F3 /* commonMacro.h */,
@@ -1464,7 +1464,8 @@
 				FC8470DF1AA6A5D000444761 /* LBleManager.mm */,
 				FC8470E41AA6E32E00444761 /* YmsCoreBluetooth */,
 			);
-			path = BLE;
+			name = BLE;
+			path = Managers/BLE;
 			sourceTree = "<group>";
 		};
 		FC8470E41AA6E32E00444761 /* YmsCoreBluetooth */ = {
@@ -1571,7 +1572,7 @@
 			);
 			name = YueKong;
 			productName = YueKong;
-			productReference = FC147CCA1A5CDB3A00BA06F3 /* 悦控.app */;
+			productReference = FC147CCA1A5CDB3A00BA06F3 /* yuekong.app */;
 			productType = "com.apple.product-type.application";
 		};
 		FC147CE21A5CDB3A00BA06F3 /* YueKongTests */ = {
@@ -2040,8 +2041,8 @@
 					"$(PROJECT_DIR)/YueKong",
 				);
 				OTHER_LDFLAGS = "-licucore";
-				PRODUCT_NAME = "悦控";
-				PROVISIONING_PROFILE = "d7b8d0c3-d8d5-4c45-aba3-e7e0e76c5a16";
+				PRODUCT_NAME = yuekong;
+				PROVISIONING_PROFILE = "de965221-4476-42a5-acc2-e3d8fe6cd886";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2065,8 +2066,8 @@
 					"$(PROJECT_DIR)/YueKong",
 				);
 				OTHER_LDFLAGS = "-licucore";
-				PRODUCT_NAME = "悦控";
-				PROVISIONING_PROFILE = "c1dd64dc-3dea-413a-8552-8c54877baaf2";
+				PRODUCT_NAME = yuekong;
+				PROVISIONING_PROFILE = "d7a2115b-64e2-4ac0-82de-2fd470ac07d1";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

@@ -8,6 +8,15 @@
 
 #import "LBleManager.h"
 
+
+@implementation ykBlePacket
+
+@end
+
+@implementation ykResBlePacket
+
+@end
+
 @interface LBleManager()
 
 @property(nonatomic, strong)NSTimer* connectTimer;
@@ -44,14 +53,15 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     }
     self.LBledelegate = delegate;
     
-    if (self.isScaning) {
-        [self stopScan];
-    }
+//    if (self.isScaning) {
+//        [self stopScan];
+//    }
 //    do {
 //        
 //    } while (self.isScaning);
     
     // 查找， 成功了在找到合适得然后连接
+    self.isScaning = YES;
     [_centralManager scanForPeripheralsWithServices:nil
                                             options:[NSDictionary dictionaryWithObjectsAndKeys:
                                                      @YES, CBCentralManagerScanOptionAllowDuplicatesKey,
@@ -60,16 +70,26 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 
 -(void)stopScan{
     
+    if (!self.isScaning) {
+        return;
+    }
     [_centralManager stopScan];
     self.isScaning = NO;
+    
+    if (self.currentPeripheral) {
+        [self disConnectServer];
+    }
 }
 
--(void)connectServer{
-    
+-(BOOL)connectServer{
+    if (nil == self.currentPeripheral) {
+        return NO;
+    }
     [_centralManager connectPeripheral:self.currentPeripheral options:[NSDictionary dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:CBConnectPeripheralOptionNotifyOnDisconnectionKey]];
     
     //开一个定时器监控连接超时的情况
     _connectTimer = [NSTimer scheduledTimerWithTimeInterval:15.0f target:self selector:@selector(connectTimeout:) userInfo:nil repeats:NO];
+    return YES;
 }
 
 -(void)disConnectServer{
@@ -100,15 +120,35 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 //写数据
 -(void)writeChar:(NSData *)data
 {
+//    if (0 == data.length) {
+//        return;
+//    }
+    NSLog(@"writeChar");
     [self startSubscribe];
-    const char* testChar = "testChar12345678";
-    [_currentPeripheral writeValue:[NSData dataWithBytes:testChar length:strlen(testChar)] forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    //const char* testChar = "111111111111111111";
+    [_currentPeripheral writeValue:[self createSendPacket] forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
 }
 
 //监听设备
 -(void)startSubscribe
 {
     [_currentPeripheral setNotifyValue:YES forCharacteristic:_currentCharacteristic];
+}
+
+-(NSData*)createSendPacket{
+    const short packetLen = 3+kLength_YKBLePacket_Body;
+    pSendYKBlePacket syb = (pSendYKBlePacket)malloc(packetLen);
+    memset(syb, 0, packetLen);
+    syb->totalLength = kLength_YKBLePacket_Body;
+    syb->index = 0;
+//    if () {
+//        
+//    }
+    memcpy(syb->body, "1234567890123456", syb->totalLength);
+    NSData* retData = [NSData dataWithBytes:syb length:packetLen];
+    free(syb);
+    
+    return retData;
 }
 
 #pragma mark - CBCentralManagerDelegate Methods
@@ -153,25 +193,26 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     
     if ([LBleManager isSameBLEPeripheral:self.currentPeripheral Peripheral2:peripheral]) {
         
-        [peripheral setDelegate:self];
+        [self.currentPeripheral setDelegate:self];
         //[peripheral readRSSI];
-        [peripheral discoverServices:nil];
-    }
-    weakSelf(wSelf);
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
+        [self.currentPeripheral discoverServices:nil];
         
-        if (wSelf.LBledelegate
-            && [wSelf.LBledelegate respondsToSelector:@selector(didConnectPeripheral:)]) {
+        weakSelf(wSelf);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
             
-            [wSelf.LBledelegate didConnectPeripheral:peripheral];
-        }
-    });
+            if (wSelf.LBledelegate
+                && [wSelf.LBledelegate respondsToSelector:@selector(didConnectPeripheral:)]) {
+                
+                [wSelf.LBledelegate didConnectPeripheral:peripheral];
+            }
+        });
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
     NSLog(@"didDisconnectPeripheral: %@", peripheral);
     
-    [self stopScan];
+    self.currentPeripheral = nil;
     
     weakSelf(wSelf);
     _YMS_PERFORM_ON_MAIN_THREAD(^{
@@ -188,9 +229,6 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     
     // 找到了服务
     
-    //YMSCBPeripheral *yp = [_centralManager findPeripheral:peripheral];
-    self.isScaning = YES;
-    
     BOOL bHave = NO;
     for (CBPeripheral* per in self.aryPeripherals) {
         if ([LBleManager isSameBLEPeripheral:per Peripheral2:peripheral]) {
@@ -199,19 +237,22 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         }
     }
     if (!bHave) {
+        NSLog(@"didDiscoverPeripheral is %@-%@", peripheral.name, peripheral.identifier.UUIDString);
         [self.aryPeripherals addObject:peripheral];
     }
+    
     if ([peripheral.name isEqualToString:NAME_YueKongYKQ_Identifier]
         ) {//[peripheral.identifier isEqual:UUIDSTR_ISSC_YueKongYKQ_Identifier]
-        // 测试代码
+        
         self.currentPeripheral = peripheral;
-        [self stopScan];
+        // 测试代码
+        //[self stopScan];
     }
     
     weakSelf(wSelf);
     _YMS_PERFORM_ON_MAIN_THREAD(^{
         // 尝试连接
-        [wSelf performSelector:@selector(connectServer) withObject:nil afterDelay:3];
+        //[wSelf performSelector:@selector(connectServer) withObject:nil afterDelay:3];
         
         if (wSelf.LBledelegate
             && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverPeripheral:advertisementData:RSSI:)]) {
@@ -286,7 +327,6 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         
         return;
     }
-    
     for (CBCharacteristic *characteristic in service.characteristics)
     {
          NSLog(@"Discovered characteristics:%@ for service: %@", characteristic.UUID, service.UUID);
@@ -296,24 +336,31 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
             
             NSLog(@"Discovered readwrite characteristics:%@ for service: %@", characteristic.UUID, service.UUID);
             
-            _currentCharacteristic = characteristic;//保存读的特征
-//            
-//            if ([self.delegate respondsToSelector:@selector(DidFoundReadChar:)])
-//                [self.delegate DidFoundReadChar:characteristic];
-//
-            [self performSelector:@selector(writeChar:) withObject:nil afterDelay:3.5];
+            self.currentCharacteristic = characteristic;//保存读的特征
+            
             break;
         }
     }
     
-    weakSelf(wSelf);
-    _YMS_PERFORM_ON_MAIN_THREAD(^{
-        if (wSelf.LBledelegate
-            && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {
+    if (self.currentCharacteristic) {
+        
+        weakSelf(wSelf);
+        _YMS_PERFORM_ON_MAIN_THREAD(^{
             
-            [wSelf.LBledelegate didDiscoverCharacteristicsForService:peripheral :service error:error];
-        }
-    });
+            [wSelf performSelector:@selector(writeChar:) withObject:nil afterDelay:3.5];
+            if (wSelf.LBledelegate
+                && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {
+                
+                [wSelf.LBledelegate didDiscoverCharacteristicsForService:peripheral
+                                                                        :service
+                                                                   error:error];
+            }
+        });
+    }
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error{
+    
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error

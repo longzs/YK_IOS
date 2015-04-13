@@ -33,7 +33,7 @@
     NSString *gifPath = [[NSBundle mainBundle] pathForResource:@"bluetooth.gif" ofType:nil];
     _imvBlueTooth.gifPath = gifPath;
     
-    [self addRightBarButtonWithType:BarButtonTypeText title:@"开始绑定" action:@selector(testFun)];
+    //[self addRightBarButtonWithType:BarButtonTypeText title:@"开始绑定" action:@selector(testFun)];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -128,7 +128,11 @@
 
 - (IBAction)clickFinish:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    // connect
+    if(![[LBleManager sharedInstance] connectServer]){
+        NSLog(@"currentPeripheral is un find");
+    }
+    //[self.navigationController popViewControllerAnimated:YES];
 }
 
 /*
@@ -158,7 +162,25 @@
 }
 
 -(void)didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI{
-    [self stopSearchWithResult:YES];
+    if ([LBleManager sharedInstance].currentPeripheral) {
+        [self stopSearchWithResult:YES];
+    }
+}
+
+-(void)didConnectPeripheral:(CBPeripheral *)peripheral{
+    [self testFun];
+}
+
+-(void)didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error{
+    
+}
+
+-(void)didDiscoverServices:(CBPeripheral *)peripheral :(NSError *)error{
+    
+}
+
+-(void)didDiscoverCharacteristicsForService:(CBPeripheral *)peripheral :(CBService *)service error:(NSError *)error{
+    
 }
 
 #pragma mark -- UITableView

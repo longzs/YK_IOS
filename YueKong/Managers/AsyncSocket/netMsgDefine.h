@@ -85,6 +85,23 @@ typedef struct routerState{
 }ROUTERSTATE,*pRouterState;
 #pragma park()
 
+#define kLength_YKBLePacket_Body    16
+#pragma pack(1)
+typedef struct ykSendBlePacket{
+    
+    short           totalLength;                  //	2字节总长度
+    SignedByte      index;
+    char            body[kLength_YKBLePacket_Body];
+}YKSENDBLEPACKET,*pSendYKBlePacket;
+
+typedef struct ykResponseBlePacket{
+    
+    Byte            dataType;                 //1字节数据类型应为：0x00，否则APP视为无效确认信
+    Byte            responseType;
+    char            body[kLength_YKBLePacket_Body];
+}YKResponseBLEPACKET,*pResponseYKBlePacket;
+#pragma park()
+
 #define PACK_LENGTH_MIN  5
 #define k_Type_PDUPack_TEXT     0
 #define k_Type_PDUPack_MEDIA    1
