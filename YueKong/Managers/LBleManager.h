@@ -23,13 +23,13 @@
 // 写
 #define UUIDSTR_ISSC_TRANS_RX               @"FFF3"
 
-@interface ykBlePacket : NSObject
+@interface ykBlePacketObject : NSObject
 @property(nonatomic, assign)short       lengthBody;
 @property(nonatomic, assign)SignedByte  index;
 @property(nonatomic, strong)NSData*     body;
 @end
 
-@interface ykResBlePacket : NSObject
+@interface ykResBlePacketObject : NSObject
 @property(nonatomic, assign)Byte  dataType;
 @property(nonatomic, assign)Byte  resType;
 @property(nonatomic, strong)NSData*  body;
@@ -80,7 +80,7 @@ DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 
 -(void)disConnectServer;
 
--(void)writeChar:(NSData *)data;
+-(BOOL)writeUserChar:(NSData *)data;
 
 -(BOOL)bleEnable;
 

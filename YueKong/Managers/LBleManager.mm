@@ -8,12 +8,20 @@
 
 #import "LBleManager.h"
 
+typedef enum ykBLETransState{
+    TransState_NotStart,
+    
+    TransState_Start,
+    
+    TransState_Over     // 结束
+    
+}YKBLETRANSSTATE;
 
-@implementation ykBlePacket
+@implementation ykBlePacketObject
 
 @end
 
-@implementation ykResBlePacket
+@implementation ykResBlePacketObject
 
 @end
 
@@ -22,6 +30,15 @@
 @property(nonatomic, strong)NSTimer* connectTimer;
 
 @property(nonatomic, strong)NSMutableArray* aryPeripherals;
+
+// 传输控制
+@property(nonatomic, assign)YKBLETRANSSTATE         transState;
+@property(nonatomic, assign)int                     indexSend;
+@property(nonatomic, assign)NSUInteger              fragmentsSend;     // 发送的分片数
+@property(nonatomic, strong)NSData*                 currentDataSend;
+@property(nonatomic, strong)NSTimer*                timerSend;
+
+-(void)reSetTransStatus;
 
 @end
 
@@ -34,6 +51,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     self = [super init];
     if (self) {
         self.aryPeripherals = [NSMutableArray arrayWithCapacity:0];
+        [self reSetTransStatus];
         
         dispatch_queue_t queue = dispatch_queue_create("ykBLe", nil);
         _centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:queue];
@@ -44,6 +62,12 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 +(BOOL)isSameBLEPeripheral:(CBPeripheral*)p1 Peripheral2:(CBPeripheral*)p2{
     return [p1.name isEqualToString:p2.name]
     && [p1.identifier isEqual:p2.identifier];
+}
+
+-(void)reSetTransStatus{
+    _transState = TransState_NotStart;
+    _indexSend = -1;
+    self.currentDataSend = nil;
 }
 
 -(void)scanWithDelegate:(id)delegate{
@@ -117,16 +141,38 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
             || CBCentralManagerStateResetting == self.centralManager.state);
 }
 
+-(void)writeValueToYKRemote:(ykBlePacketObject*)sendValue{
+    
+    [_currentPeripheral writeValue:[self createSendPacket:sendValue] forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithResponse];
+}
+
 //写数据
--(void)writeChar:(NSData *)data
+-(BOOL)writeUserChar:(NSData *)data;
 {
-//    if (0 == data.length) {
-//        return;
-//    }
+    if (0 == data.length
+        || TransState_NotStart != _transState
+        || -1 != _indexSend) {
+        NSLog(@"writeChar error, data is nil or state error");
+        return NO;
+    }
     NSLog(@"writeChar");
     [self startSubscribe];
-    //const char* testChar = "111111111111111111";
-    [_currentPeripheral writeValue:[self createSendPacket] forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    
+    // 置状态
+    _indexSend = 0;
+    _transState = TransState_Start;
+    self.currentDataSend = data;
+    if (data.length < kLength_YKBLePacket_Body) {
+        _fragmentsSend = 1;
+    }
+    else
+    {
+        _fragmentsSend = (0 == data.length%kLength_YKBLePacket_Body)?data.length/kLength_YKBLePacket_Body:(data.length/kLength_YKBLePacket_Body)+1;
+    }
+    
+    ykBlePacketObject* ybpo = [self createSendObject];
+    [self writeValueToYKRemote:ybpo];
+    return YES;
 }
 
 //监听设备
@@ -135,20 +181,52 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     [_currentPeripheral setNotifyValue:YES forCharacteristic:_currentCharacteristic];
 }
 
--(NSData*)createSendPacket{
+-(NSData*)createSendPacket:(ykBlePacketObject*)sendData{
+    
     const short packetLen = 3+kLength_YKBLePacket_Body;
     pSendYKBlePacket syb = (pSendYKBlePacket)malloc(packetLen);
     memset(syb, 0, packetLen);
-    syb->totalLength = kLength_YKBLePacket_Body;
-    syb->index = 0;
-//    if () {
-//        
-//    }
-    memcpy(syb->body, "1234567890123456", syb->totalLength);
+    syb->totalLength = sendData.body.length;
+    syb->index = sendData.index;
+    
+    memcpy(syb->body, sendData.body.bytes, syb->totalLength);
     NSData* retData = [NSData dataWithBytes:syb length:packetLen];
     free(syb);
     
     return retData;
+}
+
+// 根据 index 和 发送的data 来创建需要发送的包对象
+-(ykBlePacketObject*)createSendObject{
+    
+    if (_indexSend < 0
+        || _currentDataSend.length/kLength_YKBLePacket_Body < _indexSend) {
+        return nil;
+    }
+    ykBlePacketObject* ybpo = [[ykBlePacketObject alloc] init];
+    
+    if (_currentDataSend.length <= kLength_YKBLePacket_Body) {
+        // 一次发送就完成
+        ybpo.index = 0;
+        ybpo.body = _currentDataSend;
+        ybpo.lengthBody = _currentDataSend.length;
+    }
+    else{
+        // 拆分
+        ybpo.index = _indexSend;
+        if (_indexSend < _currentDataSend.length/kLength_YKBLePacket_Body) {
+            ybpo.lengthBody = kLength_YKBLePacket_Body;
+        }
+        else{
+            ybpo.lengthBody = _currentDataSend.length%kLength_YKBLePacket_Body;
+        }
+        if (_currentDataSend.length < ybpo.index*kLength_YKBLePacket_Body+ybpo.lengthBody) {
+            
+        }
+        ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(ybpo.index*kLength_YKBLePacket_Body, ybpo.lengthBody)];
+    }
+    
+    return ybpo;
 }
 
 #pragma mark - CBCentralManagerDelegate Methods
@@ -347,7 +425,9 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         weakSelf(wSelf);
         _YMS_PERFORM_ON_MAIN_THREAD(^{
             
-            [wSelf performSelector:@selector(writeChar:) withObject:nil afterDelay:3.5];
+            NSData* testData = [NSData dataWithBytes:<#(const void *)#> length:<#(NSUInteger)#>];
+            [wSelf performSelector:@selector(writeUserChar:) withObject:nil afterDelay:3.5];
+            
             if (wSelf.LBledelegate
                 && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {
                 
@@ -359,8 +439,17 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     }
 }
 
-- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error{
+- (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error{
+    // 发送是否成功
     
+    if (error)
+    {
+        NSLog(@"didWriteValueForCharacteristic------ %@ error: %@", characteristic.UUID, [error localizedDescription]);
+        
+        return;
+    }
+    
+    NSLog(@"didWriteValueForCharacteristic is success");
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
@@ -368,7 +457,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     
     if (error)
     {
-        NSLog(@"Error updating value for characteristic %@ error: %@", characteristic.UUID, [error localizedDescription]);
+        NSLog(@"didUpdateValueForCharacteristic---- %@ error: %@", characteristic.UUID, [error localizedDescription]);
         
 //        if ([_mainMenuDelegate respondsToSelector:@selector(DidNotifyReadError:)])
 //            [_mainMenuDelegate DidNotifyReadError:error];
