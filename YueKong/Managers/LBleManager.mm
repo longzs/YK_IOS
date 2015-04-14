@@ -38,8 +38,6 @@ typedef enum ykBLETransState{
 @property(nonatomic, strong)NSData*                 currentDataSend;
 @property(nonatomic, strong)NSTimer*                timerSend;
 
--(void)reSetTransStatus;
-
 @end
 
 @implementation LBleManager
@@ -67,6 +65,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 -(void)reSetTransStatus{
     _transState = TransState_NotStart;
     _indexSend = -1;
+    _fragmentsSend = 0;
     self.currentDataSend = nil;
 }
 
@@ -141,9 +140,16 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
             || CBCentralManagerStateResetting == self.centralManager.state);
 }
 
--(void)writeValueToYKRemote:(ykBlePacketObject*)sendValue{
+-(BOOL)writeValueToYKRemote:(ykBlePacketObject*)sendValue{
     
-    [_currentPeripheral writeValue:[self createSendPacket:sendValue] forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithResponse];
+    ykBlePacketObject* ybpo = [self createSendObject];
+    if (nil == ybpo) {
+        return NO;
+    }
+    NSData* wValue = [self createSendPacket:ybpo];
+    NSLog(@"writeValue = %@", wValue);
+    [_currentPeripheral writeValue:wValue forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
+    return YES;
 }
 
 //写数据
@@ -170,9 +176,8 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         _fragmentsSend = (0 == data.length%kLength_YKBLePacket_Body)?data.length/kLength_YKBLePacket_Body:(data.length/kLength_YKBLePacket_Body)+1;
     }
     
-    ykBlePacketObject* ybpo = [self createSendObject];
-    [self writeValueToYKRemote:ybpo];
-    return YES;
+    BOOL bRet = [self writeValueToYKRemote:nil];
+    return bRet;
 }
 
 //监听设备
@@ -190,7 +195,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     syb->index = sendData.index;
     
     memcpy(syb->body, sendData.body.bytes, syb->totalLength);
-    NSData* retData = [NSData dataWithBytes:syb length:packetLen];
+    NSData* retData = [NSData dataWithBytes:syb->body length:packetLen];
     free(syb);
     
     return retData;
@@ -200,7 +205,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 -(ykBlePacketObject*)createSendObject{
     
     if (_indexSend < 0
-        || _currentDataSend.length/kLength_YKBLePacket_Body < _indexSend) {
+        || _fragmentsSend < _indexSend) {
         return nil;
     }
     ykBlePacketObject* ybpo = [[ykBlePacketObject alloc] init];
@@ -214,15 +219,18 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     else{
         // 拆分
         ybpo.index = _indexSend;
-        if (_indexSend < _currentDataSend.length/kLength_YKBLePacket_Body) {
+        if (ybpo.index+1 < _fragmentsSend) {
             ybpo.lengthBody = kLength_YKBLePacket_Body;
         }
         else{
             ybpo.lengthBody = _currentDataSend.length%kLength_YKBLePacket_Body;
         }
-        if (_currentDataSend.length < ybpo.index*kLength_YKBLePacket_Body+ybpo.lengthBody) {
-            
-        }
+//        if (0 == ybpo.index){
+//            ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(0, ybpo.lengthBody)];
+//        }
+//        else{
+//            ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(ybpo.index*kLength_YKBLePacket_Body, ybpo.lengthBody)];
+//        }
         ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(ybpo.index*kLength_YKBLePacket_Body, ybpo.lengthBody)];
     }
     
@@ -425,8 +433,8 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         weakSelf(wSelf);
         _YMS_PERFORM_ON_MAIN_THREAD(^{
             
-            NSData* testData = [NSData dataWithBytes:<#(const void *)#> length:<#(NSUInteger)#>];
-            [wSelf performSelector:@selector(writeUserChar:) withObject:nil afterDelay:3.5];
+            NSData* testData = [NSData dataWithBytes:"0123456789abcdefghij0123456789" length:30];
+            [wSelf performSelector:@selector(writeUserChar:) withObject:testData afterDelay:3.5];
             
             if (wSelf.LBledelegate
                 && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {
@@ -445,7 +453,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     if (error)
     {
         NSLog(@"didWriteValueForCharacteristic------ %@ error: %@", characteristic.UUID, [error localizedDescription]);
-        
+        [self reSetTransStatus];
         return;
     }
     
@@ -455,37 +463,71 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
     
-    if (error)
-    {
-        NSLog(@"didUpdateValueForCharacteristic---- %@ error: %@", characteristic.UUID, [error localizedDescription]);
-        
-//        if ([_mainMenuDelegate respondsToSelector:@selector(DidNotifyReadError:)])
-//            [_mainMenuDelegate DidNotifyReadError:error];
-        
-        return;
-    }
-    
-//    [_recvData appendData:characteristic.value];
-//    
-//    
-//    if ([_recvData length] >= 5)//已收到长度
-//    {
-//        unsigned charchar *buffer = (unsigned charchar *)[_recvData bytes];
-//        int nLen = buffer[3]*256 + buffer[4];
-//        if ([_recvData length] == (nLen+3+2+2))
-//        {
-//            //接收完毕，通知代理做事
-//            if ([_mainMenuDelegate respondsToSelector:@selector(DidNotifyReadData)])
-//                [_mainMenuDelegate DidNotifyReadData];
-//            
-//        }
-//    }
     weakSelf(wSelf);
     _YMS_PERFORM_ON_MAIN_THREAD(^{
+        
+        NSError* transError = nil;
+        if (error) {
+            NSLog(@"didUpdateValueForCharacteristic---- %@ error: %@", characteristic.UUID, [error localizedDescription]);
+            [wSelf reSetTransStatus];
+            transError = error;
+        }
+        
+        if (TransState_Start ==  wSelf.transState) {
+            pResponseYKBlePacket prybp = (pResponseYKBlePacket)[characteristic.value bytes];
+            if (NULL == prybp) {
+                [wSelf reSetTransStatus];
+                transError = [NSError errorWithDomain:@"responseData InValid" code:1 userInfo:nil];
+            }
+            else{
+                if (0 != prybp->dataType) {
+                    //1字节数据类型应为:0x00，否则APP视为无效确认信息
+                    [wSelf reSetTransStatus];
+                    transError = [NSError errorWithDomain:@"responseDataType InValid" code:2 userInfo:nil];
+                }
+                else
+                {
+                    // 数据类型正确
+                    if (kResponseTypeEnd == prybp->responseType) {
+                        NSLog(@"kResponseTypeEnd");
+                        [wSelf reSetTransStatus];
+                    }
+                    else if(kResponseTypeContinued == prybp->responseType){
+                        //如果当响应类型为0x01时，在响应数据的第一字节存放对端期望的下一个Index号（分片编号）
+                        Byte expectIndex = 0;
+                        if (NULL != prybp->body) {
+                            expectIndex = prybp->body[0];
+                        }
+                        ++wSelf.indexSend;
+                        if (expectIndex == wSelf.indexSend) {
+                            // 继续传输
+                            NSLog(@"kResponseTypeContinued expectIndex = %c", expectIndex);
+                            
+                            [wSelf performSelector:@selector(writeValueToYKRemote:) withObject:nil afterDelay:0.15];
+                        }
+                        else{
+                            NSLog(@"kResponseTypeIndex Error expectIndex = %c", expectIndex);
+                            
+                            [wSelf reSetTransStatus];
+                        }
+                    }
+                    else{
+                        NSLog(@"kResponseTypeError");
+                        [wSelf reSetTransStatus];
+                    }
+                }
+            }
+        }
+        else{
+            transError = [NSError errorWithDomain:@"responseState Not Start" code:3 userInfo:nil];
+            [wSelf reSetTransStatus];
+        }
+        
+        
         if (wSelf.LBledelegate
             && [wSelf.LBledelegate respondsToSelector:@selector(didUpdateValueForCharacteristic:error:Peripheral:)]) {
             
-            [wSelf.LBledelegate didUpdateValueForCharacteristic:characteristic error:error Peripheral:peripheral];
+            [wSelf.LBledelegate didUpdateValueForCharacteristic:characteristic error:transError Peripheral:peripheral];
         }
     });
 }

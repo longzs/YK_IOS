@@ -86,6 +86,13 @@ typedef struct routerState{
 #pragma park()
 
 #define kLength_YKBLePacket_Body    16
+
+#define kResponseTypeEnd            0x00        //表示本次用户层数据传输全部完成
+
+#define kResponseTypeContinued      0x01        //表示本次分片传输完成，在响应数据部分为对端期望的下一个Index号
+
+#define kResponseTypeError            0x02        //表示对端错误，APP侧应终止用户层传输
+
 #pragma pack(1)
 typedef struct ykSendBlePacket{
     

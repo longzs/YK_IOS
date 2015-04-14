@@ -63,6 +63,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    [[LBleManager sharedInstance] reSetTransStatus];
+}
+
 + (instancetype)instantiateFromMainStoryboard
 {
     BLePeripheralViewController* rc = [[BLePeripheralViewController alloc] initWithNibName:@"BLePeripheralViewController" bundle:nil];

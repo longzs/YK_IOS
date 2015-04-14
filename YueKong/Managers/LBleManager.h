@@ -84,4 +84,6 @@ DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 
 -(BOOL)bleEnable;
 
+-(void)reSetTransStatus;
+
 @end
