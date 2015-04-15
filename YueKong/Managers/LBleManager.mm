@@ -147,7 +147,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         return NO;
     }
     NSData* wValue = [self createSendPacket:ybpo];
-    NSLog(@"writeValue = %@", wValue);
+    printf("writeValue index = %d, length = %d, body = %s /r/n", ybpo.index, ybpo.lengthBody, ybpo.body.bytes);
     [_currentPeripheral writeValue:wValue forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
     return YES;
 }
@@ -480,6 +480,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
                 transError = [NSError errorWithDomain:@"responseData InValid" code:1 userInfo:nil];
             }
             else{
+                printf("AckValue dataType = %c, responseType = %c, body = %s /r/n", prybp->dataType, prybp->responseType, prybp->body);
                 if (0 != prybp->dataType) {
                     //1字节数据类型应为:0x00，否则APP视为无效确认信息
                     [wSelf reSetTransStatus];
