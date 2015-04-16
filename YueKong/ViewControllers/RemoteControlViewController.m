@@ -10,6 +10,7 @@
 #import "DeviceSelectCollectionCell.h"
 #import "HomeAppliancesManager.h"
 #import "ConfigFinishViewController.h"
+#import "LBleManager.h"
 
 typedef enum stageType_{
     StageType_Category = 1,
@@ -593,6 +594,40 @@ UIGestureRecognizerDelegate>
     [self.collectionView reloadData];
 }
 
+-(void)processDownload_remote_binfile:(MsgSent*)reciveData{
+    
+    if ([reciveData isRequestSuccess])
+    {
+        NSString* downloadFilePath = ((DownLoadSent*)reciveData).strDownLoadPath;
+        if ([[NSFileManager defaultManager] fileExistsAtPath:downloadFilePath]) {
+            NSData* data = [NSData dataWithContentsOfFile:downloadFilePath];
+            
+            if (![[LBleManager sharedInstance] writeUserChar:data]) {
+                NSLog(@"-----发送文件失败");
+                [self hideLoading];
+            }
+        }
+        else{
+            NSLog(@"-----下载的文件没有找到");
+            [self hideLoading];
+        }
+    }
+    else
+    {   //对于HTTP请求返回的错误,暂时不展开处理
+        NSString* strError = @"请检查您得网络连接是否正常";
+        if (reciveData.httpRsp_ == E_HTTPERR_ASIRequestTimedOutErrorType)
+        {
+            strError = @"请求超时";
+        }
+        else
+        {
+            
+        }
+        [Utils showSimpleAlert:strError];
+    }
+    //[self.collectionView reloadData];
+}
+
 #pragma mark - httpResponse
 -(int)ReciveHttpMsg:(MsgSent*)ReciveMsg{
     
@@ -634,6 +669,11 @@ UIGestureRecognizerDelegate>
             [self processList_remote_indexes:ReciveMsg];
             break;
         }
+            case CC_Download_remote_binfile:
+        {
+            [self processDownload_remote_binfile:ReciveMsg];
+        }
+            break;
         default:
             
             break;

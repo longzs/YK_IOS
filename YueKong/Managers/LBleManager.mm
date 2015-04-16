@@ -147,7 +147,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         return NO;
     }
     NSData* wValue = [self createSendPacket:ybpo];
-    printf("writeValue index = %d, length = %d, body = %s /r/n", ybpo.index, ybpo.lengthBody, ybpo.body.bytes);
+    printf("writeValue index = %d, length = %d, body = %s \r\n", ybpo.index, ybpo.lengthBody, ybpo.body.bytes);
     [_currentPeripheral writeValue:wValue forCharacteristic:_currentCharacteristic type:CBCharacteristicWriteWithoutResponse];
     return YES;
 }
@@ -205,33 +205,28 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
 -(ykBlePacketObject*)createSendObject{
     
     if (_indexSend < 0
-        || _fragmentsSend < _indexSend) {
+        || _fragmentsSend <= _indexSend) {
         return nil;
     }
-    ykBlePacketObject* ybpo = [[ykBlePacketObject alloc] init];
+    unsigned long subLenth = 0;
     
+    ykBlePacketObject* ybpo = [[ykBlePacketObject alloc] init];
+    ybpo.lengthBody = _currentDataSend.length;
     if (_currentDataSend.length <= kLength_YKBLePacket_Body) {
         // 一次发送就完成
         ybpo.index = 0;
         ybpo.body = _currentDataSend;
-        ybpo.lengthBody = _currentDataSend.length;
     }
     else{
         // 拆分
         ybpo.index = _indexSend;
         if (ybpo.index+1 < _fragmentsSend) {
-            ybpo.lengthBody = kLength_YKBLePacket_Body;
+            subLenth = kLength_YKBLePacket_Body;
         }
         else{
-            ybpo.lengthBody = _currentDataSend.length%kLength_YKBLePacket_Body;
+            subLenth = _currentDataSend.length%kLength_YKBLePacket_Body;
         }
-//        if (0 == ybpo.index){
-//            ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(0, ybpo.lengthBody)];
-//        }
-//        else{
-//            ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(ybpo.index*kLength_YKBLePacket_Body, ybpo.lengthBody)];
-//        }
-        ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(ybpo.index*kLength_YKBLePacket_Body, ybpo.lengthBody)];
+        ybpo.body = [_currentDataSend subdataWithRange:NSMakeRange(ybpo.index*kLength_YKBLePacket_Body, subLenth)];
     }
     
     return ybpo;
@@ -433,8 +428,8 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         weakSelf(wSelf);
         _YMS_PERFORM_ON_MAIN_THREAD(^{
             
-            NSData* testData = [NSData dataWithBytes:"0123456789abcdefghij0123456789" length:30];
-            [wSelf performSelector:@selector(writeUserChar:) withObject:testData afterDelay:3.5];
+//            NSData* testData = [NSData dataWithBytes:"0123456789abcde0123456789abcde0123456789abcdefghij0123456789" length:60];//
+//            [wSelf performSelector:@selector(writeUserChar:) withObject:testData afterDelay:3.5];
             
             if (wSelf.LBledelegate
                 && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {
@@ -480,7 +475,7 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
                 transError = [NSError errorWithDomain:@"responseData InValid" code:1 userInfo:nil];
             }
             else{
-                printf("AckValue dataType = %c, responseType = %c, body = %s /r/n", prybp->dataType, prybp->responseType, prybp->body);
+                printf("AckValue dataType = %d, responseType = %d, body = %s \r\n", prybp->dataType, prybp->responseType, prybp->body);
                 if (0 != prybp->dataType) {
                     //1字节数据类型应为:0x00，否则APP视为无效确认信息
                     [wSelf reSetTransStatus];
@@ -502,14 +497,15 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
                         ++wSelf.indexSend;
                         if (expectIndex == wSelf.indexSend) {
                             // 继续传输
-                            NSLog(@"kResponseTypeContinued expectIndex = %c", expectIndex);
+                            NSLog(@"kResponseTypeContinued expectIndex = %d", expectIndex);
                             
                             [wSelf performSelector:@selector(writeValueToYKRemote:) withObject:nil afterDelay:0.15];
                         }
                         else{
-                            NSLog(@"kResponseTypeIndex Error expectIndex = %c", expectIndex);
-                            
-                            [wSelf reSetTransStatus];
+                            NSLog(@"kResponseTypeIndex Error expectIndex = %d selfIndex = %d", expectIndex, wSelf.indexSend);
+                            //[wSelf reSetTransStatus];
+                            // test
+                            [wSelf performSelector:@selector(writeValueToYKRemote:) withObject:nil afterDelay:0.15];
                         }
                     }
                     else{
