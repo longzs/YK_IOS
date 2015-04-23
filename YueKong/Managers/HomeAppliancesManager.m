@@ -230,7 +230,7 @@ responseDelegate:(id<HTTP_MSG_RESPOND>)delegate{
     NSString* fileName = [NSString stringWithFormat:@"%@_%@.bin", postBody[@"protocol"], postBody[@"remote"]];
     NSString *requestURL = [NSString stringWithFormat:@"%@%@",k_URL_RB,fileName];
     
-    requestURL = @"http://121.41.109.117:8200/rb/ykir_upd6121g_remote_box_164.bin";
+    //requestURL = @"http://121.41.109.117:8200/rb/ykir_upd6121g_remote_box_164.bin";
     NSMutableDictionary *header = [[NSMutableDictionary alloc] initWithCapacity:0];
     [header setObject:@"application/json" forKey:@"Content-Type"];
     

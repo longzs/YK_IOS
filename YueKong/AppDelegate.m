@@ -23,7 +23,6 @@
     if (k_IS_Report_Exception) {
         
     }
-    //[[HomeAppliancesManager sharedInstance] testHttp];
     //初始化
     
     //数据库

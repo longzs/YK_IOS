@@ -191,11 +191,11 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     const short packetLen = 3+kLength_YKBLePacket_Body;
     pSendYKBlePacket syb = (pSendYKBlePacket)malloc(packetLen);
     memset(syb, 0, packetLen);
-    syb->totalLength = sendData.body.length;
+    syb->totalLength = sendData.lengthBody;//htons
     syb->index = sendData.index;
     
-    memcpy(syb->body, sendData.body.bytes, syb->totalLength);
-    NSData* retData = [NSData dataWithBytes:syb->body length:packetLen];
+    memcpy(syb->body, sendData.body.bytes, sendData.body.length);
+    NSData* retData = [NSData dataWithBytes:syb length:packetLen];
     free(syb);
     
     return retData;
@@ -230,6 +230,38 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
     }
     
     return ybpo;
+}
+
+-(NSData*)createUserData:(NSData*)userData cmdID:(int)cmdID{
+    
+    switch (cmdID) {
+        case 0:
+            break;
+            
+        default:
+            break;
+    }
+    {
+        // test
+        
+        NSUInteger dataLen = userData.length;
+        dataLen += 6;
+        YKSendRemoteFilePacket* ysrfp = (YKSendRemoteFilePacket*)malloc(dataLen);
+        memset(ysrfp, 0, dataLen);
+        ysrfp->deviceType = 0x00;
+        ysrfp->cmdID = 0x01;
+        ysrfp->remoteNumber = 0x00;
+        ysrfp->categoryID = 0x01;
+        ysrfp->fileLength = userData.length;
+        memcpy(ysrfp->fileBody, userData.bytes, userData.length);
+        
+        NSData* retData = [NSData dataWithBytes:ysrfp length:dataLen];
+        free(ysrfp);
+        
+        return retData;
+    }
+    
+    return nil;
 }
 
 #pragma mark - CBCentralManagerDelegate Methods
@@ -428,8 +460,11 @@ DEFINE_SINGLETON_FOR_CLASS(LBleManager);
         weakSelf(wSelf);
         _YMS_PERFORM_ON_MAIN_THREAD(^{
             
-//            NSData* testData = [NSData dataWithBytes:"0123456789abcde0123456789abcde0123456789abcdefghij0123456789" length:60];//
-//            [wSelf performSelector:@selector(writeUserChar:) withObject:testData afterDelay:3.5];
+//            char testChars[2];
+//            testChars[0] = 0x00;
+//            testChars[1] = 0x05;
+//            NSData* testData = [NSData dataWithBytes:testChars length:2];//600123456789abcde0123456789abcde0123456789abcdefghij0123456789
+//            [wSelf performSelector:@selector(writeUserChar:) withObject:testData afterDelay:1];
             
             if (wSelf.LBledelegate
                 && [wSelf.LBledelegate respondsToSelector:@selector(didDiscoverCharacteristicsForService::error:)]) {

@@ -601,8 +601,8 @@ UIGestureRecognizerDelegate>
         NSString* downloadFilePath = ((DownLoadSent*)reciveData).strDownLoadPath;
         if ([[NSFileManager defaultManager] fileExistsAtPath:downloadFilePath]) {
             NSData* data = [NSData dataWithContentsOfFile:downloadFilePath];
-            
-            if (![[LBleManager sharedInstance] writeUserChar:data]) {
+            NSData* sendData = [[LBleManager sharedInstance] createUserData:data cmdID:0];
+            if (![[LBleManager sharedInstance] writeUserChar:sendData]) {
                 NSLog(@"-----发送文件失败");
                 [self hideLoading];
             }

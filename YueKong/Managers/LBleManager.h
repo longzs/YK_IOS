@@ -13,18 +13,18 @@
 
 #define UUIDSTR_ISSC_YueKongYKQ_Identifier    @"F66BE5FB-41C1-E82B-F9F2-5F1EFF479D62"
 
-#define NAME_YueKongYKQ_Identifier              @"AmoMcu1.com"
+#define NAME_YueKongYKQ_Identifier              @"UCON_Bobi"
 
 #define UUIDSTR_YueKongYKQ_SERVICE            @"FFF0"
 
 // 读写特征
-#define UUIDSTR_ISSC_TRANS_RW               @"FFF6"
+#define UUIDSTR_ISSC_TRANS_RW               @"FFF1"
 
 // 写
 #define UUIDSTR_ISSC_TRANS_RX               @"FFF3"
 
 @interface ykBlePacketObject : NSObject
-@property(nonatomic, assign)short       lengthBody;
+@property(nonatomic, assign)unsigned short       lengthBody;
 @property(nonatomic, assign)SignedByte  index;
 @property(nonatomic, strong)NSData*     body;
 @end
@@ -85,5 +85,7 @@ DEFINE_SINGLETON_FOR_HEADER(LBleManager);
 -(BOOL)bleEnable;
 
 -(void)reSetTransStatus;
+
+-(NSData*)createUserData:(NSData*)userData cmdID:(int)cmdID;
 
 @end

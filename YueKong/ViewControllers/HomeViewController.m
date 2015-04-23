@@ -77,6 +77,7 @@
             [wSelf.navigationController pushViewController:vc animated:YES];
         }
         else{
+            //RemoteControlViewController *vc = [RemoteControlViewController instantiateFromMainStoryboard];
             ViewController *vc = [ViewController instantiateFromMainStoryboard];
             [wSelf.navigationController pushViewController:vc animated:YES];
         }

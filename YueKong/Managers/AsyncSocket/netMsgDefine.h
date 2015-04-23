@@ -96,7 +96,7 @@ typedef struct routerState{
 #pragma pack(1)
 typedef struct ykSendBlePacket{
     
-    short           totalLength;                  //	2字节总长度
+    unsigned short  totalLength;                  //	2字节总长度
     SignedByte      index;
     char            body[kLength_YKBLePacket_Body];
 }YKSENDBLEPACKET,*pSendYKBlePacket;
@@ -107,6 +107,24 @@ typedef struct ykResponseBlePacket{
     Byte            responseType;
     char            body[kLength_YKBLePacket_Body];
 }YKResponseBLEPACKET,*pResponseYKBlePacket;
+
+struct YKApplicationBasePacket{
+    Byte         deviceType;
+    Byte         cmdID;
+};
+
+// 传输红外码表
+struct YKSendRemoteFilePacket{
+    
+    Byte         deviceType;
+    Byte         cmdID;
+    Byte         remoteNumber;
+    Byte         categoryID;
+    unsigned short fileLength;
+    char           fileBody[0];
+};
+
+
 #pragma park()
 
 #define PACK_LENGTH_MIN  5
